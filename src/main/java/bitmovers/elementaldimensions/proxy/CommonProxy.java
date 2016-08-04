@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.proxy;
 
 import bitmovers.elementaldimensions.dimensions.ModDimensions;
+import bitmovers.elementaldimensions.items.ModItems;
 import bitmovers.elementaldimensions.mobs.ModEntities;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -11,6 +12,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         ModDimensions.preInit();
         ModEntities.preInit();
+        ModItems.preInit();
     }
 
     public void init(FMLInitializationEvent e) {

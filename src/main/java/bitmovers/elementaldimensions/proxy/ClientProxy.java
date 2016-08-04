@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.proxy;
 
+import bitmovers.elementaldimensions.items.ModItems;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import bitmovers.elementaldimensions.mobs.RenderDirtZombie;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -12,6 +13,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
         RenderingRegistry.registerEntityRenderingHandler(EntityDirtZombie.class, RenderDirtZombie.FACTORY);
+        ModItems.initClient();
     }
 
     @Override
