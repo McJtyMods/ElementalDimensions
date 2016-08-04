@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
-import net.minecraft.block.Block;
+import bitmovers.elementaldimensions.dimensions.generators.tools.NormalTerrainGenerator;
+import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -13,28 +14,25 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
 
 public class EarthChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
 
+    private NormalTerrainGenerator terraingen = new NormalTerrainGenerator();
+
     public EarthChunkGenerator(World worldObj) {
         this.worldObj = worldObj;
         long seed = 0x1fff; // @todo
         this.random = new Random((seed + 516) * 314);
-    }
-
-    static void setBlockState(ChunkPrimer primer, int index, IBlockState state) {
-        primer.data[index] = (char) Block.BLOCK_STATE_IDS.get(state);
-    }
-
-    static IBlockState getBlockState(ChunkPrimer primer, int index) {
-        return Block.BLOCK_STATE_IDS.getByValue(primer.data[index]);
-
+        terraingen.setup(worldObj, random);
     }
 
     private static void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
@@ -65,7 +63,8 @@ public class EarthChunkGenerator implements IChunkGenerator {
     public Chunk provideChunk(int x, int z) {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
-        generate(x, z, chunkprimer);
+        terraingen.generate(x, z, chunkprimer);
+//        generate(x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 
@@ -90,6 +89,11 @@ public class EarthChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+        if (creatureType == EnumCreatureType.MONSTER) {
+            List<Biome.SpawnListEntry> creatures = new ArrayList<>();
+            creatures.add(new Biome.SpawnListEntry(EntityDirtZombie.class, 10, 3, 10));
+            return creatures;
+        }
         return Collections.emptyList();
     }
 

@@ -1,6 +1,5 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -17,6 +16,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
+
 public class FireChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
@@ -26,15 +27,6 @@ public class FireChunkGenerator implements IChunkGenerator {
         this.worldObj = worldObj;
         long seed = 0x1fff; // @todo
         this.random = new Random((seed + 516) * 314);
-    }
-
-    static void setBlockState(ChunkPrimer primer, int index, IBlockState state) {
-        primer.data[index] = (char) Block.BLOCK_STATE_IDS.get(state);
-    }
-
-    static IBlockState getBlockState(ChunkPrimer primer, int index) {
-        return Block.BLOCK_STATE_IDS.getByValue(primer.data[index]);
-
     }
 
     private static void generate(int chunkX, int chunkZ, ChunkPrimer primer) {

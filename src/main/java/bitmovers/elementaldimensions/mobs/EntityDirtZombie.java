@@ -26,12 +26,13 @@ public class EntityDirtZombie extends EntityMob {
 
     @Override
     protected boolean isValidLightLevel() {
-        return super.isValidLightLevel();
+//        return super.isValidLightLevel();
+        return true;
     }
 
     @Override
     public int getMaxSpawnedInChunk() {
-        return super.getMaxSpawnedInChunk();
+        return 5;
     }
 
     @Override
