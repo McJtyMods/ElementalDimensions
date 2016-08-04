@@ -6,19 +6,26 @@ import net.minecraftforge.common.DimensionManager;
 
 public class ModDimensions {
 
-    public static DimensionType dimensionType;
+    public static DimensionType earthDimensionType;
+    public static DimensionType waterDimensionType;
 
     public static void preInit() {
-        registerDimensionType();
+        registerDimensionTypes();
         registerDimensions();
     }
 
     private static void registerDimensions() {
-        int id1 = 100;   // @todo Make configurable
-        DimensionManager.registerDimension(id1, dimensionType);
+        // Ids should be configurable! @todo
+        DimensionManager.registerDimension(100, earthDimensionType);
+        DimensionManager.registerDimension(101, waterDimensionType);
     }
 
-    private static void registerDimensionType() {
+    private static void registerDimensionTypes() {
+        earthDimensionType = DimensionType.register(ElementalDimensions.MODID, "_earth", fetchDimensionTypeId(), EarthWorldProvider.class, false);
+        waterDimensionType = DimensionType.register(ElementalDimensions.MODID, "_water", fetchDimensionTypeId(), WaterWorldProvider.class, false);
+    }
+
+    private static int fetchDimensionTypeId() {
         int id = -1;
 
         for (DimensionType type : DimensionType.values()) {
@@ -27,7 +34,7 @@ public class ModDimensions {
             }
         }
         id++;
-        dimensionType = DimensionType.register(ElementalDimensions.MODID, "_dim", id, ElementalWorldProvider.class, false);
+        return id;
     }
 
 }

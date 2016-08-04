@@ -4,16 +4,16 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
 
-public class ElementalWorldProvider extends WorldProvider {
+public class EarthWorldProvider extends WorldProvider {
 
     @Override
     public DimensionType getDimensionType() {
-        return ModDimensions.dimensionType;
+        return ModDimensions.earthDimensionType;
     }
 
     @Override
     public String getSaveFolder() {
-        return "ELDIM" + getDimension();
+        return "ELDIM_EARTH";
     }
 
     @Override
