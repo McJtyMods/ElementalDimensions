@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.ncLayer;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import bitmovers.elementaldimensions.commands.CommandReloadConfig;
 import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
 import bitmovers.elementaldimensions.ncLayer.dev.SchematicCreatorItem;
 import bitmovers.elementaldimensions.ncLayer.worldgen.DefaultStructureCreator;
@@ -41,6 +42,7 @@ public class NCLayerMain {
 
     public void postInit(FMLPostInitializationEvent event){
         ElementalDimensions.registerCommand(new CommandReloadSchematics());
+        ElementalDimensions.registerCommand(new CommandReloadConfig());
         SchematicLoader.INSTANCE.reloadCache();
         for (int i = 1; i < 5; i++) {
             GameRegistry.registerWorldGenerator(new DefaultStructureCreator(new EDResourceLocation("schematics/test"+i+".schematic"), GenerationType.SURFACE), 100 + 1);

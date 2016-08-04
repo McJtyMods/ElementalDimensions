@@ -3,6 +3,7 @@ package bitmovers.elementaldimensions;
 import bitmovers.elementaldimensions.commands.CommandTeleport;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
+import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.config.ConfigWrapper;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
@@ -45,7 +47,7 @@ public class ElementalDimensions {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
+        logger = LogManager.getLogger(MODNAME.replace(" ", ""));
         loadTimer = new LoadTimer(logger, MODNAME);
         loadTimer.startPhase(event);
         networkHandler = new NetworkHandler(MODID);
@@ -57,8 +59,10 @@ public class ElementalDimensions {
             }
         };
         random = new Random();
+        config.registerConfigWithInnerClasses(new Config());
         proxy.preInit(event);
         NCLayerMain.instance.preInit(event);
+        config.refresh();
         loadTimer.endPhase(event);
     }
 
