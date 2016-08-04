@@ -85,8 +85,6 @@ public class ElementalDimensions {
         proxy.postInit(event);
         NCLayerMain.instance.postInit(event);
         registerCommand(new CommandTeleport());
-        EntityRegistry.addSpawn(EntityDirtZombie.class, 100, 4, 4, EnumCreatureType.MONSTER, Biomes.PLAINS);
-
         loadTimer.endPhase(event);
     }
 
