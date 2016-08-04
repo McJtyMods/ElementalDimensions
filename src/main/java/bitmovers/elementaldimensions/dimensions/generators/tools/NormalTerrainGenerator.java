@@ -34,6 +34,8 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
     private final float[] parabolicField;
     private double[] stoneNoise = new double[256];
 
+    private IBlockState baseBlock;
+
 
     public NormalTerrainGenerator() {
         this.noiseField = new double[825];
@@ -47,8 +49,9 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
         }
     }
 
-    public void setup(World world, Random rand) {
+    public void setup(World world, Random rand, IBlockState baseBlock) {
         this.world = world;
+        this.baseBlock = baseBlock;
 
         this.noiseGen1 = new NoiseGeneratorOctaves(rand, 16);
         this.noiseGen2 = new NoiseGeneratorOctaves(rand, 16);
@@ -85,22 +88,16 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
                 float f1 = 0.0F;
                 float f2 = 0.0F;
                 byte b0 = 2;
-                Biome Biome = Biomes.PLAINS;
+                Biome biome = Biomes.PLAINS;
 
                 for (int l1 = -b0; l1 <= b0; ++l1) {
                     for (int i2 = -b0; i2 <= b0; ++i2) {
-                        Biome Biome1 = Biomes.PLAINS;
-                        float f3 = Biome1.getBaseHeight();
-                        float f4 = Biome1.getHeightVariation();
+                        float baseHeight = biome.getBaseHeight();
+                        float variation = biome.getHeightVariation();
 
-                        float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (f3 + 2.0F);
-
-                        if (Biome1.getBaseHeight() > Biome.getBaseHeight()) {
-                            f5 /= 2.0F;
-                        }
-
-                        f += f4 * f5;
-                        f1 += f3 * f5;
+                        float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (baseHeight + 2.0F);
+                        f += variation * f5;
+                        f1 += baseHeight * f5;
                         f2 += f5;
                     }
                 }
@@ -168,8 +165,6 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
 
     @Override
     public void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
-        IBlockState baseBlock = Blocks.DIRT.getDefaultState();
-
         generateHeightmap(chunkX * 4, 0, chunkZ * 4);
 
         byte waterLevel = 63;
