@@ -1,5 +1,7 @@
-package bitmovers.elementaldimensions.dimensions;
+package bitmovers.elementaldimensions.dimensions.providers;
 
+import bitmovers.elementaldimensions.dimensions.generators.EarthChunkGenerator;
+import bitmovers.elementaldimensions.dimensions.ModDimensions;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;

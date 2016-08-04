@@ -1,6 +1,8 @@
 package bitmovers.elementaldimensions.dimensions;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import bitmovers.elementaldimensions.dimensions.providers.EarthWorldProvider;
+import bitmovers.elementaldimensions.dimensions.providers.WaterWorldProvider;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 

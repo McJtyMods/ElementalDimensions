@@ -1,4 +1,4 @@
-package bitmovers.elementaldimensions.dimensions;
+package bitmovers.elementaldimensions.dimensions.generators;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
