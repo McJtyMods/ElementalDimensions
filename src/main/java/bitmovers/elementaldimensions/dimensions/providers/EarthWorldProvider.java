@@ -9,7 +9,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.storage.WorldInfo;
 
 public class EarthWorldProvider extends WorldProvider {
 
@@ -30,7 +29,6 @@ public class EarthWorldProvider extends WorldProvider {
 
     @Override
     protected void createBiomeProvider() {
-        WorldInfo worldInfo = worldObj.getWorldInfo();
         this.biomeProvider = new BiomeProvider(worldObj.getWorldInfo()) {
             @Override
             public Biome getBiome(BlockPos pos) {
