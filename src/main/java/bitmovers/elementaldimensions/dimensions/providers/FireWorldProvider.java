@@ -2,7 +2,6 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.ModDimensions;
 import bitmovers.elementaldimensions.dimensions.generators.FireChunkGenerator;
-import bitmovers.elementaldimensions.dimensions.generators.WaterChunkGenerator;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;

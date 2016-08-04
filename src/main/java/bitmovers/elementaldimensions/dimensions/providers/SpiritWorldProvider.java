@@ -1,7 +1,6 @@
 package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.ModDimensions;
-import bitmovers.elementaldimensions.dimensions.generators.AirChunkGenerator;
 import bitmovers.elementaldimensions.dimensions.generators.SpiritChunkGenerator;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
