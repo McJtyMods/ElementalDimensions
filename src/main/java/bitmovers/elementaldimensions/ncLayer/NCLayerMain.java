@@ -1,22 +1,19 @@
 package bitmovers.elementaldimensions.ncLayer;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import bitmovers.elementaldimensions.util.command.AbstractSubCommand;
+import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
+import bitmovers.elementaldimensions.ncLayer.dev.SchematicCreatorItem;
+import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import elec332.core.main.ElecCore;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
-import javax.annotation.Nonnull;
-
-import static bitmovers.elementaldimensions.tools.CustomTeleporter.teleportToDimension;
+import java.io.File;
 
 /**
  * Created by Elec332 on 4-8-2016.
@@ -24,43 +21,21 @@ import static bitmovers.elementaldimensions.tools.CustomTeleporter.teleportToDim
 public class NCLayerMain {
 
     public static NCLayerMain instance;
+    public static File mcDir;
 
     public void preInit(FMLPreInitializationEvent event){
         SchematicLoader.INSTANCE.reloadCache();
     }
 
     public void init(FMLInitializationEvent event){
-        ElementalDimensions.registerCommand(new AbstractSubCommand() {
-
-            @Override
-            public String getCommandName() {
-                return "reloadSchematics";
-            }
-
-            @Override
-            public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
-                sender.addChatMessage(new TextComponentString("Schematics reloaded"));
-                SchematicLoader.INSTANCE.reloadCache();
-            }
-
-        });
-        ElementalDimensions.registerCommand(new AbstractSubCommand() {
-
-            @Override
-            public String getCommandName() {
-                return "ping";
-            }
-
-            @Override
-            public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
-                sender.addChatMessage(new TextComponentString("pong"));
-            }
-
-        });
+        mcDir = (File) FMLInjectionData.data()[6];
+        if (ElecCore.developmentEnvironment){
+            GameRegistry.register(new SchematicCreatorItem(), new EDResourceLocation("schematicCreator_DEV"));
+        }
     }
 
     public void postInit(FMLPostInitializationEvent event){
-
+        ElementalDimensions.registerCommand(new CommandReloadSchematics());
     }
 
     public void serverStarting(FMLServerStartingEvent event){
