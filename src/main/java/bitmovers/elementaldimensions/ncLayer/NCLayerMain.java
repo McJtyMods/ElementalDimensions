@@ -3,8 +3,10 @@ package bitmovers.elementaldimensions.ncLayer;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
 import bitmovers.elementaldimensions.ncLayer.dev.SchematicCreatorItem;
+import bitmovers.elementaldimensions.ncLayer.worldgen.DefaultStructureCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
+import elec332.core.api.structure.GenerationType;
 import elec332.core.main.ElecCore;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -24,7 +26,7 @@ public class NCLayerMain {
     public static File mcDir;
 
     public void preInit(FMLPreInitializationEvent event){
-        SchematicLoader.INSTANCE.reloadCache();
+
     }
 
     public void init(FMLInitializationEvent event){
@@ -32,10 +34,17 @@ public class NCLayerMain {
         if (ElecCore.developmentEnvironment){
             GameRegistry.register(new SchematicCreatorItem(), new EDResourceLocation("schematicCreator_DEV"));
         }
+        for (int i = 1; i < 5; i++) {
+            SchematicLoader.INSTANCE.registerSchematic(new EDResourceLocation("schematics/test"+i+".schematic"));
+        }
     }
 
     public void postInit(FMLPostInitializationEvent event){
         ElementalDimensions.registerCommand(new CommandReloadSchematics());
+        SchematicLoader.INSTANCE.reloadCache();
+        for (int i = 1; i < 5; i++) {
+            GameRegistry.registerWorldGenerator(new DefaultStructureCreator(new EDResourceLocation("schematics/test"+i+".schematic"), GenerationType.SURFACE), 100 + 1);
+        }
     }
 
     public void serverStarting(FMLServerStartingEvent event){

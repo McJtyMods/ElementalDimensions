@@ -11,6 +11,7 @@ import elec332.core.world.schematic.Area;
 import elec332.core.world.schematic.SchematicHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +19,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Elec332 on 4-8-2016.
@@ -67,13 +71,17 @@ public class SchematicCreatorItem extends AbstractItem {
         if (!world.isRemote && stack.hasTagCompound()) {
             String msg = "Created new schematic";
             NBTHelper nbt = new NBTHelper(stack.getTagCompound());
-            Area area = new Area(nbt.getPos("pos1"), nbt.getPos("pos2"));
+            BlockPos pos1 = nbt.getPos("pos1"), pos2 = nbt.getPos("pos2");
+            if (pos1.equals(BlockPos.ORIGIN) || pos2.equals(BlockPos.ORIGIN)){
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+            }
+            Area area = new Area(pos1, pos2);
             NBTTagCompound s = SchematicHelper.INSTANCE.writeSchematic(SchematicHelper.INSTANCE.createModSchematic(world, area, (short) 0));
             File folder = new File(NCLayerMain.mcDir, "schematics");
             File file = new File(folder, "Schematic-"+ DateHelper.getDateAsNormalString()+".schematic");
             try {
                 IOUtil.createFile(file);
-                IOUtil.NBT.write(file, s);
+                writeOut(s, file);
                 stack.setTagCompound(new NBTTagCompound());
             } catch (Exception e){
                 msg = "Failed to write schematic";
@@ -81,6 +89,16 @@ public class SchematicCreatorItem extends AbstractItem {
             player.addChatComponentMessage(new TextComponentString(msg));
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    }
+
+    @SuppressWarnings("all")
+    private void writeOut(NBTTagCompound t, File file) throws IOException {
+        DataOutputStream dataoutputstream = new DataOutputStream(new FileOutputStream(file));
+        try {
+            CompressedStreamTools.writeCompressed(t, dataoutputstream);
+        } finally {
+            dataoutputstream.close();
+        }
     }
 
 }

@@ -20,6 +20,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Random;
+
 import static bitmovers.elementaldimensions.ElementalDimensions.*;
 
 @Mod(modid = MODID, name = MODNAME, version = VERSION)
@@ -39,6 +41,7 @@ public class ElementalDimensions {
     public static NetworkHandler networkHandler;
     public static ConfigWrapper config;
     public static CreativeTabs creativeTab;
+    public static Random random;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -53,6 +56,7 @@ public class ElementalDimensions {
                 return Items.APPLE;
             }
         };
+        random = new Random();
         proxy.preInit(event);
         NCLayerMain.instance.preInit(event);
         loadTimer.endPhase(event);
