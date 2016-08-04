@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.dimensions.providers;
 
-import bitmovers.elementaldimensions.init.DimensionRegister;
 import bitmovers.elementaldimensions.dimensions.generators.EarthChunkGenerator;
+import bitmovers.elementaldimensions.init.DimensionRegister;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;

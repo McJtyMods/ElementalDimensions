@@ -10,7 +10,7 @@ public class SpawnEventHandler {
 
     @SubscribeEvent
     public void onCheckSpawn(LivingSpawnEvent.CheckSpawn event) {
-        System.out.println("event.getEntity() = " + event.getEntity());
+        //System.out.println("event.getEntity() = " + event.getEntity());
         if (event.getEntity() instanceof EntityDirtZombie) {
             if (WorldHelper.getDimID(event.getWorld()) != Config.Dimensions.Earth.dimensionID) {
                 System.out.println("Spawn denied!");

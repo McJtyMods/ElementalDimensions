@@ -3,6 +3,7 @@ package bitmovers.elementaldimensions;
 import bitmovers.elementaldimensions.commands.CommandTeleport;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.init.ItemRegister;
+import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.network.PacketPlayerConnect;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
@@ -14,6 +15,8 @@ import elec332.core.config.ConfigWrapper;
 import elec332.core.network.NetworkHandler;
 import elec332.core.util.LoadTimer;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +25,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -81,6 +85,8 @@ public class ElementalDimensions {
         proxy.postInit(event);
         NCLayerMain.instance.postInit(event);
         registerCommand(new CommandTeleport());
+        EntityRegistry.addSpawn(EntityDirtZombie.class, 100, 4, 4, EnumCreatureType.MONSTER, Biomes.PLAINS);
+
         loadTimer.endPhase(event);
     }
 

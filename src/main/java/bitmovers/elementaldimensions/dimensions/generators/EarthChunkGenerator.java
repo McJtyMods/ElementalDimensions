@@ -2,6 +2,8 @@ package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.NormalTerrainGenerator;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -13,8 +15,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +22,8 @@ public class EarthChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
+
+    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 4, 4));
 
     private NormalTerrainGenerator terraingen = new NormalTerrainGenerator();
 
@@ -62,32 +64,10 @@ public class EarthChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-//        if (creatureType == EnumCreatureType.MONSTER) {
-//            List<Biome.SpawnListEntry> creatures = new ArrayList<>();
-//            Biome.SpawnListEntry e = new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 4, 4);
-//            System.out.println("e = " + e);
-//            creatures.add(e);
-//            return creatures;
-//        }
-//        return Collections.emptyList();
-
-
-
-        Biome biome = this.worldObj.getBiome(pos);
-        List<Biome.SpawnListEntry> list = biome.getSpawnableList(creatureType);
-        if (creatureType == EnumCreatureType.MONSTER) {
-            System.out.println("########################### list.size() = " + list.size());
-            Biome.SpawnListEntry e = new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 4, 4);
-            System.out.println("e = " + e);
-
-
-            for (Biome.SpawnListEntry entry : list) {
-                System.out.println("entry = " + entry);
-            }
-
+        if (creatureType == EnumCreatureType.MONSTER){
+            return mobs;
         }
-
-        return list;
+        return ImmutableList.of();
 
     }
 
