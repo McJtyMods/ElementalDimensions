@@ -1,13 +1,22 @@
 package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.commands.TeleportCommand;
+import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
+import elec332.core.config.ConfigWrapper;
+import elec332.core.network.NetworkHandler;
+import elec332.core.util.LoadTimer;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import org.apache.logging.log4j.Logger;
 
 import static bitmovers.elementaldimensions.ElementalDimensions.*;
 
@@ -18,29 +27,54 @@ public class ElementalDimensions {
     public static final String MODNAME = "Elemental Dimensions";
     public static final String VERSION = "0.0.1";
 
-    @Mod.Instance(MODID)
-    public static ElementalDimensions instance;
-
     @SidedProxy(clientSide="bitmovers.elementaldimensions.proxy.ClientProxy", serverSide="bitmovers.elementaldimensions.proxy.ServerProxy")
     public static CommonProxy proxy;
 
+    @Mod.Instance(MODID)
+    public static ElementalDimensions instance;
+    private static Logger logger;
+    private static LoadTimer loadTimer;
+    public static NetworkHandler networkHandler;
+    public static ConfigWrapper config;
+    public static CreativeTabs creativeTab;
+
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e) {
-        proxy.preInit(e);
+    public void preInit(FMLPreInitializationEvent event) {
+        logger = event.getModLog();
+        loadTimer = new LoadTimer(logger, MODNAME);
+        loadTimer.startPhase(event);
+        networkHandler = new NetworkHandler(MODID);
+        config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
+        creativeTab = new CreativeTabs(MODID) {
+            @Override
+            public Item getTabIconItem() {
+                return Items.APPLE;
+            }
+        };
+        proxy.preInit(event);
+        NCLayerMain.instance.preInit(event);
+        loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent e) {
-        proxy.init(e);
+    public void init(FMLInitializationEvent event) {
+        loadTimer.startPhase(event);
+        proxy.init(event);
+        NCLayerMain.instance.init(event);
+        loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent e) {
-        this.proxy.postInit(e);
+    public void postInit(FMLPostInitializationEvent event) {
+        loadTimer.startPhase(event);
+        proxy.postInit(event);
+        NCLayerMain.instance.postInit(event);
+        loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
+        NCLayerMain.instance.serverStarting(event);
         event.registerServerCommand(new TeleportCommand());
     }
 
