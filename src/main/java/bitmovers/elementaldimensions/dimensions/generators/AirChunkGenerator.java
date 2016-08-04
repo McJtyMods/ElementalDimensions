@@ -17,12 +17,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class EarthChunkGenerator implements IChunkGenerator {
+public class AirChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
 
-    public EarthChunkGenerator(World worldObj) {
+    public AirChunkGenerator(World worldObj) {
         this.worldObj = worldObj;
         long seed = 0x1fff; // @todo
         this.random = new Random((seed + 516) * 314);
@@ -38,7 +38,7 @@ public class EarthChunkGenerator implements IChunkGenerator {
     }
 
     private static void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
-        IBlockState baseBlock = Blocks.DIRT.getDefaultState();
+        IBlockState baseBlock = Blocks.AIR.getDefaultState();
 
         byte waterLevel = 60;
         int index = 0;
