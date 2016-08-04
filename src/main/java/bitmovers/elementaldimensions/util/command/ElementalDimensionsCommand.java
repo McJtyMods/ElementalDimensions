@@ -87,17 +87,14 @@ public class ElementalDimensionsCommand extends CommandBase {
         }
         String s = args[0];
         IElementalDimensionsSubCommand command = subCommands.get(s);
-        if (command == null){
-            return false;
-        }
-        return command.isUsernameIndex(removeFirst(args), index - 1);
+        return command != null && command.isUsernameIndex(removeFirst(args), index - 1);
     }
 
     public static void registerSubCommand(@Nonnull IElementalDimensionsSubCommand command){
         subCommands.put(command.getCommandName(), command);
     }
 
-    public String[] removeFirst(String[] args){
+    private String[] removeFirst(String[] args){
         if (args.length < 2){
             return new String[0];
         }

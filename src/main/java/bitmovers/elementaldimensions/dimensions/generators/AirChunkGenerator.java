@@ -11,6 +11,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
@@ -18,19 +19,21 @@ import java.util.Random;
 
 public class AirChunkGenerator implements IChunkGenerator {
 
-    private final World worldObj;
-    private Random random;
-
-    private IslandTerrainGenerator terraingen = new IslandTerrainGenerator();
-
     public AirChunkGenerator(World worldObj) {
+        this.terraingen = new IslandTerrainGenerator();
         this.worldObj = worldObj;
         long seed = 0x1fff; // @todo
         this.random = new Random((seed + 516) * 314);
         terraingen.setup(worldObj, random, Blocks.GLASS.getDefaultState());
     }
 
+    private final World worldObj;
+    @SuppressWarnings("all")
+    private final Random random;
+    private final IslandTerrainGenerator terraingen;
+
     @Override
+    @Nonnull
     public Chunk provideChunk(int x, int z) {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
@@ -49,27 +52,27 @@ public class AirChunkGenerator implements IChunkGenerator {
 
     @Override
     public void populate(int x, int z) {
-
     }
 
     @Override
-    public boolean generateStructures(Chunk chunkIn, int x, int z) {
+    public boolean generateStructures(@Nonnull Chunk chunkIn, int x, int z) {
         return false;
     }
 
     @Override
-    public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+    @Nonnull
+    public List<Biome.SpawnListEntry> getPossibleCreatures(@Nonnull EnumCreatureType creatureType, @Nonnull BlockPos pos) {
         return Collections.emptyList();
     }
 
     @Nullable
     @Override
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
+    public BlockPos getStrongholdGen(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos position) {
         return null;
     }
 
     @Override
-    public void recreateStructures(Chunk chunkIn, int x, int z) {
-
+    public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z) {
     }
+
 }

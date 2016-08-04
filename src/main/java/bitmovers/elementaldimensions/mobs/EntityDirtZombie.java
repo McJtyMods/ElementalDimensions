@@ -46,4 +46,5 @@ public class EntityDirtZombie extends EntityMob {
     protected SoundEvent getAmbientSound() {
         return super.getAmbientSound();
     }
+
 }

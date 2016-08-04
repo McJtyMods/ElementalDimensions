@@ -12,21 +12,18 @@ import net.minecraft.world.WorldServer;
 import javax.annotation.Nonnull;
 
 public class CustomTeleporter extends Teleporter {
-    private final WorldServer worldServer;
 
-    private double x;
-    private double y;
-    private double z;
-
-
+    @SuppressWarnings("all")
     public CustomTeleporter(WorldServer world, double x, double y, double z) {
         super(world);
         this.worldServer = world;
         this.x = x;
         this.y = y;
         this.z = z;
-
     }
+
+    private final WorldServer worldServer;
+    private double x, y, z;
 
     @Override
     public void placeInPortal(@Nonnull Entity entity, float rotationYaw) {

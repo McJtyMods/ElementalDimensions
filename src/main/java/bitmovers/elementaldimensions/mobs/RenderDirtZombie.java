@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import javax.annotation.Nonnull;
+
 public class RenderDirtZombie extends RenderLiving<EntityDirtZombie> {
 
     private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/dirtzombie.png");
@@ -18,7 +20,8 @@ public class RenderDirtZombie extends RenderLiving<EntityDirtZombie> {
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityDirtZombie entity) {
+    @Nonnull
+    protected ResourceLocation getEntityTexture(@Nonnull EntityDirtZombie entity) {
         return mobTexture;
     }
 

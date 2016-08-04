@@ -8,6 +8,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
+import javax.annotation.Nonnull;
+
 import static bitmovers.elementaldimensions.tools.CustomTeleporter.teleportToDimension;
 
 /**
@@ -33,7 +35,7 @@ public class CommandTeleport extends AbstractSubCommand {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
         int dim, x, y, z;
         try {
             dim = Integer.parseInt(args[0]);
