@@ -227,23 +227,4 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
             }
         }
     }
-
-//    public void replaceBlocksForBiome(int chunkX, int chunkZ, ChunkPrimer primer, Biome[] Biomes) {
-//        ChunkGeneratorEvent.ReplaceBiomeBlocks event = new ChunkGeneratorEvent.ReplaceBiomeBlocks(provider, chunkX, chunkZ, primer, world);
-//        MinecraftForge.EVENT_BUS.post(event);
-//        if (event.getResult() == Event.Result.DENY) {
-//            return;
-//        }
-//
-//        double d0 = 0.03125D;
-//        this.stoneNoise = this.noiseGen4.getRegion(this.stoneNoise, (chunkX * 16), (chunkZ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
-//
-//        for (int k = 0; k < 16; ++k) {
-//            for (int l = 0; l < 16; ++l) {
-//                Biome Biome = Biomes[l + k * 16];
-//                Biome.genTerrainBlocks(world, provider.rand, primer, chunkX * 16 + k, chunkZ * 16 + l, this.stoneNoise[l + k * 16]);
-//            }
-//        }
-//    }
-
 }
