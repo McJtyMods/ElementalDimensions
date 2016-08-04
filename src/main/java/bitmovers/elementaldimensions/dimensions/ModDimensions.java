@@ -2,15 +2,8 @@ package bitmovers.elementaldimensions.dimensions;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.dimensions.providers.*;
-import bitmovers.elementaldimensions.util.Config;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModDimensions {
 
@@ -67,11 +60,11 @@ public class ModDimensions {
     }
 
     private static void registerDimensions() {
-        DimensionManager.registerDimension(Config.Dimensions.Earth.dimensionID, earthDimensionType);
-        DimensionManager.registerDimension(Config.Dimensions.Water.dimensionID, waterDimensionType);
-        DimensionManager.registerDimension(Config.Dimensions.Air.dimensionID, airDimensionType);
-        DimensionManager.registerDimension(Config.Dimensions.Spirit.dimensionID, spiritDimensionType);
-        DimensionManager.registerDimension(Config.Dimensions.Fire.dimensionID, fireDimensionType);
+        DimensionManager.registerDimension(Dimensions.EARTH.getDimensionID(), earthDimensionType);
+        DimensionManager.registerDimension(Dimensions.WATER.getDimensionID(), waterDimensionType);
+        DimensionManager.registerDimension(Dimensions.AIR.getDimensionID(), airDimensionType);
+        DimensionManager.registerDimension(Dimensions.SPIRIT.getDimensionID(), spiritDimensionType);
+        DimensionManager.registerDimension(Dimensions.FIRE.getDimensionID(), fireDimensionType);
     }
 
     private static void registerDimensionTypes() {
@@ -86,24 +79,12 @@ public class ModDimensions {
         fireDimensionType = DimensionType.register(ElementalDimensions.MODID, "_fire", fetchDimensionTypeId(), FireWorldProvider.class, false);
         */
 
-        earthDimensionType = DimensionType.register(ElementalDimensions.MODID, "_earth", Config.Dimensions.Earth.dimensionID, EarthWorldProvider.class, false);
-        waterDimensionType = DimensionType.register(ElementalDimensions.MODID, "_water", Config.Dimensions.Water.dimensionID, WaterWorldProvider.class, false);
-        airDimensionType = DimensionType.register(ElementalDimensions.MODID, "_air", Config.Dimensions.Air.dimensionID, AirWorldProvider.class, false);
-        spiritDimensionType = DimensionType.register(ElementalDimensions.MODID, "_spirit", Config.Dimensions.Spirit.dimensionID, SpiritWorldProvider.class, false);
-        fireDimensionType = DimensionType.register(ElementalDimensions.MODID, "_fire", Config.Dimensions.Fire.dimensionID, FireWorldProvider.class, false);
+        earthDimensionType = DimensionType.register(ElementalDimensions.MODID, "_earth", Dimensions.EARTH.getDimensionID(), EarthWorldProvider.class, false);
+        waterDimensionType = DimensionType.register(ElementalDimensions.MODID, "_water", Dimensions.WATER.getDimensionID(), WaterWorldProvider.class, false);
+        airDimensionType = DimensionType.register(ElementalDimensions.MODID, "_air", Dimensions.AIR.getDimensionID(), AirWorldProvider.class, false);
+        spiritDimensionType = DimensionType.register(ElementalDimensions.MODID, "_spirit", Dimensions.SPIRIT.getDimensionID(), SpiritWorldProvider.class, false);
+        fireDimensionType = DimensionType.register(ElementalDimensions.MODID, "_fire", Dimensions.FIRE.getDimensionID(), FireWorldProvider.class, false);
 
-    }
-
-    private static int fetchDimensionTypeId() {
-        int id = -1;
-
-        for (DimensionType type : DimensionType.values()) {
-            if (type.getId() > id) {
-                id = type.getId();
-            }
-        }
-        id++;
-        return id;
     }
 
 }

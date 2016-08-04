@@ -17,6 +17,8 @@ import java.util.Random;
 
 /**
  * Created by Elec332 on 4-8-2016.
+ *
+ * Test only
  */
 public class DefaultStructureCreator implements IWorldGenerator {
 
