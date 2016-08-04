@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.dimensions.providers;
 
-import bitmovers.elementaldimensions.dimensions.ModDimensions;
+import bitmovers.elementaldimensions.init.DimensionRegister;
 import bitmovers.elementaldimensions.dimensions.generators.EarthChunkGenerator;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +14,7 @@ public class EarthWorldProvider extends WorldProvider {
 
     @Override
     public DimensionType getDimensionType() {
-        return ModDimensions.earthDimensionType;
+        return DimensionRegister.earthDimensionType;
     }
 
     @Override
