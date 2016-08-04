@@ -23,7 +23,7 @@ public class ModDimensions {
     public static void preInit() {
         registerDimensionTypes();
         registerDimensions();
-        ElementalDimensions.registerLoginHandler("config|dimid", new INBTSerializable<NBTTagCompound>() {
+        /*ElementalDimensions.registerLoginHandler("config|dimid", new INBTSerializable<NBTTagCompound>() {
 
             @Override
             public NBTTagCompound serializeNBT() {
@@ -63,7 +63,7 @@ public class ModDimensions {
                 FMLClientHandler.instance().getWorldClient().sendQuittingDisconnectingPacket();
             }
 
-        });
+        });*/
     }
 
     private static void registerDimensions() {
