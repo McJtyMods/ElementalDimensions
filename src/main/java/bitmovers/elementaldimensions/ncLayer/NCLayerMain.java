@@ -32,9 +32,7 @@ public class NCLayerMain {
 
     public void init(FMLInitializationEvent event){
         mcDir = (File) FMLInjectionData.data()[6];
-        if (ElecCore.developmentEnvironment){
-            GameRegistry.register(new SchematicCreatorItem(), new EDResourceLocation("schematicCreator_DEV"));
-        }
+
         for (int i = 1; i < 5; i++) {
             SchematicLoader.INSTANCE.registerSchematic(new EDResourceLocation("schematics/test"+i+".schematic"));
         }

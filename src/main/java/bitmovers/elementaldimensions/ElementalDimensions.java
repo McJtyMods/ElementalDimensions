@@ -1,6 +1,8 @@
 package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.commands.CommandTeleport;
+import bitmovers.elementaldimensions.init.BlockRegister;
+import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.network.PacketPlayerConnect;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
@@ -74,6 +76,8 @@ public class ElementalDimensions {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         loadTimer.startPhase(event);
+        BlockRegister.init();
+        ItemRegister.init();
         proxy.postInit(event);
         NCLayerMain.instance.postInit(event);
         registerCommand(new CommandTeleport());
