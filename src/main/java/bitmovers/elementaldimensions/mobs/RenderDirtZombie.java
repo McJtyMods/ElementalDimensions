@@ -9,7 +9,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class RenderDirtZombie extends RenderLiving<EntityDirtZombie> {
 
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:entity/dirtzombie.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/dirtzombie.png");
 
     public static final Factory FACTORY = new Factory();
 
