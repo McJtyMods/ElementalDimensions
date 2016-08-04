@@ -18,7 +18,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(SpawnEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(new SpawnEventHandler());
     }
 
     public void postInit(FMLPostInitializationEvent e) {
