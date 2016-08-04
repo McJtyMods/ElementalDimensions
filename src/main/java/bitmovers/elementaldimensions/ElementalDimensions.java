@@ -32,7 +32,7 @@ public class ElementalDimensions {
 
     @Mod.Instance(MODID)
     public static ElementalDimensions instance;
-    private static Logger logger;
+    public static Logger logger;
     private static LoadTimer loadTimer;
     public static NetworkHandler networkHandler;
     public static ConfigWrapper config;
