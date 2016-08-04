@@ -20,14 +20,26 @@ public class CommandTeleport extends AbstractSubCommand {
         return "tp";
     }
 
+    private static int fetchInt(ICommandSender sender, String[] args, int index, int defaultValue) {
+        int value = defaultValue;
+        try {
+            value = Integer.parseInt(args[index]);
+        } catch (NumberFormatException e) {
+            sender.addChatMessage(new TextComponentString(TextFormatting.RED + "Parameter is not a valid integer!"));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //
+        }
+        return value;
+    }
+
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         int dim, x, y, z;
         try {
             dim = Integer.parseInt(args[0]);
-            x = Integer.parseInt(args[1]);
-            y = Integer.parseInt(args[2]);
-            z = Integer.parseInt(args[3]);
+            x = fetchInt(sender, args, 1, 0);
+            y = fetchInt(sender, args, 2, 100);
+            z = fetchInt(sender, args, 3, 0);
         } catch (Exception e){
             sender.addChatMessage(new TextComponentString(TextFormatting.RED+"Failed to parse command parameters!"));
             sender.addChatMessage(new TextComponentString(TextFormatting.RED+"Parameters:"));
