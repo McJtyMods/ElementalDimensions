@@ -62,12 +62,33 @@ public class EarthChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+//        if (creatureType == EnumCreatureType.MONSTER) {
+//            List<Biome.SpawnListEntry> creatures = new ArrayList<>();
+//            Biome.SpawnListEntry e = new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 4, 4);
+//            System.out.println("e = " + e);
+//            creatures.add(e);
+//            return creatures;
+//        }
+//        return Collections.emptyList();
+
+
+
+        Biome biome = this.worldObj.getBiome(pos);
+        List<Biome.SpawnListEntry> list = biome.getSpawnableList(creatureType);
         if (creatureType == EnumCreatureType.MONSTER) {
-            List<Biome.SpawnListEntry> creatures = new ArrayList<>();
-            creatures.add(new Biome.SpawnListEntry(EntityDirtZombie.class, 10, 3, 10));
-            return creatures;
+            System.out.println("########################### list.size() = " + list.size());
+            Biome.SpawnListEntry e = new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 4, 4);
+            System.out.println("e = " + e);
+
+
+            for (Biome.SpawnListEntry entry : list) {
+                System.out.println("entry = " + entry);
+            }
+
         }
-        return Collections.emptyList();
+
+        return list;
+
     }
 
     @Nullable
