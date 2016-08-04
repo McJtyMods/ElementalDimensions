@@ -1,11 +1,13 @@
 package bitmovers.elementaldimensions;
 
+import bitmovers.elementaldimensions.commands.TeleportCommand;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import static bitmovers.elementaldimensions.ElementalDimensions.*;
 
@@ -35,6 +37,11 @@ public class ElementalDimensions {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         this.proxy.postInit(e);
+    }
+
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        event.registerServerCommand(new TeleportCommand());
     }
 
 }
