@@ -27,9 +27,9 @@ import java.io.IOException;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public class SchematicCreatorItem extends AbstractItem {
+public class ItemSchematicCreator extends AbstractItem {
 
-    public SchematicCreatorItem() {
+    public ItemSchematicCreator() {
         this.setMaxStackSize(1);
         this.setCreativeTab(ElementalDimensions.creativeTab);
         this.setUnlocalizedName(ElementalDimensions.MODID + ".schematicCreator");
