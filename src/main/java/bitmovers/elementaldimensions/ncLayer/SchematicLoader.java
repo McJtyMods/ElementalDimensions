@@ -7,6 +7,7 @@ import elec332.core.world.schematic.Schematic;
 import elec332.core.world.schematic.SchematicHelper;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,5 +37,13 @@ public enum SchematicLoader {
         }
     }
 
+    public boolean registerSchematic(ResourceLocation resourceLocation){
+        return registeredSchematics.add(resourceLocation);
+    }
+
+    @Nullable
+    public Schematic getSchematic(ResourceLocation resourceLocation){
+        return cache.get(resourceLocation);
+    }
 
 }

@@ -3,6 +3,8 @@ package bitmovers.elementaldimensions;
 import bitmovers.elementaldimensions.commands.TeleportCommand;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
+import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
+import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.config.ConfigWrapper;
 import elec332.core.network.NetworkHandler;
 import elec332.core.util.LoadTimer;
@@ -76,6 +78,10 @@ public class ElementalDimensions {
     public void serverLoad(FMLServerStartingEvent event) {
         NCLayerMain.instance.serverStarting(event);
         event.registerServerCommand(new TeleportCommand());
+    }
+
+    public static void registerCommand(IElementalDimensionsSubCommand command){
+        ElementalDimensionsCommand.registerSubCommand(command);
     }
 
 }
