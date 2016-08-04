@@ -2,17 +2,18 @@ package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.commands.CommandTeleport;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
+import bitmovers.elementaldimensions.network.PacketPlayerConnect;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
 import bitmovers.elementaldimensions.util.Config;
+import bitmovers.elementaldimensions.util.ElementalDimensionsCreativeTab;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.config.ConfigWrapper;
 import elec332.core.network.NetworkHandler;
 import elec332.core.util.LoadTimer;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -51,18 +52,14 @@ public class ElementalDimensions {
         loadTimer = new LoadTimer(logger, MODNAME);
         loadTimer.startPhase(event);
         networkHandler = new NetworkHandler(MODID);
+        networkHandler.registerClientPacket(PacketPlayerConnect.class);
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
-        creativeTab = new CreativeTabs(MODID) {
-            @Override
-            public Item getTabIconItem() {
-                return Items.APPLE;
-            }
-        };
+        creativeTab = new ElementalDimensionsCreativeTab();
         random = new Random();
         config.registerConfigWithInnerClasses(new Config());
+        config.refresh();
         proxy.preInit(event);
         NCLayerMain.instance.preInit(event);
-        config.refresh();
         loadTimer.endPhase(event);
     }
 
@@ -90,6 +87,10 @@ public class ElementalDimensions {
 
     public static void registerCommand(IElementalDimensionsSubCommand command){
         ElementalDimensionsCommand.registerSubCommand(command);
+    }
+
+    public static void registerLoginHandler(String name, INBTSerializable<?> handler){
+        PacketPlayerConnect.registerLoginHandler(name, handler);
     }
 
 }

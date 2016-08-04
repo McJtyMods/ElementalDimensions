@@ -7,6 +7,18 @@ import elec332.core.config.Configurable;
  */
 public class Config {
 
+    @Configurable.Class
+    public static class General {
+
+    }
+
+    @Configurable.Class
+    public static class Client { //Maybe
+
+    }
+
+
+
     @Configurable.Class(comment = "Dimension settings")
     public static class Dimensions {
 

@@ -3,8 +3,14 @@ package bitmovers.elementaldimensions.dimensions;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.dimensions.providers.*;
 import bitmovers.elementaldimensions.util.Config;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModDimensions {
 
@@ -17,6 +23,47 @@ public class ModDimensions {
     public static void preInit() {
         registerDimensionTypes();
         registerDimensions();
+        ElementalDimensions.registerLoginHandler("config|dimid", new INBTSerializable<NBTTagCompound>() {
+
+            @Override
+            public NBTTagCompound serializeNBT() {
+                NBTTagCompound ret = new NBTTagCompound();
+                ret.setInteger("e", Config.Dimensions.Earth.dimensionID);
+                ret.setInteger("w", Config.Dimensions.Water.dimensionID);
+                ret.setInteger("a", Config.Dimensions.Air.dimensionID);
+                ret.setInteger("s", Config.Dimensions.Spirit.dimensionID);
+                ret.setInteger("f", Config.Dimensions.Fire.dimensionID);
+                return ret;
+            }
+
+            @Override
+            public void deserializeNBT(NBTTagCompound nbt) {
+                //Should ALWAYS be true, but it doesn't hurt to check...
+                if (FMLCommonHandler.instance().getSide().isClient()){
+                    if (Config.Dimensions.Earth.dimensionID != nbt.getInteger("e")){
+                        disconnect();
+                    }
+                    if (Config.Dimensions.Water.dimensionID != nbt.getInteger("w")){
+                        disconnect();
+                    }
+                    if (Config.Dimensions.Air.dimensionID != nbt.getInteger("a")){
+                        disconnect();
+                    }
+                    if (Config.Dimensions.Spirit.dimensionID != nbt.getInteger("s")){
+                        disconnect();
+                    }
+                    if (Config.Dimensions.Fire.dimensionID != nbt.getInteger("f")){
+                        disconnect();
+                    }
+                }
+            }
+
+            @SideOnly(Side.CLIENT)
+            private void disconnect(){
+                FMLClientHandler.instance().getWorldClient().sendQuittingDisconnectingPacket();
+            }
+
+        });
     }
 
     private static void registerDimensions() {
