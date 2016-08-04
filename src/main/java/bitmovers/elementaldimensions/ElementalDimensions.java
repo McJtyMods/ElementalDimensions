@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions;
 
-import bitmovers.elementaldimensions.commands.TeleportCommand;
+import bitmovers.elementaldimensions.commands.CommandTeleport;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
@@ -71,13 +71,13 @@ public class ElementalDimensions {
         loadTimer.startPhase(event);
         proxy.postInit(event);
         NCLayerMain.instance.postInit(event);
+        registerCommand(new CommandTeleport());
         loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
         NCLayerMain.instance.serverStarting(event);
-        event.registerServerCommand(new TeleportCommand());
     }
 
     public static void registerCommand(IElementalDimensionsSubCommand command){

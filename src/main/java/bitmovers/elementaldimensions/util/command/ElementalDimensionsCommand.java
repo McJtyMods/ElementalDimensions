@@ -67,7 +67,7 @@ public class ElementalDimensionsCommand extends CommandBase {
     @Override
     @Nonnull
     public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
-        if (args.length == 1 && args[0].length() > 1){
+        if (args.length == 1){
             return getListOfStringsMatchingLastWord(args, subCommands.keySet());
         } else if (args.length > 1){
             String s = args[0];
