@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.mobs;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
@@ -21,7 +22,7 @@ import javax.annotation.Nullable;
 
 public class EntityDirtZombie extends EntityMob {
 
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.<Boolean>createKey(EntityZombie.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityZombie.class, DataSerializers.BOOLEAN);
 
     public EntityDirtZombie(World worldIn) {
         super(worldIn);
@@ -33,6 +34,15 @@ public class EntityDirtZombie extends EntityMob {
         super.entityInit();
         this.getDataManager().register(ARMS_RAISED, Boolean.valueOf(false));
     }
+
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+    }
+
 
     public void setArmsRaised(boolean armsRaised) {
         this.getDataManager().set(ARMS_RAISED, Boolean.valueOf(armsRaised));
