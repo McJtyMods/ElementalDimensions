@@ -1,14 +1,11 @@
 package bitmovers.elementaldimensions.proxy;
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
-import bitmovers.elementaldimensions.blocks.portal.PortalDialerRenderer;
-import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
-import bitmovers.elementaldimensions.client.entity.RenderDirtZombie;
+import bitmovers.elementaldimensions.mobs.RenderDirtZombie;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
 import elec332.core.util.RegistryHelper;
 import net.minecraft.block.Block;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
