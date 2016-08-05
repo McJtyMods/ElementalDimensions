@@ -33,7 +33,7 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 StructureTemplate structure = new StructureTemplate(schematic, GenerationType.SURFACE);
-                structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, 0, chunkZ, random), world, chunkProvider);
+                structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, random), world, chunkProvider);
             } else {
                 throw new IllegalStateException();
             }
