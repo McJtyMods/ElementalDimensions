@@ -10,7 +10,7 @@ import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
 
-import static bitmovers.elementaldimensions.tools.CustomTeleporter.teleportToDimension;
+import static bitmovers.elementaldimensions.util.CustomTeleporter.teleportToDimension;
 
 /**
  * Created by Elec332 on 4-8-2016.

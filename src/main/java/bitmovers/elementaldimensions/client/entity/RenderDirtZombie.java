@@ -1,5 +1,6 @@
-package bitmovers.elementaldimensions.mobs;
+package bitmovers.elementaldimensions.client.entity;
 
+import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;

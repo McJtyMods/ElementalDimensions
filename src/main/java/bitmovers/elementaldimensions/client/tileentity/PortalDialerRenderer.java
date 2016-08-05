@@ -1,9 +1,9 @@
-package bitmovers.elementaldimensions.client;
+package bitmovers.elementaldimensions.client.tileentity;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
-import bitmovers.elementaldimensions.tools.RenderTools;
+import bitmovers.elementaldimensions.client.RenderTools;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;

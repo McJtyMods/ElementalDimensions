@@ -1,4 +1,4 @@
-package bitmovers.elementaldimensions.tools;
+package bitmovers.elementaldimensions.util;
 
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.Entity;

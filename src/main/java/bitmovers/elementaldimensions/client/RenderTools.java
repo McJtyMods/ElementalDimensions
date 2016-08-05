@@ -1,11 +1,14 @@
-package bitmovers.elementaldimensions.tools;
+package bitmovers.elementaldimensions.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class RenderTools {
 
     public static void renderQuadBright(double scale, int brightness) {
