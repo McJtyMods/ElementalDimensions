@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.proxy;
 
+import bitmovers.elementaldimensions.blocks.ModBlocks;
 import bitmovers.elementaldimensions.init.DimensionRegister;
 import bitmovers.elementaldimensions.items.ModItems;
 import bitmovers.elementaldimensions.init.EntityRegister;
@@ -13,6 +14,7 @@ public class CommonProxy {
         DimensionRegister.preInit();
         EntityRegister.preInit();
         ModItems.preInit();
+        ModBlocks.preInit();
     }
 
     public void init(FMLInitializationEvent e) {

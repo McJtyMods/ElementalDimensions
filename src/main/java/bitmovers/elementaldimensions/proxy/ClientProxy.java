@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.proxy;
 
+import bitmovers.elementaldimensions.blocks.ModBlocks;
 import bitmovers.elementaldimensions.items.ModItems;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import bitmovers.elementaldimensions.mobs.RenderDirtZombie;
@@ -15,6 +16,7 @@ public class ClientProxy extends CommonProxy {
         super.preInit(e);
         RenderingRegistry.registerEntityRenderingHandler(EntityDirtZombie.class, RenderDirtZombie.FACTORY);
         ModItems.initClient();
+        ModBlocks.initClient();
     }
 
     @Override
