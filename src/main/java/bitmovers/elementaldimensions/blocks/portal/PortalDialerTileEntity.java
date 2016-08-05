@@ -7,17 +7,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
 public class PortalDialerTileEntity extends GenericTileEntity {
 
     private PortialDestination destination = PortialDestination.EARTH;
-
-    @Override
-    public boolean shouldRenderInPass(int pass) {
-        return pass == 1;
-    }
 
     public PortialDestination getDestination() {
         return destination;
@@ -110,4 +108,19 @@ public class PortalDialerTileEntity extends GenericTileEntity {
         compound.setByte("dest", (byte) destination.ordinal());
         return compound;
     }
+
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return pass == 1;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        int xCoord = getPos().getX();
+        int yCoord = getPos().getY();
+        int zCoord = getPos().getZ();
+        return new AxisAlignedBB(xCoord - 2, yCoord, zCoord - 2, xCoord + 3, yCoord + 3, zCoord + 3);
+    }
+
 }
