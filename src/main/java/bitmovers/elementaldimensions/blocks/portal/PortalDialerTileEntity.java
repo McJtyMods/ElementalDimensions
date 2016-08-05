@@ -1,7 +1,8 @@
 package bitmovers.elementaldimensions.blocks.portal;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericTileEntity;
-import bitmovers.elementaldimensions.items.ModItems;
+import elec332.core.api.annotations.RegisterTile;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +14,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
+import static bitmovers.elementaldimensions.init.ItemRegister.*;
+
+@RegisterTile(name = ElementalDimensions.MODID + "_portaldialer")
 public class PortalDialerTileEntity extends GenericTileEntity {
 
     private PortialDestination destination = PortialDestination.EARTH;
@@ -71,25 +75,25 @@ public class PortalDialerTileEntity extends GenericTileEntity {
             case EARTH:
                 return null;
             case WATER:
-                return ModItems.runeOfWater;
+                return runeOfWater;
             case AIR:
-                return ModItems.runeOfAir;
+                return runeOfAir;
             case SPIRIT:
-                return ModItems.runeOfSpirit;
+                return runeOfSpirit;
             case FIRE:
-                return ModItems.runeOfFire;
+                return runeOfFire;
         }
         return null;
     }
 
     private PortialDestination getDestination(Item item) {
-        if (item == ModItems.runeOfWater) {
+        if (item == runeOfWater) {
             return PortialDestination.WATER;
-        } else if (item == ModItems.runeOfAir) {
+        } else if (item == runeOfAir) {
             return PortialDestination.AIR;
-        } else if (item == ModItems.runeOfSpirit) {
+        } else if (item == runeOfSpirit) {
             return PortialDestination.SPIRIT;
-        } else if (item == ModItems.runeOfFire) {
+        } else if (item == runeOfFire) {
             return PortialDestination.FIRE;
         } else {
             return null;

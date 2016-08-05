@@ -20,8 +20,9 @@ public class ModBlocks {
 
     @SideOnly(Side.CLIENT)
     public static void initClient() {
-        portalDialerBlock.initModel();
-        portalBaseBlock.initModel();
-        solidWaterBlock.initModel();
+        //portalDialerBlock.initModel();
+        //portalBaseBlock.initModel();
+        //solidWaterBlock.initModel();
     }
+
 }

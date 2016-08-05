@@ -1,6 +1,5 @@
 package bitmovers.elementaldimensions.blocks.portal;
 
-import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -19,10 +18,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
@@ -33,19 +28,11 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
 
     public PortalDialerBlock() {
         super("portaldialer", Material.ROCK);
-        GameRegistry.registerTileEntity(PortalDialerTileEntity.class, ElementalDimensions.MODID + "_portaldialer");
     }
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new PortalDialerTileEntity();
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void initModel() {
-        super.initModel();
-        ClientRegistry.bindTileEntitySpecialRenderer(PortalDialerTileEntity.class, new PortalDialerRenderer());
     }
 
     @Override
@@ -113,4 +100,5 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
     }
+
 }

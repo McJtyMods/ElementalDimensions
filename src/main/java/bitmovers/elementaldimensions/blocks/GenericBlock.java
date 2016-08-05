@@ -17,12 +17,12 @@ public class GenericBlock extends Block {
         super(materialIn);
         setRegistryName(name);
         setUnlocalizedName(ElementalDimensions.MODID + "." + name);
-        GameRegistry.register(this);
-        GameRegistry.register(new ItemBlock(this), getRegistryName());
+        GameRegistry.register(this.setCreativeTab(ElementalDimensions.creativeTab));
+        GameRegistry.register((new ItemBlock(this)).setCreativeTab(ElementalDimensions.creativeTab), getRegistryName());
     }
 
     @SideOnly(Side.CLIENT)
     public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
+
 }
