@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.ncLayer.overworldTweaks;
 
 import bitmovers.elementaldimensions.init.BlockRegister;
+import bitmovers.elementaldimensions.util.worldgen.RegisteredWorldGenerator;
 import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.world.WorldHelper;
 import net.minecraft.block.BlockStone;
@@ -17,6 +18,7 @@ import java.util.Random;
 /**
  * Created by Elec332 on 4-8-2016.
  */
+@RegisteredWorldGenerator
 public class SilverfishTweak implements IWorldGenerator {
 
     @Override

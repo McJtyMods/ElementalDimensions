@@ -22,7 +22,7 @@ public class WorldGeneratorHandler implements IASMDataProcessor {
                 Class<?> clazz = Class.forName(asmData.getClassName());
                 Object o = clazz.newInstance();
                 if (o instanceof IWorldGenerator){
-                    GameRegistry.registerWorldGenerator((IWorldGenerator) o, (int)asmData.getAnnotationInfo().get("weight"));
+                    GameRegistry.registerWorldGenerator((IWorldGenerator) o, clazz.getAnnotation(RegisteredWorldGenerator.class).weight());
                 }
             } catch (Exception e){
                 ElementalDimensions.logger.error("Error registering WorldGenerator: "+asmData.getClassName());
