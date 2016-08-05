@@ -31,7 +31,7 @@ public class EarthChunkGenerator implements IChunkGenerator {
         this.worldObj = worldObj;
         long seed = 0x1fff; // @todo
         this.random = new Random((seed + 516) * 314);
-        terraingen.setup(worldObj, random, Blocks.DIRT.getDefaultState());
+        terraingen.setup(worldObj, random, Blocks.DIRT.getDefaultState(), Biomes.PLAINS);
     }
 
     @Override
