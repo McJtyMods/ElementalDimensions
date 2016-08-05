@@ -14,7 +14,7 @@ public class DimensionRegister {
     public static DimensionType spiritDimensionType;
     public static DimensionType fireDimensionType;
 
-    public static void preInit() {
+    public static void init() {
         registerDimensionTypes();
         registerDimensions();
     }
