@@ -64,16 +64,16 @@ public class ElementalDimensions {
         random = new Random();
         config.registerConfigWithInnerClasses(new Config());
         config.refresh();
-        proxy.preInit(event);
         NCLayerMain.instance.preInit(event);
+        proxy.preInit(event);
         loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         loadTimer.startPhase(event);
-        proxy.init(event);
         NCLayerMain.instance.init(event);
+        proxy.init(event);
         loadTimer.endPhase(event);
     }
 
@@ -82,9 +82,9 @@ public class ElementalDimensions {
         loadTimer.startPhase(event);
         BlockRegister.init();
         ItemRegister.init();
-        proxy.postInit(event);
         NCLayerMain.instance.postInit(event);
         registerCommand(new CommandTeleport());
+        proxy.postInit(event);
         loadTimer.endPhase(event);
     }
 

@@ -1,10 +1,13 @@
 package bitmovers.elementaldimensions.proxy;
 
-import bitmovers.elementaldimensions.client.tileentity.PortalDialerRenderer;
+import bitmovers.elementaldimensions.blocks.GenericBlock;
+import bitmovers.elementaldimensions.blocks.portal.PortalDialerRenderer;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import bitmovers.elementaldimensions.client.entity.RenderDirtZombie;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
+import elec332.core.util.RegistryHelper;
+import net.minecraft.block.Block;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -23,6 +26,11 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent e) {
         super.init(e);
         elec332.core.client.model.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE.setFields());
+        for (Block block : RegistryHelper.getBlockRegistry().getValues()){
+            if (block instanceof GenericBlock){
+                ((GenericBlock) block).initClient();
+            }
+        }
     }
 
     @Override
@@ -36,7 +44,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     private void registerTESRs(){
-        ClientRegistry.bindTileEntitySpecialRenderer(PortalDialerTileEntity.class, new PortalDialerRenderer());
+
     }
 
 }

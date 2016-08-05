@@ -32,5 +32,7 @@ public class RenderDirtZombie extends RenderLiving<EntityDirtZombie> {
         public Render<? super EntityDirtZombie> createRenderFor(RenderManager manager) {
             return new RenderDirtZombie(manager);
         }
+
     }
+
 }

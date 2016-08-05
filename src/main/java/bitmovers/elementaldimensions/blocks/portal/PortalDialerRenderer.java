@@ -1,8 +1,9 @@
-package bitmovers.elementaldimensions.client.tileentity;
+package bitmovers.elementaldimensions.blocks.portal;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
+import bitmovers.elementaldimensions.client.RegisteredTESR;
 import bitmovers.elementaldimensions.client.RenderTools;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
+@RegisteredTESR(PortalDialerTileEntity.class)
 public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialerTileEntity> {
 
     ResourceLocation portalTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portaleffect.png");
