@@ -31,13 +31,22 @@ public enum SchematicLoader {
         cache.clear();
         for (ResourceLocation resourceLocation : registeredSchematics){
             try {
-                cache.put(resourceLocation, SchematicHelper.INSTANCE.loadSchematic(resourceLocation));
-            } catch (Exception e){ //Possible IO issues
-                ElementalDimensions.logger.error("Failed to load schemtic: "+resourceLocation);
-                if (forced.contains(resourceLocation)){
-                    throw new IllegalStateException("Failed to load forced schemtic: "+resourceLocation);
+                Schematic schematic = SchematicHelper.INSTANCE.loadSchematic(resourceLocation);
+                if (schematic != null){
+                    cache.put(resourceLocation, schematic);
+                } else {
+                    errored(resourceLocation);
                 }
+            } catch (Exception e){ //Possible IO issues
+                errored(resourceLocation);
             }
+        }
+    }
+
+    private void errored(ResourceLocation resourceLocation){
+        ElementalDimensions.logger.error("Failed to load schematic: "+resourceLocation);
+        if (forced.contains(resourceLocation)){
+            throw new IllegalStateException("Failed to load forced schematic: "+resourceLocation);
         }
     }
 
