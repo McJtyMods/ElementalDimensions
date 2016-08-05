@@ -21,8 +21,10 @@ public class PortalDungeonLocator {
         if (world == null){
             throw new IllegalStateException();
         }
-        Random random = new Random((world.getSeed() + chunkX) * 37 + chunkZ * 5 + 113);
+        Random random = new Random(((world.getSeed() + chunkX + 3) * 37 + chunkZ * 5 + 113) ^ world.getSeed() - 5);
         random.nextFloat();
+        random.nextInt(random.nextInt(random.nextInt(chunkX + 76 * chunkZ * 98 + 16)));
+        random.nextDouble();
         return random.nextFloat() < Config.Dimensions.portalDungeonChance;
     }
 
