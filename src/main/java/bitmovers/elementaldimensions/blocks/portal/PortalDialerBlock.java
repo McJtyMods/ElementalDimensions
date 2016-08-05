@@ -89,11 +89,14 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
         world.setBlockState(pos, state.withProperty(FACING_HORIZ, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
+
+
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof PortalDialerTileEntity) {
+                ItemStack stack = playerIn.getHeldItemMainhand();
                 PortalDialerTileEntity dialer = (PortalDialerTileEntity) te;
                 ItemStack old = dialer.undial();
                 if (old != null) {
@@ -101,7 +104,6 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
                         playerIn.dropItem(old, true);
                     }
                 }
-                ItemStack stack = playerIn.getHeldItemMainhand();
                 if (dialer.dial(stack)) {
                     playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
                     playerIn.openContainer.detectAndSendChanges();

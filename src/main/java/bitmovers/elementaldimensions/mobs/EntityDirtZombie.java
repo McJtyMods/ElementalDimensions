@@ -13,7 +13,6 @@ public class EntityDirtZombie extends EntityMob {
     public EntityDirtZombie(World worldIn) {
         super(worldIn);
         setSize(0.6F, 1.95F);
-        System.out.println("EntityDirtZombie.EntityDirtZombie");
     }
 
     @Override

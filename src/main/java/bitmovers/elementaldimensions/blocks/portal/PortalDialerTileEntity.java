@@ -39,9 +39,11 @@ public class PortalDialerTileEntity extends GenericTileEntity {
             // Do nothing
             return null;
         }
+        Item item = getItem(destination);
+
         destination = PortialDestination.EARTH;
         markDirtyClient();
-        Item item = getItem(destination);
+
         if (item == null) {
             return null;
         }
@@ -57,7 +59,11 @@ public class PortalDialerTileEntity extends GenericTileEntity {
             return false;
         }
 
-        destination = getDestination(rune.getItem());
+        PortialDestination newdest = getDestination(rune.getItem());
+        if (newdest == null) {
+            return false;
+        }
+        this.destination = newdest;
         markDirtyClient();
         return true;
     }
@@ -88,28 +94,20 @@ public class PortalDialerTileEntity extends GenericTileEntity {
         } else if (item == ModItems.runeOfFire) {
             return PortialDestination.FIRE;
         } else {
-            return PortialDestination.EARTH;
+            return null;
         }
     }
 
     @Override
-    protected void readClientDataFromNBT(NBTTagCompound nbt) {
-        destination = PortialDestination.values()[nbt.getByte("dest")];
-    }
-
-    @Override
-    protected void writeClientDataToNBT(NBTTagCompound nbt) {
-        nbt.setByte("dest", (byte) destination.ordinal());
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound compound) {
-        readClientDataFromNBT(compound);
+        super.readFromNBT(compound);
+        destination = PortialDestination.values()[compound.getByte("dest")];
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        writeClientDataToNBT(compound);
-        return super.writeToNBT(compound);
+        super.writeToNBT(compound);
+        compound.setByte("dest", (byte) destination.ordinal());
+        return compound;
     }
 }

@@ -8,8 +8,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class RenderTools {
 
-    public static void renderQuadBright(double scale) {
-        int brightness = 240;
+    public static void renderQuadBright(double scale, int brightness) {
         int b1 = brightness >> 16 & 65535;
         int b2 = brightness & 65535;
         Tessellator tessellator = Tessellator.getInstance();
@@ -22,8 +21,7 @@ public class RenderTools {
         tessellator.draw();
     }
 
-    public static void renderBillboardQuadBright(double scale) {
-        int brightness = 240;
+    public static void renderBillboardQuadBright(double scale, int brightness) {
         int b1 = brightness >> 16 & 65535;
         int b2 = brightness & 65535;
         GlStateManager.pushMatrix();
