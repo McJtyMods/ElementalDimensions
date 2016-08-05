@@ -1,7 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "elementaldimensions:portalbase"
+    "model": "cube_all",
+    "textures": {
+      "all": "elementaldimensions:blocks/portalbase"
+    }
   },
   "variants": {
     "normal": [{}],

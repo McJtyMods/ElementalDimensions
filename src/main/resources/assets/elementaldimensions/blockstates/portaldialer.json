@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "elementaldimensions:frontblock",
+    "textures": {
+      "side": "elementaldimensions:blocks/portalbase",
+      "front": "elementaldimensions:blocks/portaldialer_spirit"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "facing": {
+      "north": {},
+      "south": {"y": 180},
+      "west": {"y": 270},
+      "east": {"y": 90}
+    },
+    "destination": {
+      "earth": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer" } },
+      "air": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_air" } },
+      "water": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_water" } },
+      "spirit": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_spirit" } },
+      "fire": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_fire" } }
+    }
+  }
+}

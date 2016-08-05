@@ -10,12 +10,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class PortalBaseRenderer extends TileEntitySpecialRenderer<PortalBaseTileEntity> {
+public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialerTileEntity> {
 
-    ResourceLocation halo = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portaleffect.png");
+    ResourceLocation portalTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portaleffect.png");
+    ResourceLocation spiritTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalspirit.png");
 
     @Override
-    public void renderTileEntityAt(PortalBaseTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+    public void renderTileEntityAt(PortalDialerTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
 //        super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 
         GlStateManager.depthMask(false);
@@ -24,9 +25,11 @@ public class PortalBaseRenderer extends TileEntitySpecialRenderer<PortalBaseTile
         GlStateManager.disableAlpha();
 
         GlStateManager.pushMatrix();
-        GlStateManager.translate((float) x + 0.5F, (float) y + 1.7F, (float) z + 0.5F);
-        this.bindTexture(halo);
-        RenderTools.renderQuadBright(1.0f);
+        GlStateManager.translate((float) x + 0.5F, (float) y + 3.0F, (float) z + 0.5F);
+        this.bindTexture(portalTexture);
+        RenderTools.renderQuadBright(2.5f);
+        this.bindTexture(spiritTexture);
+        RenderTools.renderQuadBright(1.5f);
         GlStateManager.popMatrix();
     }
 }
