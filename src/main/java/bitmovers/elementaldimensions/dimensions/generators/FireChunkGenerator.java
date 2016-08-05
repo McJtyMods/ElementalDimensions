@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
-import net.minecraft.block.state.IBlockState;
+import bitmovers.elementaldimensions.dimensions.generators.tools.FireTerrainGenerator;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -16,48 +16,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
-
 public class FireChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
+    private FireTerrainGenerator terraingen = new FireTerrainGenerator();
 
     public FireChunkGenerator(World worldObj) {
         this.worldObj = worldObj;
         long seed = 0x1fff; // @todo
-        this.random = new Random((seed + 516) * 314);
-    }
-
-    private static void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
-        IBlockState baseBlock = Blocks.LAVA.getDefaultState();
-
-        byte waterLevel = 60;
-        int index = 0;
-        for (int x = 0; x < 16; ++x) {
-            for (int z = 0; z < 16; ++z) {
-                int height = 0;
-                while (height < 2) {
-                    setBlockState(primer, index++, Blocks.BEDROCK.getDefaultState());
-                    height++;
-                }
-                while (height < waterLevel) {
-                    setBlockState(primer, index++, baseBlock);
-                    height++;
-                }
-                while (height < 256) {
-                    setBlockState(primer, index++, Blocks.AIR.getDefaultState());
-                    height++;
-                }
-            }
-        }
+        this.random = new Random((seed + 314) * 516);
+        terraingen.setup(worldObj, random, Blocks.NETHERRACK.getDefaultState(), Biomes.PLAINS);
     }
 
     @Override
     public Chunk provideChunk(int x, int z) {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
-        generate(x, z, chunkprimer);
+        terraingen.generate(x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 
