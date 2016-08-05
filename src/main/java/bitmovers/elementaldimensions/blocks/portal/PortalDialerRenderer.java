@@ -15,6 +15,9 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
 
     ResourceLocation portalTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portaleffect.png");
     ResourceLocation spiritTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalspirit.png");
+    ResourceLocation fireTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalfire.png");
+    ResourceLocation airTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalair.png");
+    ResourceLocation waterTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalwater.png");
 
     @Override
     public void renderTileEntityAt(PortalDialerTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
@@ -41,10 +44,30 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
         GlStateManager.rotate(180, 0, 1, 0);
         RenderTools.renderQuadBright(2.5f, brightness);
 
-        this.bindTexture(spiritTexture);
-        RenderTools.renderQuadBright(1.5f, 240);
-        GlStateManager.rotate(180, 0, 1, 0);
-        RenderTools.renderQuadBright(1.5f, 240);
+        ResourceLocation txt = null;
+        switch(te.getDestination()) {
+            case EARTH:
+                break;
+            case WATER:
+                txt = waterTexture;
+                break;
+            case AIR:
+                txt = airTexture;
+                break;
+            case SPIRIT:
+                txt = spiritTexture;
+                break;
+            case FIRE:
+                txt = fireTexture;
+                break;
+        }
+
+        if (txt != null) {
+            this.bindTexture(txt);
+            RenderTools.renderQuadBright(1.5f, 240);
+            GlStateManager.rotate(180, 0, 1, 0);
+            RenderTools.renderQuadBright(1.5f, 240);
+        }
 
         GlStateManager.popMatrix();
     }
