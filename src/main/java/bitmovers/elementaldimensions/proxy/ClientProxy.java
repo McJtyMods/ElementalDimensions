@@ -1,6 +1,5 @@
 package bitmovers.elementaldimensions.proxy;
 
-import bitmovers.elementaldimensions.blocks.ModBlocks;
 import bitmovers.elementaldimensions.client.PortalDialerRenderer;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
@@ -17,7 +16,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
-        ModBlocks.initClient();
         registerEntityRenderers();
     }
 

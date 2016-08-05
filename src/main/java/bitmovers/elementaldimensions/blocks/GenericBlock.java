@@ -21,8 +21,4 @@ public class GenericBlock extends Block {
         GameRegistry.register((new ItemBlock(this)).setCreativeTab(ElementalDimensions.creativeTab), getRegistryName());
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-    }
-
 }
