@@ -21,9 +21,10 @@ public enum SchematicLoader {
     SchematicLoader(){
         this.registeredSchematics = Sets.newHashSet();
         this.cache = Maps.newHashMap();
+        this.forced = Sets.newHashSet();
     }
 
-    private Set<ResourceLocation> registeredSchematics;
+    private Set<ResourceLocation> registeredSchematics, forced;
     private Map<ResourceLocation, Schematic> cache;
 
     public void reloadCache(){
@@ -33,11 +34,21 @@ public enum SchematicLoader {
                 cache.put(resourceLocation, SchematicHelper.INSTANCE.loadSchematic(resourceLocation));
             } catch (Exception e){ //Possible IO issues
                 ElementalDimensions.logger.error("Failed to load schemtic: "+resourceLocation);
+                if (forced.contains(resourceLocation)){
+                    throw new IllegalStateException("Failed to load forced schemtic: "+resourceLocation);
+                }
             }
         }
     }
 
     public boolean registerSchematic(ResourceLocation resourceLocation){
+        return registerSchematic(resourceLocation, false);
+    }
+
+    public boolean registerSchematic(ResourceLocation resourceLocation, boolean forced){
+        if (forced){
+            this.forced.add(resourceLocation);
+        }
         return registeredSchematics.add(resourceLocation);
     }
 

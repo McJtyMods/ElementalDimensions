@@ -6,6 +6,7 @@ import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
 import bitmovers.elementaldimensions.ncLayer.worldgen.DefaultStructureCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
+import bitmovers.elementaldimensions.world.WorldGeneratorPortalDungeon;
 import elec332.core.api.structure.GenerationType;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -34,6 +35,7 @@ public class NCLayerMain {
         for (int i = 1; i < 5; i++) {
             SchematicLoader.INSTANCE.registerSchematic(new EDResourceLocation("schematics/test"+i+".schematic"));
         }
+        SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorPortalDungeon.dungeonResource, true);
     }
 
     public void postInit(FMLPostInitializationEvent event){
