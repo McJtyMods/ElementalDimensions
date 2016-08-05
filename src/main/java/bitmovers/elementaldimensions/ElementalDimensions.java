@@ -70,6 +70,10 @@ public class ElementalDimensions {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         loadTimer.startPhase(event);
+        BlockRegister.init();
+        ItemRegister.init();
+        DimensionRegister.init();
+        EntityRegister.init();
         NCLayerMain.instance.init(event);
         proxy.init(event);
         loadTimer.endPhase(event);
@@ -78,10 +82,6 @@ public class ElementalDimensions {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         loadTimer.startPhase(event);
-        BlockRegister.init();
-        ItemRegister.init();
-        DimensionRegister.init();
-        EntityRegister.init();
         NCLayerMain.instance.postInit(event);
         registerCommand(new CommandTeleport());
         proxy.postInit(event);
