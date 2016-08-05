@@ -81,7 +81,7 @@ public class ElementalDimensions {
         BlockRegister.init();
         ItemRegister.init();
         DimensionRegister.init();
-        EntityRegister.preInit();
+        EntityRegister.init();
         NCLayerMain.instance.postInit(event);
         registerCommand(new CommandTeleport());
         proxy.postInit(event);
