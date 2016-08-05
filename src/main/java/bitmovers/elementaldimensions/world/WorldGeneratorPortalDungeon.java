@@ -30,6 +30,7 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && PortalDungeonLocator.isPortalChunk(chunkX, chunkZ)){
+            System.out.println("chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 StructureTemplate structure = new StructureTemplate(schematic, GenerationType.SURFACE);
