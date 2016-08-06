@@ -6,6 +6,7 @@ import bitmovers.elementaldimensions.mobs.EntityGuard;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.api.annotations.RegisterTile;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,16 +45,25 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             counter--;
             if (counter <= 0) {
                 counter = 500;
+
+                EntityPlayer closestPlayer = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, true);
+                if (closestPlayer != null) {
+                    // Don't spawn if there are players nearby
+                    return;
+                }
+
                 List<EntityGuard> guards = worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(getPos()).expand(7, 7, 7));
                 if (guards.size() >= Config.Mobs.maxGuards) {
                     return;
                 }
 
-                BlockPos spawnPos = new BlockPos(getPos().getX() + random.nextInt(7)-3, getPos().getY(), getPos().getZ() + random.nextInt(7)-3);
+                BlockPos spawnPos = new BlockPos(getPos().getX() + random.nextInt(5)-2, getPos().getY(), getPos().getZ() + random.nextInt(5)-2);
                 if (worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(spawnPos).expand(1, 1, 1)).size() == 0) {
-                    EntityGuard guard = new EntityGuard(worldObj);
-                    guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-                    worldObj.spawnEntityInWorld(guard);
+                    if (worldObj.isAirBlock(spawnPos)) {
+                        EntityGuard guard = new EntityGuard(worldObj);
+                        guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                        worldObj.spawnEntityInWorld(guard);
+                    }
                 }
             }
         }
