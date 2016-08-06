@@ -1,11 +1,15 @@
 package bitmovers.elementaldimensions.mobs;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -13,9 +17,11 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -24,6 +30,7 @@ import javax.annotation.Nullable;
 public class EntityDirtZombie extends EntityMob {
 
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityZombie.class, DataSerializers.BOOLEAN);
+    public static final ResourceLocation LOOT = LootTableList.register(new ResourceLocation(ElementalDimensions.MODID, "entities/dirt_zombie"));
 
     public EntityDirtZombie(World worldIn) {
         super(worldIn);
@@ -82,6 +89,12 @@ public class EntityDirtZombie extends EntityMob {
         } else {
             return false;
         }
+    }
+
+    @Override
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LOOT;
     }
 
 
