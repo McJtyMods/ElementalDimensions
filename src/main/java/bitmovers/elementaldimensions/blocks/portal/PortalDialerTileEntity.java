@@ -44,7 +44,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             counter--;
             if (counter <= 0) {
                 counter = 500;
-                List<EntityGuard> guards = worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(getPos()).expand(5, 5, 5));
+                List<EntityGuard> guards = worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(getPos()).expand(7, 7, 7));
                 if (guards.size() >= Config.Mobs.maxGuards) {
                     return;
                 }
