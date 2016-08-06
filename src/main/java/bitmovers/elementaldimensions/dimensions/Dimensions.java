@@ -1,14 +1,18 @@
 package bitmovers.elementaldimensions.dimensions;
 
 import bitmovers.elementaldimensions.util.Config;
+import com.google.common.collect.Maps;
 import elec332.core.api.structure.GenerationType;
+import net.minecraft.util.IStringSerializable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public enum Dimensions {
+public enum Dimensions implements IStringSerializable {
 
     EARTH(0, GenerationType.SURFACE) {
 
@@ -49,15 +53,25 @@ public enum Dimensions {
             return Config.Dimensions.Fire.dimensionID;
         }
 
+    },
+    OVERWORLD(-1, GenerationType.SURFACE) {
+
+        @Override
+        public int getDimensionID() {
+            return 0;
+        }
+
     };
 
     Dimensions(int level, GenerationType generationType){
         this.level = (byte)level;
         this.generationType = generationType;
+        this.name = toString().toLowerCase();
     }
 
     private final byte level;
     private final GenerationType generationType;
+    private final String name;
 
     public abstract int getDimensionID();
 
@@ -79,5 +93,25 @@ public enum Dimensions {
         return null;
     }
 
+    @Override
+    @Nonnull
+    public String getName() {
+        return name;
+    }
+
+    public static Dimensions getDimensionFromLevel(int level){
+        return LEVEL_MAP.get(level);
+    }
+
+    public static final Dimensions[] VALUES;
+    private static final Map<Integer, Dimensions> LEVEL_MAP;
+
+    static {
+        VALUES = values();
+        LEVEL_MAP = Maps.newHashMap();
+        for (Dimensions dim : VALUES){
+            LEVEL_MAP.put((int)dim.getLevel(), dim);
+        }
+    }
 
 }

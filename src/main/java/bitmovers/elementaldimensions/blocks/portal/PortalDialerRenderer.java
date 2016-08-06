@@ -49,21 +49,23 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
         RenderTools.renderQuadBright(2.5f, brightness);
 
         ResourceLocation txt = null;
-        switch(te.getDestination()) {
-            case EARTH:
-                break;
-            case WATER:
-                txt = waterTexture;
-                break;
-            case AIR:
-                txt = airTexture;
-                break;
-            case SPIRIT:
-                txt = spiritTexture;
-                break;
-            case FIRE:
-                txt = fireTexture;
-                break;
+        if (te.getDestination() != null) {
+            switch (te.getDestination()) {
+                case EARTH:
+                    break;
+                case WATER:
+                    txt = waterTexture;
+                    break;
+                case AIR:
+                    txt = airTexture;
+                    break;
+                case SPIRIT:
+                    txt = spiritTexture;
+                    break;
+                case FIRE:
+                    txt = fireTexture;
+                    break;
+            }
         }
 
         if (txt != null) {

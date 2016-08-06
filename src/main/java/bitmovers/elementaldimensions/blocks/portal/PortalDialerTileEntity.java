@@ -2,15 +2,17 @@ package bitmovers.elementaldimensions.blocks.portal;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericTileEntity;
+import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.PortalDungeonLocator;
+import bitmovers.elementaldimensions.items.ItemRune;
 import bitmovers.elementaldimensions.mobs.EntityGuard;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.CustomTeleporter;
-import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.api.annotations.RegisterTile;
 import elec332.core.util.DirectionHelper;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,6 +26,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import java.util.List;
@@ -34,50 +37,47 @@ import static bitmovers.elementaldimensions.init.ItemRegister.*;
 @RegisterTile(name = ElementalDimensions.MODID + "_portaldialer")
 public class PortalDialerTileEntity extends GenericTileEntity implements ITickable {
 
-    private PortialDestination destination = PortialDestination.EARTH;
-    private int guardCounter = 0;       // Remember how many guards we spawned
-
-    public PortialDestination getDestination() {
-        return destination;
+    public PortalDialerTileEntity(){
+        destination = Dimensions.OVERWORLD;
     }
 
-
-    private int counter = 0;
-    private boolean hasBeenUsed = false;
-
+    private Dimensions destination;
+    private int counter;
+    private boolean hasBeenUsed;
     private static Random random = new Random();
+
+    public Dimensions getDestination() {
+        return destination;
+    }
 
     @Override
     public void update() {
         if (!worldObj.isRemote) {
-            EnumFacing facing = getFacing();
-            BlockPos p = pos.offset(EnumFacing.UP);
-            AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX(), p.getY() + 3, p.getZ()).offset(DirectionHelper.rotateRight(facing)));
-            List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, tpAABB);
-            if (players.size() > 0){
-                if (!hasBeenUsed){
-                    hasBeenUsed = true;
-                }
-                PortalDialerTileEntity dest = PortalDungeonLocator.getTeleporter((WorldServer) worldObj, pos, destination == null ? null : destination.getDimension());
-                if (dest != null) {
-                    for (EntityPlayer player : players) {
-                        CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.pos.offset(EnumFacing.UP));
+            counter--;
+            if (counter % 50 == 0 && (destination == null && WorldHelper.getDimID(worldObj) != 0 || destination != null && WorldHelper.getDimID(worldObj) != destination.getDimensionID())) {
+                EnumFacing facing = getFacing();
+                BlockPos p = pos.offset(EnumFacing.UP);
+                AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX(), p.getY() + 3, p.getZ()).offset(DirectionHelper.rotateRight(facing)));
+                List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, tpAABB);
+                if (players.size() > 0) {
+                    if (!hasBeenUsed) {
+                        hasBeenUsed = true;
+                    }
+                    PortalDialerTileEntity dest = PortalDungeonLocator.getTeleporter((WorldServer) worldObj, pos, destination);
+                    if (dest != null) {
+                        for (EntityPlayer player : players) {
+                            CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.pos.offset(EnumFacing.UP));
+                        }
                     }
                 }
             }
-            if (!hasBeenUsed) {
-                counter--;
-                if (counter <= 0) {
-                    counter = 400 + worldObj.rand.nextInt(200);
 
-                    if (guardCounter >= Config.Mobs.totalMaxGuards) {
-                        // We can't spawn any more guards
-                        return;
-                    }
-
+            if (counter <= 0) {
+                counter = 400 + worldObj.rand.nextInt(200);
+                if (!hasBeenUsed) {
                     EntityPlayer closestPlayer = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, true);
                     if (closestPlayer != null) {
-                        // Don't spawn if there are players nearby
+                        // Don't spawn if there are no players nearby
                         return;
                     }
 
@@ -92,7 +92,6 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                             EntityGuard guard = new EntityGuard(worldObj);
                             guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
                             worldObj.spawnEntityInWorld(guard);
-                            guardCounter++;
                             markDirty();
                         }
                     }
@@ -107,53 +106,49 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
 
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        PortialDestination old = destination;
+        Dimensions old = destination;
         super.onDataPacket(net, packet);
         if (old != destination) {
             worldObj.markBlockRangeForRenderUpdate(getPos(), getPos());
         }
     }
 
-    /// Undial the portal (dial back to 'earth') and possibly return an itemstack with the previous rune if any
+    public void onActivated(EntityPlayer player){
+        ItemStack stack = player.getHeldItemMainhand();
+        if (stack != null) {
+            Item item = stack.getItem();
+            if (item instanceof ItemRune){
+                Dimensions dim = ((ItemRune) item).getDimension(stack);
+                if (destination == dim){
+                    return;
+                }
+                dropDest(player);
+                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+                this.destination = dim;
+                markDirtyClient();
+            }
+        } else {
+            dropDest(player);
+        }
+    }
+
+    @SuppressWarnings("all")
+    private void dropDest(EntityPlayer player){
+        if (destination != null){
+            ItemStack s3 = new ItemStack(getItem(destination));
+            if (!player.inventory.addItemStackToInventory(s3)){
+                player.dropItem(s3, true);
+            }
+            destination = null;
+            markDirtyClient();
+        }
+    }
+
     @Nullable
-    public ItemStack undial() {
-        if (destination == PortialDestination.EARTH) {
-            // Do nothing
-            return null;
-        }
-        Item item = getItem(destination);
-
-        destination = PortialDestination.EARTH;
-        markDirtyClient();
-
-        if (item == null) {
-            return null;
-        }
-        return new ItemStack(item);
-    }
-
-    public boolean dial(@Nullable ItemStack rune) {
-        if (rune == null) {
-            return false;
-        }
-        if (rune.getItem() == getItem(destination)) {
-            // Do nothing
-            return false;
-        }
-
-        PortialDestination newdest = getDestination(rune.getItem());
-        if (newdest == null) {
-            return false;
-        }
-        this.destination = newdest;
-        markDirtyClient();
-        return true;
-    }
-
-    private Item getItem(PortialDestination destination) {
+    private Item getItem(Dimensions destination) {
         switch (destination) {
             case EARTH:
-                return null;
+                return runeEarth;
             case WATER:
                 return runeOfWater;
             case AIR:
@@ -162,37 +157,25 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                 return runeOfSpirit;
             case FIRE:
                 return runeOfFire;
-        }
-        return null;
-    }
-
-    private PortialDestination getDestination(Item item) {
-        if (item == runeOfWater) {
-            return PortialDestination.WATER;
-        } else if (item == runeOfAir) {
-            return PortialDestination.AIR;
-        } else if (item == runeOfSpirit) {
-            return PortialDestination.SPIRIT;
-        } else if (item == runeOfFire) {
-            return PortialDestination.FIRE;
-        } else {
-            return null;
+            default:
+                return null;
         }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        destination = PortialDestination.values()[compound.getByte("dest")];
-        guardCounter = compound.getInteger("guards");
+        destination = Dimensions.findDimension(compound.getByte("dest"));
+        //guardCounter = compound.getInteger("guards");
         hasBeenUsed = compound.getBoolean("used");
     }
 
     @Override
+    @Nonnull
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setByte("dest", (byte) destination.ordinal());
-        compound.setInteger("guards", guardCounter);
+        compound.setByte("dest", destination == null ? -1 : destination.getLevel());
+        //compound.setInteger("guards", guardCounter);
         compound.setBoolean("used", hasBeenUsed);
         return compound;
     }
@@ -200,13 +183,13 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     @Override
     protected void writeClientDataToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setByte("dest", (byte) destination.ordinal());
+        nbt.setByte("dest", destination == null ? -1 : destination.getLevel());
     }
 
     @Override
     protected void readClientDataFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        destination = PortialDestination.values()[nbt.getByte("dest")];
+        destination = Dimensions.findDimension(nbt.getByte("dest"));
     }
 
     @Override
@@ -214,8 +197,10 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
         return pass == 1;
     }
 
-    @SideOnly(Side.CLIENT)
+
     @Override
+    @Nonnull
+    @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {
         int xCoord = getPos().getX();
         int yCoord = getPos().getY();

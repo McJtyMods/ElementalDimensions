@@ -12,10 +12,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class ItemRegister {
 
-    public static RuneOfWater runeOfWater;
-    public static RuneOfAir runeOfAir;
-    public static RuneOfSpirit runeOfSpirit;
-    public static RuneOfFire runeOfFire;
+    public static ItemWaterRune runeOfWater;
+    public static ItemAirRune runeOfAir;
+    public static ItemSpiritRune runeOfSpirit;
+    public static ItemFireRune runeOfFire;
+    public static ItemEarthRune runeEarth;
 
     public static GenericItem runeOfWaterPart1;
     public static GenericItem runeOfWaterPart2;
@@ -34,13 +35,16 @@ public class ItemRegister {
     public static GenericItem runeOfFirePart3;
 
     public static void init(){
+
         if (ElecCore.developmentEnvironment){
             GameRegistry.register(new ItemSchematicCreator(), new EDResourceLocation("schematicCreator_DEV"));
         }
-        runeOfWater = new RuneOfWater();
-        runeOfAir = new RuneOfAir();
-        runeOfSpirit = new RuneOfSpirit();
-        runeOfFire = new RuneOfFire();
+
+        runeOfWater = new ItemWaterRune();
+        runeOfAir = new ItemAirRune();
+        runeOfSpirit = new ItemSpiritRune();
+        runeOfFire = new ItemFireRune();
+        runeEarth = new ItemEarthRune();
 
         runeOfWaterPart1 = new GenericItem("waterrune_part1");
         runeOfWaterPart2 = new GenericItem("waterrune_part2");;
