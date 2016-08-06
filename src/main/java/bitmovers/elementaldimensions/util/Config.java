@@ -30,8 +30,8 @@ public class Config {
     @Configurable.Class(comment = "Dimension settings")
     public static class Dimensions {
 
-        @Configurable(comment = "Chance for a portal dungeon to spawn (1 means 100%)", minValue = 0.0f, maxValue = 1.0f)
-        public static float portalDungeonChance = 0.01f;
+        @Configurable(comment = "Chance for a portal dungeon to spawn (1 means 100%)", maxValue = 1.0f)
+        public static float portalDungeonChance = 0.003f;
 
         @Configurable.Class(comment = "Settings for the Air dimension.")
         public static class Air {

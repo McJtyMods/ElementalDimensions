@@ -35,6 +35,10 @@ public class CustomTeleporter extends Teleporter {
         entity.motionZ = 0.0f;
     }
 
+    public static void teleportToDimension(EntityPlayer player, int dimension, BlockPos pos){
+        teleportToDimension(player, dimension, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+    }
+
     @SuppressWarnings("all")
     public static void teleportToDimension(EntityPlayer player, int dimension, double x, double y, double z) {
         int oldDimension = WorldHelper.getDimID(player.worldObj);

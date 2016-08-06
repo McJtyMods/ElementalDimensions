@@ -26,4 +26,5 @@ public enum PortialDestination implements IStringSerializable {
     public Dimensions getDimension() {
         return dimension;
     }
+
 }
