@@ -23,7 +23,7 @@ public class EarthChunkGenerator implements IChunkGenerator {
     private final World worldObj;
     private Random random;
 
-    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 4, 4));
+    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 3, 3));
 
     private NormalTerrainGenerator terraingen = new NormalTerrainGenerator();
 

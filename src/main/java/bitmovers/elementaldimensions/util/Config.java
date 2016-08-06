@@ -17,7 +17,13 @@ public class Config {
 
     }
 
+    @Configurable.Class(comment = "Mob settings")
+    public static class Mobs {
 
+        @Configurable(comment = "Max number of guards around a portal dungeon", minValue = 0, maxValue = 100)
+        public static int maxGuards = 4;
+
+    }
 
     @Configurable.Class(comment = "Dimension settings")
     public static class Dimensions {

@@ -2,7 +2,9 @@ package bitmovers.elementaldimensions.proxy;
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
+import bitmovers.elementaldimensions.mobs.EntityGuard;
 import bitmovers.elementaldimensions.mobs.RenderDirtZombie;
+import bitmovers.elementaldimensions.mobs.RenderGuard;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
 import elec332.core.util.RegistryHelper;
 import net.minecraft.block.Block;
@@ -38,6 +40,7 @@ public class ClientProxy extends CommonProxy {
 
     private void registerEntityRenderers(){
         RenderingRegistry.registerEntityRenderingHandler(EntityDirtZombie.class, RenderDirtZombie.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGuard.class, RenderGuard.FACTORY);
     }
 
     private void registerTESRs(){

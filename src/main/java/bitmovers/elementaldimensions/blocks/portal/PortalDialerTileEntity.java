@@ -2,27 +2,61 @@ package bitmovers.elementaldimensions.blocks.portal;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericTileEntity;
+import bitmovers.elementaldimensions.mobs.EntityGuard;
+import bitmovers.elementaldimensions.util.Config;
+import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.api.annotations.RegisterTile;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
+import java.util.List;
+import java.util.Random;
+
 import static bitmovers.elementaldimensions.init.ItemRegister.*;
 
 @RegisterTile(name = ElementalDimensions.MODID + "_portaldialer")
-public class PortalDialerTileEntity extends GenericTileEntity {
+public class PortalDialerTileEntity extends GenericTileEntity implements ITickable {
 
     private PortialDestination destination = PortialDestination.EARTH;
 
     public PortialDestination getDestination() {
         return destination;
+    }
+
+
+    private int counter = 0;
+
+    private static Random random = new Random();
+
+    @Override
+    public void update() {
+        if (!worldObj.isRemote) {
+            counter--;
+            if (counter <= 0) {
+                counter = 500;
+                List<EntityGuard> guards = worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(getPos()).expand(5, 5, 5));
+                if (guards.size() >= Config.Mobs.maxGuards) {
+                    return;
+                }
+
+                BlockPos spawnPos = new BlockPos(getPos().getX() + random.nextInt(7)-3, getPos().getY(), getPos().getZ() + random.nextInt(7)-3);
+                if (worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(spawnPos).expand(1, 1, 1)).size() == 0) {
+                    EntityGuard guard = new EntityGuard(worldObj);
+                    guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                    worldObj.spawnEntityInWorld(guard);
+                }
+            }
+        }
     }
 
     @Override
