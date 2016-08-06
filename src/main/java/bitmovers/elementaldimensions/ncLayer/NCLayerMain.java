@@ -6,6 +6,7 @@ import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
 import bitmovers.elementaldimensions.ncLayer.worldgen.DefaultStructureCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
+import bitmovers.elementaldimensions.world.WorldGeneratorEarthDungeon;
 import bitmovers.elementaldimensions.world.WorldGeneratorPortalDungeon;
 import elec332.core.api.structure.GenerationType;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -36,15 +37,16 @@ public class NCLayerMain {
             SchematicLoader.INSTANCE.registerSchematic(new EDResourceLocation("schematics/test"+i+".schematic"));
         }
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorPortalDungeon.dungeonResource, true);
+        SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorEarthDungeon.dungeonResource, true);
     }
 
     public void postInit(FMLPostInitializationEvent event){
         ElementalDimensions.registerCommand(new CommandReloadSchematics());
         ElementalDimensions.registerCommand(new CommandReloadConfig());
         SchematicLoader.INSTANCE.reloadCache();
-        for (int i = 1; i < 5; i++) {
-            GameRegistry.registerWorldGenerator(new DefaultStructureCreator(new EDResourceLocation("schematics/test"+i+".schematic"), GenerationType.SURFACE), 100 + 1);
-        }
+//        for (int i = 1; i < 5; i++) {
+//            GameRegistry.registerWorldGenerator(new DefaultStructureCreator(new EDResourceLocation("schematics/test"+i+".schematic"), GenerationType.SURFACE), 100 + 1);
+//        }
     }
 
     public void serverStarting(FMLServerStartingEvent event){

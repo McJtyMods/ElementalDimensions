@@ -218,7 +218,9 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
 
                             for (int z = 0; z < 4; ++z) {
                                 index += maxheight;
-                                if ((d15 += d16) > 0.0D) {
+                                if (height < 2) {
+                                    setBlockState(primer, index, Blocks.BEDROCK.getDefaultState());
+                                } else if ((d15 += d16) > 0.0D) {
                                     setBlockState(primer, index, baseBlock);
                                 } else {
                                     setBlockState(primer, index, Blocks.AIR.getDefaultState());

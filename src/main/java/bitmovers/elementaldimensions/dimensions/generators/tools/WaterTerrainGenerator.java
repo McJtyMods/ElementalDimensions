@@ -15,6 +15,9 @@ import java.util.Random;
 import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
 
 public class WaterTerrainGenerator implements ITerrainGenerator {
+
+    public static final int SEALEVEL = 80;
+
     private World world;
 
     private final double[] noiseField;
@@ -172,7 +175,7 @@ public class WaterTerrainGenerator implements ITerrainGenerator {
     public void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
         generateHeightmap(chunkX * 4, 0, chunkZ * 4);
 
-        byte waterLevel = 80;
+        byte waterLevel = SEALEVEL;
         for (int x4 = 0; x4 < 4; ++x4) {
             int l = x4 * 5;
             int i1 = (x4 + 1) * 5;
@@ -212,7 +215,9 @@ public class WaterTerrainGenerator implements ITerrainGenerator {
 
                             for (int z = 0; z < 4; ++z) {
                                 index += maxheight;
-                                if ((d15 += d16) > 0.2D) {
+                                if (height < 2) {
+                                    setBlockState(primer, index, Blocks.BEDROCK.getDefaultState());
+                                } else if ((d15 += d16) > 0.2D) {
                                     setBlockState(primer, index, baseBlock);
                                 } else if ((d15 += d16) > 0.0D) {
                                     setBlockState(primer, index, BlockRegister.solidWaterBlock.getDefaultState());
