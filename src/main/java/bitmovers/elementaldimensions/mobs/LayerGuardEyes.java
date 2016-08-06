@@ -13,8 +13,8 @@ public class LayerGuardEyes implements LayerRenderer<EntityGuard> {
     private static final ResourceLocation GUARD_EYES = new ResourceLocation("elementaldimensions:textures/entity/guard_eyes.png");
     private final RenderGuard guardRender;
 
-    public LayerGuardEyes(RenderGuard endermanRendererIn) {
-        this.guardRender = endermanRendererIn;
+    public LayerGuardEyes(RenderGuard renderGuard) {
+        this.guardRender = renderGuard;
     }
 
     public void doRenderLayer(EntityGuard entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {

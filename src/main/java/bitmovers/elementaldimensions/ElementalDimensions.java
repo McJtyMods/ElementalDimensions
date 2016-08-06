@@ -64,16 +64,13 @@ public class ElementalDimensions {
         config.refresh();
         NCLayerMain.instance.preInit(event);
         proxy.preInit(event);
+
         loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         loadTimer.startPhase(event);
-        BlockRegister.init();
-        ItemRegister.init();
-        DimensionRegister.init();
-        EntityRegister.init();
         NCLayerMain.instance.init(event);
         proxy.init(event);
         loadTimer.endPhase(event);
