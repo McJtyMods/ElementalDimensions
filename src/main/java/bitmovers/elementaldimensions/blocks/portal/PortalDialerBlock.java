@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.blocks.portal;
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -20,6 +21,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class PortalDialerBlock extends GenericBlock implements ITileEntityProvider {
 
@@ -28,6 +31,9 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
 
     public PortalDialerBlock() {
         super("portaldialer", Material.ROCK);
+        setHardness(50.0F);
+        setResistance(2000.0F);
+        setSoundType(SoundType.STONE);
     }
 
     @Override
@@ -38,6 +44,18 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
         return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
+        if (!worldIn.isRemote) {
+            worldIn.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 3.0f, false);
+        }
     }
 
     @Override
