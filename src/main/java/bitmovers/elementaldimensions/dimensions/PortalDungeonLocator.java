@@ -23,15 +23,6 @@ public class PortalDungeonLocator {
 
         Random random = new Random((world.getSeed() + chunkX) * 37 + chunkZ * 5 + 113);
         random.nextFloat();
-//
-//
-//        long seed = world.getSeed();
-//        Random random = new Random(seed);//((seed + chunkX + 3) * 37 + chunkZ * 5 + 113) ^ seed - 5);
-//        long xSeed = random.nextLong() >> 2 + 1L;
-//        long zSeed = random.nextLong() >> 2 + 1L;
-//        long chunkSeed = (xSeed * chunkX + zSeed * chunkZ) ^ seed;
-//        random.setSeed(chunkSeed);
-//        random.nextInt(100);
         return random.nextFloat() < Config.Dimensions.portalDungeonChance;
     }
 
