@@ -2,6 +2,10 @@ package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.NormalTerrainGenerator;
 import bitmovers.elementaldimensions.dimensions.generators.tools.WaterTerrainGenerator;
+import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
+import bitmovers.elementaldimensions.mobs.EntityWaterCreep;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -25,6 +29,8 @@ public class WaterChunkGenerator implements IChunkGenerator {
     private final World worldObj;
     private Random random;
 
+    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityWaterCreep.class, 100, 1, 1));
+
     private WaterTerrainGenerator terraingen = new WaterTerrainGenerator();
 
     public WaterChunkGenerator(World worldObj) {
@@ -32,6 +38,7 @@ public class WaterChunkGenerator implements IChunkGenerator {
         long seed = 0x1fff; // @todo
         this.random = new Random((seed + 516) * 314);
         terraingen.setup(worldObj, random, Blocks.STONE.getDefaultState(), Biomes.PLAINS);
+        worldObj.setSeaLevel(WaterTerrainGenerator.SEALEVEL);
     }
 
     @Override
@@ -63,7 +70,11 @@ public class WaterChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        return Collections.emptyList();
+        if (creatureType == EnumCreatureType.WATER_CREATURE){
+            return mobs;
+        }
+        return ImmutableList.of();
+
     }
 
     @Nullable

@@ -42,9 +42,9 @@ public class NCLayerMain {
         ElementalDimensions.registerCommand(new CommandReloadSchematics());
         ElementalDimensions.registerCommand(new CommandReloadConfig());
         SchematicLoader.INSTANCE.reloadCache();
-        for (int i = 1; i < 5; i++) {
-            GameRegistry.registerWorldGenerator(new DefaultStructureCreator(new EDResourceLocation("schematics/test"+i+".schematic"), GenerationType.SURFACE), 100 + 1);
-        }
+//        for (int i = 1; i < 5; i++) {
+//            GameRegistry.registerWorldGenerator(new DefaultStructureCreator(new EDResourceLocation("schematics/test"+i+".schematic"), GenerationType.SURFACE), 100 + 1);
+//        }
     }
 
     public void serverStarting(FMLServerStartingEvent event){
