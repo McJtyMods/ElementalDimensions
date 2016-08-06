@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
-import bitmovers.elementaldimensions.dimensions.PortalDungeonLocator;
+import bitmovers.elementaldimensions.dimensions.EarthDungeonLocator;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.worldgen.RegisteredWorldGenerator;
@@ -21,25 +21,21 @@ import java.util.Random;
 /**
  * Created by Elec332 on 5-8-2016.
  */
-@RegisteredWorldGenerator(weight = 394)
-public class WorldGeneratorPortalDungeon implements IWorldGenerator {
+@RegisteredWorldGenerator(weight = 395)
+public class WorldGeneratorEarthDungeon implements IWorldGenerator {
 
     public static final ResourceLocation dungeonResource;
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
-        if (validDimension(dimension) && PortalDungeonLocator.isPortalChunk(chunkX, chunkZ)){
-            System.out.println("PORTAL: chunkX = " + chunkX + "," + chunkZ);
+        if (validDimension(dimension) && EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)){
+            System.out.println("EARTH: chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
-                GenerationType type = GenerationType.SURFACE;
-                Dimensions dim = Dimensions.findDimension(dimension);
-                if (dim != null) {
-                    type = dim.getGenerationType();
-                }
+                GenerationType type = GenerationType.UNDERGROUND;
                 StructureTemplate structure = new StructureTemplate(schematic, type);
-                structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(PortalDungeonLocator.getSpecialSeed(chunkX, chunkZ))), world, chunkProvider);
+                structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed())), world, chunkProvider);
             } else {
                 throw new IllegalStateException();
             }
@@ -47,15 +43,11 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
     }
 
     private boolean validDimension(int dim){
-        if (dim == 0){
-            return true;
-        }
-        Dimensions dimension = Dimensions.findDimension(dim);
-        return dimension != null;
+        return dim == Dimensions.EARTH.getDimensionID();
     }
 
     static {
-        dungeonResource = new EDResourceLocation("schematics/portalDungeon.schematic");
+        dungeonResource = new EDResourceLocation("schematics/earthDungeon.schematic");
     }
 
 }
