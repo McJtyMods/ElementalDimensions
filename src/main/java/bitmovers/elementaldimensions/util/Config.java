@@ -23,6 +23,8 @@ public class Config {
         @Configurable(comment = "Max number of guards around a portal dungeon", minValue = 0, maxValue = 100)
         public static int maxGuards = 4;
 
+        @Configurable(comment = "Max number of guards can spawn in a portal dungeon before it 'runs out'", minValue = 0, maxValue = 100000)
+        public static int totalMaxGuards = 100;
     }
 
     @Configurable.Class(comment = "Dimension settings")

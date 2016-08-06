@@ -29,6 +29,7 @@ import static bitmovers.elementaldimensions.init.ItemRegister.*;
 public class PortalDialerTileEntity extends GenericTileEntity implements ITickable {
 
     private PortialDestination destination = PortialDestination.EARTH;
+    private int guardCounter = 0;       // Remember how many guards we spawned
 
     public PortialDestination getDestination() {
         return destination;
@@ -46,6 +47,11 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             if (counter <= 0) {
                 counter = 500;
 
+                if (guardCounter >= Config.Mobs.totalMaxGuards) {
+                    // We can't spawn any more guards
+                    return;
+                }
+
                 EntityPlayer closestPlayer = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, true);
                 if (closestPlayer != null) {
                     // Don't spawn if there are players nearby
@@ -59,10 +65,12 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
 
                 BlockPos spawnPos = new BlockPos(getPos().getX() + random.nextInt(5)-2, getPos().getY(), getPos().getZ() + random.nextInt(5)-2);
                 if (worldObj.getEntitiesWithinAABB(EntityGuard.class, new AxisAlignedBB(spawnPos).expand(1, 1, 1)).size() == 0) {
-                    if (worldObj.isAirBlock(spawnPos)) {
+                    if (worldObj.isAirBlock(spawnPos) && worldObj.isAirBlock(spawnPos.up(2))) {
                         EntityGuard guard = new EntityGuard(worldObj);
                         guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
                         worldObj.spawnEntityInWorld(guard);
+                        guardCounter++;
+                        markDirty();
                     }
                 }
             }
@@ -148,13 +156,27 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         destination = PortialDestination.values()[compound.getByte("dest")];
+        guardCounter = compound.getInteger("guards");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setByte("dest", (byte) destination.ordinal());
+        compound.setInteger("guards", guardCounter);
         return compound;
+    }
+
+    @Override
+    protected void writeClientDataToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        nbt.setByte("dest", (byte) destination.ordinal());
+    }
+
+    @Override
+    protected void readClientDataFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        destination = PortialDestination.values()[nbt.getByte("dest")];
     }
 
     @Override
