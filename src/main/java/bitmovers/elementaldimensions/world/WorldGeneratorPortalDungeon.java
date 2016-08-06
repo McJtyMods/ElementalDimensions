@@ -33,7 +33,12 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
             System.out.println("chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
-                StructureTemplate structure = new StructureTemplate(schematic, GenerationType.SURFACE);
+                GenerationType type = GenerationType.SURFACE;
+                Dimensions dim = Dimensions.findDimension(dimension);
+                if (dim != null) {
+                    type = dim.getGenerationType();
+                }
+                StructureTemplate structure = new StructureTemplate(schematic, type);
                 structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, random), world, chunkProvider);
             } else {
                 throw new IllegalStateException();
@@ -45,12 +50,8 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
         if (dim == 0){
             return true;
         }
-        for (Dimensions dimension : Dimensions.values()){
-            if (dimension.getDimensionID() == dim){
-                return true;
-            }
-        }
-        return false;
+        Dimensions dimension = Dimensions.findDimension(dim);
+        return dimension != null;
     }
 
     static {
