@@ -11,6 +11,7 @@ import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
 import elec332.core.world.schematic.Schematic;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -35,7 +36,9 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
             if (schematic != null) {
                 GenerationType type = GenerationType.UNDERGROUND;
                 StructureTemplate structure = new StructureTemplate(schematic, type);
-                structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed())), world, chunkProvider);
+                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
+                System.out.println("    pos = " + pos);
+                structure.generateStructure(pos, world, chunkProvider);
             } else {
                 throw new IllegalStateException();
             }

@@ -212,7 +212,9 @@ public class FireTerrainGenerator implements ITerrainGenerator {
 
                             for (int z = 0; z < 4; ++z) {
                                 index += maxheight;
-                                if ((d15 += d16) > 0.2D) {
+                                if (height < 2) {
+                                    setBlockState(primer, index, Blocks.BEDROCK.getDefaultState());
+                                } else if ((d15 += d16) > 0.2D) {
                                     setBlockState(primer, index, baseBlock);
                                 } else if ((d15 += d16) > 0.0D) {
                                     setBlockState(primer, index, BlockRegister.solidWaterBlock.getDefaultState());
