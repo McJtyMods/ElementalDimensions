@@ -18,6 +18,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
+        ItemRegister.initCrafting();
     }
 
     public void postInit(FMLPostInitializationEvent e) {

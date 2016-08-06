@@ -4,6 +4,7 @@ import bitmovers.elementaldimensions.items.*;
 import bitmovers.elementaldimensions.ncLayer.dev.ItemSchematicCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import elec332.core.main.ElecCore;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -56,6 +57,13 @@ public class ItemRegister {
         runeOfFirePart1 = new GenericItem("firerune_part1");;
         runeOfFirePart2 = new GenericItem("firerune_part2");;
         runeOfFirePart3 = new GenericItem("firerune_part3");;
+    }
+
+    public static void initCrafting() {
+        GameRegistry.addShapelessRecipe(new ItemStack(runeOfAir), new ItemStack(runeOfAirPart1), new ItemStack(runeOfAirPart2), new ItemStack(runeOfAirPart3));
+        GameRegistry.addShapelessRecipe(new ItemStack(runeOfWater), new ItemStack(runeOfWaterPart1), new ItemStack(runeOfWaterPart2), new ItemStack(runeOfWaterPart3));
+        GameRegistry.addShapelessRecipe(new ItemStack(runeOfFire), new ItemStack(runeOfFirePart1), new ItemStack(runeOfFirePart2), new ItemStack(runeOfFirePart3));
+        GameRegistry.addShapelessRecipe(new ItemStack(runeOfSpirit), new ItemStack(runeOfSpiritPart1), new ItemStack(runeOfSpiritPart2), new ItemStack(runeOfSpiritPart3));
     }
 
 }
