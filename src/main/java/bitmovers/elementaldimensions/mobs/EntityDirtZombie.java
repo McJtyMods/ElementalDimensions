@@ -21,7 +21,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,7 +32,8 @@ import javax.annotation.Nullable;
 public class EntityDirtZombie extends EntityMob {
 
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityZombie.class, DataSerializers.BOOLEAN);
-    public static final ResourceLocation LOOT = LootTableList.register(new ResourceLocation(ElementalDimensions.MODID, "entities/dirt_zombie"));
+    public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/dirt_zombie");
+
 
     public EntityDirtZombie(World worldIn) {
         super(worldIn);
@@ -41,6 +44,8 @@ public class EntityDirtZombie extends EntityMob {
     protected void entityInit() {
         super.entityInit();
         this.getDataManager().register(ARMS_RAISED, Boolean.valueOf(false));
+//        LootTable lootTableFromLocation = worldObj.getLootTableManager().getLootTableFromLocation(LOOT);
+//        System.out.println("lootTableFromLocation = " + lootTableFromLocation);
     }
 
     protected void applyEntityAttributes() {
