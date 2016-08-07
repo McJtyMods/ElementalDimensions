@@ -28,4 +28,8 @@ public class AirWorldProvider extends WorldProvider {
         return new AirChunkGenerator(worldObj);
     }
 
+    @Override
+    public double getHorizon() {
+        return 0.0D;
+    }
 }
