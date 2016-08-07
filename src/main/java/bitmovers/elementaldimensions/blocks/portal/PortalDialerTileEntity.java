@@ -200,6 +200,9 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     protected void readClientDataFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         destination = Dimensions.findDimension(nbt.getByte("dest"));
+        if (destination == null) {
+            destination = Dimensions.OVERWORLD;
+        }
     }
 
     @Override

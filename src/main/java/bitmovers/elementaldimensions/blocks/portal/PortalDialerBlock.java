@@ -31,7 +31,7 @@ import java.util.Set;
 public class PortalDialerBlock extends GenericBlock implements ITileEntityProvider {
 
     public static final PropertyDirection FACING_HORIZ = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    public static PropertyEnum<Dimensions> DESTINATION = PropertyEnum.create("destination", Dimensions.class);
+    public static final PropertyEnum<Dimensions> DESTINATION = PropertyEnum.create("destination", Dimensions.class);
 
     public PortalDialerBlock() {
         super("portaldialer", Material.ROCK);
