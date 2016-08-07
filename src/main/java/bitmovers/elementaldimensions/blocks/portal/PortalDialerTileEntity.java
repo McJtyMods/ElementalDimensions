@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.List;
 import java.util.Random;
 
@@ -87,6 +86,14 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                             dest.setCooldown(7);    // Some cooldown
                             for (EntityPlayer player : players) {
                                 CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.pos.offset(EnumFacing.UP));
+                                String[] tasks = destination.getTaskDescriptions();
+                                if (tasks != null) {
+                                    player.addChatComponentMessage(new TextComponentString(TextFormatting.GREEN + "Mortal, here are your tasks:"));
+                                    for (String task : tasks) {
+                                        player.addChatComponentMessage(new TextComponentString(task));
+                                    }
+
+                                }
                             }
                         }
                     }

@@ -21,6 +21,10 @@ public enum Dimensions implements IStringSerializable {
             return Config.Dimensions.Earth.dimensionID;
         }
 
+        @Override
+        public String[] getTaskDescriptions() {
+            return new String[] { "Kill dirt zombies for the first water rune part", "Find a dungeon for the second part", "Kill the boss at midnight for the last part" };
+        }
     },
     WATER(1, GenerationType.SURFACE) {
 
@@ -74,6 +78,10 @@ public enum Dimensions implements IStringSerializable {
     private final String name;
 
     public abstract int getDimensionID();
+
+    public String[] getTaskDescriptions() {
+        return null;
+    }
 
     public byte getLevel(){
         return level;
