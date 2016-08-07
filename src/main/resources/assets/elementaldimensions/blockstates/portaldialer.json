@@ -11,7 +11,8 @@
     "normal": [{}],
     "inventory": [{}],
     "destination": {
-      "earth": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer" } },
+      "overworld": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer" } },
+      "earth": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_earth" } },
       "air": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_air" } },
       "water": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_water" } },
       "spirit": { "textures": { "side": "elementaldimensions:blocks/portalbase", "front": "elementaldimensions:blocks/portaldialer_spirit" } },

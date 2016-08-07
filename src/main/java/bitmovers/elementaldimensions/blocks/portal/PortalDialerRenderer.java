@@ -22,6 +22,8 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
     ResourceLocation fireTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalfire.png");
     ResourceLocation airTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalair.png");
     ResourceLocation waterTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalwater.png");
+    ResourceLocation earthTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portalearth.png");
+    ResourceLocation overworldTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portaloverworld.png");
 
     @Override
     public void renderTileEntityAt(PortalDialerTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
@@ -52,6 +54,7 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
         if (te.getDestination() != null) {
             switch (te.getDestination()) {
                 case EARTH:
+                    txt = earthTexture;
                     break;
                 case WATER:
                     txt = waterTexture;
@@ -64,6 +67,11 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
                     break;
                 case FIRE:
                     txt = fireTexture;
+                    break;
+                case OVERWORLD:
+                    if (te.getWorld().provider.getDimension() != 0) {
+                        txt = overworldTexture;
+                    }
                     break;
             }
         }
