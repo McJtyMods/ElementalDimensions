@@ -93,6 +93,16 @@ public enum Dimensions implements IStringSerializable {
         return null;
     }
 
+    @Nullable
+    public static Dimensions findLevel(int level) {
+        for (Dimensions dimension : Dimensions.values()){
+            if (dimension.getLevel() == level){
+                return dimension;
+            }
+        }
+        return null;
+    }
+
     @Override
     @Nonnull
     public String getName() {

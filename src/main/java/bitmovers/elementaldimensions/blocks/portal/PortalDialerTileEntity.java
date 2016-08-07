@@ -172,7 +172,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        destination = Dimensions.findDimension(compound.getByte("dest"));
+        destination = Dimensions.findLevel(compound.getByte("dest"));
         if (destination == null) {
             destination = Dimensions.OVERWORLD;
         }
@@ -199,7 +199,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     @Override
     protected void readClientDataFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        destination = Dimensions.findDimension(nbt.getByte("dest"));
+        destination = Dimensions.findLevel(nbt.getByte("dest"));
         if (destination == null) {
             destination = Dimensions.OVERWORLD;
         }
