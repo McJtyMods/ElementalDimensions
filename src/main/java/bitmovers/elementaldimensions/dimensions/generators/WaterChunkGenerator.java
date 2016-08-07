@@ -64,7 +64,7 @@ public class WaterChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        if (creatureType == EnumCreatureType.MONSTER){
+        if (creatureType == EnumCreatureType.WATER_CREATURE) {
             return mobs;
         }
         return ImmutableList.of();

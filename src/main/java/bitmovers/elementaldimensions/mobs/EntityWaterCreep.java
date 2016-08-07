@@ -3,10 +3,7 @@ package bitmovers.elementaldimensions.mobs;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import com.google.common.base.Predicate;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,6 +52,17 @@ public class EntityWaterCreep extends EntityMob {
         this.moveHelper = new WaterCreepMoveHelper(this);
         this.clientSideTailAnimation = this.rand.nextFloat();
         this.clientSideTailAnimationO = this.clientSideTailAnimation;
+    }
+
+
+    @Override
+    public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
+        return type.equals(EnumCreatureType.WATER_CREATURE);
+    }
+
+    @Override
+    public boolean canBreatheUnderwater() {
+        return true;
     }
 
     protected void initEntityAI() {
