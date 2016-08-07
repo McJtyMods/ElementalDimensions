@@ -1,15 +1,15 @@
 package bitmovers.elementaldimensions.mobs;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.monster.EntityZombie;
 
 public class EntityAIDirtZombieAttack extends EntityAIAttackMelee {
-    private final EntityDirtZombie zombie;
+    private final IArmRaisable raisable;
     private int raiseArmTicks;
 
-    public EntityAIDirtZombieAttack(EntityDirtZombie zombieIn, double speedIn, boolean longMemoryIn) {
+    public EntityAIDirtZombieAttack(EntityCreature zombieIn, IArmRaisable raisable, double speedIn, boolean longMemoryIn) {
         super(zombieIn, speedIn, longMemoryIn);
-        this.zombie = zombieIn;
+        this.raisable = raisable;
     }
 
     /**
@@ -27,7 +27,7 @@ public class EntityAIDirtZombieAttack extends EntityAIAttackMelee {
     @Override
     public void resetTask() {
         super.resetTask();
-        this.zombie.setArmsRaised(false);
+        this.raisable.setArmsRaised(false);
     }
 
     /**
@@ -38,9 +38,9 @@ public class EntityAIDirtZombieAttack extends EntityAIAttackMelee {
         ++this.raiseArmTicks;
 
         if (this.raiseArmTicks >= 5 && this.attackTick < 10) {
-            this.zombie.setArmsRaised(true);
+            this.raisable.setArmsRaised(true);
         } else {
-            this.zombie.setArmsRaised(false);
+            this.raisable.setArmsRaised(false);
         }
     }
 }

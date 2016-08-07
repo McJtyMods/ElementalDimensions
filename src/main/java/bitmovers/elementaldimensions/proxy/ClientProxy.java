@@ -39,6 +39,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityDirtZombie.class, RenderDirtZombie.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityGuard.class, RenderGuard.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityWaterCreep.class, RenderWaterCreep.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDirtBossZombie.class, RenderDirtBossZombie.FACTORY);
     }
 
     private void registerTESRs(){

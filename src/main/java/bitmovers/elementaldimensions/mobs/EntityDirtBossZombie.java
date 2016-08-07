@@ -21,23 +21,20 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class EntityDirtZombie extends EntityMob implements IArmRaisable {
+public class EntityDirtBossZombie extends EntityMob implements IArmRaisable {
 
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityZombie.class, DataSerializers.BOOLEAN);
-    public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/dirt_zombie");
+    public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/dirt_boss_zombie");
 
 
-    public EntityDirtZombie(World worldIn) {
+    public EntityDirtBossZombie(World worldIn) {
         super(worldIn);
-        setSize(0.6F, 1.95F);
+        setSize(0.6F * 5, 1.95F * 5);
     }
 
     @Override
@@ -51,11 +48,11 @@ public class EntityDirtZombie extends EntityMob implements IArmRaisable {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
     }
-
 
     @Override
     public void setArmsRaised(boolean armsRaised) {
