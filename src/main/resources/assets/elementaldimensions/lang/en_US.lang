@@ -5,6 +5,22 @@ item.elementaldimensions.firerune.name=Rune of Fire
 item.elementaldimensions.spiritrune.name=Rune of Spirit
 item.elementaldimensions.earthrune.name=Rune of Earth
 
+item.elementaldimensions.waterrune_part1.name=Rune of Water Part 1
+item.elementaldimensions.waterrune_part2.name=Rune of Water Part 2
+item.elementaldimensions.waterrune_part3.name=Rune of Water Part 3
+
+item.elementaldimensions.airrune_part1.name=Rune of Air Part 1
+item.elementaldimensions.airrune_part2.name=Rune of Air Part 2
+item.elementaldimensions.airrune_part3.name=Rune of Air Part 3
+
+item.elementaldimensions.firerune_part1.name=Rune of Fire Part 1
+item.elementaldimensions.firerune_part2.name=Rune of Fire Part 2
+item.elementaldimensions.firerune_part3.name=Rune of Fire Part 3
+
+item.elementaldimensions.spiritrune_part1.name=Rune of Spirit Part 1
+item.elementaldimensions.spiritrune_part2.name=Rune of Spirit Part 2
+item.elementaldimensions.spiritrune_part3.name=Rune of Spirit Part 3
+
 # Blocks
 tile.elementaldimensions.portalbase.name=Elemental Block
 tile.elementaldimensions.portaldialer.name=Portal Dialer
