@@ -47,6 +47,11 @@ public enum Dimensions implements IStringSerializable {
                 return new BlockPos(pos.getX(), WaterTerrainGenerator.SEALEVEL, pos.getZ());
             }
         }
+
+        @Override
+        public String[] getTaskDescriptions() {
+            return new String[] { "Kill water creeps for the first air rune part", "Find a water dungeon for the second part", "Use a water boss seed in water for the last part" };
+        }
     },
     AIR(2, GenerationType.NONE) {
 
