@@ -22,7 +22,7 @@ public class RenderDirtBossZombie extends RenderLiving<EntityDirtBossZombie> {
 
     @Override
     protected void preRenderCallback(EntityDirtBossZombie entitylivingbaseIn, float partialTickTime) {
-        GlStateManager.scale(5, 5, 5);
+        GlStateManager.scale(4, 4, 4);
     }
 
     @Override

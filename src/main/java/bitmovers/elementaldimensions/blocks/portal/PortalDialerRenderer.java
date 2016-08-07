@@ -5,6 +5,8 @@ import bitmovers.elementaldimensions.blocks.portal.PortalDialerBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
 import bitmovers.elementaldimensions.client.RegisteredTESR;
 import bitmovers.elementaldimensions.client.RenderTools;
+import bitmovers.elementaldimensions.init.BlockRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
@@ -27,6 +29,11 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
 
     @Override
     public void renderTileEntityAt(PortalDialerTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+        IBlockState blockState = getWorld().getBlockState(te.getPos());
+        if (blockState.getBlock() != BlockRegister.portalDialerBlock) {
+            return;
+        }
+
         GlStateManager.depthMask(false);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -35,7 +42,7 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) x + 0.5F, (float) y + 3.0F, (float) z + 0.5F);
 
-        EnumFacing facing = getWorld().getBlockState(te.getPos()).getValue(PortalDialerBlock.FACING_HORIZ);
+        EnumFacing facing = blockState.getValue(PortalDialerBlock.FACING_HORIZ);
         if (facing == EnumFacing.WEST || facing == EnumFacing.EAST) {
             GlStateManager.rotate(90, 0, 1, 0);
         }

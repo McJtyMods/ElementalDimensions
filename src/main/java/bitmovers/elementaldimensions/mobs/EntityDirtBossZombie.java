@@ -33,7 +33,7 @@ public class EntityDirtBossZombie extends EntityMob implements IArmRaisable {
 
     public EntityDirtBossZombie(World worldIn) {
         super(worldIn);
-        setSize(0.6F * 5, 1.95F * 5);
+        setSize(0.6F * 4, 1.95F * 4);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class EntityDirtBossZombie extends EntityMob implements IArmRaisable {
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
@@ -109,7 +109,7 @@ public class EntityDirtBossZombie extends EntityMob implements IArmRaisable {
 
     @Override
     public int getMaxSpawnedInChunk() {
-        return 5;
+        return 1;
     }
 
     @Override

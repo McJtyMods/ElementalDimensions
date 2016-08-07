@@ -109,7 +109,7 @@ public class EntityDirtZombie extends EntityMob implements IArmRaisable {
 
     @Override
     public int getMaxSpawnedInChunk() {
-        return 5;
+        return 3;
     }
 
     @Override
