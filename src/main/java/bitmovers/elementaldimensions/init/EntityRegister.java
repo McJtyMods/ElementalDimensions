@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.init;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import bitmovers.elementaldimensions.items.EntityWaterBossSeed;
 import bitmovers.elementaldimensions.mobs.*;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
@@ -16,6 +17,7 @@ public class EntityRegister {
         EntityRegistry.registerModEntity(EntityWaterCreep.class, "Water Creep", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x005533);
         EntityRegistry.registerModEntity(EntityDirtZombieBoss.class, "Dirt Zombie Boss", id++, ElementalDimensions.instance, 64, 3, true, 0x996600, 0x00ff00);
         EntityRegistry.registerModEntity(EntityWaterCreepBoss.class, "Water Creep Boss", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x005533);
+        EntityRegistry.registerModEntity(EntityWaterBossSeed.class, "Water Boss Seed", id++, ElementalDimensions.instance, 64, 3, true);
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreep.class, EntityLiving.SpawnPlacementType.IN_WATER);
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreepBoss.class, EntityLiving.SpawnPlacementType.IN_WATER);
 
