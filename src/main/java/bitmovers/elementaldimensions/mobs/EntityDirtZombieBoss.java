@@ -25,13 +25,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class EntityDirtBossZombie extends EntityMob implements IArmRaisable {
+public class EntityDirtZombieBoss extends EntityMob implements IArmRaisable {
 
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityDirtBossZombie.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityDirtZombieBoss.class, DataSerializers.BOOLEAN);
     public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/dirt_boss_zombie");
 
 
-    public EntityDirtBossZombie(World worldIn) {
+    public EntityDirtZombieBoss(World worldIn) {
         super(worldIn);
         setSize(0.6F * 4, 1.95F * 4);
     }

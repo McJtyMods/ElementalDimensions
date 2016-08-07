@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.dimensions;
 
-import bitmovers.elementaldimensions.mobs.EntityDirtBossZombie;
+import bitmovers.elementaldimensions.mobs.EntityDirtZombieBoss;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -43,11 +43,11 @@ public class DimensionTicker {
         long worldTime = evt.world.getWorldTime();
         if (Math.abs(worldTime-18000) < 500) {
             // It is around midnight now
-            int count = evt.world.countEntities(EntityDirtBossZombie.class);
+            int count = evt.world.countEntities(EntityDirtZombieBoss.class);
             if (count == 0) {
                 BlockPos pos = findAveragePlayerPos(evt.world);
                 if (pos != null) {
-                    EntityDirtBossZombie boss = new EntityDirtBossZombie(evt.world);
+                    EntityDirtZombieBoss boss = new EntityDirtZombieBoss(evt.world);
                     boss.setPosition(pos.getX(), pos.getY(), pos.getZ());
                     evt.world.spawnEntityInWorld(boss);
                 }

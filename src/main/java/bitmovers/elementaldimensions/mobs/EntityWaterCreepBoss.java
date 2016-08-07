@@ -28,11 +28,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class EntityWaterCreep extends EntityMob {
+public class EntityWaterCreepBoss extends EntityMob {
 
-    private static final DataParameter<Byte> STATUS = EntityDataManager.<Byte>createKey(EntityWaterCreep.class, DataSerializers.BYTE);
-    private static final DataParameter<Integer> TARGET_ENTITY = EntityDataManager.<Integer>createKey(EntityWaterCreep.class, DataSerializers.VARINT);
-    public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/water_creep");
+    private static final DataParameter<Byte> STATUS = EntityDataManager.<Byte>createKey(EntityWaterCreepBoss.class, DataSerializers.BYTE);
+    private static final DataParameter<Integer> TARGET_ENTITY = EntityDataManager.<Integer>createKey(EntityWaterCreepBoss.class, DataSerializers.VARINT);
+    public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/water_creep_boss");
 
     private float clientSideTailAnimation;
     private float clientSideTailAnimationO;
@@ -44,10 +44,10 @@ public class EntityWaterCreep extends EntityMob {
     private boolean clientSideTouchedGround;
     private EntityAIWander wander;
 
-    public EntityWaterCreep(World worldIn) {
+    public EntityWaterCreepBoss(World worldIn) {
         super(worldIn);
-        this.experienceValue = 20;
-        this.setSize(2.5F, 2.5F);
+        this.experienceValue = 150;
+        this.setSize(2.5F*3, 2.5F*3);
         ;
         this.moveHelper = new WaterCreepMoveHelper(this);
         this.clientSideTailAnimation = this.rand.nextFloat();
@@ -68,11 +68,11 @@ public class EntityWaterCreep extends EntityMob {
     protected void initEntityAI() {
         EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
         this.wander = new EntityAIWander(this, 1.0D, 80);
-        this.tasks.addTask(4, new EntityWaterCreep.AIGuardianAttack(this));
+        this.tasks.addTask(4, new EntityWaterCreepBoss.AIGuardianAttack(this));
         this.tasks.addTask(5, entityaimovetowardsrestriction);
         this.tasks.addTask(7, this.wander);
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityWaterCreep.class, 12.0F, 0.01F));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityWaterCreepBoss.class, 12.0F, 0.01F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.wander.setMutexBits(3);
         entityaimovetowardsrestriction.setMutexBits(3);
@@ -81,10 +81,10 @@ public class EntityWaterCreep extends EntityMob {
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(60.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
     }
 
     /**
@@ -387,10 +387,10 @@ public class EntityWaterCreep extends EntityMob {
     }
 
     static class AIGuardianAttack extends EntityAIBase {
-        private final EntityWaterCreep theEntity;
+        private final EntityWaterCreepBoss theEntity;
         private int tickCounter;
 
-        public AIGuardianAttack(EntityWaterCreep guardian) {
+        public AIGuardianAttack(EntityWaterCreepBoss guardian) {
             this.theEntity = guardian;
             this.setMutexBits(3);
         }
@@ -463,9 +463,9 @@ public class EntityWaterCreep extends EntityMob {
     }
 
     static class WaterCreepMoveHelper extends EntityMoveHelper {
-        private final EntityWaterCreep entityWaterCreep;
+        private final EntityWaterCreepBoss entityWaterCreep;
 
-        public WaterCreepMoveHelper(EntityWaterCreep guardian) {
+        public WaterCreepMoveHelper(EntityWaterCreepBoss guardian) {
             super(guardian);
             this.entityWaterCreep = guardian;
         }
@@ -515,9 +515,9 @@ public class EntityWaterCreep extends EntityMob {
     }
 
     static class WaterCreepTargetSelector implements Predicate<EntityLivingBase> {
-        private final EntityWaterCreep parentEntity;
+        private final EntityWaterCreepBoss parentEntity;
 
-        public WaterCreepTargetSelector(EntityWaterCreep creep) {
+        public WaterCreepTargetSelector(EntityWaterCreepBoss creep) {
             this.parentEntity = creep;
         }
 

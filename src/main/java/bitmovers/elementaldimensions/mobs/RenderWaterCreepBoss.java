@@ -20,19 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
-public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
+public class RenderWaterCreepBoss extends RenderLiving<EntityWaterCreepBoss> {
 
     private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/watercreep.png");
 
     private static final ResourceLocation GUARDIAN_BEAM_TEXTURE = new ResourceLocation("textures/entity/guardian_beam.png");
     int lastModelVersion;
 
-    public RenderWaterCreep(RenderManager renderManagerIn) {
-        super(renderManagerIn, new ModelWaterCreep(), 1.0F);
-        this.lastModelVersion = ((ModelWaterCreep) this.mainModel).getModelVersion();
+    public RenderWaterCreepBoss(RenderManager renderManagerIn) {
+        super(renderManagerIn, new ModelWaterCreepBoss(), 2.5F);
+        this.lastModelVersion = ((ModelWaterCreepBoss) this.mainModel).getModelVersion();
     }
 
-    public boolean shouldRender(EntityWaterCreep livingEntity, ICamera camera, double camX, double camY, double camZ) {
+    public boolean shouldRender(EntityWaterCreepBoss livingEntity, ICamera camera, double camX, double camY, double camZ) {
         if (super.shouldRender(livingEntity, camera, camX, camY, camZ)) {
             return true;
         } else {
@@ -63,10 +63,10 @@ public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
     /**
      * Renders the desired {@code T} type Entity.
      */
-    public void doRender(EntityWaterCreep entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        if (this.lastModelVersion != ((ModelWaterCreep) this.mainModel).getModelVersion()) {
-            this.mainModel = new ModelWaterCreep();
-            this.lastModelVersion = ((ModelWaterCreep) this.mainModel).getModelVersion();
+    public void doRender(EntityWaterCreepBoss entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        if (this.lastModelVersion != ((ModelWaterCreepBoss) this.mainModel).getModelVersion()) {
+            this.mainModel = new ModelWaterCreepBoss();
+            this.lastModelVersion = ((ModelWaterCreepBoss) this.mainModel).getModelVersion();
         }
 
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
@@ -156,23 +156,23 @@ public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
      * Allows the render to do state modifications necessary before the model is rendered.
      */
     @Override
-    protected void preRenderCallback(EntityWaterCreep entitylivingbaseIn, float partialTickTime) {
-        GlStateManager.scale(2.35F, 2.35F, 2.35F);
+    protected void preRenderCallback(EntityWaterCreepBoss entitylivingbaseIn, float partialTickTime) {
+        GlStateManager.scale(2.35F*3, 2.35F*3, 2.35F*3);
     }
 
-    public static final RenderWaterCreep.Factory FACTORY = new RenderWaterCreep.Factory();
+    public static final RenderWaterCreepBoss.Factory FACTORY = new RenderWaterCreepBoss.Factory();
 
     @Override
     @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityWaterCreep entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityWaterCreepBoss entity) {
         return mobTexture;
     }
 
-    public static class Factory implements IRenderFactory<EntityWaterCreep> {
+    public static class Factory implements IRenderFactory<EntityWaterCreepBoss> {
 
         @Override
-        public Render<? super EntityWaterCreep> createRenderFor(RenderManager manager) {
-            return new RenderWaterCreep(manager);
+        public Render<? super EntityWaterCreepBoss> createRenderFor(RenderManager manager) {
+            return new RenderWaterCreepBoss(manager);
         }
 
     }
