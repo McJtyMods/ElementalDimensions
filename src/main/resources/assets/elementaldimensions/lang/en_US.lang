@@ -1,0 +1,13 @@
+# Items
+item.elementaldimensions.airrune.name=Rune of Air
+item.elementaldimensions.waterrune.name=Rune of Water
+item.elementaldimensions.firerune.name=Rune of Fire
+item.elementaldimensions.spiritrune.name=Rune of Spirit
+item.elementaldimensions.airrune.name=Rune of Air
+
+# Blocks
+tile.elementaldimensions.portalbase.name=Elemental Block
+tile.elementaldimensions.portaldialer.name=Portal Dialer
+
+# Creative Tabs
+itemGroup.elementaldimensions=Elemental Dimensions
