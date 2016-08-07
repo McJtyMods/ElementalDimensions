@@ -3,7 +3,7 @@ item.elementaldimensions.airrune.name=Rune of Air
 item.elementaldimensions.waterrune.name=Rune of Water
 item.elementaldimensions.firerune.name=Rune of Fire
 item.elementaldimensions.spiritrune.name=Rune of Spirit
-item.elementaldimensions.airrune.name=Rune of Air
+item.elementaldimensions.earthrune.name=Rune of Earth
 
 # Blocks
 tile.elementaldimensions.portalbase.name=Elemental Block
