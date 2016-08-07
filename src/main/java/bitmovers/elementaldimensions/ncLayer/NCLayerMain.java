@@ -3,17 +3,15 @@ package bitmovers.elementaldimensions.ncLayer;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.commands.CommandReloadConfig;
 import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
-import bitmovers.elementaldimensions.ncLayer.worldgen.DefaultStructureCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.world.WorldGeneratorEarthDungeon;
 import bitmovers.elementaldimensions.world.WorldGeneratorPortalDungeon;
-import elec332.core.api.structure.GenerationType;
+import bitmovers.elementaldimensions.world.WorldGeneratorWaterDungeon;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import java.io.File;
@@ -38,6 +36,7 @@ public class NCLayerMain {
         }
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorPortalDungeon.dungeonResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorEarthDungeon.dungeonResource, true);
+        SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorWaterDungeon.dungeonResource, true);
     }
 
     public void postInit(FMLPostInitializationEvent event){
