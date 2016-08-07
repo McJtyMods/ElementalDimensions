@@ -1,0 +1,16 @@
+[
+{
+  "modid": "elementaldimensions",
+  "name": "Elemental Dimensions",
+  "description": "Elemental Dimensions Adventure",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["McJty", "Elec332"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
