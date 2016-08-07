@@ -10,8 +10,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Random;
 
-public class DimensionTicker {
-
+public class BossSpawnEvents {
 
     @SubscribeEvent
     public void onWorldTick(TickEvent.WorldTickEvent evt) {

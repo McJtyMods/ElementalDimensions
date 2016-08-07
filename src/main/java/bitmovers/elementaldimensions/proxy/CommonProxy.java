@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.proxy;
 
-import bitmovers.elementaldimensions.dimensions.DimensionTicker;
+import bitmovers.elementaldimensions.dimensions.BossSpawnEvents;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.init.DimensionRegister;
 import bitmovers.elementaldimensions.init.EntityRegister;
@@ -21,7 +21,7 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e) {
         ItemRegister.initCrafting();
-        MinecraftForge.EVENT_BUS.register(new DimensionTicker());
+        MinecraftForge.EVENT_BUS.register(new BossSpawnEvents());
     }
 
     public void postInit(FMLPostInitializationEvent e) {
