@@ -34,9 +34,9 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
             System.out.println("EARTH: chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
-                GenerationType type = GenerationType.UNDERGROUND;
+                GenerationType type = GenerationType.NONE;
                 StructureTemplate structure = new StructureTemplate(schematic, type);
-                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
+                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 35, new Random(world.getSeed()));
                 System.out.println("    pos = " + pos);
                 structure.generateStructure(pos, world, chunkProvider);
             } else {
