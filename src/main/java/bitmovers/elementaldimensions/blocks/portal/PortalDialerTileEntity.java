@@ -173,6 +173,9 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         destination = Dimensions.findDimension(compound.getByte("dest"));
+        if (destination == null) {
+            destination = Dimensions.OVERWORLD;
+        }
         guardCounter = compound.getInteger("guards");
         hasBeenUsed = compound.getBoolean("used");
     }
