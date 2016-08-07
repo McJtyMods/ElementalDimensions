@@ -55,7 +55,8 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     public void update() {
         if (!worldObj.isRemote) {
             counter--;
-            if (counter % 50 == 0 && (destination == null && WorldHelper.getDimID(worldObj) != 0 || destination != null && WorldHelper.getDimID(worldObj) != destination.getDimensionID())) {
+            int currentDim = WorldHelper.getDimID(worldObj);
+            if (counter % 50 == 0 && ((destination == null && currentDim != 0) || (destination != null && currentDim != destination.getDimensionID()))) {
                 EnumFacing facing = getFacing();
                 BlockPos p = pos.offset(EnumFacing.UP);
                 AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX(), p.getY() + 3, p.getZ()).offset(DirectionHelper.rotateRight(facing)));
