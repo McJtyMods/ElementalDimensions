@@ -4,6 +4,7 @@ import bitmovers.elementaldimensions.items.*;
 import bitmovers.elementaldimensions.ncLayer.dev.ItemSchematicCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import elec332.core.main.ElecCore;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -11,6 +12,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Created by Elec332 on 4-8-2016.
  */
 public class ItemRegister {
+
+    public static ItemWaterBossSeed waterBossSeed;
 
     public static ItemWaterRune runeOfWater;
     public static ItemAirRune runeOfAir;
@@ -40,6 +43,8 @@ public class ItemRegister {
             GameRegistry.register(new ItemSchematicCreator(), new EDResourceLocation("schematicCreator_DEV"));
         }
 
+        waterBossSeed = new ItemWaterBossSeed();
+
         runeOfWater = new ItemWaterRune();
         runeOfAir = new ItemAirRune();
         runeOfSpirit = new ItemSpiritRune();
@@ -68,6 +73,8 @@ public class ItemRegister {
         GameRegistry.addShapelessRecipe(new ItemStack(runeOfWater), new ItemStack(runeOfWaterPart1), new ItemStack(runeOfWaterPart2), new ItemStack(runeOfWaterPart3));
         GameRegistry.addShapelessRecipe(new ItemStack(runeOfFire), new ItemStack(runeOfFirePart1), new ItemStack(runeOfFirePart2), new ItemStack(runeOfFirePart3));
         GameRegistry.addShapelessRecipe(new ItemStack(runeOfSpirit), new ItemStack(runeOfSpiritPart1), new ItemStack(runeOfSpiritPart2), new ItemStack(runeOfSpiritPart3));
+
+        GameRegistry.addRecipe(new ItemStack(waterBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.DIAMOND);
     }
 
 }
