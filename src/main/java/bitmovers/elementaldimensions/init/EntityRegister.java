@@ -20,6 +20,7 @@ public class EntityRegister {
 
         LootTableList.register(EntityDirtZombie.LOOT);
         LootTableList.register(EntityWaterCreep.LOOT);
+        LootTableList.register(EntityGuard.LOOT);
 
     }
 

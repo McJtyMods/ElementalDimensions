@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.mobs;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -8,6 +9,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,6 +17,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class EntityGuard extends EntityMob {
+
+    public static final ResourceLocation LOOT = new ResourceLocation(ElementalDimensions.MODID, "entities/guard");
 
     public EntityGuard(World worldIn) {
         super(worldIn);
@@ -65,6 +69,11 @@ public class EntityGuard extends EntityMob {
     protected boolean isValidLightLevel() {
 //        return super.isValidLightLevel();
         return true;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return LOOT;
     }
 
     @Override
