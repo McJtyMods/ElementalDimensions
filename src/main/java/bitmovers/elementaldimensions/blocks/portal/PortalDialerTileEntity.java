@@ -155,7 +155,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     private Item getItem(Dimensions destination) {
         switch (destination) {
             case EARTH:
-                return runeEarth;
+                return runeOfEarth;
             case WATER:
                 return runeOfWater;
             case AIR:

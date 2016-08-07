@@ -16,7 +16,7 @@ public class ItemRegister {
     public static ItemAirRune runeOfAir;
     public static ItemSpiritRune runeOfSpirit;
     public static ItemFireRune runeOfFire;
-    public static ItemEarthRune runeEarth;
+    public static ItemEarthRune runeOfEarth;
 
     public static GenericItem runeOfWaterPart1;
     public static GenericItem runeOfWaterPart2;
@@ -44,7 +44,7 @@ public class ItemRegister {
         runeOfAir = new ItemAirRune();
         runeOfSpirit = new ItemSpiritRune();
         runeOfFire = new ItemFireRune();
-        runeEarth = new ItemEarthRune();
+        runeOfEarth = new ItemEarthRune();
 
         runeOfWaterPart1 = new GenericItem("waterrune_part1");
         runeOfWaterPart2 = new GenericItem("waterrune_part2");;
