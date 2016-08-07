@@ -46,29 +46,46 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     private boolean hasBeenUsed;
     private static Random random = new Random();
     private int guardCounter = 0;
+    private int cooldown = 0;
 
     public Dimensions getDestination() {
         return destination;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+        markDirty();
     }
 
     @Override
     public void update() {
         if (!worldObj.isRemote) {
             counter--;
+
             int currentDim = WorldHelper.getDimID(worldObj);
             if (counter % 50 == 0 && ((destination == null && currentDim != 0) || (destination != null && currentDim != destination.getDimensionID()))) {
-                EnumFacing facing = getFacing();
-                BlockPos p = pos.offset(EnumFacing.UP);
-                AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX()+1, p.getY() + 3, p.getZ()+1).offset(DirectionHelper.rotateRight(facing)));
-                List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, tpAABB);
-                if (players.size() > 0) {
-                    if (!hasBeenUsed) {
-                        hasBeenUsed = true;
-                    }
-                    PortalDialerTileEntity dest = PortalDungeonLocator.getTeleporter((WorldServer) worldObj, pos, destination);
-                    if (dest != null) {
-                        for (EntityPlayer player : players) {
-                            CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.pos.offset(EnumFacing.UP));
+                if (cooldown > 0) {
+                    cooldown--;
+                    markDirty();
+                } else {
+                    EnumFacing facing = getFacing();
+                    BlockPos p = pos.offset(EnumFacing.UP);
+                    AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX() + 1, p.getY() + 3, p.getZ() + 1).offset(DirectionHelper.rotateRight(facing)));
+                    List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, tpAABB);
+                    if (players.size() > 0) {
+                        if (!hasBeenUsed) {
+                            hasBeenUsed = true;
+                        }
+                        PortalDialerTileEntity dest = PortalDungeonLocator.getTeleporter((WorldServer) worldObj, pos, destination);
+                        if (dest != null) {
+                            dest.setCooldown(7);    // Some cooldown
+                            for (EntityPlayer player : players) {
+                                CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.pos.offset(EnumFacing.UP));
+                            }
                         }
                     }
                 }
@@ -178,6 +195,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             destination = Dimensions.OVERWORLD;
         }
         guardCounter = compound.getInteger("guards");
+        cooldown = compound.getInteger("cooldown");
         hasBeenUsed = compound.getBoolean("used");
     }
 
@@ -187,6 +205,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
         super.writeToNBT(compound);
         compound.setByte("dest", destination == null ? -1 : destination.getLevel());
         compound.setInteger("guards", guardCounter);
+        compound.setInteger("cooldown", cooldown);
         compound.setBoolean("used", hasBeenUsed);
         return compound;
     }
