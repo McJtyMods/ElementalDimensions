@@ -45,6 +45,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     private int counter;
     private boolean hasBeenUsed;
     private static Random random = new Random();
+    private int guardCounter = 0;
 
     public Dimensions getDestination() {
         return destination;
@@ -75,6 +76,11 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             if (counter <= 0) {
                 counter = 400 + worldObj.rand.nextInt(200);
                 if (!hasBeenUsed) {
+                    if (guardCounter >= Config.Mobs.totalMaxGuards) {
+                        // We can't spawn any more guards
+                        return;
+                    }
+
                     EntityPlayer closestPlayer = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 20, true);
                     if (closestPlayer != null) {
                         // Don't spawn if there are no players nearby
@@ -92,6 +98,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                             EntityGuard guard = new EntityGuard(worldObj);
                             guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
                             worldObj.spawnEntityInWorld(guard);
+                            guardCounter++;
                             markDirty();
                         }
                     }
@@ -166,7 +173,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         destination = Dimensions.findDimension(compound.getByte("dest"));
-        //guardCounter = compound.getInteger("guards");
+        guardCounter = compound.getInteger("guards");
         hasBeenUsed = compound.getBoolean("used");
     }
 
@@ -175,7 +182,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setByte("dest", destination == null ? -1 : destination.getLevel());
-        //compound.setInteger("guards", guardCounter);
+        compound.setInteger("guards", guardCounter);
         compound.setBoolean("used", hasBeenUsed);
         return compound;
     }
