@@ -15,6 +15,9 @@ import java.util.Random;
 import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
 
 public class FireTerrainGenerator implements ITerrainGenerator {
+
+    public static final int LAVALEVEL = 80;
+
     private World world;
 
     private final double[] noiseField;
@@ -172,7 +175,7 @@ public class FireTerrainGenerator implements ITerrainGenerator {
     public void generate(int chunkX, int chunkZ, ChunkPrimer primer) {
         generateHeightmap(chunkX * 4, 0, chunkZ * 4);
 
-        byte waterLevel = 80;
+        byte waterLevel = LAVALEVEL;
         for (int x4 = 0; x4 < 4; ++x4) {
             int l = x4 * 5;
             int i1 = (x4 + 1) * 5;

@@ -1,13 +1,18 @@
 package bitmovers.elementaldimensions.dimensions;
 
+import bitmovers.elementaldimensions.dimensions.generators.tools.FireTerrainGenerator;
+import bitmovers.elementaldimensions.dimensions.generators.tools.WaterTerrainGenerator;
 import bitmovers.elementaldimensions.util.Config;
 import com.google.common.collect.Maps;
 import elec332.core.api.structure.GenerationType;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Elec332 on 4-8-2016.
@@ -26,21 +31,34 @@ public enum Dimensions implements IStringSerializable {
             return new String[] { "Kill dirt zombies for the first water rune part", "Find a dungeon for the second part", "Kill the boss at midnight for the last part" };
         }
     },
-    WATER(1, GenerationType.SURFACE) {
+    WATER(1, GenerationType.NONE) {
 
         @Override
         public int getDimensionID() {
             return Config.Dimensions.Water.dimensionID;
         }
 
+        @Override
+        public BlockPos adjustHeight(int chunkX, int chunkZ, BlockPos pos, World world, Random random) {
+            BlockPos topBlock = world.getTopSolidOrLiquidBlock(pos);
+            if (topBlock.getY() >= WaterTerrainGenerator.SEALEVEL) {
+                return topBlock;
+            } else {
+                return new BlockPos(pos.getX(), WaterTerrainGenerator.SEALEVEL, pos.getZ());
+            }
+        }
     },
-    AIR(2, GenerationType.SEA_LEVEL) {
+    AIR(2, GenerationType.NONE) {
 
         @Override
         public int getDimensionID() {
             return Config.Dimensions.Air.dimensionID;
         }
 
+        @Override
+        public BlockPos adjustHeight(int chunkX, int chunkZ, BlockPos pos, World world, Random random) {
+            return new BlockPos(pos.getX(), random.nextInt(50)+30, pos.getZ());
+        }
     },
     SPIRIT(3, GenerationType.NONE) {
 
@@ -50,21 +68,40 @@ public enum Dimensions implements IStringSerializable {
         }
 
     },
-    FIRE(4, GenerationType.SEA_LEVEL) {
+    FIRE(4, GenerationType.NONE) {
 
         @Override
         public int getDimensionID() {
             return Config.Dimensions.Fire.dimensionID;
         }
 
+        @Override
+        public BlockPos adjustHeight(int chunkX, int chunkZ, BlockPos pos, World world, Random random) {
+            BlockPos topBlock = world.getTopSolidOrLiquidBlock(pos);
+            if (topBlock.getY() >= FireTerrainGenerator.LAVALEVEL) {
+                return topBlock;
+            } else {
+                return new BlockPos(pos.getX(), FireTerrainGenerator.LAVALEVEL, pos.getZ());
+            }
+        }
+
     },
-    OVERWORLD(-1, GenerationType.SURFACE) {
+    OVERWORLD(-1, GenerationType.NONE) {
 
         @Override
         public int getDimensionID() {
             return 0;
         }
 
+        @Override
+        public BlockPos adjustHeight(int chunkX, int chunkZ, BlockPos pos, World world, Random random) {
+            BlockPos topBlock = world.getTopSolidOrLiquidBlock(pos);
+            if (topBlock.getY() >= 63) {
+                return topBlock;
+            } else {
+                return new BlockPos(pos.getX(), 63, pos.getZ());
+            }
+        }
     };
 
     Dimensions(int level, GenerationType generationType){
@@ -89,6 +126,10 @@ public enum Dimensions implements IStringSerializable {
 
     public GenerationType getGenerationType() {
         return generationType;
+    }
+
+    public BlockPos adjustHeight(int chunkX, int chunkZ, BlockPos pos, World world, Random random) {
+        return pos;
     }
 
     @Nullable

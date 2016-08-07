@@ -11,6 +11,7 @@ import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
 import elec332.core.world.schematic.Schematic;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -39,7 +40,8 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
                     type = dim.getGenerationType();
                 }
                 StructureTemplate structure = new StructureTemplate(schematic, type);
-                structure.generateStructure(WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(PortalDungeonLocator.getSpecialSeed(chunkX, chunkZ))), world, chunkProvider);
+                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(PortalDungeonLocator.getSpecialSeed(chunkX, chunkZ)));
+                structure.generateStructure(dim.adjustHeight(chunkX, chunkZ, pos, world, random), world, chunkProvider);
             } else {
                 throw new IllegalStateException();
             }
