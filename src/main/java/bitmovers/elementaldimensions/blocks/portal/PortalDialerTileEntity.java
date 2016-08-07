@@ -22,6 +22,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -143,6 +145,10 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
         if (stack != null) {
             Item item = stack.getItem();
             if (item instanceof ItemRune){
+                if (worldObj.provider.getDimension() != 0) {
+                    player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "This portal can only go to the overworld!"));
+                    return;
+                }
                 Dimensions dim = ((ItemRune) item).getDimension(stack);
                 if (destination == dim){
                     return;
