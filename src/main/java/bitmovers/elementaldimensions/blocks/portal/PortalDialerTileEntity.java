@@ -59,7 +59,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             if (counter % 50 == 0 && ((destination == null && currentDim != 0) || (destination != null && currentDim != destination.getDimensionID()))) {
                 EnumFacing facing = getFacing();
                 BlockPos p = pos.offset(EnumFacing.UP);
-                AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX(), p.getY() + 3, p.getZ()).offset(DirectionHelper.rotateRight(facing)));
+                AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX()+1, p.getY() + 3, p.getZ()+1).offset(DirectionHelper.rotateRight(facing)));
                 List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, tpAABB);
                 if (players.size() > 0) {
                     if (!hasBeenUsed) {
