@@ -11,38 +11,38 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderGhostBoss extends RenderLiving<EntityGhostBoss> {
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/ghost_boss.png");
-    private ResourceLocation mobShootingTexture = new ResourceLocation("elementaldimensions:textures/entity/ghost_boss_shooting.png");
+public class RenderFireBoss extends RenderLiving<EntityFireBoss> {
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/fire_boss.png");
+    private ResourceLocation mobShootingTexture = new ResourceLocation("elementaldimensions:textures/entity/fire_boss_shooting.png");
 
-    public RenderGhostBoss(RenderManager renderManagerIn) {
-        super(renderManagerIn, new ModelGhast(), 2.5F);
+    public RenderFireBoss(RenderManager renderManagerIn) {
+        super(renderManagerIn, new ModelGhast(), 3.5F);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
-    protected ResourceLocation getEntityTexture(EntityGhostBoss entity) {
+    protected ResourceLocation getEntityTexture(EntityFireBoss entity) {
         return entity.isAttacking() ? mobShootingTexture : mobTexture;
     }
 
-    public static final RenderGhostBoss.Factory FACTORY = new RenderGhostBoss.Factory();
+    public static final RenderFireBoss.Factory FACTORY = new RenderFireBoss.Factory();
 
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
     @Override
-    protected void preRenderCallback(EntityGhostBoss entitylivingbaseIn, float partialTickTime) {
-        GlStateManager.scale(4.5F*2, 4.5F*2, 4.5F*2);
+    protected void preRenderCallback(EntityFireBoss entitylivingbaseIn, float partialTickTime) {
+        GlStateManager.scale(4.5F*3, 4.5F*3, 4.5F*3);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    public static class Factory implements IRenderFactory<EntityGhostBoss> {
+    public static class Factory implements IRenderFactory<EntityFireBoss> {
 
         @Override
-        public Render<? super EntityGhostBoss> createRenderFor(RenderManager manager) {
-            return new RenderGhostBoss(manager);
+        public Render<? super EntityFireBoss> createRenderFor(RenderManager manager) {
+            return new RenderFireBoss(manager);
         }
 
     }

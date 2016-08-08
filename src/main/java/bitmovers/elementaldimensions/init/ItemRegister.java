@@ -15,6 +15,7 @@ public class ItemRegister {
 
     public static ItemWaterBossSeed waterBossSeed;
     public static ItemAirBossSeed airBossSeed;
+    public static ItemFireBossSeed fireBossSeed;
 
     public static ItemElementalWand elementalWand;
     public static ItemFocusDamage focusDamage;
@@ -51,6 +52,7 @@ public class ItemRegister {
 
         waterBossSeed = new ItemWaterBossSeed();
         airBossSeed = new ItemAirBossSeed();
+        fireBossSeed = new ItemFireBossSeed();
 
         elementalWand = new ItemElementalWand();
         focusDamage = new ItemFocusDamage();
@@ -88,6 +90,7 @@ public class ItemRegister {
 
         GameRegistry.addRecipe(new ItemStack(waterBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.DIAMOND);
         GameRegistry.addRecipe(new ItemStack(airBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.EMERALD);
+        GameRegistry.addRecipe(new ItemStack(fireBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.NETHER_STAR);
     }
 
 }

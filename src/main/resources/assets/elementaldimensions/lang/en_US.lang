@@ -1,6 +1,7 @@
 # Items
 item.elementaldimensions.waterbossseed.name=Water Boss Seed
 item.elementaldimensions.airbossseed.name=Air Boss Seed
+item.elementaldimensions.firebossseed.name=Fire Boss Seed
 
 item.elementaldimensions.elementalwand.name=Elemental Wand
 item.elementaldimensions.focusdigging.name=Digging Focus
@@ -45,6 +46,7 @@ entity.elementaldimensions.Ghost.name=Ghost
 entity.elementaldimensions.GhostBoss.name=Ghost Boss
 entity.elementaldimensions.Spirit.name=Spirit
 entity.elementaldimensions.Blaster.name=Blaster
+entity.elementaldimensions.FireBoss.name=Fire Boss
 
 
 # Creative Tabs

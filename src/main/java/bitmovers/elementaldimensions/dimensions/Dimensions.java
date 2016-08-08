@@ -99,6 +99,10 @@ public enum Dimensions implements IStringSerializable {
             }
         }
 
+        @Override
+        public String[] getTaskDescriptions() {
+            return new String[] { "Throw a fire boss seed in the air for the final reward!" };
+        }
     },
     OVERWORLD(-1, GenerationType.NONE) {
 
