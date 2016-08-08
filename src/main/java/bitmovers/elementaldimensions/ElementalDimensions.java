@@ -7,6 +7,7 @@ import bitmovers.elementaldimensions.init.EntityRegister;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.network.PacketPlayerConnect;
+import bitmovers.elementaldimensions.network.PacketPointedEntity;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.ElementalDimensionsCreativeTab;
@@ -57,6 +58,7 @@ public class ElementalDimensions {
         loadTimer.startPhase(event);
         networkHandler = new NetworkHandler(MODID);
         networkHandler.registerClientPacket(PacketPlayerConnect.class);
+        networkHandler.registerServerPacket(PacketPointedEntity.class);
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
         creativeTab = new ElementalDimensionsCreativeTab();
         random = new Random();
