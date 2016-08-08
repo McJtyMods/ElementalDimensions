@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class WaterDungeonLocator {
 
-    public static boolean isEarthDungeonChunk(World world, int chunkX, int chunkZ) {
+    public static boolean isWaterDungeonChunk(World world, int chunkX, int chunkZ) {
         Random random = new Random((world.getSeed() + chunkX) * 349 + chunkZ * 13 + 241);
         random.nextFloat();
         return random.nextFloat() < Config.Dimensions.waterDungeonChance;
