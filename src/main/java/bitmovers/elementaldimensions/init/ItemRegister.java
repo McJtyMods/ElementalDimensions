@@ -15,6 +15,9 @@ public class ItemRegister {
 
     public static ItemWaterBossSeed waterBossSeed;
     public static ItemElementalWand elementalWand;
+    public static ItemFocusDamage focusDamage;
+    public static ItemFocusDigging focusDigging;
+    public static ItemFocusTeleport focusTeleport;
 
     public static ItemWaterRune runeOfWater;
     public static ItemAirRune runeOfAir;
@@ -46,6 +49,9 @@ public class ItemRegister {
 
         waterBossSeed = new ItemWaterBossSeed();
         elementalWand = new ItemElementalWand();
+        focusDamage = new ItemFocusDamage();
+        focusDigging = new ItemFocusDigging();
+        focusTeleport = new ItemFocusTeleport();
 
         runeOfWater = new ItemWaterRune();
         runeOfAir = new ItemAirRune();
