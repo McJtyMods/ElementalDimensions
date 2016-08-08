@@ -87,7 +87,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
         if (this.isEntityInvulnerable(source)) {
             return false;
         } else if ("fireball".equals(source.getDamageType()) && source.getEntity() instanceof EntityPlayer) {
-            super.attackEntityFrom(source, 3000.0F);
+            super.attackEntityFrom(source, 2000.0F);
             return true;
         } else {
             return super.attackEntityFrom(source, amount);
@@ -101,7 +101,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(200.0D);
     }
 
