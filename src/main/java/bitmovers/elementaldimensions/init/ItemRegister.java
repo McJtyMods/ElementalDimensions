@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemRegister {
 
     public static ItemWaterBossSeed waterBossSeed;
+    public static ItemElementalWand elementalWand;
 
     public static ItemWaterRune runeOfWater;
     public static ItemAirRune runeOfAir;
@@ -44,6 +45,7 @@ public class ItemRegister {
         }
 
         waterBossSeed = new ItemWaterBossSeed();
+        elementalWand = new ItemElementalWand();
 
         runeOfWater = new ItemWaterRune();
         runeOfAir = new ItemAirRune();

@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.util;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import bitmovers.elementaldimensions.init.ItemRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ public class ElementalDimensionsCreativeTab extends CreativeTabs {
     @Override
     @Nonnull
     public Item getTabIconItem() {
-        return Items.APPLE;
+        return ItemRegister.elementalWand;
     }
 
 }
