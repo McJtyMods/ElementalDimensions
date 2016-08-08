@@ -1,6 +1,9 @@
 # Items
 item.elementaldimensions.waterbossseed.name=Water Boss Seed
 item.elementaldimensions.elementalwand.name=Elemental Wand
+item.elementaldimensions.focusdigging.name=Digging Focus
+item.elementaldimensions.focusteleport.name=Teleport Focus
+item.elementaldimensions.focusdamage.name=Damage Focus
 
 item.elementaldimensions.airrune.name=Rune of Air
 item.elementaldimensions.waterrune.name=Rune of Water
