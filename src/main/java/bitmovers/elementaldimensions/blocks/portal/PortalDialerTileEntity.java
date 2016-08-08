@@ -62,6 +62,11 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
         markDirty();
     }
 
+    public BlockPos getTeleportSpot() {
+        EnumFacing facing = worldObj.getBlockState(pos).getValue(PortalDialerBlock.FACING_HORIZ);
+        return pos.offset(EnumFacing.UP).offset(facing);
+    }
+
     @Override
     public void update() {
         if (!worldObj.isRemote) {
@@ -83,9 +88,9 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                         }
                         PortalDialerTileEntity dest = PortalDungeonLocator.getTeleporter((WorldServer) worldObj, pos, destination);
                         if (dest != null) {
-                            dest.setCooldown(7);    // Some cooldown
+                            dest.setCooldown(3);    // Some cooldown
                             for (EntityPlayer player : players) {
-                                CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.pos.offset(EnumFacing.UP));
+                                CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.getTeleportSpot());
                                 String[] tasks = destination.getTaskDescriptions();
                                 if (tasks != null) {
                                     player.addChatComponentMessage(new TextComponentString(TextFormatting.GREEN + "Mortal, here are your tasks:"));
