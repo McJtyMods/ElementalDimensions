@@ -1,12 +1,10 @@
 package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.init.ItemRegister;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -30,6 +28,8 @@ public class ItemElementalWand extends GenericItem {
             }
             if (offhand.getItem() == ItemRegister.focusTeleport) {
                 doTeleport(worldIn, playerIn);
+//            } else if (offhand.getItem() == ItemRegister.focusDamage) {
+//                doDamage(worldIn, playerIn);
             } else {
                 playerIn.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "Sorry! Not implemented yet!"));
             }
@@ -68,4 +68,13 @@ public class ItemElementalWand extends GenericItem {
         }
 
     }
+
+    private static void doDamage(World world, EntityPlayer player) {
+        Vec3d lookVec = player.getLookVec();
+        Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+        int distance = 20;  // @todo make configurable
+        Vec3d end = start.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
+        // @todo
+    }
+
 }
