@@ -31,6 +31,7 @@ item.elementaldimensions.spiritrune_part3.name=Rune of Spirit Part 3
 
 # Blocks
 tile.elementaldimensions.solidwater.name=Solid Water
+tile.elementaldimensions.solidfire.name=Solid Fire
 tile.elementaldimensions.portalbase.name=Elemental Block
 tile.elementaldimensions.portaldialer.name=Portal Dialer
 

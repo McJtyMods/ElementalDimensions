@@ -220,7 +220,7 @@ public class FireTerrainGenerator implements ITerrainGenerator {
                                 } else if ((d15 += d16) > 0.2D) {
                                     setBlockState(primer, index, baseBlock);
                                 } else if ((d15 += d16) > 0.0D) {
-                                    setBlockState(primer, index, BlockRegister.solidWaterBlock.getDefaultState());
+                                    setBlockState(primer, index, BlockRegister.solidFireBlock.getDefaultState());
                                 } else if (height < waterLevel) {
                                     setBlockState(primer, index, Blocks.LAVA.getDefaultState());
                                 } else {
