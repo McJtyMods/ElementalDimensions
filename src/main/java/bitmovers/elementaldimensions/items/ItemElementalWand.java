@@ -64,24 +64,6 @@ public class ItemElementalWand extends GenericItem {
                     return;
                 }
                 player.setPositionAndUpdate(x + .5 + hit.getFrontOffsetX(), y, z + .5 + hit.getFrontOffsetZ());
-//                switch (position.sideHit) {
-//                    case DOWN:
-//                        break;
-//                    case UP:
-//                        break;
-//                    case NORTH:
-//                        player.setPositionAndUpdate(x+.5, y, z - 1 + .5);
-//                        break;
-//                    case SOUTH:
-//                        player.setPositionAndUpdate(x+.5, y, z + 1+.5);
-//                        break;
-//                    case WEST:
-//                        player.setPositionAndUpdate(x - 1+.5, y, z+.5);
-//                        break;
-//                    case EAST:
-//                        player.setPositionAndUpdate(x + 1+.5, y, z+.5);
-//                        break;
-//                }
             }
         }
 
