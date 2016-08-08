@@ -37,6 +37,7 @@ entity.elementaldimensions.Guard.name=Guard
 entity.elementaldimensions.WaterCreep.name=Water Creep
 entity.elementaldimensions.DirtZombieBoss.name=Dirt Zombie Boss
 entity.elementaldimensions.WaterCreepBoss.name=Water Creep Boss
+entity.elementaldimensions.Ghost.name=Ghost
 
 
 # Creative Tabs

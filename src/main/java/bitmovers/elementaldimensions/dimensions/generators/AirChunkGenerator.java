@@ -2,6 +2,10 @@ package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.IslandTerrainGenerator;
 import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenTendrils;
+import bitmovers.elementaldimensions.mobs.EntityGhost;
+import bitmovers.elementaldimensions.mobs.EntityWaterCreep;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -27,6 +31,8 @@ public class AirChunkGenerator implements IChunkGenerator {
         this.random = new Random((seed + 516) * 314);
         terraingen.setup(worldObj, random, Blocks.GLASS.getDefaultState());
     }
+
+    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityGhost.class, 100, 3, 3));
 
     private final World worldObj;
     @SuppressWarnings("all")
@@ -63,9 +69,12 @@ public class AirChunkGenerator implements IChunkGenerator {
     }
 
     @Override
-    @Nonnull
-    public List<Biome.SpawnListEntry> getPossibleCreatures(@Nonnull EnumCreatureType creatureType, @Nonnull BlockPos pos) {
-        return Collections.emptyList();
+    public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+        if (creatureType == EnumCreatureType.MONSTER) {
+            return mobs;
+        }
+        return ImmutableList.of();
+
     }
 
     @Nullable

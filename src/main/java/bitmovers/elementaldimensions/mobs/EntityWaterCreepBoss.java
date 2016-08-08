@@ -333,7 +333,7 @@ public class EntityWaterCreepBoss extends EntityMob {
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
     public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < (double)this.worldObj.getSeaLevel();
+        return this.posY > 45.0D && this.posY < (double)this.worldObj.getSeaLevel() && this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
     }
 
     /**
