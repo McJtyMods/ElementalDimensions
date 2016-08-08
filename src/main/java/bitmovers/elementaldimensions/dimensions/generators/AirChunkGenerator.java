@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.IslandTerrainGenerator;
+import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenTendrils;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -31,6 +32,7 @@ public class AirChunkGenerator implements IChunkGenerator {
     @SuppressWarnings("all")
     private final Random random;
     private final IslandTerrainGenerator terraingen;
+    private MapGenTendrils tendrilGenerator = new MapGenTendrils();
 
     @Override
     @Nonnull
@@ -38,6 +40,7 @@ public class AirChunkGenerator implements IChunkGenerator {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
         terraingen.generate(x, z, chunkprimer);
+        tendrilGenerator.generate(this.worldObj, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 
