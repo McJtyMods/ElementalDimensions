@@ -28,4 +28,8 @@ public class FireWorldProvider extends WorldProvider {
         return new FireChunkGenerator(worldObj);
     }
 
+    @Override
+    public float calculateCelestialAngle(long worldTime, float partialTicks) {
+        return 0.5F;
+    }
 }

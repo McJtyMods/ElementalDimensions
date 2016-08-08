@@ -1,6 +1,10 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.FireTerrainGenerator;
+import bitmovers.elementaldimensions.mobs.EntityBlaster;
+import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -21,6 +25,8 @@ public class FireChunkGenerator implements IChunkGenerator {
     private final World worldObj;
     private Random random;
     private FireTerrainGenerator terraingen = new FireTerrainGenerator();
+
+    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityBlaster.class, 100, 2, 2));
 
     public FireChunkGenerator(World worldObj) {
         this.worldObj = worldObj;
@@ -58,7 +64,11 @@ public class FireChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        return Collections.emptyList();
+        if (creatureType == EnumCreatureType.MONSTER){
+            return mobs;
+        }
+        return ImmutableList.of();
+
     }
 
     @Nullable

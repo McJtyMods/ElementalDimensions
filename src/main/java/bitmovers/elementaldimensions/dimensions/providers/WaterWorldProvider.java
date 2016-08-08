@@ -50,5 +50,4 @@ public class WaterWorldProvider extends WorldProvider {
 
         };
     }
-
 }

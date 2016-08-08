@@ -44,6 +44,7 @@ entity.elementaldimensions.WaterCreepBoss.name=Water Creep Boss
 entity.elementaldimensions.Ghost.name=Ghost
 entity.elementaldimensions.GhostBoss.name=Ghost Boss
 entity.elementaldimensions.Spirit.name=Spirit
+entity.elementaldimensions.Blaster.name=Blaster
 
 
 # Creative Tabs
