@@ -43,6 +43,7 @@ entity.elementaldimensions.DirtZombieBoss.name=Dirt Zombie Boss
 entity.elementaldimensions.WaterCreepBoss.name=Water Creep Boss
 entity.elementaldimensions.Ghost.name=Ghost
 entity.elementaldimensions.GhostBoss.name=Ghost Boss
+entity.elementaldimensions.Spirit.name=Spirit
 
 
 # Creative Tabs

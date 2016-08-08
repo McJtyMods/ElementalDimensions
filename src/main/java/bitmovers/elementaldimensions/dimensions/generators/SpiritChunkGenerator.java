@@ -1,5 +1,9 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
+import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
+import bitmovers.elementaldimensions.mobs.EntitySpirit;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -22,6 +26,8 @@ public class SpiritChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
+
+    private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntitySpirit.class, 100, 2, 2));
 
     public SpiritChunkGenerator(World worldObj) {
         this.worldObj = worldObj;
@@ -82,7 +88,11 @@ public class SpiritChunkGenerator implements IChunkGenerator {
 
     @Override
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        return Collections.emptyList();
+        if (creatureType == EnumCreatureType.MONSTER){
+            return mobs;
+        }
+        return ImmutableList.of();
+
     }
 
     @Nullable

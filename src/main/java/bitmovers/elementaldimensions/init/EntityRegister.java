@@ -20,6 +20,7 @@ public class EntityRegister {
         EntityRegistry.registerModEntity(EntityWaterCreepBoss.class, "WaterCreepBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
         EntityRegistry.registerModEntity(EntityGhost.class, "Ghost", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
         EntityRegistry.registerModEntity(EntityGhostBoss.class, "GhostBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
+        EntityRegistry.registerModEntity(EntitySpirit.class, "Spirit", id++, ElementalDimensions.instance, 64, 3, true, 0x996655, 0x00ff55);
 
         id = 100;
         EntityRegistry.registerModEntity(EntityWaterBossSeed.class, "WaterBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
@@ -29,6 +30,7 @@ public class EntityRegister {
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreepBoss.class, EntityLiving.SpawnPlacementType.IN_WATER);
         EntitySpawnPlacementRegistry.setPlacementType(EntityGhost.class, EntityLiving.SpawnPlacementType.IN_AIR);
 
+        LootTableList.register(EntitySpirit.LOOT);
         LootTableList.register(EntityDirtZombie.LOOT);
         LootTableList.register(EntityDirtZombieBoss.LOOT);
         LootTableList.register(EntityWaterCreep.LOOT);
