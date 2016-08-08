@@ -50,7 +50,7 @@ public enum Dimensions implements IStringSerializable {
 
         @Override
         public String[] getTaskDescriptions() {
-            return new String[] { "Kill water creeps for the first air rune part", "Find a water dungeon for the second part", "Use a water boss seed in water for the last part" };
+            return new String[] { "Kill water creeps for the first air rune part", "Find a water dungeon for the second part", "Throw a water boss seed in water for the last part" };
         }
     },
     AIR(2, GenerationType.NONE) {
@@ -63,6 +63,11 @@ public enum Dimensions implements IStringSerializable {
         @Override
         public BlockPos adjustHeight(int chunkX, int chunkZ, BlockPos pos, World world, Random random) {
             return new BlockPos(pos.getX(), random.nextInt(50)+30, pos.getZ());
+        }
+
+        @Override
+        public String[] getTaskDescriptions() {
+            return new String[] { "Kill ghosts for the first spirit rune part", "Find a dungeon for the second part", "Throw an air boss seed in the air for the last part" };
         }
     },
     SPIRIT(3, GenerationType.NONE) {
