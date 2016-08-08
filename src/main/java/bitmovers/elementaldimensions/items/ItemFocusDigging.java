@@ -1,7 +1,9 @@
 package bitmovers.elementaldimensions.items;
 
+import elec332.core.world.WorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -21,7 +23,7 @@ public class ItemFocusDigging extends ItemFocus {
             int distance = 20;  // @todo make configurable
             Vec3d end = start.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
             RayTraceResult position = world.rayTraceBlocks(start, end);
-            if (position != null) {
+            if (position != null && WorldHelper.getBlockAt(world, position.getBlockPos()) != Blocks.BEDROCK) {
                 EntityPlayerMP playerMP = (EntityPlayerMP) player;
                 playerMP.interactionManager.tryHarvestBlock(position.getBlockPos());
             }
