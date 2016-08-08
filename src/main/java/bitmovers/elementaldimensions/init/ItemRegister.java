@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemRegister {
 
     public static ItemWaterBossSeed waterBossSeed;
+    public static ItemAirBossSeed airBossSeed;
+
     public static ItemElementalWand elementalWand;
     public static ItemFocusDamage focusDamage;
     public static ItemFocusDigging focusDigging;
@@ -48,6 +50,8 @@ public class ItemRegister {
         }
 
         waterBossSeed = new ItemWaterBossSeed();
+        airBossSeed = new ItemAirBossSeed();
+
         elementalWand = new ItemElementalWand();
         focusDamage = new ItemFocusDamage();
         focusDigging = new ItemFocusDigging();
@@ -83,6 +87,7 @@ public class ItemRegister {
         GameRegistry.addShapelessRecipe(new ItemStack(runeOfSpirit), new ItemStack(runeOfSpiritPart1), new ItemStack(runeOfSpiritPart2), new ItemStack(runeOfSpiritPart3));
 
         GameRegistry.addRecipe(new ItemStack(waterBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.DIAMOND);
+        GameRegistry.addRecipe(new ItemStack(airBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.EMERALD);
     }
 
 }

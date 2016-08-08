@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.init;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import bitmovers.elementaldimensions.items.EntityAirBossSeed;
 import bitmovers.elementaldimensions.items.EntityWaterBossSeed;
 import bitmovers.elementaldimensions.mobs.*;
 import net.minecraft.entity.EntityLiving;
@@ -17,8 +18,13 @@ public class EntityRegister {
         EntityRegistry.registerModEntity(EntityWaterCreep.class, "WaterCreep", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
         EntityRegistry.registerModEntity(EntityDirtZombieBoss.class, "DirtZombieBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x996600, 0x00ff00);
         EntityRegistry.registerModEntity(EntityWaterCreepBoss.class, "WaterCreepBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
-        EntityRegistry.registerModEntity(EntityWaterBossSeed.class, "WaterBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
         EntityRegistry.registerModEntity(EntityGhost.class, "Ghost", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
+        EntityRegistry.registerModEntity(EntityGhostBoss.class, "GhostBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
+
+        id = 100;
+        EntityRegistry.registerModEntity(EntityWaterBossSeed.class, "WaterBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
+        EntityRegistry.registerModEntity(EntityAirBossSeed.class, "AirBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
+
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreep.class, EntityLiving.SpawnPlacementType.IN_WATER);
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreepBoss.class, EntityLiving.SpawnPlacementType.IN_WATER);
         EntitySpawnPlacementRegistry.setPlacementType(EntityGhost.class, EntityLiving.SpawnPlacementType.IN_AIR);
