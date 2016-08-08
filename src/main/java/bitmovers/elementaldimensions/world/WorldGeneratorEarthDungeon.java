@@ -31,13 +31,11 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)){
-            System.out.println("EARTH: chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 GenerationType type = GenerationType.NONE;
                 StructureTemplate structure = new StructureTemplate(schematic, type);
                 BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 35, new Random(world.getSeed()));
-                System.out.println("    pos = " + pos);
                 structure.generateStructure(pos, world, chunkProvider);
             } else {
                 throw new IllegalStateException();

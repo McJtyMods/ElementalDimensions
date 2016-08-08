@@ -31,7 +31,6 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && PortalDungeonLocator.isPortalChunk(chunkX, chunkZ)){
-            System.out.println("PORTAL: chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 GenerationType type = GenerationType.SURFACE;

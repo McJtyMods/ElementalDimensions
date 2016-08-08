@@ -30,16 +30,13 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && WaterDungeonLocator.isWaterDungeonChunk(world, chunkX, chunkZ)){
-            System.out.println("WATER: chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 GenerationType type = GenerationType.NONE;
                 StructureTemplate structure = new StructureTemplate(schematic, type);
                 BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
                 pos = world.getTopSolidOrLiquidBlock(pos);
-                System.out.println("    pos = " + pos);
                 if (pos.getY() > WaterTerrainGenerator.SEALEVEL-3) {
-                    System.out.println("    CANCELED");
                     return;
                 }
                 structure.generateStructure(pos, world, chunkProvider);

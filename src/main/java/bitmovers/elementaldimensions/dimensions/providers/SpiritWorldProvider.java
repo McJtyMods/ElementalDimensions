@@ -28,4 +28,12 @@ public class SpiritWorldProvider extends WorldProvider {
         return new SpiritChunkGenerator(worldObj);
     }
 
+    public SpiritWorldProvider() {
+        hasNoSky = true;
+    }
+
+    @Override
+    public int getActualHeight() {
+        return 256;
+    }
 }

@@ -29,13 +29,11 @@ public class WorldGeneratorAirDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && AirDungeonLocator.isAirDungeonChunk(world, chunkX, chunkZ)){
-            System.out.println("AIR: chunkX = " + chunkX + "," + chunkZ);
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 GenerationType type = GenerationType.NONE;
                 StructureTemplate structure = new StructureTemplate(schematic, type);
                 BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, random.nextInt(50)+30, new Random(world.getSeed()));
-                System.out.println("    pos = " + pos);
                 structure.generateStructure(pos, world, chunkProvider);
             } else {
                 throw new IllegalStateException();

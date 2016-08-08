@@ -70,7 +70,7 @@ public enum Dimensions implements IStringSerializable {
             return new String[] { "Kill ghosts for the first spirit rune part", "Find a dungeon for the second part", "Throw an air boss seed in the air for the last part" };
         }
     },
-    SPIRIT(3, GenerationType.NONE) {
+    SPIRIT(3, GenerationType.SURFACE) {
 
         @Override
         public int getDimensionID() {
