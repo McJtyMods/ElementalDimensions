@@ -5,10 +5,7 @@ import bitmovers.elementaldimensions.commands.CommandReloadConfig;
 import bitmovers.elementaldimensions.commands.CommandReloadSchematics;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
-import bitmovers.elementaldimensions.world.WorldGeneratorAirDungeon;
-import bitmovers.elementaldimensions.world.WorldGeneratorEarthDungeon;
-import bitmovers.elementaldimensions.world.WorldGeneratorPortalDungeon;
-import bitmovers.elementaldimensions.world.WorldGeneratorWaterDungeon;
+import bitmovers.elementaldimensions.world.*;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -39,6 +36,7 @@ public class NCLayerMain {
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorEarthDungeon.dungeonResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorWaterDungeon.dungeonResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorAirDungeon.dungeonResource, true);
+        SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorSpiritDungeon.dungeonResource, true);
     }
 
     public void postInit(FMLPostInitializationEvent event){
