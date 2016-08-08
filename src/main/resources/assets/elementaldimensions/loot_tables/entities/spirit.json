@@ -47,6 +47,27 @@
           "weight": 1
         }
       ]
+    },
+    {
+      "name": "elementaldimensions:spirit",
+      "conditions": [
+        {
+          "condition": "killed_by_player"
+        },
+        {
+          "condition": "random_chance_with_looting",
+          "chance": 0.07,
+          "looting_multiplier": 0.01
+        }
+      ],
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "elementaldimensions:firerune_part3",
+          "weight": 1
+        }
+      ]
     }
   ]
 }

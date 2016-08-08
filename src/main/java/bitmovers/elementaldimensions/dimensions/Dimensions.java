@@ -77,6 +77,10 @@ public enum Dimensions implements IStringSerializable {
             return Config.Dimensions.Spirit.dimensionID;
         }
 
+        @Override
+        public String[] getTaskDescriptions() {
+            return new String[] { "Kill spirits for the first spirit rune part", "Find a dungeon for the second part", "WIP: There is no boss yet, kill other spirits" };
+        }
     },
     FIRE(4, GenerationType.NONE) {
 
