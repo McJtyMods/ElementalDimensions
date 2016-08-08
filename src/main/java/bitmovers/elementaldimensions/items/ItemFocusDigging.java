@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.items;
 
 import elec332.core.world.WorldHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -30,4 +31,8 @@ public class ItemFocusDigging extends ItemFocus {
         }
     }
 
+    @Override
+    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+        return super.onLeftClickEntity(stack, player, entity);
+    }
 }

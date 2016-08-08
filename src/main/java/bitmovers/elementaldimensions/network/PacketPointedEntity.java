@@ -1,15 +1,14 @@
 package bitmovers.elementaldimensions.network;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import elec332.core.main.ElecCore;
 import elec332.core.network.AbstractPacket;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -21,8 +20,8 @@ public class PacketPointedEntity extends AbstractPacket {
     public PacketPointedEntity(){
         if (ElecCore.proxy.isClient()){
             NBTTagCompound tag = new NBTTagCompound();
-            RayTraceResult e = Minecraft.getMinecraft().objectMouseOver;
-            tag.setInteger("eID", e == null ? -1 : e.typeOfHit == RayTraceResult.Type.ENTITY ? (e.entityHit == null ? -1 : e.entityHit.getEntityId()) : -1);
+            Entity e = ElementalDimensions.proxy.getPointedEntity();
+            tag.setInteger("eID", e == null ? -1 : e.getEntityId());
             networkPackageObject = tag;
         }
     }
