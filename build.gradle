@@ -32,13 +32,13 @@ repositories {
     }
 }
 
-version = "1.10-1.2.0beta36"
+version = "0.0.2"
 def ENV = System.getenv()
 if (ENV.DRONE_BUILD_NUMBER) {
     version += ".n" + ENV.DRONE_BUILD_NUMBER
 }
-group= "mcjty.deepresonance" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "deepresonance"
+group= "mcjty.elementaldimensions" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "elementaldimensions"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

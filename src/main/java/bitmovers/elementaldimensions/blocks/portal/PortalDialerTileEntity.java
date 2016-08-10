@@ -91,13 +91,14 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                             dest.setCooldown(3);    // Some cooldown
                             for (EntityPlayer player : players) {
                                 CustomTeleporter.teleportToDimension(player, WorldHelper.getDimID(dest.getWorld()), dest.getTeleportSpot());
-                                String[] tasks = destination.getTaskDescriptions();
-                                if (tasks != null) {
-                                    player.addChatComponentMessage(new TextComponentString(TextFormatting.GREEN + "Mortal, here are your tasks:"));
-                                    for (String task : tasks) {
-                                        player.addChatComponentMessage(new TextComponentString(task));
+                                if (destination != null) {
+                                    String[] tasks = destination.getTaskDescriptions();
+                                    if (tasks != null) {
+                                        player.addChatComponentMessage(new TextComponentString(TextFormatting.GREEN + "Mortal, here are your tasks:"));
+                                        for (String task : tasks) {
+                                            player.addChatComponentMessage(new TextComponentString(task));
+                                        }
                                     }
-
                                 }
                             }
                         }
