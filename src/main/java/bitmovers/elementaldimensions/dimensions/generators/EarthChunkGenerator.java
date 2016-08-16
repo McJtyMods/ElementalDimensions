@@ -2,7 +2,6 @@ package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.EarthTerrainGenerator;
 import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenLowTendrils;
-import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenTendrils;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import com.google.common.collect.ImmutableList;
@@ -12,6 +11,7 @@ import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -67,7 +67,12 @@ public class EarthChunkGenerator implements IChunkGenerator {
 
     @Override
     public void populate(int x, int z) {
-
+        int i = x * 16;
+        int j = z * 16;
+        BlockPos blockpos = new BlockPos(i, 0, j);
+        Biome biome = this.worldObj.getBiome(blockpos.add(16, 0, 16));
+        biome.decorate(this.worldObj, this.random, new BlockPos(i, 0, j));
+        WorldEntitySpawner.performWorldGenSpawning(this.worldObj, biome, i + 8, j + 8, 16, 16, this.random);
     }
 
     @Override
