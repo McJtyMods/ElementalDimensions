@@ -26,19 +26,33 @@ import java.util.Random;
 public class WorldGeneratorEarthDungeon implements IWorldGenerator {
 
     public static final ResourceLocation dungeonResource;
+    public static final ResourceLocation towerResource;
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
-        if (validDimension(dimension) && EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)){
-            Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
-            if (schematic != null) {
-                GenerationType type = GenerationType.NONE;
-                StructureTemplate structure = new StructureTemplate(schematic, type);
-                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 35, new Random(world.getSeed()));
-                structure.generateStructure(pos, world, chunkProvider);
-            } else {
-                throw new IllegalStateException();
+        if (validDimension(dimension)) {
+            if (EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)) {
+                Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
+                if (schematic != null) {
+                    GenerationType type = GenerationType.NONE;
+                    StructureTemplate structure = new StructureTemplate(schematic, type);
+                    BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 35, new Random(world.getSeed()));
+                    structure.generateStructure(pos, world, chunkProvider);
+                } else {
+                    throw new IllegalStateException();
+                }
+            }
+            if (EarthDungeonLocator.isEarthTowerChunk(world, chunkX, chunkZ)) {
+                Schematic schematic = SchematicLoader.INSTANCE.getSchematic(towerResource);
+                if (schematic != null) {
+                    GenerationType type = GenerationType.SURFACE;
+                    StructureTemplate structure = new StructureTemplate(schematic, type);
+                    BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
+                    structure.generateStructure(pos, world, chunkProvider);
+                } else {
+                    throw new IllegalStateException();
+                }
             }
         }
     }
@@ -49,6 +63,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
 
     static {
         dungeonResource = new EDResourceLocation("schematics/earthDungeon.schematic");
+        towerResource = new EDResourceLocation("schematics/earthTower.schematic");
     }
 
 }

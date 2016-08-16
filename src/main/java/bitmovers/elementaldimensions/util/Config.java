@@ -36,6 +36,9 @@ public class Config {
         @Configurable(comment = "Chance for an earth dungeon to spawn (in the earth dimension) (1 means 100%)", maxValue = 1.0f)
         public static float earthDungeonChance = 0.03f;
 
+        @Configurable(comment = "Chance for an earth tower to spawn (in the earth dimension) (1 means 100%)", maxValue = 1.0f)
+        public static float earthTowerChance = 0.01f;
+
         @Configurable(comment = "Chance for an air dungeon to spawn (in the air dimension) (1 means 100%)", maxValue = 1.0f)
         public static float airDungeonChance = 0.03f;
 

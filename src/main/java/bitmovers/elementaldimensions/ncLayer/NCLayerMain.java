@@ -34,6 +34,7 @@ public class NCLayerMain {
         }
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorPortalDungeon.dungeonResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorEarthDungeon.dungeonResource, true);
+        SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorEarthDungeon.towerResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorWaterDungeon.dungeonResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorAirDungeon.dungeonResource, true);
         SchematicLoader.INSTANCE.registerSchematic(WorldGeneratorSpiritDungeon.dungeonResource, true);
