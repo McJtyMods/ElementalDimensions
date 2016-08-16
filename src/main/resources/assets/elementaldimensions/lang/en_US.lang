@@ -35,6 +35,7 @@ tile.elementaldimensions.solidwater.name=Solid Water
 tile.elementaldimensions.solidfire.name=Solid Fire
 tile.elementaldimensions.portalbase.name=Elemental Block
 tile.elementaldimensions.portaldialer.name=Portal Dialer
+tile.elementaldimensions.harddirt.name=Hard Dirt
 
 # Entities
 entity.elementaldimensions.DirtZombie.name=Dirt Zombie

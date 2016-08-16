@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.init;
 
+import bitmovers.elementaldimensions.blocks.cosmetic.HardDirtBlock;
 import bitmovers.elementaldimensions.blocks.cosmetic.SolidFireBlock;
 import bitmovers.elementaldimensions.blocks.cosmetic.SolidWaterBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalBaseBlock;
@@ -18,6 +19,7 @@ public class BlockRegister {
     public static PortalBaseBlock portalBaseBlock;
     public static SolidWaterBlock solidWaterBlock;
     public static SolidFireBlock solidFireBlock;
+    public static HardDirtBlock hardDirtBlock;
 
     public static Block silverFishStone;
 
@@ -28,6 +30,7 @@ public class BlockRegister {
         portalBaseBlock = new PortalBaseBlock();
         solidWaterBlock = new SolidWaterBlock();
         solidFireBlock = new SolidFireBlock();
+        hardDirtBlock = new HardDirtBlock();
     }
 
 }

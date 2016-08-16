@@ -1,6 +1,9 @@
 package bitmovers.elementaldimensions.dimensions.generators;
 
-import bitmovers.elementaldimensions.dimensions.generators.tools.NormalTerrainGenerator;
+import bitmovers.elementaldimensions.dimensions.generators.tools.EarthTerrainGenerator;
+import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenLowTendrils;
+import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenTendrils;
+import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -31,7 +34,8 @@ public class EarthChunkGenerator implements IChunkGenerator {
     private List<Biome.SpawnListEntry> mobs = Lists.newArrayList(new Biome.SpawnListEntry(EntityDirtZombie.class, 100, 2, 2));
 
     private MapGenBase caveGenerator = new MapGenCaves();
-    private NormalTerrainGenerator terraingen = new NormalTerrainGenerator();
+    private MapGenLowTendrils tendrilGenerator = new MapGenLowTendrils(BlockRegister.hardDirtBlock.getDefaultState());
+    private EarthTerrainGenerator terraingen = new EarthTerrainGenerator();
 
     public EarthChunkGenerator(World worldObj) {
         this.worldObj = worldObj;
@@ -46,8 +50,8 @@ public class EarthChunkGenerator implements IChunkGenerator {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
         terraingen.generate(x, z, chunkprimer);
-//        generate(x, z, chunkprimer);
 
+        tendrilGenerator.generate(this.worldObj, x, z, chunkprimer);
         this.caveGenerator.generate(this.worldObj, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);

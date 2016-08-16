@@ -14,7 +14,7 @@ import java.util.Random;
 
 import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
 
-public class NormalTerrainGenerator implements ITerrainGenerator {
+public class EarthTerrainGenerator implements ITerrainGenerator {
     private World world;
 
     private final double[] noiseField;
@@ -38,7 +38,7 @@ public class NormalTerrainGenerator implements ITerrainGenerator {
     private Biome biome;
     private boolean amplified;
 
-    public NormalTerrainGenerator() {
+    public EarthTerrainGenerator() {
         this.noiseField = new double[825];
 
         this.parabolicField = new float[25];

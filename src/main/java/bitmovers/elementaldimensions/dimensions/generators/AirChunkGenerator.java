@@ -2,8 +2,8 @@ package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.IslandTerrainGenerator;
 import bitmovers.elementaldimensions.dimensions.generators.tools.MapGenTendrils;
+import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.mobs.EntityGhost;
-import bitmovers.elementaldimensions.mobs.EntityWaterCreep;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
@@ -18,7 +18,6 @@ import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -38,7 +37,7 @@ public class AirChunkGenerator implements IChunkGenerator {
     @SuppressWarnings("all")
     private final Random random;
     private final IslandTerrainGenerator terraingen;
-    private MapGenTendrils tendrilGenerator = new MapGenTendrils();
+    private MapGenTendrils tendrilGenerator = new MapGenTendrils(BlockRegister.solidWaterBlock.getDefaultState());
 
     @Override
     @Nonnull

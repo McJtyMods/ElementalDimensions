@@ -11,12 +11,12 @@ import java.util.Random;
 import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.getBlockState;
 import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
 
-public class MapGenTendrils {
+public class MapGenLowTendrils {
     private int range = 8;
     private Random rand = new Random();
     private IBlockState baseBlock;
 
-    public MapGenTendrils(IBlockState baseBlock) {
+    public MapGenLowTendrils(IBlockState baseBlock) {
         this.baseBlock = baseBlock;
     }
 
@@ -59,8 +59,8 @@ public class MapGenTendrils {
 
             p_151541_14_ += f4 * 0.1F;
             p_151541_13_ += f3 * 0.1F;
-            f4 *= 0.9F;
-            f3 *= 0.75F;
+            f4 *= 0.5F;
+            f3 *= 0.45F;
             f4 += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
             f3 += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
@@ -71,12 +71,12 @@ public class MapGenTendrils {
             }
 
             if (flag2 || random.nextInt(4) != 0) {
-                double d8 = xx - centerX;
-                double d9 = zz - centerZ;
+                double cx = xx - centerX;
+                double cz = zz - centerZ;
                 double d10 = (p_151541_16_ - p_151541_15_);
                 double d11 = (p_151541_12_ + 2.0F + 16.0F);
 
-                if (d8 * d8 + d9 * d9 - d10 * d10 > d11 * d11) {
+                if (cx * cx + cz * cz - d10 * d10 > d11 * d11) {
                     return;
                 }
 
@@ -112,29 +112,26 @@ public class MapGenTendrils {
                         j2 = 16;
                     }
 
-                    int k2;
-                    int j3;
+                    for (int xxx = i4; xxx < l1; ++xxx) {
+                        double d13 = ((xxx + chunkX * 16) + 0.5D - xx) / d6;
 
-                    for (k2 = i4; k2 < l1; ++k2) {
-                        double d13 = ((k2 + chunkX * 16) + 0.5D - xx) / d6;
-
-                        for (j3 = k4; j3 < j2; ++j3) {
-                            double d14 = ((j3 + chunkZ * 16) + 0.5D - zz) / d6;
-                            int k3 = (k2 * 16 + j3) * 256 + i2;
+                        for (int zzz = k4; zzz < j2; ++zzz) {
+                            double d14 = ((zzz + chunkZ * 16) + 0.5D - zz) / d6;
+                            int index = (xxx * 16 + zzz) * 256 + i2;
 
                             if (d13 * d13 + d14 * d14 < 1.0D) {
                                 for (int l3 = i2 - 1; l3 >= j4; --l3) {
                                     double d12 = (l3 + 0.5D - yy) / d7;
 
                                     if (d12 > -0.7D && d13 * d13 + d12 * d12 + d14 * d14 < 1.0D) {
-                                        IBlockState block = getBlockState(primer, k3);
+                                        IBlockState block = getBlockState(primer, index);
 
                                         if (block.getBlock() == Blocks.AIR || block == null) {
-                                            setBlockState(primer, k3, baseBlock);
+                                            setBlockState(primer, index, baseBlock);
                                         }
                                     }
 
-                                    --k3;
+                                    --index;
                                 }
                             }
                         }
@@ -151,7 +148,7 @@ public class MapGenTendrils {
 
     public void generate(World world, int chunkX, int chunkZ, ChunkPrimer primer) {
         int k = this.range;
-        this.rand.setSeed(world.getSeed());
+        this.rand.setSeed(world.getSeed() * 13 + 527);
         long l = this.rand.nextLong();
         long i1 = this.rand.nextLong();
 
@@ -168,13 +165,9 @@ public class MapGenTendrils {
     private void fillChunk(int cx, int cz, int chunkX, int chunkZ, ChunkPrimer primer) {
         int i1 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(15) + 1) + 1);
 
-        if (this.rand.nextInt(7) != 0) {
-            i1 = 0;
-        }
-
         for (int j1 = 0; j1 < i1; ++j1) {
             double xx = (cx * 16 + this.rand.nextInt(16));
-            double yy = this.rand.nextInt(this.rand.nextInt(120) + 8);
+            double yy = this.rand.nextInt(this.rand.nextInt(30) + 55);
             double zz = (cz * 16 + this.rand.nextInt(16));
             int k1 = 1;
 
