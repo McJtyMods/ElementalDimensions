@@ -9,6 +9,7 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.storage.WorldInfo;
 
 import javax.annotation.Nonnull;
 
@@ -30,6 +31,28 @@ public class WaterWorldProvider extends WorldProvider {
     @Nonnull
     public IChunkGenerator createChunkGenerator() {
         return new WaterChunkGenerator(worldObj);
+    }
+
+    @Override
+    public void calculateInitialWeather() {
+        worldObj.thunderingStrength = 1.0F;
+        worldObj.rainingStrength = 1.0F;
+        worldObj.getWorldInfo().setThundering(true);
+        worldObj.getWorldInfo().setRaining(true);
+    }
+
+    @Override
+    public void updateWeather() {
+        WorldInfo worldInfo = worldObj.getWorldInfo();
+        if (!worldObj.isRemote) {
+            worldObj.thunderingStrength = 1.0f;
+            worldObj.rainingStrength = 1.0F;
+            worldInfo.setThundering(true);
+            worldInfo.setRaining(true);
+        }
+        worldInfo.setCleanWeatherTime(0);
+        worldInfo.setThunderTime(worldInfo.getThunderTime() - 100);
+        worldObj.updateWeatherBody();
     }
 
     @Override
