@@ -3,6 +3,9 @@ package bitmovers.elementaldimensions.proxy;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.mobs.*;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
+import bitmovers.elementaldimensions.sound.MobSounds;
+import bitmovers.elementaldimensions.sound.SoundController;
+import bitmovers.elementaldimensions.sound.SoundHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import elec332.core.util.RegistryHelper;
@@ -17,6 +20,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -31,6 +35,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
         registerEntityRenderers();
+        MobSounds.init();
     }
 
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -44,6 +49,7 @@ public class ClientProxy extends CommonProxy {
                 ((GenericBlock) block).initClient();
             }
         }
+        MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 
     @Override

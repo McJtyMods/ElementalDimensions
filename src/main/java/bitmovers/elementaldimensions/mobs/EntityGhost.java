@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.mobs;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import bitmovers.elementaldimensions.sound.MobSounds;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,7 +11,6 @@ import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -20,12 +20,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -50,6 +48,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         this.moveHelper = new GhostMoveHelper(this);
     }
 
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(5, new EntityGhost.AIRandomFly(this));
         this.tasks.addTask(7, new EntityGhost.AILookAround(this));
@@ -73,6 +72,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -84,6 +84,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.isEntityInvulnerable(source)) {
             return false;
@@ -95,33 +96,40 @@ public class EntityGhost extends EntityFlying implements IMob {
         }
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(ATTACKING, Boolean.valueOf(false));
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
     }
 
+    @Override
     public SoundCategory getSoundCategory() {
         return SoundCategory.HOSTILE;
     }
 
+    @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_GHAST_AMBIENT;
+        return MobSounds.GHOST;
     }
 
+    @Override
     protected SoundEvent getHurtSound() {
-        return SoundEvents.ENTITY_GHAST_HURT;
+        return MobSounds.GHOST2;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_GHAST_DEATH;
+        return MobSounds.GHOST2;
     }
 
+    @Override
     @Nullable
     protected ResourceLocation getLootTable() {
         return LOOT;
@@ -130,13 +138,15 @@ public class EntityGhost extends EntityFlying implements IMob {
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
-        return 10.0F;
+        return 7.0F;
     }
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         boolean b = /*this.rand.nextInt(5) == 0 && /* super.getCanSpawnHere() && */ this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
         return b;
@@ -150,6 +160,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     /**
      * Will return how many at most can spawn in a chunk at once.
      */
+    @Override
     public int getMaxSpawnedInChunk() {
         return 3;
     }
@@ -157,6 +168,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("ExplosionPower", this.explosionStrength);
@@ -165,6 +177,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
 
@@ -173,6 +186,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         }
     }
 
+    @Override
     public float getEyeHeight() {
         return 2.6F;
     }
@@ -188,6 +202,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return this.parentEntity.getAttackTarget() != null;
         }
@@ -195,6 +210,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             this.attackTimer = 0;
         }
@@ -202,6 +218,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Resets the task
          */
+        @Override
         public void resetTask() {
             this.parentEntity.setAttacking(false);
         }
@@ -209,6 +226,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Updates the task
          */
+        @Override
         public void updateTask() {
             EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
             double d0 = 64.0D;
@@ -218,16 +236,19 @@ public class EntityGhost extends EntityFlying implements IMob {
                 ++this.attackTimer;
 
                 if (this.attackTimer == 10) {
-                    world.playEvent((EntityPlayer) null, 1015, new BlockPos(this.parentEntity), 0);
+//                    world.playEvent(null, 1015, new BlockPos(this.parentEntity), 0);
                 }
 
                 if (this.attackTimer == 20) {
                     double d1 = 4.0D;
                     Vec3d vec3d = this.parentEntity.getLook(1.0F);
                     double d2 = entitylivingbase.posX - (this.parentEntity.posX + vec3d.xCoord * 4.0D);
-                    double d3 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
+                    double d3 = entitylivingbase.getEntityBoundingBox().minY + (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
                     double d4 = entitylivingbase.posZ - (this.parentEntity.posZ + vec3d.zCoord * 4.0D);
-                    world.playEvent(null, 1016, new BlockPos(this.parentEntity), 0);
+//                    world.playEvent(null, 1016, new BlockPos(this.parentEntity), 0);
+                    for (int i = 0; i < world.playerEntities.size(); ++i) {
+                        world.playSound(world.playerEntities.get(i), d2, d3, d4, MobSounds.GHOST_SHOOT, SoundCategory.HOSTILE, 1.0f, 1.0f);
+                    }
                     EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, this.parentEntity, d2, d3, d4);
                     entitylargefireball.explosionPower = this.parentEntity.getFireballStrength();
                     entitylargefireball.posX = this.parentEntity.posX + vec3d.xCoord * 4.0D;
@@ -255,6 +276,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             return true;
         }
@@ -262,6 +284,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Updates the task
          */
+        @Override
         public void updateTask() {
             if (this.parentEntity.getAttackTarget() == null) {
                 this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
@@ -291,6 +314,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             EntityMoveHelper entitymovehelper = this.parentEntity.getMoveHelper();
 
@@ -308,6 +332,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
+        @Override
         public boolean continueExecuting() {
             return false;
         }
@@ -315,6 +340,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             Random random = this.parentEntity.getRNG();
             double d0 = this.parentEntity.posX + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
@@ -333,6 +359,7 @@ public class EntityGhost extends EntityFlying implements IMob {
             this.parentEntity = ghast;
         }
 
+        @Override
         public void onUpdateMoveHelper() {
             if (this.action == Action.MOVE_TO) {
                 double d0 = this.posX - this.parentEntity.posX;

@@ -1,0 +1,7 @@
+{
+    "spirits" : {"category": "ambient", "sounds": ["elementaldimensions:spirits"]},
+    "howlingwind" : {"category": "ambient", "sounds": ["elementaldimensions:howlingwind"]},
+    "ghost" : {"category": "hostile", "sounds": ["elementaldimensions:ghost"]},
+    "ghost2" : {"category": "hostile", "sounds": ["elementaldimensions:ghost2"]},
+    "ghost_shoot" : {"category": "hostile", "sounds": ["elementaldimensions:ghost_shoot"]}
+}
