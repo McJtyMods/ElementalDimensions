@@ -18,6 +18,9 @@ public class SolidWaterBlock extends GenericBlock {
     public SolidWaterBlock() {
         super("solidwater", Material.GLASS);
         setSoundType(SoundType.GLASS);
+        setHardness(1.5F);
+        setResistance(10.0F);
+        setHarvestLevel("pickaxe", 1);
     }
 
     @Override

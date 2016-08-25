@@ -9,5 +9,8 @@ public class SolidFireBlock extends GenericBlock {
     public SolidFireBlock() {
         super("solidfire", Material.ROCK);
         setSoundType(SoundType.STONE);
+        setHardness(1.5F);
+        setResistance(10.0F);
+        setHarvestLevel("pickaxe", 1);
     }
 }
