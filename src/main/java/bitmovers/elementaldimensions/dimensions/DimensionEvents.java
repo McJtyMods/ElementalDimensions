@@ -1,7 +1,14 @@
 package bitmovers.elementaldimensions.dimensions;
 
 import bitmovers.elementaldimensions.mobs.EntityDirtZombieBoss;
+import bitmovers.elementaldimensions.mobs.EntityGhost;
+import bitmovers.elementaldimensions.mobs.EntityGhostBoss;
+import bitmovers.elementaldimensions.util.Config;
+import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,7 +17,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Random;
 
-public class BossSpawnEvents {
+public class DimensionEvents {
 
     @SubscribeEvent
     public void onWorldTick(TickEvent.WorldTickEvent evt) {
@@ -28,6 +35,7 @@ public class BossSpawnEvents {
             case WATER:
                 break;
             case AIR:
+                handleAir(evt);
                 break;
             case SPIRIT:
                 break;
@@ -35,6 +43,22 @@ public class BossSpawnEvents {
                 break;
             case OVERWORLD:
                 break;
+        }
+    }
+
+    private void handleAir(TickEvent.WorldTickEvent evt) {
+        for (Entity entity : evt.world.loadedEntityList) {
+            if (entity instanceof EntityGhost || entity instanceof EntityGhostBoss) {
+                // These are immune
+                continue;
+            }
+            if (WorldGenHelper.areWeOutside(evt.world, entity.getPosition())) {
+                entity.addVelocity(Config.Dimensions.windStrength, 0, 0);
+                if (entity instanceof EntityPlayer) {
+                    ((EntityPlayerMP) entity).connection.sendPacket(new SPacketEntityVelocity(entity));
+                    entity.velocityChanged = false;
+                }
+            }
         }
     }
 
@@ -72,5 +96,6 @@ public class BossSpawnEvents {
         BlockPos center = new BlockPos((b.maxX+b.minX) / 2 + random.nextInt(50) - 25, (b.maxY+b.minY) / 2, (b.maxZ+b.minZ) / 2 + random.nextInt(50) - 25);
         return world.getTopSolidOrLiquidBlock(center);
     }
+
 
 }

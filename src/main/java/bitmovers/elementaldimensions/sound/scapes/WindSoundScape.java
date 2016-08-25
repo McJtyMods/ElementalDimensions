@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.sound.scapes;
 
 import bitmovers.elementaldimensions.util.EDResourceLocation;
+import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,8 +20,7 @@ public class WindSoundScape implements SoundScape {
     @Override
     public float calculateVolume(World world, BlockPos pos, EntityPlayer player) {
         float volume = 1.0f;
-        BlockPos top = world.getTopSolidOrLiquidBlock(pos);
-        if (top.getY() > pos.getY()) {
+        if (!WorldGenHelper.areWeOutside(world, pos)) {
             volume /= 5;
         }
         return volume;

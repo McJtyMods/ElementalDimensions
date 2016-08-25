@@ -95,9 +95,29 @@ public class WorldGenHelper {
                     if (tileentity instanceof TileEntityChest) {
                         ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_SIMPLE_DUNGEON, random.nextLong());
                     }
-
                 }
             }
         }
+    }
+
+    public static boolean areWeOutside(World world, BlockPos pos) {
+        BlockPos top = world.getTopSolidOrLiquidBlock(pos);
+        boolean b = top.getY() > pos.getY();
+        if (!b) {
+            return true;
+        }
+
+        // Check negative x for a wall
+        BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos(pos);
+        for (int x = 1 ; x < 20 ; x++) {
+            mpos.setPos(pos.getX()-x, pos.getY(), pos.getZ());
+            boolean air1 = world.isAirBlock(mpos);
+            boolean air2 = world.isAirBlock(mpos.up());
+            if ((!air1) && (!air2)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

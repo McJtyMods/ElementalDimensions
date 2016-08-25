@@ -48,6 +48,9 @@ public class Config {
         @Configurable(comment = "Chance for a spirit dungeon to spawn (in the spirit dimension) (1 means 100%)", maxValue = 1.0f)
         public static float spiritDungeonChance = 0.02f;
 
+        @Configurable(comment = "Strength of the wind in the air dimension)", maxValue = 1.0f)
+        public static float windStrength = 0.005f;
+
         @Configurable.Class(comment = "Settings for the Air dimension.")
         public static class Air {
 
