@@ -10,6 +10,7 @@ import elec332.core.api.structure.GenerationType;
 import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
 import elec332.core.world.schematic.Schematic;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -46,10 +47,29 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
             if (EarthDungeonLocator.isEarthTowerChunk(world, chunkX, chunkZ)) {
                 Schematic schematic = SchematicLoader.INSTANCE.getSchematic(towerResource);
                 if (schematic != null) {
-                    GenerationType type = GenerationType.SURFACE;
+                    GenerationType type = GenerationType.NONE;
                     StructureTemplate structure = new StructureTemplate(schematic, type);
                     BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
+
+                    int averagey = WorldGenHelper.findBestStructureY(world, schematic, pos, Blocks.DIRT);
+                    if (averagey == -1) {
+                        // No good spot
+                        return;
+                    }
+                    pos =  new BlockPos(pos.getX(), averagey, pos.getZ());
                     structure.generateStructure(pos, world, chunkProvider);
+
+                    BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
+                    for (int x = pos.getX() ; x <= pos.getX() + schematic.width ; x++) {
+                        for (int z = pos.getZ() ; z <= pos.getZ() + schematic.length ; z++) {
+                            for (int y = averagey-1 ; y > 0 ; y--) {
+                                mpos.setPos(x, y, z);
+                                if (world.isAirBlock(mpos)) {
+                                    world.setBlockState(mpos, Blocks.DIRT.getDefaultState());
+                                }
+                            }
+                        }
+                    }
                 } else {
                     throw new IllegalStateException();
                 }
