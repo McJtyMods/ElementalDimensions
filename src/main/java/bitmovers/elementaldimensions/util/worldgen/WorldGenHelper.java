@@ -2,8 +2,12 @@ package bitmovers.elementaldimensions.util.worldgen;
 
 import elec332.core.world.schematic.Schematic;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTableList;
 
 import java.util.Random;
 
@@ -61,5 +65,39 @@ public class WorldGenHelper {
             return -1;
         }
         return npos.getY();
+    }
+
+    // Fill the area below a structure with some blocks
+    public static void fillWithBlock(World world, Schematic schematic, BlockPos pos, int averagey, IBlockState state) {
+        BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
+        for (int x = pos.getX() ; x <= pos.getX() + schematic.width ; x++) {
+            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.length ; z++) {
+                for (int y = averagey-1 ; y > 0 ; y--) {
+                    mpos.setPos(x, y, z);
+                    if (world.isAirBlock(mpos)) {
+                        world.setBlockState(mpos, state);
+                    }
+                }
+            }
+        }
+    }
+
+    // Fix chests in the structure so they have loot
+    public static void fixLootChests(World world, Schematic schematic, BlockPos pos) {
+        Random random = new Random(world.getSeed());
+        random.nextLong();
+        BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
+        for (int x = pos.getX() ; x <= pos.getX() + schematic.width ; x++) {
+            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.length ; z++) {
+                for (int y = pos.getY() ; y <= pos.getY() + schematic.height ; y++) {
+                    mpos.setPos(x, y, z);
+                    TileEntity tileentity = world.getTileEntity(mpos);
+                    if (tileentity instanceof TileEntityChest) {
+                        ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_SIMPLE_DUNGEON, random.nextLong());
+                    }
+
+                }
+            }
+        }
     }
 }

@@ -58,18 +58,9 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
                     }
                     pos =  new BlockPos(pos.getX(), averagey, pos.getZ());
                     structure.generateStructure(pos, world, chunkProvider);
+                    WorldGenHelper.fixLootChests(world, schematic, pos);
 
-                    BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
-                    for (int x = pos.getX() ; x <= pos.getX() + schematic.width ; x++) {
-                        for (int z = pos.getZ() ; z <= pos.getZ() + schematic.length ; z++) {
-                            for (int y = averagey-1 ; y > 0 ; y--) {
-                                mpos.setPos(x, y, z);
-                                if (world.isAirBlock(mpos)) {
-                                    world.setBlockState(mpos, Blocks.DIRT.getDefaultState());
-                                }
-                            }
-                        }
-                    }
+                    WorldGenHelper.fillWithBlock(world, schematic, pos, averagey, Blocks.DIRT.getDefaultState());
                 } else {
                     throw new IllegalStateException();
                 }
