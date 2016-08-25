@@ -12,9 +12,12 @@ import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DimensionEvents {
@@ -24,6 +27,7 @@ public class DimensionEvents {
         if (evt.phase == TickEvent.Phase.START) {
             return;
         }
+
         Dimensions dimension = Dimensions.findDimension(evt.world.provider.getDimension());
         if (dimension == null) {
             return;
@@ -47,18 +51,29 @@ public class DimensionEvents {
     }
 
     private void handleAir(TickEvent.WorldTickEvent evt) {
+        if (evt.world.playerEntities.isEmpty()) {
+            // Temporary until we figure out why the code below sometimes gives a concurrent modificatino
+            // exception when the player isn't there
+            return;
+        }
+        List<EntityPlayerMP> playersToNotify = new ArrayList<>();
         for (Entity entity : evt.world.loadedEntityList) {
             if (entity instanceof EntityGhost || entity instanceof EntityGhostBoss) {
                 // These are immune
                 continue;
             }
             if (WorldGenHelper.areWeOutside(evt.world, entity.getPosition())) {
-                entity.addVelocity(Config.Dimensions.windStrength, 0, 0);
                 if (entity instanceof EntityPlayer) {
-                    ((EntityPlayerMP) entity).connection.sendPacket(new SPacketEntityVelocity(entity));
-                    entity.velocityChanged = false;
+                    playersToNotify.add((EntityPlayerMP)entity);
+                } else {
+                    entity.addVelocity(Config.Dimensions.windStrength, 0, 0);
                 }
             }
+        }
+        for (EntityPlayerMP player : playersToNotify) {
+            player.addVelocity(Config.Dimensions.windStrength, 0, 0);
+            player.connection.sendPacket(new SPacketEntityVelocity(player));
+            player.velocityChanged = false;
         }
     }
 
