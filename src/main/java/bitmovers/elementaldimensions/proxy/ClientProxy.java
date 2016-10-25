@@ -4,7 +4,6 @@ import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.mobs.*;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
 import bitmovers.elementaldimensions.sound.MobSounds;
-import bitmovers.elementaldimensions.sound.SoundController;
 import bitmovers.elementaldimensions.sound.SoundHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -12,12 +11,8 @@ import elec332.core.util.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,6 +31,11 @@ public class ClientProxy extends CommonProxy {
         super.preInit(e);
         registerEntityRenderers();
         MobSounds.init();
+        for (Block block : RegistryHelper.getBlockRegistry().getValues()){
+            if (block instanceof GenericBlock){
+                ((GenericBlock) block).initClient();
+            }
+        }
     }
 
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -44,11 +44,6 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent e) {
         super.init(e);
         elec332.core.client.model.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE.setFields());
-        for (Block block : RegistryHelper.getBlockRegistry().getValues()){
-            if (block instanceof GenericBlock){
-                ((GenericBlock) block).initClient();
-            }
-        }
         MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 

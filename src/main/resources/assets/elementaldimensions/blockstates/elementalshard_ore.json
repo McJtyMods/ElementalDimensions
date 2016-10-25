@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "oretype": {
+      "dirt": { "model": "elementaldimensions:elementalshard_ore_dirt" },
+      "stone": { "model": "elementaldimensions:elementalshard_ore_stone" },
+      "glass": { "model": "elementaldimensions:elementalshard_ore_glass" }
+    }
+  }
+}

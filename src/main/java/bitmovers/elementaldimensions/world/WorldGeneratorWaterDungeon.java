@@ -1,9 +1,10 @@
 package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
-import bitmovers.elementaldimensions.dimensions.EarthDungeonLocator;
 import bitmovers.elementaldimensions.dimensions.WaterDungeonLocator;
 import bitmovers.elementaldimensions.dimensions.generators.tools.WaterTerrainGenerator;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalShardBlock;
+import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.worldgen.RegisteredWorldGenerator;
@@ -12,6 +13,8 @@ import elec332.core.api.structure.GenerationType;
 import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
 import elec332.core.world.schematic.Schematic;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,6 +33,9 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && WaterDungeonLocator.isWaterDungeonChunk(world, chunkX, chunkZ)){
+            IBlockState ore = BlockRegister.elementalShardBlock.getDefaultState().withProperty(ElementalShardBlock.ORETYPE, ElementalShardBlock.OreType.ORE_STONE);
+            WorldGenHelper.addOreSpawn(ore, Blocks.STONE.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 50);
+
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
                 GenerationType type = GenerationType.NONE;

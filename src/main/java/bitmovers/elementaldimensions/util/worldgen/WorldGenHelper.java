@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.storage.loot.LootTableList;
 
 import java.util.Random;
@@ -120,4 +121,16 @@ public class WorldGenHelper {
 
         return true;
     }
+
+    public static void addOreSpawn(IBlockState block, IBlockState targetBlock,
+                            World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
+        WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize - random.nextInt(maxVeinSize - minVeinSize)), state -> state.getBlock() == targetBlock.getBlock());
+        for (int i = 0 ; i < chancesToSpawn ; i++) {
+            int posX = blockXPos + random.nextInt(16);
+            int posY = minY + random.nextInt(maxY - minY);
+            int posZ = blockZPos + random.nextInt(16);
+            minable.generate(world, random, new BlockPos(posX, posY, posZ));
+        }
+    }
+
 }

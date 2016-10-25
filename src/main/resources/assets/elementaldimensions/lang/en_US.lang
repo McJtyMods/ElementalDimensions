@@ -30,12 +30,15 @@ item.elementaldimensions.spiritrune_part1.name=Rune of Spirit Part 1
 item.elementaldimensions.spiritrune_part2.name=Rune of Spirit Part 2
 item.elementaldimensions.spiritrune_part3.name=Rune of Spirit Part 3
 
+item.elementaldimensions.elementalshard.name=Elemental Shard
+
 # Blocks
 tile.elementaldimensions.solidwater.name=Solid Water
 tile.elementaldimensions.solidfire.name=Solid Fire
 tile.elementaldimensions.portalbase.name=Elemental Block
 tile.elementaldimensions.portaldialer.name=Portal Dialer
 tile.elementaldimensions.harddirt.name=Hard Dirt
+tile.elementaldimensions.elementalshard_ore.name=Elemental Shard Ore
 
 # Entities
 entity.elementaldimensions.DirtZombie.name=Dirt Zombie

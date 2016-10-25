@@ -2,6 +2,8 @@ package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.EarthDungeonLocator;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalShardBlock;
+import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.worldgen.RegisteredWorldGenerator;
@@ -10,6 +12,7 @@ import elec332.core.api.structure.GenerationType;
 import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
 import elec332.core.world.schematic.Schematic;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -33,6 +36,9 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension)) {
+            IBlockState ore = BlockRegister.elementalShardBlock.getDefaultState().withProperty(ElementalShardBlock.ORETYPE, ElementalShardBlock.OreType.ORE_DIRT);
+            WorldGenHelper.addOreSpawn(ore, Blocks.DIRT.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 50);
+
             if (EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)) {
                 Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
                 if (schematic != null) {
