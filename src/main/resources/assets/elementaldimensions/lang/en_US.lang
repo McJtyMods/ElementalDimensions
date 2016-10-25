@@ -39,6 +39,8 @@ tile.elementaldimensions.portalbase.name=Elemental Block
 tile.elementaldimensions.portaldialer.name=Portal Dialer
 tile.elementaldimensions.harddirt.name=Hard Dirt
 tile.elementaldimensions.elementalshard_ore.name=Elemental Shard Ore
+tile.elementaldimensions.altarcenter.name=Altar Center
+tile.elementaldimensions.altarpedestal.name=Altar Pedestal
 
 # Entities
 entity.elementaldimensions.DirtZombie.name=Dirt Zombie
