@@ -130,7 +130,7 @@ public class ElementalDustBlock extends GenericBlock {
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
         if (state.getValue(ORETYPE) == OreType.ORE_GLASS) {
-            return layer == BlockRenderLayer.CUTOUT;
+            return layer == BlockRenderLayer.TRANSLUCENT;
         } else {
             return layer == BlockRenderLayer.SOLID;
         }
