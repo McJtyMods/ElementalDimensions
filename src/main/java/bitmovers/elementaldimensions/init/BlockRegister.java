@@ -7,7 +7,7 @@ import bitmovers.elementaldimensions.blocks.cosmetic.SolidFireBlock;
 import bitmovers.elementaldimensions.blocks.cosmetic.SolidWaterBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalBaseBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerBlock;
-import bitmovers.elementaldimensions.dimensions.ores.ElementalShardBlock;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.blocks.SilverFishStone;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import net.minecraft.block.Block;
@@ -26,7 +26,7 @@ public class BlockRegister {
     public static SolidWaterBlock solidWaterBlock;
     public static SolidFireBlock solidFireBlock;
     public static HardDirtBlock hardDirtBlock;
-    public static ElementalShardBlock elementalShardBlock;
+    public static ElementalDustBlock elementalDustBlock;
     public static AltarCenterBlock altarCenterBlock;
     public static AltarPedestalBlock altarPedestalBlock;
 
@@ -41,14 +41,14 @@ public class BlockRegister {
         solidFireBlock = new SolidFireBlock();
         hardDirtBlock = new HardDirtBlock();
 
-        elementalShardBlock = new ElementalShardBlock();
+        elementalDustBlock = new ElementalDustBlock();
         altarCenterBlock = new AltarCenterBlock();
         altarPedestalBlock = new AltarPedestalBlock();
     }
 
     public static void initCrafting() {
-        GameRegistry.addRecipe(new ItemStack(altarCenterBlock), " D ", "sSs", "sss", 's', ItemRegister.elementalShardItem, 'S', Blocks.GOLD_BLOCK, 'D', Items.EMERALD);
-        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalShardItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
+        GameRegistry.addRecipe(new ItemStack(altarCenterBlock), " D ", "sSs", "sss", 's', ItemRegister.elementalDustItem, 'S', Blocks.GOLD_BLOCK, 'D', Items.EMERALD);
+        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalDustItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
     }
 
 }

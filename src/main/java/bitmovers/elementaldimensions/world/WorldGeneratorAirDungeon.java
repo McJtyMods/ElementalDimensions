@@ -2,8 +2,7 @@ package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.AirDungeonLocator;
 import bitmovers.elementaldimensions.dimensions.Dimensions;
-import bitmovers.elementaldimensions.dimensions.EarthDungeonLocator;
-import bitmovers.elementaldimensions.dimensions.ores.ElementalShardBlock;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
@@ -33,7 +32,7 @@ public class WorldGeneratorAirDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && AirDungeonLocator.isAirDungeonChunk(world, chunkX, chunkZ)){
-            IBlockState ore = BlockRegister.elementalShardBlock.getDefaultState().withProperty(ElementalShardBlock.ORETYPE, ElementalShardBlock.OreType.ORE_GLASS);
+            IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_GLASS);
             WorldGenHelper.addOreSpawn(ore, Blocks.GLASS.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 90);
 
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);

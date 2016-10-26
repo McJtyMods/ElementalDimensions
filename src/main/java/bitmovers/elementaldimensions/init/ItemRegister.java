@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.init;
 
-import bitmovers.elementaldimensions.dimensions.ores.ElementalShardItem;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalDustItem;
 import bitmovers.elementaldimensions.items.*;
 import bitmovers.elementaldimensions.ncLayer.dev.ItemSchematicCreator;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
@@ -45,7 +45,7 @@ public class ItemRegister {
     public static GenericItem runeOfFirePart2;
     public static GenericItem runeOfFirePart3;
 
-    public static ElementalShardItem elementalShardItem;
+    public static ElementalDustItem elementalDustItem;
 
     public static void init(){
 
@@ -68,7 +68,7 @@ public class ItemRegister {
         runeOfFire = new ItemFireRune();
         runeOfEarth = new ItemEarthRune();
 
-        elementalShardItem = new ElementalShardItem();
+        elementalDustItem = new ElementalDustItem();
 
         runeOfWaterPart1 = new GenericItem("waterrune_part1");
         runeOfWaterPart2 = new GenericItem("waterrune_part2");;

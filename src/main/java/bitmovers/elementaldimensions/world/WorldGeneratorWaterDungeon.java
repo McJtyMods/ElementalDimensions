@@ -3,7 +3,7 @@ package bitmovers.elementaldimensions.world;
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.WaterDungeonLocator;
 import bitmovers.elementaldimensions.dimensions.generators.tools.WaterTerrainGenerator;
-import bitmovers.elementaldimensions.dimensions.ores.ElementalShardBlock;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
@@ -33,7 +33,7 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && WaterDungeonLocator.isWaterDungeonChunk(world, chunkX, chunkZ)){
-            IBlockState ore = BlockRegister.elementalShardBlock.getDefaultState().withProperty(ElementalShardBlock.ORETYPE, ElementalShardBlock.OreType.ORE_STONE);
+            IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_STONE);
             WorldGenHelper.addOreSpawn(ore, Blocks.STONE.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 50);
 
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);

@@ -2,7 +2,7 @@ package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.EarthDungeonLocator;
-import bitmovers.elementaldimensions.dimensions.ores.ElementalShardBlock;
+import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
@@ -36,7 +36,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension)) {
-            IBlockState ore = BlockRegister.elementalShardBlock.getDefaultState().withProperty(ElementalShardBlock.ORETYPE, ElementalShardBlock.OreType.ORE_DIRT);
+            IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_DIRT);
             WorldGenHelper.addOreSpawn(ore, Blocks.DIRT.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 50);
 
             if (EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)) {

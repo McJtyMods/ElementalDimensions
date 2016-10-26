@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class ElementalShardBlock extends GenericBlock {
+public class ElementalDustBlock extends GenericBlock {
 
     public static enum OreType implements IStringSerializable {
         ORE_DIRT("dirt"),
@@ -47,12 +47,11 @@ public class ElementalShardBlock extends GenericBlock {
 
     public static final PropertyEnum<OreType> ORETYPE = PropertyEnum.create("oretype", OreType.class);
 
-    public ElementalShardBlock() {
-        super("elementalshard_ore", Material.ROCK, ElementalShardItemBlock.class);
+    public ElementalDustBlock() {
+        super("elementaldust_ore", Material.ROCK, ElementalDustItemBlock.class);
         setHardness(3.0f);
         setResistance(5.0f);
         setHarvestLevel("pickaxe", 2);
-//        setLightLevel(0.5f);
     }
 
     @SideOnly(Side.CLIENT)
@@ -80,7 +79,7 @@ public class ElementalShardBlock extends GenericBlock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemRegister.elementalShardItem;
+        return ItemRegister.elementalDustItem;
     }
 
     @Override

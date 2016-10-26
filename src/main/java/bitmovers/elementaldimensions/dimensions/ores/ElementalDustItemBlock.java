@@ -3,8 +3,8 @@ package bitmovers.elementaldimensions.dimensions.ores;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
-public class ElementalShardItemBlock extends ItemBlock {
-    public ElementalShardItemBlock(Block block) {
+public class ElementalDustItemBlock extends ItemBlock {
+    public ElementalDustItemBlock(Block block) {
         super(block);
     }
 

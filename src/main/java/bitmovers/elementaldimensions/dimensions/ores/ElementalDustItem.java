@@ -2,10 +2,10 @@ package bitmovers.elementaldimensions.dimensions.ores;
 
 import bitmovers.elementaldimensions.items.GenericItem;
 
-public class ElementalShardItem extends GenericItem {
+public class ElementalDustItem extends GenericItem {
 
-    public ElementalShardItem() {
-        super("elementalshard");
+    public ElementalDustItem() {
+        super("elementaldust");
         setMaxStackSize(64);
     }
 }
