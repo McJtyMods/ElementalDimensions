@@ -1,13 +1,25 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "cube_all",
+    "custom": { "flip-v": true },
+    "model": "elementaldimensions:altarcenter.obj",
     "textures": {
-      "all": "elementaldimensions:blocks/altarCenter"
-    }
+      "particle": "elementaldimensions:blocks/altartop",
+      "#elementaldimensions:blocks/altarside": "elementaldimensions:blocks/altarside_disabled"
+    },
+    "transform": "forge:default-block"
   },
   "variants": {
     "normal": [{}],
-    "inventory": [{}]
+    "inventory": [{}],
+    "working": {
+      "false": {},
+      "true": {
+        "textures": {
+          "particle": "elementaldimensions:blocks/altartop",
+          "#elementaldimensions:blocks/altarside": "elementaldimensions:blocks/altarside"
+        }
+      }
+    }
   }
 }

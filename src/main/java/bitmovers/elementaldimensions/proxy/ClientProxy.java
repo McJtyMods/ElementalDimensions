@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.proxy;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.mobs.*;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
@@ -15,6 +16,7 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,6 +31,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
+
+        OBJLoader.INSTANCE.addDomain(ElementalDimensions.MODID);
+
         registerEntityRenderers();
         MobSounds.init();
         for (Block block : RegistryHelper.getBlockRegistry().getValues()){
