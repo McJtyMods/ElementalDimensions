@@ -1,10 +1,7 @@
 package bitmovers.elementaldimensions.ncLayer.overworldTweaks.client;
 
-import elec332.core.client.IIconRegistrar;
-import elec332.core.client.model.ElecModelBakery;
-import elec332.core.client.model.ElecQuadBakery;
-import elec332.core.client.model.INoJsonBlock;
-import elec332.core.client.model.template.ElecTemplateBakery;
+import elec332.core.api.client.IIconRegistrar;
+import elec332.core.client.model.loading.INoJsonBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public interface IOWTBlock extends INoJsonBlock{
+public interface IOWTBlock extends INoJsonBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -33,11 +30,6 @@ public interface IOWTBlock extends INoJsonBlock{
     @Override
     @SideOnly(Side.CLIENT)
     default public void registerTextures(IIconRegistrar iIconRegistrar) {
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    default public void registerModels(ElecQuadBakery elecQuadBakery, ElecModelBakery elecModelBakery, ElecTemplateBakery elecTemplateBakery) {
     }
 
 }

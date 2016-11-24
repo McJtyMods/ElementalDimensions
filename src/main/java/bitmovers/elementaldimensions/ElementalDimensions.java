@@ -14,7 +14,6 @@ import bitmovers.elementaldimensions.util.ElementalDimensionsCreativeTab;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.config.ConfigWrapper;
-import elec332.core.network.NetworkHandler;
 import elec332.core.util.LoadTimer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.config.Configuration;
