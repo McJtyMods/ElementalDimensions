@@ -1,9 +1,9 @@
 package bitmovers.elementaldimensions.util.worldgen;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import elec332.core.api.annotations.ASMDataProcessor;
-import elec332.core.api.util.IASMDataHelper;
-import elec332.core.api.util.IASMDataProcessor;
+import elec332.core.api.discovery.ASMDataProcessor;
+import elec332.core.api.discovery.IASMDataHelper;
+import elec332.core.api.discovery.IASMDataProcessor;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;

@@ -1,7 +1,6 @@
 package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
-import bitmovers.elementaldimensions.mobs.EntityDirtZombieBoss;
 import bitmovers.elementaldimensions.mobs.EntityWaterCreepBoss;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;

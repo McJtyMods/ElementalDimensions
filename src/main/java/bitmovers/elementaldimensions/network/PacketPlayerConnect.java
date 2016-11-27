@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.network;
 
 import com.google.common.collect.Maps;
-import elec332.core.network.AbstractPacket;
+import elec332.core.network.packets.AbstractPacket;
 import joptsimple.internal.Strings;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;

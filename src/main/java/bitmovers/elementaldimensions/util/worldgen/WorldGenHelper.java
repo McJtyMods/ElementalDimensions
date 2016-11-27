@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.util.worldgen;
 
+import elec332.core.api.structure.ISchematic;
 import elec332.core.world.schematic.Schematic;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +26,7 @@ public class WorldGenHelper {
         return chunkPos * 16 + random.nextInt(16);
     }
 
-    public static int findBestStructureY(World world, Schematic schematic, BlockPos pos, Block matching) {
+    public static int findBestStructureY(World world, ISchematic schematic, BlockPos pos, Block matching) {
         int toty = 0;
         int cnt = 0;
         int y = findBestY(world, pos, matching);
@@ -33,22 +34,22 @@ public class WorldGenHelper {
             toty += y;
             cnt++;
         }
-        y = findBestY(world, pos.add(schematic.width, 0, 0), matching);
+        y = findBestY(world, pos.add(schematic.getBlockWidth(), 0, 0), matching);
         if (y != -1) {
             toty += y;
             cnt++;
         }
-        y = findBestY(world, pos.add(schematic.width, 0, schematic.length), matching);
+        y = findBestY(world, pos.add(schematic.getBlockWidth(), 0, schematic.getBlockLength()), matching);
         if (y != -1) {
             toty += y;
             cnt++;
         }
-        y = findBestY(world, pos.add(0, 0, schematic.length), matching);
+        y = findBestY(world, pos.add(0, 0, schematic.getBlockLength()), matching);
         if (y != -1) {
             toty += y;
             cnt++;
         }
-        y = findBestY(world, pos.add(schematic.width/2, 0, schematic.length/2), matching);
+        y = findBestY(world, pos.add(schematic.getBlockWidth()/2, 0, schematic.getBlockLength()/2), matching);
         if (y != -1) {
             toty += y;
             cnt++;
@@ -71,8 +72,8 @@ public class WorldGenHelper {
     // Fill the area below a structure with some blocks
     public static void fillWithBlock(World world, Schematic schematic, BlockPos pos, int averagey, IBlockState state) {
         BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
-        for (int x = pos.getX() ; x <= pos.getX() + schematic.width ; x++) {
-            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.length ; z++) {
+        for (int x = pos.getX() ; x <= pos.getX() + schematic.getBlockWidth() ; x++) {
+            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.getBlockLength() ; z++) {
                 for (int y = averagey-1 ; y > 0 ; y--) {
                     mpos.setPos(x, y, z);
                     if (world.isAirBlock(mpos)) {
@@ -88,9 +89,9 @@ public class WorldGenHelper {
         Random random = new Random(world.getSeed());
         random.nextLong();
         BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
-        for (int x = pos.getX() ; x <= pos.getX() + schematic.width ; x++) {
-            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.length ; z++) {
-                for (int y = pos.getY() ; y <= pos.getY() + schematic.height ; y++) {
+        for (int x = pos.getX() ; x <= pos.getX() + schematic.getBlockWidth() ; x++) {
+            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.getBlockLength() ; z++) {
+                for (int y = pos.getY() ; y <= pos.getY() + schematic.getBlockHeight() ; y++) {
                     mpos.setPos(x, y, z);
                     TileEntity tileentity = world.getTileEntity(mpos);
                     if (tileentity instanceof TileEntityChest) {

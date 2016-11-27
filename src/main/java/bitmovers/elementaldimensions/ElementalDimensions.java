@@ -1,10 +1,6 @@
 package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.commands.CommandTeleport;
-import bitmovers.elementaldimensions.init.BlockRegister;
-import bitmovers.elementaldimensions.init.DimensionRegister;
-import bitmovers.elementaldimensions.init.EntityRegister;
-import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.network.PacketPlayerConnect;
 import bitmovers.elementaldimensions.network.PacketPointedEntity;
@@ -13,7 +9,9 @@ import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.ElementalDimensionsCreativeTab;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
+import elec332.core.api.network.ModNetworkHandler;
 import elec332.core.config.ConfigWrapper;
+import elec332.core.network.IElecNetworkHandler;
 import elec332.core.util.LoadTimer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.config.Configuration;
@@ -31,7 +29,7 @@ import java.util.Random;
 
 import static bitmovers.elementaldimensions.ElementalDimensions.*;
 
-@Mod(modid = MODID, name = MODNAME, version = VERSION)
+@Mod(modid = MODID, name = MODNAME, version = VERSION, dependencies = "required-after:eleccore@[1.6.345,);")
 public class ElementalDimensions {
 
     public static final String MODID = "elementaldimensions";
@@ -43,9 +41,10 @@ public class ElementalDimensions {
 
     @Mod.Instance(MODID)
     public static ElementalDimensions instance;
+    @ModNetworkHandler
+    public static IElecNetworkHandler networkHandler;
     public static Logger logger;
     private static LoadTimer loadTimer;
-    public static NetworkHandler networkHandler;
     public static ConfigWrapper config;
     public static CreativeTabs creativeTab;
     public static Random random;
@@ -55,7 +54,6 @@ public class ElementalDimensions {
         logger = LogManager.getLogger(MODNAME.replace(" ", ""));
         loadTimer = new LoadTimer(logger, MODNAME);
         loadTimer.startPhase(event);
-        networkHandler = new NetworkHandler(MODID);
         networkHandler.registerClientPacket(PacketPlayerConnect.class);
         networkHandler.registerServerPacket(PacketPointedEntity.class);
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later

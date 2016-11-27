@@ -3,7 +3,7 @@ package bitmovers.elementaldimensions.network;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import elec332.core.main.ElecCore;
-import elec332.core.network.AbstractPacket;
+import elec332.core.network.packets.AbstractPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;

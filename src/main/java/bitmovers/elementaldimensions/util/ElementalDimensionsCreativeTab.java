@@ -3,7 +3,6 @@ package bitmovers.elementaldimensions.util;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;

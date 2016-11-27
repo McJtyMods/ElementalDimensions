@@ -17,7 +17,7 @@ public class PlayerEventHandler {
     public void onPlayerConnected(PlayerEvent.PlayerLoggedInEvent event){
         if (event.player instanceof EntityPlayerMP){
             ElementalDimensions.logger.info("Player "+event.player.getDisplayNameString()+" connected, sending connection packet.");
-            ElementalDimensions.networkHandler.getNetworkWrapper().sendTo(new PacketPlayerConnect(), (EntityPlayerMP) event.player);
+            ElementalDimensions.networkHandler.sendTo(new PacketPlayerConnect(), (EntityPlayerMP) event.player);
         }
     }
 

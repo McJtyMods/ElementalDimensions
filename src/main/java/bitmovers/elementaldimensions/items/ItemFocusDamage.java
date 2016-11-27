@@ -2,24 +2,9 @@ package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.network.PacketPointedEntity;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import elec332.core.util.RayTraceHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.*;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class ItemFocusDamage extends ItemFocus {
 
@@ -30,7 +15,7 @@ public class ItemFocusDamage extends ItemFocus {
     @Override
     public void execute(ItemStack stack, World world, EntityPlayer player) {
         if (world.isRemote){
-            ElementalDimensions.networkHandler.getNetworkWrapper().sendToServer(new PacketPointedEntity());
+            ElementalDimensions.networkHandler.sendToServer(new PacketPointedEntity());
         }
         /*
         RayTraceResult rtr = RayTraceHelper.rayTrace(player, 20);

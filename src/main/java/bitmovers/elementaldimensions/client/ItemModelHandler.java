@@ -1,12 +1,11 @@
 package bitmovers.elementaldimensions.client;
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
-import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.items.GenericItem;
 import com.google.common.collect.ImmutableList;
+import elec332.core.api.client.model.loading.IItemModelHandler;
+import elec332.core.api.client.model.loading.ModelHandler;
 import elec332.core.client.RenderHelper;
-import elec332.core.client.newstuff.IItemModelHandler;
-import elec332.core.client.newstuff.ModelHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.*;

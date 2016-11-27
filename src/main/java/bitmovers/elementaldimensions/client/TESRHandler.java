@@ -1,13 +1,12 @@
 package bitmovers.elementaldimensions.client;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import elec332.core.api.annotations.ASMDataProcessor;
-import elec332.core.api.util.IASMDataHelper;
-import elec332.core.api.util.IASMDataProcessor;
+import elec332.core.api.discovery.ASMDataProcessor;
+import elec332.core.api.discovery.IASMDataHelper;
+import elec332.core.api.discovery.IASMDataProcessor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import org.objectweb.asm.Type;

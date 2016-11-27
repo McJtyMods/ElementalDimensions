@@ -2,7 +2,6 @@ package bitmovers.elementaldimensions.blocks.portal;
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.dimensions.Dimensions;
-import com.google.common.collect.Sets;
 import elec332.core.world.WorldHelper;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -24,9 +23,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class PortalDialerBlock extends GenericBlock implements ITileEntityProvider {
 

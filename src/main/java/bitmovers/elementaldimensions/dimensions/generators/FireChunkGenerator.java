@@ -2,7 +2,6 @@ package bitmovers.elementaldimensions.dimensions.generators;
 
 import bitmovers.elementaldimensions.dimensions.generators.tools.FireTerrainGenerator;
 import bitmovers.elementaldimensions.mobs.EntityBlaster;
-import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
@@ -16,7 +15,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 

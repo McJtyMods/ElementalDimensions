@@ -1,8 +1,6 @@
 package bitmovers.elementaldimensions.blocks.portal;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import bitmovers.elementaldimensions.blocks.portal.PortalDialerBlock;
-import bitmovers.elementaldimensions.blocks.portal.PortalDialerTileEntity;
 import bitmovers.elementaldimensions.client.RegisteredTESR;
 import bitmovers.elementaldimensions.client.RenderTools;
 import bitmovers.elementaldimensions.init.BlockRegister;

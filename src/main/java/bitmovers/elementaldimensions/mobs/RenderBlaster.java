@@ -1,7 +1,6 @@
 package bitmovers.elementaldimensions.mobs;
 
 import net.minecraft.client.model.ModelBlaze;
-import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

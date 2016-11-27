@@ -7,7 +7,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opencl.CL;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

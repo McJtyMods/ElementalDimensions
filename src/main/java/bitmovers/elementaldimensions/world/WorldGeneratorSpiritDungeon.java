@@ -2,8 +2,6 @@ package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.SpiritDungeonLocator;
-import bitmovers.elementaldimensions.dimensions.WaterDungeonLocator;
-import bitmovers.elementaldimensions.dimensions.generators.tools.WaterTerrainGenerator;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.worldgen.RegisteredWorldGenerator;
