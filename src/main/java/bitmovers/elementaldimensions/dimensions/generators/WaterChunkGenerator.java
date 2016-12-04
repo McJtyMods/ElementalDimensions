@@ -72,8 +72,8 @@ public class WaterChunkGenerator implements IChunkGenerator {
     }
 
     @Nullable
-    @Override
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
+    @Override //TODO: compat 1.11 -> 1.10
+    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
         return null;
     }
 

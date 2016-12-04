@@ -29,7 +29,7 @@ import java.util.Random;
 
 import static bitmovers.elementaldimensions.ElementalDimensions.*;
 
-@Mod(modid = MODID, name = MODNAME, version = VERSION, dependencies = "required-after:eleccore@[1.6.345,);")
+@Mod(modid = MODID, name = MODNAME, version = VERSION, dependencies = "required-after:eleccore@[1.6.358,);")
 public class ElementalDimensions {
 
     public static final String MODID = "elementaldimensions";

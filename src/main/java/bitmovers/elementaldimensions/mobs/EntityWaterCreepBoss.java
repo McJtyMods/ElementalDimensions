@@ -3,10 +3,7 @@ package bitmovers.elementaldimensions.mobs;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import com.google.common.base.Predicate;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -372,7 +369,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         if (this.isServerWorld()) {
             if (this.isInWater()) {
                 this.moveRelative(strafe, forward, 0.1F);
-                this.moveEntity(this.motionX, this.motionY, this.motionZ);
+                this.moveEntity(MoverType.SELF, this.motionX, this.motionY, this.motionZ); //TODO: COmpat 1.11 -> 1.10
                 this.motionX *= 0.8999999761581421D;
                 this.motionY *= 0.8999999761581421D;
                 this.motionZ *= 0.8999999761581421D;

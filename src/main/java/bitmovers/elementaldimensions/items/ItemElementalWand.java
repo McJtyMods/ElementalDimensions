@@ -1,5 +1,7 @@
 package bitmovers.elementaldimensions.items;
 
+import elec332.core.util.ItemStackHelper;
+import elec332.core.util.PlayerHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,23 +13,24 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemElementalWand extends GenericItem {
 
     public ItemElementalWand() {
         super("elementalwand");
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-        //if (!worldIn.isRemote) {
-            ItemStack offhand = playerIn.getHeldItemOffhand();
-            if (offhand == null || !(offhand.getItem() instanceof ItemFocus)) {
-                playerIn.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "You need to have a focus item in your off-hand"));
-                return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-            }
-            ((ItemFocus) offhand.getItem()).execute(offhand, worldIn, playerIn);
-        //}
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+    protected ActionResult<ItemStack> onItemRightClick(EntityPlayer player, @Nonnull EnumHand hand, World world) {
+        ItemStack offhand = player.getHeldItemOffhand(), itemStack = player.getHeldItemMainhand();
+        if (!ItemStackHelper.isStackValid(offhand) || !(offhand.getItem() instanceof ItemFocus)) {
+            PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "You need to have a focus item in your off-hand");
+            return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
+        }
+        ((ItemFocus) offhand.getItem()).execute(offhand, world, player);
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
     }
 
     @Override
@@ -35,12 +38,5 @@ public class ItemElementalWand extends GenericItem {
         return true;
     }
 
-    private static void doDamage(World world, EntityPlayer player) {
-        Vec3d lookVec = player.getLookVec();
-        Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
-        int distance = 20;  // @todo make configurable
-        Vec3d end = start.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
-        // @todo
-    }
 
 }

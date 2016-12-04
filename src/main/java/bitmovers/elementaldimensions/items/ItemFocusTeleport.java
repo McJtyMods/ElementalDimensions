@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.items;
 
+import elec332.core.util.PlayerHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -36,7 +37,7 @@ public class ItemFocusTeleport extends ItemFocus {
                 } else {
                     EnumFacing hit = position.sideHit;
                     if (hit == EnumFacing.UP) {
-                        player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "You cannot teleport there!"));
+                        PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "You cannot teleport there!");
                         return;
                     }
                     if (hit == EnumFacing.DOWN) {

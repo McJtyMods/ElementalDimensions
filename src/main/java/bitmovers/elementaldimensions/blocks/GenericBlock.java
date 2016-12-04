@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.blocks;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import elec332.core.tile.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
@@ -11,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class GenericBlock extends Block {
+public class GenericBlock extends AbstractBlock {
 
     public GenericBlock(String name, Material materialIn) {
         this(name, materialIn, ItemBlock.class);

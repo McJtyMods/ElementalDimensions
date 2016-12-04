@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+		mavenCentral()
         jcenter()
         maven {
             name = "forge"
@@ -44,9 +45,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 minecraft {
-    version = "1.10.2-12.18.1.2088"
+    version = "1.11-13.19.0.2160"
     runDir = "run"
-    mappings = "snapshot_20160801"
+    mappings = "snapshot_20161111"
     useDepAts = true
 }
 

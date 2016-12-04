@@ -10,6 +10,7 @@ import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.CustomTeleporter;
 import elec332.core.api.annotations.RegisterTile;
 import elec332.core.util.DirectionHelper;
+import elec332.core.util.PlayerHelper;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -94,9 +95,9 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                                 if (destination != null) {
                                     String[] tasks = destination.getTaskDescriptions();
                                     if (tasks != null) {
-                                        player.addChatComponentMessage(new TextComponentString(TextFormatting.GREEN + "Mortal, here are your tasks:"));
+                                        PlayerHelper.sendMessageToPlayer(player, TextFormatting.GREEN + "Mortal, here are your tasks:");
                                         for (String task : tasks) {
-                                            player.addChatComponentMessage(new TextComponentString(task));
+                                            PlayerHelper.sendMessageToPlayer(player, task);
                                         }
                                     }
                                 }
@@ -159,7 +160,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             Item item = stack.getItem();
             if (item instanceof ItemRune){
                 if (worldObj.provider.getDimension() != 0) {
-                    player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "This portal can only go to the overworld!"));
+                    PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "This portal can only go to the overworld!");
                     return;
                 }
                 Dimensions dim = ((ItemRune) item).getDimension(stack);

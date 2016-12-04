@@ -8,6 +8,7 @@ import bitmovers.elementaldimensions.util.EDResourceLocation;
 import elec332.core.api.util.Area;
 import elec332.core.util.IOUtil;
 import elec332.core.util.NBTHelper;
+import elec332.core.util.PlayerHelper;
 import elec332.core.world.schematic.SchematicHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,6 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -42,9 +42,10 @@ public class ItemSchematicCreator extends AbstractItem {
         };
     }
 
-    @Override
     @Nonnull
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    @Override
+    protected EnumActionResult onItemUse(EntityPlayer player, EnumHand hand, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
             if (!stack.hasTagCompound()) {
                 stack.setTagCompound(new NBTTagCompound());
@@ -53,21 +54,22 @@ public class ItemSchematicCreator extends AbstractItem {
             if (player.isSneaking()) {
                 nbt.addToTag(pos, "pos1");
 
-                player.addChatComponentMessage(new TextComponentString("Position 1: "+pos));
-                player.addChatComponentMessage(new TextComponentString("Position 2: "+nbt.getPos("pos2")));
+                PlayerHelper.sendMessageToPlayer(player, "Position 1: "+pos);
+                PlayerHelper.sendMessageToPlayer(player, "Position 2: "+nbt.getPos("pos2"));
             } else {
                 nbt.addToTag(pos, "pos2");
 
-                player.addChatComponentMessage(new TextComponentString("Position 1: "+nbt.getPos("pos1")));
-                player.addChatComponentMessage(new TextComponentString("Position 2: "+pos));
+                PlayerHelper.sendMessageToPlayer(player, "Position 1: "+nbt.getPos("pos1"));
+                PlayerHelper.sendMessageToPlayer(player, "Position 2: "+pos);
             }
         }
         return EnumActionResult.SUCCESS;
     }
 
-    @Override
     @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+    @Override
+    protected ActionResult<ItemStack> onItemRightClick(EntityPlayer player, @Nonnull EnumHand hand, World world) {
+        ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && stack.hasTagCompound()) {
             String msg = "Created new schematic";
             NBTHelper nbt = new NBTHelper(stack.getTagCompound());
@@ -86,7 +88,7 @@ public class ItemSchematicCreator extends AbstractItem {
             } catch (Exception e){
                 msg = "Failed to write schematic";
             }
-            player.addChatComponentMessage(new TextComponentString(msg));
+            PlayerHelper.sendMessageToPlayer(player, msg);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }

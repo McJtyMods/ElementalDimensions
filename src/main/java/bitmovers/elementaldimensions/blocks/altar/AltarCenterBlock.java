@@ -41,7 +41,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
      * block, etc.
      */
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn) {
+    protected void neighborChanged(World world, BlockPos pos, IBlockState state, Block neighbor, BlockPos p_189540_5_) {
         checkRedstone(world, pos);
     }
 

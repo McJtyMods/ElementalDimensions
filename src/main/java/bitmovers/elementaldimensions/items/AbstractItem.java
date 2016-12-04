@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public abstract class AbstractItem extends Item implements INoJsonItem {
+public abstract class AbstractItem extends elec332.core.item.AbstractItem implements INoJsonItem {
 
     private TextureAtlasSprite[] textures;
     private IBakedModel model;
