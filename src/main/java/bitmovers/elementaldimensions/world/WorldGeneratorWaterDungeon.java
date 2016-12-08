@@ -57,7 +57,7 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
     }
 
     static {
-        dungeonResource = new EDResourceLocation("schematics/waterDungeon.schematic");
+        dungeonResource = new EDResourceLocation("schematics/dungeon_water.schematic");
     }
 
 }

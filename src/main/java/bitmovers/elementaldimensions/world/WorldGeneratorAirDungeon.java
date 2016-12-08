@@ -52,7 +52,7 @@ public class WorldGeneratorAirDungeon implements IWorldGenerator {
     }
 
     static {
-        dungeonResource = new EDResourceLocation("schematics/airDungeon.schematic");
+        dungeonResource = new EDResourceLocation("schematics/dungeon_air.schematic");
     }
 
 }

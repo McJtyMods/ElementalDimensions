@@ -56,7 +56,7 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
     }
 
     static {
-        dungeonResource = new EDResourceLocation("schematics/portalDungeon.schematic");
+        dungeonResource = new EDResourceLocation("schematics/dungeon_portal.schematic");
     }
 
 }

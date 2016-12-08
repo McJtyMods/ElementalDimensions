@@ -45,7 +45,7 @@ public class WorldGeneratorSpiritDungeon implements IWorldGenerator {
     }
 
     static {
-        dungeonResource = new EDResourceLocation("schematics/spiritDungeon.schematic");
+        dungeonResource = new EDResourceLocation("schematics/dungeon_spirit.schematic");
     }
 
 }

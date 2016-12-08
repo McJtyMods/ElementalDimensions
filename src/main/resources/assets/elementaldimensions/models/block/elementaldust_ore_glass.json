@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "elementaldimensions:blocks/elementaldustOreGlass"
+    "all": "elementaldimensions:blocks/elementaldustoreglass"
   }
 }

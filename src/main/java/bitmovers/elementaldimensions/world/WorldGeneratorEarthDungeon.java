@@ -79,8 +79,8 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
     }
 
     static {
-        dungeonResource = new EDResourceLocation("schematics/earthDungeon.schematic");
-        towerResource = new EDResourceLocation("schematics/earthTower.schematic");
+        dungeonResource = new EDResourceLocation("schematics/dungeon_earth.schematic");
+        towerResource = new EDResourceLocation("schematics/earth_tower.schematic");
     }
 
 }
