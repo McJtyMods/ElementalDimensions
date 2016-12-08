@@ -6,12 +6,11 @@ import bitmovers.elementaldimensions.items.EntityFireBossSeed;
 import bitmovers.elementaldimensions.items.EntityWaterBossSeed;
 import bitmovers.elementaldimensions.mobs.*;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
+import mcjty.lib.tools.EntityTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntityRegister {
 
@@ -48,11 +47,11 @@ public class EntityRegister {
     }
 
     private static void registerModEntity(Class<? extends Entity> entityClass, String entityName, int id, Object mod, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int eggPrimary, int eggSecondary){
-        EntityRegistry.registerModEntity(new EDResourceLocation(entityName), entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates, eggPrimary, eggSecondary);
+        EntityTools.registerModEntity(new EDResourceLocation(entityName), entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates, eggPrimary, eggSecondary);
     }
 
     private static void registerModEntity(Class<? extends Entity> entityClass, String entityName, int id, Object mod, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates){
-        EntityRegistry.registerModEntity(new EDResourceLocation(entityName), entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates);
+        EntityTools.registerModEntity(new EDResourceLocation(entityName), entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates);
     }
 
 

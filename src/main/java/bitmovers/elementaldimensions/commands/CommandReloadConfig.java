@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.commands;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.util.command.AbstractSubCommand;
+import mcjty.lib.tools.ChatTools;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
@@ -22,7 +23,7 @@ public class CommandReloadConfig extends AbstractSubCommand {
     @Override
     public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
         ElementalDimensions.config.refresh();
-        sender.addChatMessage(new TextComponentString("Configs reloaded"));
+        ChatTools.addChatMessage(sender, new TextComponentString("Configs reloaded"));
     }
 
 }

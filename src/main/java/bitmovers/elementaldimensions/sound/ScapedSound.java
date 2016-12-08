@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.sound;
 
 import bitmovers.elementaldimensions.sound.scapes.SoundScape;
+import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -27,8 +28,8 @@ public class ScapedSound extends PositionedSoundRecord implements ITickableSound
     @Override
     public void update() {
         if (scape.needsUpdate()) {
-            EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-            WorldClient world = Minecraft.getMinecraft().theWorld;
+            EntityPlayerSP player = MinecraftTools.getPlayer(Minecraft.getMinecraft());
+            WorldClient world = MinecraftTools.getWorld(Minecraft.getMinecraft());
             desiredVolume = scape.calculateVolume(world, player.getPosition(), player);
         }
 

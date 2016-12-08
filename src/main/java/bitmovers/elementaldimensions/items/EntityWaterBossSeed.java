@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.mobs.EntityWaterCreepBoss;
+import mcjty.lib.tools.WorldTools;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -25,15 +26,15 @@ public class EntityWaterBossSeed extends EntityItem {
     public void onUpdate() {
         super.onUpdate();
 
-        if (!worldObj.isRemote && worldObj.provider.getDimension() == Dimensions.WATER.getDimensionID()) {
-            Block block = worldObj.getBlockState(getPosition()).getBlock();
+        if (!getEntityWorld().isRemote && getEntityWorld().provider.getDimension() == Dimensions.WATER.getDimensionID()) {
+            Block block = getEntityWorld().getBlockState(getPosition()).getBlock();
             if (block == Blocks.WATER) {
                 countdown--;
                 if (countdown <= 0) {
                     setDead();
-                    EntityWaterCreepBoss boss = new EntityWaterCreepBoss(worldObj);
+                    EntityWaterCreepBoss boss = new EntityWaterCreepBoss(getEntityWorld());
                     boss.setPosition(posX, posY, posZ);
-                    worldObj.spawnEntityInWorld(boss);
+                    WorldTools.spawnEntity(getEntityWorld(), boss);
                 }
             }
         }

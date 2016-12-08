@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.sound;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
+import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -13,7 +14,7 @@ public class SoundHandler {
 
     @SubscribeEvent
     public void onWorldTick(TickEvent.ClientTickEvent event) {
-        WorldClient world = Minecraft.getMinecraft().theWorld;
+        WorldClient world = MinecraftTools.getWorld(Minecraft.getMinecraft());
         if (world == null) {
             return;
         }
@@ -31,7 +32,7 @@ public class SoundHandler {
             }
             if (!SoundController.isPlaying(SoundController.HOWLINGWIND)) {
                 System.out.println("Start playing HOWLINGWIND");
-                EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+                EntityPlayerSP player = MinecraftTools.getPlayer(Minecraft.getMinecraft());
                 SoundController.playSoundScape(world, player, SoundController.HOWLINGWIND);
             }
         } else if (world.provider.getDimension() == Dimensions.SPIRIT.getDimensionID()) {
@@ -41,7 +42,7 @@ public class SoundHandler {
             }
             if (!SoundController.isPlaying(SoundController.SPIRITS)) {
                 System.out.println("Start playing SPIRITS");
-                EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+                EntityPlayerSP player = MinecraftTools.getPlayer(Minecraft.getMinecraft());
                 SoundController.playSoundScape(world, player, SoundController.SPIRITS);
             }
         } else {

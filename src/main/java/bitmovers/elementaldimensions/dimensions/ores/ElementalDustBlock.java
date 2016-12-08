@@ -102,7 +102,7 @@ public class ElementalDustBlock extends GenericBlock {
 
     @Override
     public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
-        return MathHelper.getRandomIntegerInRange(rand, 3, 7);
+        return rand.nextInt(7-3 + 1) + 3;
     }
 
 //    @Override

@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.dimensions.generators.tools;
 
+import mcjty.lib.tools.MathTools;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
@@ -43,7 +44,7 @@ public class EarthTerrainGenerator implements ITerrainGenerator {
         this.parabolicField = new float[25];
         for (int j = -2; j <= 2; ++j) {
             for (int k = -2; k <= 2; ++k) {
-                float f = 10.0F / MathHelper.sqrt_float((j * j + k * k) + 0.2F);
+                float f = (float) (10.0F / Math.sqrt((j * j + k * k) + 0.2F));
                 this.parabolicField[j + 2 + (k + 2) * 5] = f;
             }
         }
@@ -158,7 +159,7 @@ public class EarthTerrainGenerator implements ITerrainGenerator {
                     double d7 = this.noiseData2[l] / 512.0D;
                     double d8 = this.noiseData3[l] / 512.0D;
                     double d9 = (this.noiseData1[l] / 10.0D + 1.0D) / 2.0D;
-                    double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
+                    double d10 = MathTools.clamp(d7, d8, d9) - d6;
 
                     if (j2 > 29) {
                         double d11 = ((j2 - 29) / 3.0F);

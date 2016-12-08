@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.util;
 
 import elec332.core.world.WorldHelper;
+import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -41,9 +42,9 @@ public class CustomTeleporter extends Teleporter {
 
     @SuppressWarnings("all")
     public static void teleportToDimension(EntityPlayer player, int dimension, double x, double y, double z) {
-        int oldDimension = WorldHelper.getDimID(player.worldObj);
+        int oldDimension = WorldHelper.getDimID(player.getEntityWorld());
         EntityPlayerMP entityPlayerMP = (EntityPlayerMP) player;
-        MinecraftServer server = ((EntityPlayerMP) player).worldObj.getMinecraftServer();
+        MinecraftServer server = ((EntityPlayerMP) player).getEntityWorld().getMinecraftServer();
         WorldServer worldServer = server.worldServerForDimension(dimension);
         player.addExperienceLevel(0);
 
@@ -56,7 +57,7 @@ public class CustomTeleporter extends Teleporter {
         if (oldDimension == 1) {
             // For some reason teleporting out of the end does weird things.
             player.setPositionAndUpdate(x, y, z);
-            worldServer.spawnEntityInWorld(player);
+            WorldTools.spawnEntity(worldServer, player);
             worldServer.updateEntityWithOptionalForce(player, false);
         }
     }

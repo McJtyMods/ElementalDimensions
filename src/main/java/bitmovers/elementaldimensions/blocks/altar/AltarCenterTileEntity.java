@@ -20,11 +20,11 @@ public class AltarCenterTileEntity extends GenericTileEntity {
 
         super.onDataPacket(net, packet);
 
-        if (worldObj.isRemote) {
+        if (getWorld().isRemote) {
             // If needed send a render update.
             boolean newWorking = isWorking();
             if (newWorking != working) {
-                worldObj.markBlockRangeForRenderUpdate(getPos(), getPos());
+                getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
             }
         }
     }

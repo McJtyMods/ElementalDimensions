@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.WaterChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
+import mcjty.lib.compat.CompatWorldProvider;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
@@ -13,7 +14,7 @@ import net.minecraft.world.storage.WorldInfo;
 
 import javax.annotation.Nonnull;
 
-public class WaterWorldProvider extends WorldProvider {
+public class WaterWorldProvider extends CompatWorldProvider {
 
     @Override
     @Nonnull
@@ -30,34 +31,34 @@ public class WaterWorldProvider extends WorldProvider {
     @Override
     @Nonnull
     public IChunkGenerator createChunkGenerator() {
-        return new WaterChunkGenerator(worldObj);
+        return new WaterChunkGenerator(getWorld());
     }
 
     @Override
     public void calculateInitialWeather() {
-        worldObj.thunderingStrength = 1.0F;
-        worldObj.rainingStrength = 1.0F;
-        worldObj.getWorldInfo().setThundering(true);
-        worldObj.getWorldInfo().setRaining(true);
+        getWorld().thunderingStrength = 1.0F;
+        getWorld().rainingStrength = 1.0F;
+        getWorld().getWorldInfo().setThundering(true);
+        getWorld().getWorldInfo().setRaining(true);
     }
 
     @Override
     public void updateWeather() {
-        WorldInfo worldInfo = worldObj.getWorldInfo();
-        if (!worldObj.isRemote) {
-            worldObj.thunderingStrength = 1.0f;
-            worldObj.rainingStrength = 1.0F;
+        WorldInfo worldInfo = getWorld().getWorldInfo();
+        if (!getWorld().isRemote) {
+            getWorld().thunderingStrength = 1.0f;
+            getWorld().rainingStrength = 1.0F;
             worldInfo.setThundering(true);
             worldInfo.setRaining(true);
         }
         worldInfo.setCleanWeatherTime(0);
         worldInfo.setThunderTime(worldInfo.getThunderTime() - 100);
-        worldObj.updateWeatherBody();
+        getWorld().updateWeatherBody();
     }
 
     @Override
-    protected void createBiomeProvider() {
-        this.biomeProvider = new BiomeProvider(worldObj.getWorldInfo()) {
+    protected void initialize() {
+        this.biomeProvider = new BiomeProvider(getWorld().getWorldInfo()) {
 
             @Override
             @Nonnull

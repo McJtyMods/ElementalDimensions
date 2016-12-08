@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.mobs;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import com.google.common.base.Predicate;
+import mcjty.lib.tools.EntityTools;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -64,6 +65,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         return true;
     }
 
+    @Override
     protected void initEntityAI() {
         EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
         this.wander = new EntityAIWander(this, 1.0D, 80);
@@ -78,6 +80,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 10, true, false, new WaterCreepTargetSelector(this)));
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(60.0D);
@@ -93,6 +96,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         return new PathNavigateSwimmer(this, worldIn);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(STATUS, Byte.valueOf((byte) 0));
@@ -103,14 +107,14 @@ public class EntityWaterCreepBoss extends EntityMob {
      * Returns true if given flag is set
      */
     private boolean isSyncedFlagSet(int flagId) {
-        return (((Byte) this.dataManager.get(STATUS)).byteValue() & flagId) != 0;
+        return (this.dataManager.get(STATUS).byteValue() & flagId) != 0;
     }
 
     /**
      * Sets a flag state "on/off" on both sides (client/server) by using DataWatcher
      */
     private void setSyncedFlag(int flagId, boolean state) {
-        byte b0 = ((Byte) this.dataManager.get(STATUS)).byteValue();
+        byte b0 = this.dataManager.get(STATUS).byteValue();
 
         if (state) {
             this.dataManager.set(STATUS, Byte.valueOf((byte) (b0 | flagId)));
@@ -136,17 +140,17 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     public boolean hasTargetedEntity() {
-        return ((Integer) this.dataManager.get(TARGET_ENTITY)).intValue() != 0;
+        return this.dataManager.get(TARGET_ENTITY).intValue() != 0;
     }
 
     public EntityLivingBase getTargetedEntity() {
         if (!this.hasTargetedEntity()) {
             return null;
-        } else if (this.worldObj.isRemote) {
+        } else if (this.getEntityWorld().isRemote) {
             if (this.targetedEntity != null) {
                 return this.targetedEntity;
             } else {
-                Entity entity = this.worldObj.getEntityByID(((Integer) this.dataManager.get(TARGET_ENTITY)).intValue());
+                Entity entity = this.getEntityWorld().getEntityByID(this.dataManager.get(TARGET_ENTITY).intValue());
 
                 if (entity instanceof EntityLivingBase) {
                     this.targetedEntity = (EntityLivingBase) entity;
@@ -160,6 +164,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         }
     }
 
+    @Override
     public void notifyDataManagerChange(DataParameter<?> key) {
         super.notifyDataManagerChange(key);
 
@@ -172,18 +177,22 @@ public class EntityWaterCreepBoss extends EntityMob {
     /**
      * Get number of ticks, at least during which the living entity will be silent.
      */
+    @Override
     public int getTalkInterval() {
         return 160;
     }
 
+    @Override
     protected SoundEvent getAmbientSound() {
         return (this.isInWater() ? SoundEvents.ENTITY_GUARDIAN_AMBIENT : SoundEvents.ENTITY_GUARDIAN_AMBIENT_LAND);
     }
 
+    @Override
     protected SoundEvent getHurtSound() {
         return (this.isInWater() ? SoundEvents.ENTITY_GUARDIAN_HURT : SoundEvents.ENTITY_GUARDIAN_HURT_LAND);
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return (this.isInWater() ? SoundEvents.ENTITY_GUARDIAN_DEATH : SoundEvents.ENTITY_GUARDIAN_DEATH_LAND);
     }
@@ -192,34 +201,38 @@ public class EntityWaterCreepBoss extends EntityMob {
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
 
+    @Override
     public float getEyeHeight() {
         return this.height * 0.5F;
     }
 
+    @Override
     public float getBlockPathWeight(BlockPos pos) {
-        return this.worldObj.getBlockState(pos).getMaterial() == Material.WATER ? 10.0F + this.worldObj.getLightBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
+        return this.getEntityWorld().getBlockState(pos).getMaterial() == Material.WATER ? 10.0F + this.getEntityWorld().getLightBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
     }
 
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
-        if (this.worldObj.isRemote) {
+        if (this.getEntityWorld().isRemote) {
             this.clientSideTailAnimationO = this.clientSideTailAnimation;
 
             if (!this.isInWater()) {
                 this.clientSideTailAnimationSpeed = 2.0F;
 
                 if (this.motionY > 0.0D && this.clientSideTouchedGround && !this.isSilent()) {
-                    this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GUARDIAN_FLOP, this.getSoundCategory(), 1.0F, 1.0F, false);
+                    this.getEntityWorld().playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GUARDIAN_FLOP, this.getSoundCategory(), 1.0F, 1.0F, false);
                 }
 
-                this.clientSideTouchedGround = this.motionY < 0.0D && this.worldObj.isBlockNormalCube((new BlockPos(this)).down(), false);
+                this.clientSideTouchedGround = this.motionY < 0.0D && this.getEntityWorld().isBlockNormalCube((new BlockPos(this)).down(), false);
             } else if (this.isMoving()) {
                 if (this.clientSideTailAnimationSpeed < 0.5F) {
                     this.clientSideTailAnimationSpeed = 4.0F;
@@ -245,7 +258,7 @@ public class EntityWaterCreepBoss extends EntityMob {
                 Vec3d vec3d = this.getLook(0.0F);
 
                 for (int i = 0; i < 2; ++i) {
-                    this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width - vec3d.xCoord * 1.5D, this.posY + this.rand.nextDouble() * (double) this.height - vec3d.yCoord * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width - vec3d.zCoord * 1.5D, 0.0D, 0.0D, 0.0D, new int[0]);
+                    this.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * this.width - vec3d.xCoord * 1.5D, this.posY + this.rand.nextDouble() * this.height - vec3d.yCoord * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width - vec3d.zCoord * 1.5D, 0.0D, 0.0D, 0.0D, new int[0]);
                 }
             }
 
@@ -259,9 +272,9 @@ public class EntityWaterCreepBoss extends EntityMob {
                 if (entitylivingbase != null) {
                     this.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F);
                     this.getLookHelper().onUpdateLook();
-                    double d5 = (double) this.getAttackAnimationScale(0.0F);
+                    double d5 = this.getAttackAnimationScale(0.0F);
                     double d0 = entitylivingbase.posX - this.posX;
-                    double d1 = entitylivingbase.posY + (double) (entitylivingbase.height * 0.5F) - (this.posY + (double) this.getEyeHeight());
+                    double d1 = entitylivingbase.posY + (entitylivingbase.height * 0.5F) - (this.posY + this.getEyeHeight());
                     double d2 = entitylivingbase.posZ - this.posZ;
                     double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
                     d0 = d0 / d3;
@@ -271,7 +284,7 @@ public class EntityWaterCreepBoss extends EntityMob {
 
                     while (d4 < d3) {
                         d4 += 1.8D - d5 + this.rand.nextDouble() * (1.7D - d5);
-                        this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + d0 * d4, this.posY + d1 * d4 + (double) this.getEyeHeight(), this.posZ + d2 * d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                        this.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + d0 * d4, this.posY + d1 * d4 + this.getEyeHeight(), this.posZ + d2 * d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     }
                 }
             }
@@ -281,8 +294,8 @@ public class EntityWaterCreepBoss extends EntityMob {
             this.setAir(300);
         } else if (this.onGround) {
             this.motionY += 0.5D;
-            this.motionX += (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
-            this.motionZ += (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
+            this.motionX += ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
+            this.motionZ += ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
             this.rotationYaw = this.rand.nextFloat() * 360.0F;
             this.onGround = false;
             this.isAirBorne = true;
@@ -306,9 +319,10 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     public float getAttackAnimationScale(float p_175477_1_) {
-        return ((float) this.clientSideAttackTime + p_175477_1_) / (float) this.getAttackDuration();
+        return (this.clientSideAttackTime + p_175477_1_) / this.getAttackDuration();
     }
 
+    @Override
     @Nullable
     protected ResourceLocation getLootTable() {
         return LOOT;
@@ -317,6 +331,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     /**
      * Checks to make sure the light is not too bright where the mob is spawning
      */
+    @Override
     protected boolean isValidLightLevel() {
         return true;
     }
@@ -324,20 +339,23 @@ public class EntityWaterCreepBoss extends EntityMob {
     /**
      * Checks that the entity is not colliding with any blocks / liquids
      */
+    @Override
     public boolean isNotColliding() {
-        return this.worldObj.checkNoEntityCollision(this.getEntityBoundingBox(), this) && this.worldObj.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty();
+        return this.getEntityWorld().checkNoEntityCollision(this.getEntityBoundingBox(), this) && this.getEntityWorld().getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty();
     }
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < (double)this.worldObj.getSeaLevel() && this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
+        return this.posY > 45.0D && this.posY < this.getEntityWorld().getSeaLevel() && this.getEntityWorld().getDifficulty() != EnumDifficulty.PEACEFUL;
     }
 
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (!this.isMoving() && !source.isMagicDamage() && source.getSourceOfDamage() instanceof EntityLivingBase) {
             EntityLivingBase entitylivingbase = (EntityLivingBase) source.getSourceOfDamage();
@@ -358,6 +376,7 @@ public class EntityWaterCreepBoss extends EntityMob {
      * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
      * use in wolves.
      */
+    @Override
     public int getVerticalFaceSpeed() {
         return 180;
     }
@@ -365,11 +384,12 @@ public class EntityWaterCreepBoss extends EntityMob {
     /**
      * Moves the entity based on the specified heading.
      */
+    @Override
     public void moveEntityWithHeading(float strafe, float forward) {
         if (this.isServerWorld()) {
             if (this.isInWater()) {
                 this.moveRelative(strafe, forward, 0.1F);
-                this.moveEntity(MoverType.SELF, this.motionX, this.motionY, this.motionZ); //TODO: COmpat 1.11 -> 1.10
+                EntityTools.moveEntity(this, this.motionX, this.motionY, this.motionZ); //TODO: COmpat 1.11 -> 1.10
                 this.motionX *= 0.8999999761581421D;
                 this.motionY *= 0.8999999761581421D;
                 this.motionZ *= 0.8999999761581421D;
@@ -397,6 +417,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         /**
          * Returns whether the EntityAIBase should begin execution.
          */
+        @Override
         public boolean shouldExecute() {
             EntityLivingBase entitylivingbase = this.theEntity.getAttackTarget();
             return entitylivingbase != null && entitylivingbase.isEntityAlive();
@@ -405,6 +426,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         /**
          * Returns whether an in-progress EntityAIBase should continue executing
          */
+        @Override
         public boolean continueExecuting() {
             return super.continueExecuting() && (this.theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) > 9.0D);
         }
@@ -412,6 +434,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         /**
          * Execute a one shot task or start executing a continuous task
          */
+        @Override
         public void startExecuting() {
             this.tickCounter = -10;
             this.theEntity.getNavigator().clearPathEntity();
@@ -422,32 +445,34 @@ public class EntityWaterCreepBoss extends EntityMob {
         /**
          * Resets the task
          */
+        @Override
         public void resetTask() {
             this.theEntity.setTargetedEntity(0);
-            this.theEntity.setAttackTarget((EntityLivingBase) null);
+            this.theEntity.setAttackTarget(null);
             this.theEntity.wander.makeUpdate();
         }
 
         /**
          * Updates the task
          */
+        @Override
         public void updateTask() {
             EntityLivingBase entitylivingbase = this.theEntity.getAttackTarget();
             this.theEntity.getNavigator().clearPathEntity();
             this.theEntity.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F);
 
             if (!this.theEntity.canEntityBeSeen(entitylivingbase)) {
-                this.theEntity.setAttackTarget((EntityLivingBase) null);
+                this.theEntity.setAttackTarget(null);
             } else {
                 ++this.tickCounter;
 
                 if (this.tickCounter == 0) {
                     this.theEntity.setTargetedEntity(this.theEntity.getAttackTarget().getEntityId());
-                    this.theEntity.worldObj.setEntityState(this.theEntity, (byte) 21);
+                    this.theEntity.getEntityWorld().setEntityState(this.theEntity, (byte) 21);
                 } else if (this.tickCounter >= this.theEntity.getAttackDuration()) {
                     float f = 1.0F;
 
-                    if (this.theEntity.worldObj.getDifficulty() == EnumDifficulty.HARD) {
+                    if (this.theEntity.getEntityWorld().getDifficulty() == EnumDifficulty.HARD) {
                         f += 2.0F;
                     }
 
@@ -469,30 +494,31 @@ public class EntityWaterCreepBoss extends EntityMob {
             this.entityWaterCreep = guardian;
         }
 
+        @Override
         public void onUpdateMoveHelper() {
             if (this.action == Action.MOVE_TO && !this.entityWaterCreep.getNavigator().noPath()) {
                 double d0 = this.posX - this.entityWaterCreep.posX;
                 double d1 = this.posY - this.entityWaterCreep.posY;
                 double d2 = this.posZ - this.entityWaterCreep.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                d3 = (double) MathHelper.sqrt_double(d3);
+                d3 = Math.sqrt(d3);
                 d1 = d1 / d3;
                 float f = (float) (MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F;
                 this.entityWaterCreep.rotationYaw = this.limitAngle(this.entityWaterCreep.rotationYaw, f, 90.0F);
                 this.entityWaterCreep.renderYawOffset = this.entityWaterCreep.rotationYaw;
                 float f1 = (float) (this.speed * this.entityWaterCreep.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
                 this.entityWaterCreep.setAIMoveSpeed(this.entityWaterCreep.getAIMoveSpeed() + (f1 - this.entityWaterCreep.getAIMoveSpeed()) * 0.125F);
-                double d4 = Math.sin((double) (this.entityWaterCreep.ticksExisted + this.entityWaterCreep.getEntityId()) * 0.5D) * 0.05D;
-                double d5 = Math.cos((double) (this.entityWaterCreep.rotationYaw * 0.017453292F));
-                double d6 = Math.sin((double) (this.entityWaterCreep.rotationYaw * 0.017453292F));
+                double d4 = Math.sin((this.entityWaterCreep.ticksExisted + this.entityWaterCreep.getEntityId()) * 0.5D) * 0.05D;
+                double d5 = Math.cos((this.entityWaterCreep.rotationYaw * 0.017453292F));
+                double d6 = Math.sin((this.entityWaterCreep.rotationYaw * 0.017453292F));
                 this.entityWaterCreep.motionX += d4 * d5;
                 this.entityWaterCreep.motionZ += d4 * d6;
-                d4 = Math.sin((double) (this.entityWaterCreep.ticksExisted + this.entityWaterCreep.getEntityId()) * 0.75D) * 0.05D;
+                d4 = Math.sin((this.entityWaterCreep.ticksExisted + this.entityWaterCreep.getEntityId()) * 0.75D) * 0.05D;
                 this.entityWaterCreep.motionY += d4 * (d6 + d5) * 0.25D;
-                this.entityWaterCreep.motionY += (double) this.entityWaterCreep.getAIMoveSpeed() * d1 * 0.1D;
+                this.entityWaterCreep.motionY += this.entityWaterCreep.getAIMoveSpeed() * d1 * 0.1D;
                 EntityLookHelper entitylookhelper = this.entityWaterCreep.getLookHelper();
                 double d7 = this.entityWaterCreep.posX + d0 / d3 * 2.0D;
-                double d8 = (double) this.entityWaterCreep.getEyeHeight() + this.entityWaterCreep.posY + d1 / d3;
+                double d8 = this.entityWaterCreep.getEyeHeight() + this.entityWaterCreep.posY + d1 / d3;
                 double d9 = this.entityWaterCreep.posZ + d2 / d3 * 2.0D;
                 double d10 = entitylookhelper.getLookPosX();
                 double d11 = entitylookhelper.getLookPosY();
@@ -520,6 +546,7 @@ public class EntityWaterCreepBoss extends EntityMob {
             this.parentEntity = creep;
         }
 
+        @Override
         public boolean apply(@Nullable EntityLivingBase p_apply_1_) {
             return (p_apply_1_ instanceof EntityPlayer) && p_apply_1_.getDistanceSqToEntity(this.parentEntity) > 9.0D;
         }

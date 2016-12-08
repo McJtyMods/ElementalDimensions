@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.dimensions.generators.tools;
 
+import mcjty.lib.tools.MathTools;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
@@ -81,12 +82,12 @@ public class MapGenTendrils {
                 }
 
                 if (xx >= centerX - 16.0D - d6 * 2.0D && zz >= centerZ - 16.0D - d6 * 2.0D && xx <= centerX + 16.0D + d6 * 2.0D && zz <= centerZ + 16.0D + d6 * 2.0D) {
-                    int i4 = MathHelper.floor_double(xx - d6) - chunkX * 16 - 1;
-                    int l1 = MathHelper.floor_double(xx + d6) - chunkX * 16 + 1;
-                    int j4 = MathHelper.floor_double(yy - d7) - 1;
-                    int i2 = MathHelper.floor_double(yy + d7) + 1;
-                    int k4 = MathHelper.floor_double(zz - d6) - chunkZ * 16 - 1;
-                    int j2 = MathHelper.floor_double(zz + d6) - chunkZ * 16 + 1;
+                    int i4 = MathTools.floor(xx - d6) - chunkX * 16 - 1;
+                    int l1 = MathTools.floor(xx + d6) - chunkX * 16 + 1;
+                    int j4 = MathTools.floor(yy - d7) - 1;
+                    int i2 = MathTools.floor(yy + d7) + 1;
+                    int k4 = MathTools.floor(zz - d6) - chunkZ * 16 - 1;
+                    int j2 = MathTools.floor(zz + d6) - chunkZ * 16 + 1;
 
                     if (i4 < 0) {
                         i4 = 0;

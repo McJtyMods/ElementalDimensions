@@ -31,7 +31,7 @@ public class PacketPointedEntity extends AbstractPacket {
         int i = abstractPacket.networkPackageObject.getInteger("eID");
         if (i > -1){
             EntityPlayer p = messageContext.getServerHandler().playerEntity;
-            Entity e = p.worldObj.getEntityByID(i);
+            Entity e = p.getEntityWorld().getEntityByID(i);
             if (e instanceof EntityLiving){
                 if (p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() == ItemRegister.elementalWand && p.getHeldItemOffhand() != null && p.getHeldItemOffhand().getItem() == ItemRegister.focusDamage){
                     e.attackEntityFrom(DamageSource.causeIndirectMagicDamage(p, e), 7);

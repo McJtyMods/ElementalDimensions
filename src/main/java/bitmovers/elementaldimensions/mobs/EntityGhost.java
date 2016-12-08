@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.mobs;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.sound.MobSounds;
+import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -76,7 +77,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     public void onUpdate() {
         super.onUpdate();
 
-        if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL) {
+        if (!this.getEntityWorld().isRemote && this.getEntityWorld().getDifficulty() == EnumDifficulty.PEACEFUL) {
             this.setDead();
         }
     }
@@ -148,7 +149,7 @@ public class EntityGhost extends EntityFlying implements IMob {
      */
     @Override
     public boolean getCanSpawnHere() {
-        boolean b = /*this.rand.nextInt(5) == 0 && /* super.getCanSpawnHere() && */ this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
+        boolean b = /*this.rand.nextInt(5) == 0 && /* super.getCanSpawnHere() && */ this.getEntityWorld().getDifficulty() != EnumDifficulty.PEACEFUL;
         return b;
     }
 
@@ -232,7 +233,7 @@ public class EntityGhost extends EntityFlying implements IMob {
             double d0 = 64.0D;
 
             if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D && this.parentEntity.canEntityBeSeen(entitylivingbase)) {
-                World world = this.parentEntity.worldObj;
+                World world = this.parentEntity.getEntityWorld();
                 ++this.attackTimer;
 
                 if (this.attackTimer == 10) {
@@ -254,7 +255,7 @@ public class EntityGhost extends EntityFlying implements IMob {
                     entitylargefireball.posX = this.parentEntity.posX + vec3d.xCoord * 4.0D;
                     entitylargefireball.posY = this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F) + 0.5D;
                     entitylargefireball.posZ = this.parentEntity.posZ + vec3d.zCoord * 4.0D;
-                    world.spawnEntityInWorld(entitylargefireball);
+                    WorldTools.spawnEntity(world, entitylargefireball);
                     this.attackTimer = -40;
                 }
             } else if (this.attackTimer > 0) {
@@ -369,7 +370,7 @@ public class EntityGhost extends EntityFlying implements IMob {
 
                 if (this.courseChangeCooldown-- <= 0) {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-                    d3 = (double) MathHelper.sqrt_double(d3);
+                    d3 = Math.sqrt(d3);
 
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3)) {
                         this.parentEntity.motionX += d0 / d3 * 0.1D;
@@ -394,7 +395,7 @@ public class EntityGhost extends EntityFlying implements IMob {
             for (int i = 1; (double) i < p_179926_7_; ++i) {
                 axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
-                if (!this.parentEntity.worldObj.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty()) {
+                if (!this.parentEntity.getEntityWorld().getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty()) {
                     return false;
                 }
             }

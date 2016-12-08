@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.commands;
 
 import bitmovers.elementaldimensions.util.command.AbstractSubCommand;
+import mcjty.lib.tools.ChatTools;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ public class CommandTeleport extends AbstractSubCommand {
         try {
             value = Integer.parseInt(args[index]);
         } catch (NumberFormatException e) {
-            sender.addChatMessage(new TextComponentString(TextFormatting.RED + "Parameter is not a valid integer!"));
+            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED + "Parameter is not a valid integer!"));
         } catch (ArrayIndexOutOfBoundsException e) {
             //
         }
@@ -43,21 +44,21 @@ public class CommandTeleport extends AbstractSubCommand {
             y = fetchInt(sender, args, 2, 100);
             z = fetchInt(sender, args, 3, 0);
         } catch (Exception e){
-            sender.addChatMessage(new TextComponentString(TextFormatting.RED+"Failed to parse command parameters!"));
-            sender.addChatMessage(new TextComponentString(TextFormatting.RED+"Parameters:"));
-            sender.addChatMessage(new TextComponentString(TextFormatting.RED+"<dimid> <x> <y> <z>"));
+            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED+"Failed to parse command parameters!"));
+            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED+"Parameters:"));
+            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED+"<dimid> <x> <y> <z>"));
             return;
         }
 
         if (sender instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) sender;
 
-            int currentId = player.worldObj.provider.getDimension();
+            int currentId = player.getEntityWorld().provider.getDimension();
             if (currentId != dim) {
                 try {
                     teleportToDimension(player, dim, x, y, z);
                 } catch (IllegalArgumentException e){
-                    sender.addChatMessage(new TextComponentString(TextFormatting.RED + e.getMessage()));
+                    ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED + e.getMessage()));
                 }
             } else {
                 player.setPositionAndUpdate(x, y, z);

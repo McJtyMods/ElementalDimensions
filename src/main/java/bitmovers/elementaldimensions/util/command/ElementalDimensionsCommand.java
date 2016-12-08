@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import elec332.core.main.ElecCore;
+import mcjty.lib.compat.CompatCommandBase;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -19,7 +20,7 @@ import java.util.Map;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public class ElementalDimensionsCommand extends CommandBase {
+public class ElementalDimensionsCommand extends CompatCommandBase {
 
     public ElementalDimensionsCommand(){
         aliases = Lists.newArrayList(ElementalDimensions.MODID, "ED", "ed");
@@ -29,20 +30,17 @@ public class ElementalDimensionsCommand extends CommandBase {
     private final List<String> aliases;
 
     @Override
-    @Nonnull
-    public String getCommandName() {
+    public String getName() {
         return ElementalDimensions.MODNAME;
     }
 
     @Override
-    @Nonnull
-    public String getCommandUsage(@Nonnull ICommandSender sender) {
+    public String getUsage(ICommandSender sender) {
         return "command.ed.usage";
     }
 
     @Override
-    @Nonnull
-    public List<String> getCommandAliases() {
+    public List<String> getAliases() {
         return aliases;
     }
 
@@ -65,8 +63,7 @@ public class ElementalDimensionsCommand extends CommandBase {
     }
 
     @Override
-    @Nonnull
-    public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
+    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
         if (args.length == 1){
             return getListOfStringsMatchingLastWord(args, subCommands.keySet());
         } else if (args.length > 1){

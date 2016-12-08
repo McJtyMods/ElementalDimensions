@@ -4,6 +4,7 @@ import bitmovers.elementaldimensions.dimensions.generators.tools.WaterTerrainGen
 import bitmovers.elementaldimensions.mobs.EntityWaterCreep;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import mcjty.lib.compat.CompatChunkGenerator;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -18,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class WaterChunkGenerator implements IChunkGenerator {
+public class WaterChunkGenerator implements CompatChunkGenerator {
 
     private final World worldObj;
     private Random random;
@@ -71,9 +72,8 @@ public class WaterChunkGenerator implements IChunkGenerator {
 
     }
 
-    @Nullable
-    @Override //TODO: compat 1.11 -> 1.10
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
+    @Override
+    public BlockPos clGetStrongholdGen(World worldIn, String structureName, BlockPos position) {
         return null;
     }
 

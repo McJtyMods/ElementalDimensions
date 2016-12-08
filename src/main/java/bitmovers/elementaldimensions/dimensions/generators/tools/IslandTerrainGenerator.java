@@ -186,12 +186,6 @@ public class IslandTerrainGenerator implements ITerrainGenerator {
                             for (int z = 0; z < 8; ++z) {
                                 if (d15 > 0.0D) {
                                     setBlockState(primer, index, baseBlock);
-                                    // @todo support 127
-//                                    if (baseMeta == 127) {
-//                                        realMeta = (byte)((height/2 + x/2 + z/2) & 0xf);
-//                                    } else {
-//                                        realMeta = baseMeta;
-//                                    }
                                 } else {
                                     setBlockState(primer, index, Blocks.AIR.getDefaultState());
                                 }

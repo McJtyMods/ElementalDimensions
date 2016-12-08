@@ -6,6 +6,7 @@ import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.mobs.EntityGhost;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import mcjty.lib.compat.CompatChunkGenerator;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -21,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class AirChunkGenerator implements IChunkGenerator {
+public class AirChunkGenerator implements CompatChunkGenerator {
 
     public AirChunkGenerator(World worldObj) {
         this.terraingen = new IslandTerrainGenerator();
@@ -76,9 +77,8 @@ public class AirChunkGenerator implements IChunkGenerator {
 
     }
 
-    @Nullable
-    @Override //TODO: compat 1.11 -> 1.10
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
+    @Override
+    public BlockPos clGetStrongholdGen(World worldIn, String structureName, BlockPos position) {
         return null;
     }
 

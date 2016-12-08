@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.mobs.EntityGhostBoss;
+import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,19 +33,19 @@ public class EntityAirBossSeed extends EntityItem {
     public void onUpdate() {
         super.onUpdate();
 
-        if (!worldObj.isRemote && worldObj.provider.getDimension() == Dimensions.AIR.getDimensionID()) {
+        if (!getEntityWorld().isRemote && getEntityWorld().provider.getDimension() == Dimensions.AIR.getDimensionID()) {
             countdown--;
 
             if (countdown == 50) {
-                worldObj.createExplosion(this, posX, posY, posZ, 8, true);
+                getEntityWorld().createExplosion(this, posX, posY, posZ, 8, true);
             }
 
             if (countdown <= 0) {
                 setDead();
 
-                EntityGhostBoss boss = new EntityGhostBoss(worldObj);
+                EntityGhostBoss boss = new EntityGhostBoss(getEntityWorld());
                 boss.setPosition(posX, posY, posZ);
-                worldObj.spawnEntityInWorld(boss);
+                WorldTools.spawnEntity(getEntityWorld(), boss);
             }
         }
     }
