@@ -3,7 +3,6 @@ package bitmovers.elementaldimensions.dimensions.generators.tools;
 import mcjty.lib.tools.MathTools;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;

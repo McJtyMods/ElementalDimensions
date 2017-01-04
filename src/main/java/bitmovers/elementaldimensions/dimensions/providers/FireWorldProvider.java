@@ -2,14 +2,13 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.FireChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
-import mcjty.lib.compat.CompatWorldProvider;
+import elec332.core.world.AbstractWorldProvider;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-public class FireWorldProvider extends CompatWorldProvider {
+public class FireWorldProvider extends AbstractWorldProvider {
 
     @Override
     @Nonnull

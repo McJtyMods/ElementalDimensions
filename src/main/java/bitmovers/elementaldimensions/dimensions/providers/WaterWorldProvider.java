@@ -2,11 +2,10 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.WaterChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
-import mcjty.lib.compat.CompatWorldProvider;
+import elec332.core.world.AbstractWorldProvider;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -14,7 +13,7 @@ import net.minecraft.world.storage.WorldInfo;
 
 import javax.annotation.Nonnull;
 
-public class WaterWorldProvider extends CompatWorldProvider {
+public class WaterWorldProvider extends AbstractWorldProvider {
 
     @Override
     @Nonnull
@@ -57,7 +56,7 @@ public class WaterWorldProvider extends CompatWorldProvider {
     }
 
     @Override
-    protected void initialize() {
+    protected void setup() {
         this.biomeProvider = new BiomeProvider(getWorld().getWorldInfo()) {
 
             @Override

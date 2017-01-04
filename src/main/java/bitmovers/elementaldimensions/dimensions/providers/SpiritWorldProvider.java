@@ -2,13 +2,13 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.SpiritChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
-import mcjty.lib.compat.CompatWorldProvider;
+import elec332.core.world.AbstractWorldProvider;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-public class SpiritWorldProvider extends CompatWorldProvider {
+public class SpiritWorldProvider extends AbstractWorldProvider {
 
     @Override
     @Nonnull
@@ -36,4 +36,5 @@ public class SpiritWorldProvider extends CompatWorldProvider {
     public int getActualHeight() {
         return 256;
     }
+    
 }
