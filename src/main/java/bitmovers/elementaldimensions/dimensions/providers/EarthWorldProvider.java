@@ -34,6 +34,7 @@ public class EarthWorldProvider extends AbstractWorldProvider {
 
     @Override
     protected void setup() {
+        super.setup();
         this.biomeProvider = new BiomeProvider(getWorld().getWorldInfo()) {
 
             @Override

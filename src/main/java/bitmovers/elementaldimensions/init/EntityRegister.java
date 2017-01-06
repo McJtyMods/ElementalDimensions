@@ -16,21 +16,21 @@ public class EntityRegister {
 
     public static void init() {
         int id = 1;
-        registerModEntity(EntityDirtZombie.class, "DirtZombie", id++, ElementalDimensions.instance, 64, 3, true, 0x996600, 0x00ff00);
-        registerModEntity(EntityGuard.class, "Guard", id++, ElementalDimensions.instance, 32, 3, true, 0x880088, 0x00ff00);
-        registerModEntity(EntityWaterCreep.class, "WaterCreep", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
-        registerModEntity(EntityDirtZombieBoss.class, "DirtZombieBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x996600, 0x00ff00);
-        registerModEntity(EntityWaterCreepBoss.class, "WaterCreepBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
-        registerModEntity(EntityGhost.class, "Ghost", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
-        registerModEntity(EntityGhostBoss.class, "GhostBoss", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
-        registerModEntity(EntitySpirit.class, "Spirit", id++, ElementalDimensions.instance, 64, 3, true, 0x996655, 0x00ff55);
-        registerModEntity(EntityBlaster.class, "Blaster", id++, ElementalDimensions.instance, 64, 3, true, 0xff8833, 0xee3300);
-        registerModEntity(EntityFireBoss.class, "FireBoss", id++, ElementalDimensions.instance, 64, 3, true, 0xff8833, 0xee3300);
+        registerModEntity(EntityDirtZombie.class, "dirtzombie", id++, ElementalDimensions.instance, 64, 3, true, 0x996600, 0x00ff00);
+        registerModEntity(EntityGuard.class, "guard", id++, ElementalDimensions.instance, 32, 3, true, 0x880088, 0x00ff00);
+        registerModEntity(EntityWaterCreep.class, "watercreep", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
+        registerModEntity(EntityDirtZombieBoss.class, "dirtzombieboss", id++, ElementalDimensions.instance, 64, 3, true, 0x996600, 0x00ff00);
+        registerModEntity(EntityWaterCreepBoss.class, "watercreepboss", id++, ElementalDimensions.instance, 64, 3, true, 0x002288, 0x775533);
+        registerModEntity(EntityGhost.class, "ghost", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
+        registerModEntity(EntityGhostBoss.class, "ghostboss", id++, ElementalDimensions.instance, 64, 3, true, 0x998800, 0x995533);
+        registerModEntity(EntitySpirit.class, "spirit", id++, ElementalDimensions.instance, 64, 3, true, 0x996655, 0x00ff55);
+        registerModEntity(EntityBlaster.class, "blaster", id++, ElementalDimensions.instance, 64, 3, true, 0xff8833, 0xee3300);
+        registerModEntity(EntityFireBoss.class, "fireboss", id++, ElementalDimensions.instance, 64, 3, true, 0xff8833, 0xee3300);
 
         id = 100;
-        registerModEntity(EntityWaterBossSeed.class, "WaterBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
-        registerModEntity(EntityAirBossSeed.class, "AirBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
-        registerModEntity(EntityFireBossSeed.class, "FireBossSeed", id++, ElementalDimensions.instance, 64, 3, true);
+        registerModEntity(EntityWaterBossSeed.class, "waterbossseed", id++, ElementalDimensions.instance, 64, 3, true);
+        registerModEntity(EntityAirBossSeed.class, "airbossseed", id++, ElementalDimensions.instance, 64, 3, true);
+        registerModEntity(EntityFireBossSeed.class, "firebossseed", id++, ElementalDimensions.instance, 64, 3, true);
 
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreep.class, EntityLiving.SpawnPlacementType.IN_WATER);
         EntitySpawnPlacementRegistry.setPlacementType(EntityWaterCreepBoss.class, EntityLiving.SpawnPlacementType.IN_WATER);

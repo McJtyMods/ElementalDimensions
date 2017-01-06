@@ -12,6 +12,7 @@ import elec332.core.api.annotations.RegisterTile;
 import elec332.core.util.DirectionHelper;
 import elec332.core.util.PlayerHelper;
 import elec332.core.world.WorldHelper;
+import mcjty.lib.tools.ItemStackTools;
 import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -156,7 +157,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
 
     public void onActivated(EntityPlayer player){
         ItemStack stack = player.getHeldItemMainhand();
-        if (stack != null) {
+        if (ItemStackTools.isValid(stack)) {
             Item item = stack.getItem();
             if (item instanceof ItemRune){
                 if (getWorld().provider.getDimension() != 0) {
@@ -168,7 +169,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                     return;
                 }
                 dropDest(player);
-                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStackTools.getEmptyStack());
                 this.destination = dim;
                 markDirtyClient();
             }

@@ -43,16 +43,16 @@ tile.elementaldimensions.altarcenter.name=Altar Center
 tile.elementaldimensions.altarpedestal.name=Altar Pedestal
 
 # Entities
-entity.elementaldimensions.DirtZombie.name=Dirt Zombie
-entity.elementaldimensions.Guard.name=Guard
-entity.elementaldimensions.WaterCreep.name=Water Creep
-entity.elementaldimensions.DirtZombieBoss.name=Dirt Zombie Boss
-entity.elementaldimensions.WaterCreepBoss.name=Water Creep Boss
-entity.elementaldimensions.Ghost.name=Ghost
-entity.elementaldimensions.GhostBoss.name=Ghost Boss
-entity.elementaldimensions.Spirit.name=Spirit
-entity.elementaldimensions.Blaster.name=Blaster
-entity.elementaldimensions.FireBoss.name=Fire Boss
+entity.dirtzombie.name=Dirt Zombie
+entity.guard.name=Guard
+entity.watercreep.name=Water Creep
+entity.dirtzombieboss.name=Dirt Zombie Boss
+entity.watercreepboss.name=Water Creep Boss
+entity.ghost.name=Ghost
+entity.ghostboss.name=Ghost Boss
+entity.spirit.name=Spirit
+entity.blaster.name=Blaster
+entity.fireboss.name=Fire Boss
 
 
 # Creative Tabs
