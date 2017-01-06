@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.ncLayer.overworldTweaks.blocks;
 
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.IOWTBlock;
-import mcjty.lib.tools.WorldTools;
+import elec332.core.world.WorldHelper;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySilverfish;
@@ -23,7 +23,7 @@ public class SilverFishStone extends BlockStone implements IOWTBlock {
     public void dropBlockAsItemWithChance(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, float chance, int fortune) {
         EntitySilverfish entitysilverfish = new EntitySilverfish(worldIn);
         entitysilverfish.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
-        WorldTools.spawnEntity(worldIn, entitysilverfish);
+        WorldHelper.spawnEntityInWorld(worldIn, entitysilverfish);
         entitysilverfish.spawnExplosionParticle();
     }
 

@@ -5,6 +5,7 @@ import bitmovers.elementaldimensions.mobs.EntityGhost;
 import bitmovers.elementaldimensions.mobs.EntityGhostBoss;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
+import elec332.core.world.WorldHelper;
 import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -87,7 +88,7 @@ public class DimensionEvents {
                 if (pos != null) {
                     EntityDirtZombieBoss boss = new EntityDirtZombieBoss(evt.world);
                     boss.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                    WorldTools.spawnEntity(evt.world, boss);
+                    WorldHelper.spawnEntityInWorld(evt.world, boss);
                 }
             }
         }

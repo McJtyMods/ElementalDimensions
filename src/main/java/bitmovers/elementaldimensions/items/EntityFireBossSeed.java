@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.mobs.EntityFireBoss;
+import elec332.core.world.WorldHelper;
 import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -45,7 +46,7 @@ public class EntityFireBossSeed extends EntityItem {
 
                 EntityFireBoss boss = new EntityFireBoss(getEntityWorld());
                 boss.setPosition(posX, posY, posZ);
-                WorldTools.spawnEntity(getEntityWorld(), boss);
+                WorldHelper.spawnEntityInWorld(getEntityWorld(), boss);
             }
         }
     }

@@ -8,8 +8,8 @@ import bitmovers.elementaldimensions.sound.MobSounds;
 import bitmovers.elementaldimensions.sound.SoundHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import elec332.core.main.ElecCore;
 import elec332.core.util.RegistryHelper;
-import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -84,7 +84,7 @@ public class ClientProxy extends CommonProxy {
 
         if (entity != null)
         {
-            if (MinecraftTools.getWorld(this.mc) != null)
+            if (ElecCore.proxy.getClientWorld() != null)
             {
                 this.mc.mcProfiler.startSection("pick");
                 this.mc.pointedEntity = null;
@@ -118,7 +118,7 @@ public class ClientProxy extends CommonProxy {
                 pointedEntity = null;
                 Vec3d vec3d3 = null;
                 float f = 1.0F;
-                List<Entity> list = MinecraftTools.getWorld(this.mc).getEntitiesInAABBexcluding(entity, entity.getEntityBoundingBox().addCoord(vec3d1.xCoord * d0, vec3d1.yCoord * d0, vec3d1.zCoord * d0).expand((double)f, (double)f, (double)f), Predicates.and(EntitySelectors.NOT_SPECTATING, new Predicate<Entity>()
+                List<Entity> list = ElecCore.proxy.getClientWorld().getEntitiesInAABBexcluding(entity, entity.getEntityBoundingBox().addCoord(vec3d1.xCoord * d0, vec3d1.yCoord * d0, vec3d1.zCoord * d0).expand((double)f, (double)f, (double)f), Predicates.and(EntitySelectors.NOT_SPECTATING, new Predicate<Entity>()
                 {
                     @Override
                     public boolean apply(@Nullable Entity p_apply_1_)

@@ -20,29 +20,29 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 @RegisteredWorldGenerator(weight = 391)
-public class WorldGeneratorSpiritDungeon implements IWorldGenerator {
-
-    public static final ResourceLocation dungeonResource;
+public class WorldGeneratorSpiritDungeon extends AbstractDungeonWorldGenerator {
 
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        int dimension = WorldHelper.getDimID(world);
-        if (validDimension(dimension) && SpiritDungeonLocator.isSpiritDungeonChunk(world, chunkX, chunkZ)){
-            Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
-            if (schematic != null) {
-                GenerationType type = GenerationType.SURFACE;
-                StructureTemplate structure = new StructureTemplate(schematic, type);
-                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
-                structure.generateStructure(pos, world, chunkProvider);
-            } else {
-                throw new IllegalStateException();
-            }
-        }
+    protected boolean validGenPoint(World world, int chunkX, int chunkZ) {
+        return WorldHelper.getDimID(world) == Dimensions.SPIRIT.getDimensionID() && SpiritDungeonLocator.isSpiritDungeonChunk(world, chunkX, chunkZ);
     }
 
-    private boolean validDimension(int dim){
-        return dim == Dimensions.SPIRIT.getDimensionID();
+    @Override
+    protected BlockPos randomPos(World world, int chunkX, int chunkZ, Random random) {
+        return WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
     }
+
+    @Override
+    protected ResourceLocation getDungeonSchematic() {
+        return dungeonResource;
+    }
+
+    @Override
+    protected GenerationType getGenerationType(World world) {
+        return GenerationType.SURFACE;
+    }
+
+    public static final ResourceLocation dungeonResource;
 
     static {
         dungeonResource = new EDResourceLocation("schematics/dungeon_spirit.schematic");

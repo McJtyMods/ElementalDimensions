@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.mobs;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import mcjty.lib.tools.WorldTools;
+import elec332.core.world.WorldHelper;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -253,7 +253,7 @@ public class EntityFireBoss extends EntityFlying implements IMob {
                     entitylargefireball.posX = this.parentEntity.posX + vec3d.xCoord * 4.0D;
                     entitylargefireball.posY = this.parentEntity.posY + (this.parentEntity.height / 2.0F) + 0.5D;
                     entitylargefireball.posZ = this.parentEntity.posZ + vec3d.zCoord * 4.0D;
-                    WorldTools.spawnEntity(world, entitylargefireball);
+                    WorldHelper.spawnEntityInWorld(world, entitylargefireball);
                     this.attackTimer = -40;
                 }
             } else if (this.attackTimer > 0) {

@@ -10,10 +10,9 @@ import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.CustomTeleporter;
 import elec332.core.api.annotations.RegisterTile;
 import elec332.core.util.DirectionHelper;
+import elec332.core.util.ItemStackHelper;
 import elec332.core.util.PlayerHelper;
 import elec332.core.world.WorldHelper;
-import mcjty.lib.tools.ItemStackTools;
-import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -132,7 +131,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                         if (getWorld().isAirBlock(spawnPos) && getWorld().isAirBlock(spawnPos.up(2))) {
                             EntityGuard guard = new EntityGuard(getWorld());
                             guard.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-                            WorldTools.spawnEntity(getWorld(), guard);
+                            WorldHelper.spawnEntityInWorld(getWorld(), guard);
                             guardCounter++;
                             markDirty();
                         }
@@ -157,7 +156,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
 
     public void onActivated(EntityPlayer player){
         ItemStack stack = player.getHeldItemMainhand();
-        if (ItemStackTools.isValid(stack)) {
+        if (ItemStackHelper.isStackValid(stack)) {
             Item item = stack.getItem();
             if (item instanceof ItemRune){
                 if (getWorld().provider.getDimension() != 0) {
@@ -169,7 +168,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                     return;
                 }
                 dropDest(player);
-                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStackTools.getEmptyStack());
+                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStackHelper.NULL_STACK);
                 this.destination = dim;
                 markDirtyClient();
             }

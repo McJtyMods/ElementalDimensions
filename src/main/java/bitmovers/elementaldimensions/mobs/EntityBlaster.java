@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.mobs;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import mcjty.lib.tools.WorldTools;
+import elec332.core.world.WorldHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -250,7 +250,7 @@ public class EntityBlaster extends EntityMob {
                         for (int i = 0; i < 1; ++i) {
                             EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.blaze.getEntityWorld(), this.blaze, d1 + this.blaze.getRNG().nextGaussian() * f, d2, d3 + this.blaze.getRNG().nextGaussian() * f);
                             entitysmallfireball.posY = this.blaze.posY + (this.blaze.height / 2.0F) + 0.5D;
-                            WorldTools.spawnEntity(this.blaze.getEntityWorld(), entitysmallfireball);
+                            WorldHelper.spawnEntityInWorld(this.blaze.getEntityWorld(), entitysmallfireball);
                         }
                     }
                 }
