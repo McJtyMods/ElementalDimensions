@@ -65,6 +65,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
                     pos =  new BlockPos(pos.getX(), averagey, pos.getZ());
                     structure.generateStructure(pos, world, chunkProvider);
                     WorldGenHelper.fixLootChests(world, schematic, pos);
+                    WorldGenHelper.fixSpawners(world, schematic, pos, new EDResourceLocation("dirtzombie"), "dirtzombie");
 
                     WorldGenHelper.fillWithBlock(world, schematic, pos, averagey, Blocks.DIRT.getDefaultState());
                 } else {

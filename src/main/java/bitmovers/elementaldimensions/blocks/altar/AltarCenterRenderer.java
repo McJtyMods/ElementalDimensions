@@ -5,9 +5,17 @@ import bitmovers.elementaldimensions.client.RegisteredTESR;
 import bitmovers.elementaldimensions.client.RenderTools;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -43,9 +51,28 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
         this.bindTexture(blueSphereTexture);
         RenderTools.renderBillboardQuadBright(1.2f, 240);
 
+        renderItem(te);
+
+
         GlStateManager.popMatrix();
 
 //        GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    }
+
+    private void renderItem(AltarCenterTileEntity te) {
+        ItemStack stack = te.getStack();
+        if (stack != null) {
+            RenderHelper.enableStandardItemLighting();
+            GlStateManager.enableLighting();
+            GlStateManager.pushMatrix();
+            // Translate to the center of the block and .9 points higher
+            GlStateManager.translate(.5, .9, .5);
+            GlStateManager.scale(.4f, .4f, .4f);
+
+            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
+
+            GlStateManager.popMatrix();
+        }
     }
 }

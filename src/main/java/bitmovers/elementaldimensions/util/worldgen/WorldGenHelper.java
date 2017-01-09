@@ -2,10 +2,13 @@ package bitmovers.elementaldimensions.util.worldgen;
 
 import elec332.core.api.structure.ISchematic;
 import elec332.core.world.schematic.Schematic;
+import mcjty.lib.tools.EntityTools;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -96,6 +99,25 @@ public class WorldGenHelper {
                     TileEntity tileentity = world.getTileEntity(mpos);
                     if (tileentity instanceof TileEntityChest) {
                         ((TileEntityChest)tileentity).setLootTable(LootTableList.CHESTS_SIMPLE_DUNGEON, random.nextLong());
+                    }
+                }
+            }
+        }
+    }
+
+    // Fix spawners in the structure so they are a specific type
+    public static void fixSpawners(World world, Schematic schematic, BlockPos pos, ResourceLocation mobId, String mobName) {
+        Random random = new Random(world.getSeed());
+        random.nextLong();
+        BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
+        for (int x = pos.getX() ; x <= pos.getX() + schematic.getBlockWidth() ; x++) {
+            for (int z = pos.getZ() ; z <= pos.getZ() + schematic.getBlockLength() ; z++) {
+                for (int y = pos.getY() ; y <= pos.getY() + schematic.getBlockHeight() ; y++) {
+                    mpos.setPos(x, y, z);
+                    TileEntity tileentity = world.getTileEntity(mpos);
+                    if (tileentity instanceof TileEntityMobSpawner) {
+                        TileEntityMobSpawner spawner = (TileEntityMobSpawner) tileentity;
+                        EntityTools.setSpawnerEntity(world, spawner, mobId, mobName);
                     }
                 }
             }
