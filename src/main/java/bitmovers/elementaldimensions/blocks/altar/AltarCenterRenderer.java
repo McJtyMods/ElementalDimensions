@@ -59,7 +59,7 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
             GlStateManager.pushMatrix();
             // Translate to the center of the block and .9 points higher
             GlStateManager.translate(x + .5, y + 1.5, z + .5);
-            GlStateManager.scale(.4f, .4f, .4f);
+//            GlStateManager.scale(.4f, .4f, .4f);
 
             RenderTools.renderItemCustom(stack, 0, .4f, true);
 //            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
