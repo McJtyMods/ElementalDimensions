@@ -18,8 +18,10 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -68,8 +70,8 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
     @Override
     @SuppressWarnings("deprecation")
     @Nonnull
-    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TileEntity te = worldIn.getTileEntity(pos);
+    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos) {
+        TileEntity te = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
         if (te instanceof PortalDialerTileEntity) {
             PortalDialerTileEntity dialer = (PortalDialerTileEntity) te;
             return state.withProperty(DESTINATION, dialer.getDestination());

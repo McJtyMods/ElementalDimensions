@@ -28,46 +28,41 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
 
     @Override
     public void renderTileEntityAt(AltarCenterTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
-        if (!te.isWorking()) {
-            return;
-        }
-
         IBlockState blockState = getWorld().getBlockState(te.getPos());
         if (blockState.getBlock() != BlockRegister.altarCenterBlock) {
             return;
         }
 
-        GlStateManager.depthMask(false);
-        GlStateManager.enableBlend();
-//        GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
-        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+        if (te.isWorking()) {
+            GlStateManager.depthMask(false);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 
-//        GlStateManager.enableAlpha();
-        GlStateManager.disableAlpha();
+            GlStateManager.disableAlpha();
 
-        GlStateManager.pushMatrix();
-        GlStateManager.translate((float) x + 0.5F, (float) y + 1.9F, (float) z + 0.5F);
+            GlStateManager.pushMatrix();
+            GlStateManager.translate((float) x + 0.5F, (float) y + 1.9F, (float) z + 0.5F);
 
-        this.bindTexture(blueSphereTexture);
-        RenderTools.renderBillboardQuadBright(1.2f, 240);
-
-        renderItem(te);
+            this.bindTexture(blueSphereTexture);
+            RenderTools.renderBillboardQuadBright(1.2f, 240);
 
 
-        GlStateManager.popMatrix();
+            GlStateManager.popMatrix();
 
-//        GlStateManager.enableBlend();
-        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        }
+
+        renderItem(te, x, y, z);
     }
 
-    private void renderItem(AltarCenterTileEntity te) {
+    private void renderItem(AltarCenterTileEntity te,  double x, double y, double z) {
         ItemStack stack = te.getStack();
         if (stack != null) {
             RenderHelper.enableStandardItemLighting();
             GlStateManager.enableLighting();
             GlStateManager.pushMatrix();
             // Translate to the center of the block and .9 points higher
-            GlStateManager.translate(.5, .9, .5);
+            GlStateManager.translate(x + .5, y + .9, z + .5);
             GlStateManager.scale(.4f, .4f, .4f);
 
             Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
