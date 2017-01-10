@@ -33,6 +33,13 @@ public class SpiritWorldProvider extends AbstractWorldProvider {
     }
 
     @Override
+    protected void setup() {
+        super.setup();
+        this.hasSkyLight = false;
+        this.hasNoSky = true;
+    }
+
+    @Override
     public int getActualHeight() {
         return 256;
     }
