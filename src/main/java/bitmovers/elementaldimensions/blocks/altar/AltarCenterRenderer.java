@@ -6,17 +6,11 @@ import bitmovers.elementaldimensions.client.RenderTools;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -57,7 +51,7 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
     }
 
     private void renderItem(AltarCenterTileEntity te,  double x, double y, double z) {
-        ItemStack stack = te.getStack();
+        ItemStack stack = te.getChargingItem();
         if (ItemStackTools.isValid(stack)) {
             RenderHelper.enableStandardItemLighting();
             GlStateManager.disableRescaleNormal();

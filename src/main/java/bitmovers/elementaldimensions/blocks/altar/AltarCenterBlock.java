@@ -27,6 +27,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
@@ -54,7 +56,8 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         TileEntity te = world.getTileEntity(data.getPos());
         if (te instanceof AltarCenterTileEntity) {
             AltarCenterTileEntity altar = (AltarCenterTileEntity) te;
-            int dust = altar.getDust();
+            ItemStack dustStack = altar.getDust();
+            int dust = ItemStackTools.isValid(dustStack) ? ItemStackTools.getStackSize(dustStack) : 0;
             probeInfo.text(TextFormatting.GREEN + "Dust: " + TextFormatting.WHITE + dust);
         }
     }
@@ -111,16 +114,17 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
     protected boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, EnumHand hand, IBlockState state, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             ItemStack heldItem = player.getHeldItem(hand);
-            AltarCenterTileEntity te = getTE(world, pos);
+            AltarCenterTileEntity altar = getTE(world, pos);
 
             if (ItemStackTools.isValid(heldItem) && heldItem.getItem() == ItemRegister.elementalDustItem) {
-                te.addDust(ItemStackTools.getStackSize(heldItem));
-                player.setHeldItem(EnumHand.MAIN_HAND, ItemStackTools.getEmptyStack());
-            } else if (ItemStackTools.isEmpty(te.getStack())) {
+                IItemHandler handler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+                ItemStack remainder = handler.insertItem(0, heldItem, false);
+                player.setHeldItem(EnumHand.MAIN_HAND, remainder);
+            } else if (ItemStackTools.isEmpty(altar.getChargingItem())) {
                 if (ItemStackTools.isValid(heldItem)) {
                     // There is no item in the pedestal and the player is holding an item. We move that item
                     // to the pedestal
-                    te.setStack(heldItem);
+                    altar.setChargingItem(heldItem);
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStackTools.getEmptyStack());
                     // Make sure the client knows about the changes in the player inventory
                     player.openContainer.detectAndSendChanges();
@@ -128,8 +132,8 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
             } else {
                 // There is a stack in the pedestal. In this case we remove it and try to put it in the
                 // players inventory if there is room
-                ItemStack stack = te.getStack();
-                te.setStack(ItemStackTools.getEmptyStack());
+                ItemStack stack = altar.getChargingItem();
+                altar.setChargingItem(ItemStackTools.getEmptyStack());
                 if (!player.inventory.addItemStackToInventory(stack)) {
                     // Not possible. Throw item in the world
                     EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), stack);

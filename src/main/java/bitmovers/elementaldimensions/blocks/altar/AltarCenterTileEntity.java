@@ -2,37 +2,35 @@ package bitmovers.elementaldimensions.blocks.altar;
 
 import bitmovers.elementaldimensions.blocks.GenericTileEntity;
 import mcjty.lib.tools.ItemStackTools;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class AltarCenterTileEntity extends GenericTileEntity {
 
     private boolean working = false;
 
-    private int dust = 0;
-    private ItemStack stack = ItemStackTools.getEmptyStack();
+    private ItemStack chargingItem = ItemStackTools.getEmptyStack();
+    private ItemStack dust = ItemStackTools.getEmptyStack();
 
-    public ItemStack getStack() {
-        return stack;
+    public ItemStack getChargingItem() {
+        return chargingItem;
     }
 
-    public void setStack(ItemStack stack) {
-        this.stack = stack;
-        markDirty();
-        if (getWorld() != null) {
-            IBlockState state = getWorld().getBlockState(getPos());
-            getWorld().notifyBlockUpdate(getPos(), state, state, 3);
-        }
+    public void setChargingItem(ItemStack chargingItem) {
+        this.chargingItem = chargingItem;
+        markDirtyClient();
     }
-
 
 
     @Override
@@ -59,17 +57,12 @@ public class AltarCenterTileEntity extends GenericTileEntity {
         markDirtyClient();
     }
 
-    public int getDust() {
+    public ItemStack getDust() {
         return dust;
     }
 
-    public void setDust(int dust) {
+    public void setDust(ItemStack dust) {
         this.dust = dust;
-        markDirty();
-    }
-
-    public void addDust(int dust) {
-        this.dust += dust;
         markDirty();
     }
 
@@ -77,22 +70,31 @@ public class AltarCenterTileEntity extends GenericTileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         if (compound.hasKey("item")) {
-            stack = new ItemStack(compound.getCompoundTag("item"));
+            chargingItem = new ItemStack(compound.getCompoundTag("item"));
         } else {
-            stack = null;
+            chargingItem = null;
         }
+        if (compound.hasKey("dust")) {
+            chargingItem = new ItemStack(compound.getCompoundTag("dust"));
+        } else {
+            chargingItem = null;
+        }
+
         working = compound.getBoolean("working");
-        dust = compound.getInteger("dust");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("working", working);
-        compound.setInteger("dust", dust);
-        if (stack != null) {
+        if (ItemStackTools.isValid(chargingItem)) {
             NBTTagCompound tagCompound = new NBTTagCompound();
-            stack.writeToNBT(tagCompound);
+            chargingItem.writeToNBT(tagCompound);
             compound.setTag("item", tagCompound);
+        }
+        if (ItemStackTools.isValid(dust)) {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            dust.writeToNBT(tagCompound);
+            compound.setTag("dust", tagCompound);
         }
         return super.writeToNBT(compound);
     }
@@ -110,6 +112,30 @@ public class AltarCenterTileEntity extends GenericTileEntity {
         int yCoord = getPos().getY();
         int zCoord = getPos().getZ();
         return new AxisAlignedBB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 3, zCoord + 2);
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return true;
+        }
+        return super.hasCapability(capability, facing);
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (facing == null) {
+                // @todo, more general item handler
+                return (T) new DustItemHandler(this);
+            } else if (facing == EnumFacing.DOWN) {
+                return (T) new ChargeItemHandler(this);
+            } else {
+                return (T) new DustItemHandler(this);
+            }
+        }
+        return super.getCapability(capability, facing);
     }
 
 }
