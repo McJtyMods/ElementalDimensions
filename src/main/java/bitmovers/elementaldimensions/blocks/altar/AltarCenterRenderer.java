@@ -4,6 +4,7 @@ import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.client.RegisteredTESR;
 import bitmovers.elementaldimensions.client.RenderTools;
 import bitmovers.elementaldimensions.init.BlockRegister;
+import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -57,15 +58,17 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
 
     private void renderItem(AltarCenterTileEntity te,  double x, double y, double z) {
         ItemStack stack = te.getStack();
-        if (stack != null) {
+        if (ItemStackTools.isValid(stack)) {
             RenderHelper.enableStandardItemLighting();
-            GlStateManager.enableLighting();
+            GlStateManager.disableRescaleNormal();
+//            GlStateManager.enableLighting();
             GlStateManager.pushMatrix();
             // Translate to the center of the block and .9 points higher
-            GlStateManager.translate(x + .5, y + .9, z + .5);
+            GlStateManager.translate(x + .5, y + 1.5, z + .5);
             GlStateManager.scale(.4f, .4f, .4f);
 
-            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
+            RenderTools.renderItemCustom(stack, 0, .4f, true);
+//            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
 
             GlStateManager.popMatrix();
         }
