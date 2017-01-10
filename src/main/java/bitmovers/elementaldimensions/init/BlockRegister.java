@@ -1,7 +1,6 @@
 package bitmovers.elementaldimensions.init;
 
 import bitmovers.elementaldimensions.blocks.altar.AltarCenterBlock;
-import bitmovers.elementaldimensions.blocks.altar.AltarPedestalBlock;
 import bitmovers.elementaldimensions.blocks.cosmetic.HardDirtBlock;
 import bitmovers.elementaldimensions.blocks.cosmetic.SolidFireBlock;
 import bitmovers.elementaldimensions.blocks.cosmetic.SolidWaterBlock;
@@ -28,7 +27,7 @@ public class BlockRegister {
     public static HardDirtBlock hardDirtBlock;
     public static ElementalDustBlock elementalDustBlock;
     public static AltarCenterBlock altarCenterBlock;
-    public static AltarPedestalBlock altarPedestalBlock;
+//    public static AltarPedestalBlock altarPedestalBlock;
 
     public static Block silverFishStone;
 
@@ -43,12 +42,12 @@ public class BlockRegister {
 
         elementalDustBlock = new ElementalDustBlock();
         altarCenterBlock = new AltarCenterBlock();
-        altarPedestalBlock = new AltarPedestalBlock();
+//        altarPedestalBlock = new AltarPedestalBlock();
     }
 
     public static void initCrafting() {
         GameRegistry.addRecipe(new ItemStack(altarCenterBlock), " D ", "sSs", "sss", 's', ItemRegister.elementalDustItem, 'S', Blocks.GOLD_BLOCK, 'D', Items.EMERALD);
-        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalDustItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
+//        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalDustItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
     }
 
 }

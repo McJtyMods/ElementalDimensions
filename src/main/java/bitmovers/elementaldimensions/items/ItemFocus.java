@@ -10,6 +10,6 @@ public abstract class ItemFocus extends GenericItem {
         super(name);
     }
 
-    public abstract void execute(ItemStack stack, World world, EntityPlayer player);
+    public abstract int execute(ItemStack stack, World world, EntityPlayer player, int dustLevel);
 
 }

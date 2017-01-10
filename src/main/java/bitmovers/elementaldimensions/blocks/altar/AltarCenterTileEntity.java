@@ -1,12 +1,16 @@
 package bitmovers.elementaldimensions.blocks.altar;
 
 import bitmovers.elementaldimensions.blocks.GenericTileEntity;
+import bitmovers.elementaldimensions.init.ItemRegister;
+import bitmovers.elementaldimensions.items.ItemElementalWand;
+import bitmovers.elementaldimensions.util.Config;
 import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,12 +20,25 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class AltarCenterTileEntity extends GenericTileEntity {
+public class AltarCenterTileEntity extends GenericTileEntity implements ITickable {
 
     private boolean working = false;
 
     private ItemStack chargingItem = ItemStackTools.getEmptyStack();
     private ItemStack dust = ItemStackTools.getEmptyStack();
+
+    @Override
+    public void update() {
+        if (working && !getWorld().isRemote) {
+            if (ItemStackTools.isValid(chargingItem) && ItemStackTools.isValid(dust) && chargingItem.getItem() == ItemRegister.elementalWand) {
+                int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
+                if (dustLevel < Config.Wand.maxDust) {
+                    dust.splitStack(1);
+                    ItemElementalWand.setDustLevel(chargingItem, dustLevel);
+                }
+            }
+        }
+    }
 
     public ItemStack getChargingItem() {
         return chargingItem;

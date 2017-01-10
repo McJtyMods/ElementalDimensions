@@ -17,6 +17,20 @@ public class Config {
 
     }
 
+    @Configurable.Class(comment = "Wand settings")
+    public static class Wand {
+
+        @Configurable(comment = "Maximum number of dust to fully charge a wand", minValue = 0, maxValue = 10000000)
+        public static int maxDust = 512;
+
+        @Configurable(comment = "Dust usage for the damage focus", minValue = 0, maxValue = 10000000)
+        public static int damageDustUsage = 4;
+        @Configurable(comment = "Dust usage for the digging focus", minValue = 0, maxValue = 10000000)
+        public static int diggingDustUsage = 1;
+        @Configurable(comment = "Dust usage for the teleport focus", minValue = 0, maxValue = 10000000)
+        public static int teleportDustUsage = 2;
+    }
+
     @Configurable.Class(comment = "Mob settings")
     public static class Mobs {
 

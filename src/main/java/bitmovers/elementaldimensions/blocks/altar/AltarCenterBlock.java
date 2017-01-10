@@ -27,10 +27,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class AltarCenterBlock extends GenericBlock implements ITileEntityProvider {
 
@@ -60,6 +63,15 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
             int dust = ItemStackTools.isValid(dustStack) ? ItemStackTools.getStackSize(dustStack) : 0;
             probeInfo.text(TextFormatting.GREEN + "Dust: " + TextFormatting.WHITE + dust);
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, playerIn, tooltip, advanced);
+        tooltip.add(TextFormatting.GREEN + "This altar can charge the elemental wand");
+        tooltip.add(TextFormatting.GREEN + "Right click with dust and give a redstone");
+        tooltip.add(TextFormatting.GREEN + "signal");
     }
 
     /**

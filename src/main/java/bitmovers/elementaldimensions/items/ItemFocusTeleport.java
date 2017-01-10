@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.items;
 
+import bitmovers.elementaldimensions.util.Config;
 import elec332.core.util.PlayerHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,15 @@ public class ItemFocusTeleport extends ItemFocus {
     }
 
     @Override
-    public void execute(ItemStack stack, World world, EntityPlayer player) {
+    public int execute(ItemStack stack, World world, EntityPlayer player, int dustLevel) {
+        if (dustLevel < Config.Wand.teleportDustUsage) {
+            if (world.isRemote) {
+                PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
+            }
+            return dustLevel;
+        }
+
+
         if (!world.isRemote) {
             Vec3d lookVec = player.getLookVec();
             Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
@@ -37,16 +46,17 @@ public class ItemFocusTeleport extends ItemFocus {
                     EnumFacing hit = position.sideHit;
                     if (hit == EnumFacing.UP) {
                         PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "You cannot teleport there!");
-                        return;
-                    }
-                    if (hit == EnumFacing.DOWN) {
+                    } else if (hit == EnumFacing.DOWN) {
                         player.setPositionAndUpdate(x + .5, y - 2, z + .5);
-                        return;
+                    } else {
+                        player.setPositionAndUpdate(x + .5 + hit.getFrontOffsetX(), y, z + .5 + hit.getFrontOffsetZ());
                     }
-                    player.setPositionAndUpdate(x + .5 + hit.getFrontOffsetX(), y, z + .5 + hit.getFrontOffsetZ());
                 }
             }
         }
+
+        return dustLevel - Config.Wand.teleportDustUsage;
+
     }
 
 }

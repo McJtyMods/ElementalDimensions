@@ -4,6 +4,7 @@ import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import elec332.core.main.ElecCore;
 import elec332.core.network.packets.AbstractPacket;
+import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +34,7 @@ public class PacketPointedEntity extends AbstractPacket {
             EntityPlayer p = messageContext.getServerHandler().playerEntity;
             Entity e = p.getEntityWorld().getEntityByID(i);
             if (e instanceof EntityLiving){
-                if (p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() == ItemRegister.elementalWand && p.getHeldItemOffhand() != null && p.getHeldItemOffhand().getItem() == ItemRegister.focusDamage){
+                if (ItemStackTools.isValid(p.getHeldItemMainhand()) && p.getHeldItemMainhand().getItem() == ItemRegister.elementalWand && p.getHeldItemOffhand() != null && p.getHeldItemOffhand().getItem() == ItemRegister.focusDamage){
                     e.attackEntityFrom(DamageSource.causeIndirectMagicDamage(p, e), 7);
                 }
             }
