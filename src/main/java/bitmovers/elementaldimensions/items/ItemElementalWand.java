@@ -45,6 +45,8 @@ public class ItemElementalWand extends GenericItem {
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, playerIn, tooltip, advanced);
         tooltip.add(TextFormatting.GREEN + "Put in the altar to charge with elemental dust");
+        int dustLevel = getDustLevel(stack);
+        tooltip.add(TextFormatting.GREEN + "Charge: " + TextFormatting.YELLOW + dustLevel + TextFormatting.WHITE + " (max " + Config.Wand.maxDust + ")");
     }
 
     @Override

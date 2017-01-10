@@ -3,6 +3,8 @@ package bitmovers.elementaldimensions.blocks.altar;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.init.ItemRegister;
+import bitmovers.elementaldimensions.items.ItemElementalWand;
+import bitmovers.elementaldimensions.util.Config;
 import mcjty.lib.tools.ItemStackTools;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -62,6 +64,13 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
             ItemStack dustStack = altar.getDust();
             int dust = ItemStackTools.isValid(dustStack) ? ItemStackTools.getStackSize(dustStack) : 0;
             probeInfo.text(TextFormatting.GREEN + "Dust: " + TextFormatting.WHITE + dust);
+            ItemStack chargingItem = altar.getChargingItem();
+            if (ItemStackTools.isValid(chargingItem)) {
+                if (chargingItem.getItem() == ItemRegister.elementalWand) {
+                    probeInfo.progress(ItemElementalWand.getDustLevel(chargingItem), Config.Wand.maxDust);
+//                    probeInfo.text(TextFormatting.GREEN + "Wand charge: " + TextFormatting.YELLOW + ItemElementalWand.getDustLevel(chargingItem));
+                }
+            }
         }
     }
 

@@ -34,7 +34,7 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
                 int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
                 if (dustLevel < Config.Wand.maxDust) {
                     dust.splitStack(1);
-                    ItemElementalWand.setDustLevel(chargingItem, dustLevel);
+                    ItemElementalWand.setDustLevel(chargingItem, dustLevel+1);
                 }
             }
         }
@@ -89,12 +89,12 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
         if (compound.hasKey("item")) {
             chargingItem = new ItemStack(compound.getCompoundTag("item"));
         } else {
-            chargingItem = null;
+            chargingItem = ItemStackTools.getEmptyStack();
         }
         if (compound.hasKey("dust")) {
-            chargingItem = new ItemStack(compound.getCompoundTag("dust"));
+            dust = new ItemStack(compound.getCompoundTag("dust"));
         } else {
-            chargingItem = null;
+            dust = ItemStackTools.getEmptyStack();
         }
 
         working = compound.getBoolean("working");
