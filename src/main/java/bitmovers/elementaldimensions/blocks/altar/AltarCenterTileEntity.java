@@ -17,6 +17,7 @@ public class AltarCenterTileEntity extends GenericTileEntity {
 
     private boolean working = false;
 
+    private int dust = 0;
     private ItemStack stack = ItemStackTools.getEmptyStack();
 
     public ItemStack getStack() {
@@ -58,6 +59,20 @@ public class AltarCenterTileEntity extends GenericTileEntity {
         markDirtyClient();
     }
 
+    public int getDust() {
+        return dust;
+    }
+
+    public void setDust(int dust) {
+        this.dust = dust;
+        markDirty();
+    }
+
+    public void addDust(int dust) {
+        this.dust += dust;
+        markDirty();
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
@@ -67,11 +82,13 @@ public class AltarCenterTileEntity extends GenericTileEntity {
             stack = null;
         }
         working = compound.getBoolean("working");
+        dust = compound.getInteger("dust");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("working", working);
+        compound.setInteger("dust", dust);
         if (stack != null) {
             NBTTagCompound tagCompound = new NBTTagCompound();
             stack.writeToNBT(tagCompound);

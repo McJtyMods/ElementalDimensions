@@ -2,7 +2,11 @@ package bitmovers.elementaldimensions.blocks.altar;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
+import bitmovers.elementaldimensions.init.ItemRegister;
 import mcjty.lib.tools.ItemStackTools;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -17,6 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -41,6 +46,17 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
     @Nonnull
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
         return new AltarCenterTileEntity();
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+        super.addProbeInfo(mode, probeInfo, player, world, blockState, data);
+        TileEntity te = world.getTileEntity(data.getPos());
+        if (te instanceof AltarCenterTileEntity) {
+            AltarCenterTileEntity altar = (AltarCenterTileEntity) te;
+            int dust = altar.getDust();
+            probeInfo.text(TextFormatting.GREEN + "Dust: " + TextFormatting.WHITE + dust);
+        }
     }
 
     /**
@@ -94,12 +110,17 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
     @Override
     protected boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, EnumHand hand, IBlockState state, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
+            ItemStack heldItem = player.getHeldItem(hand);
             AltarCenterTileEntity te = getTE(world, pos);
-            if (ItemStackTools.isEmpty(te.getStack())) {
-                if (ItemStackTools.isValid(player.getHeldItem(hand))) {
+
+            if (ItemStackTools.isValid(heldItem) && heldItem.getItem() == ItemRegister.elementalDustItem) {
+                te.addDust(ItemStackTools.getStackSize(heldItem));
+                player.setHeldItem(EnumHand.MAIN_HAND, ItemStackTools.getEmptyStack());
+            } else if (ItemStackTools.isEmpty(te.getStack())) {
+                if (ItemStackTools.isValid(heldItem)) {
                     // There is no item in the pedestal and the player is holding an item. We move that item
                     // to the pedestal
-                    te.setStack(player.getHeldItem(hand));
+                    te.setStack(heldItem);
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStackTools.getEmptyStack());
                     // Make sure the client knows about the changes in the player inventory
                     player.openContainer.detectAndSendChanges();

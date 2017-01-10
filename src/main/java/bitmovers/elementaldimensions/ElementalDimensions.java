@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.commands.CommandTeleport;
+import bitmovers.elementaldimensions.compat.MainCompatHandler;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.network.PacketPlayerConnect;
 import bitmovers.elementaldimensions.network.PacketPointedEntity;
@@ -75,6 +76,9 @@ public class ElementalDimensions {
         config.refresh();
         NCLayerMain.instance.preInit(event);
         proxy.preInit(event);
+
+        MainCompatHandler.registerWaila();
+        MainCompatHandler.registerTOP();
 
         loadTimer.endPhase(event);
     }

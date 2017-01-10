@@ -3,6 +3,9 @@ package bitmovers.elementaldimensions.blocks.portal;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import elec332.core.world.WorldHelper;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,6 +21,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -84,6 +88,19 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
     @Nonnull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING_HORIZ, DESTINATION);
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+        super.addProbeInfo(mode, probeInfo, player, world, blockState, data);
+        TileEntity te = world.getTileEntity(data.getPos());
+        if (te instanceof PortalDialerTileEntity) {
+            PortalDialerTileEntity dialer = (PortalDialerTileEntity) te;
+            Dimensions destination = dialer.getDestination();
+            if (destination != null) {
+                probeInfo.text(TextFormatting.GREEN + "Dialed too " + TextFormatting.WHITE + destination.getName());
+            }
+        }
     }
 
     @Override
