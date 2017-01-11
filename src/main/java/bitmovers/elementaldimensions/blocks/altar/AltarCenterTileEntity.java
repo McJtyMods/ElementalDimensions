@@ -178,12 +178,12 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         if (compound.hasKey("item")) {
-            chargingItem = new ItemStack(compound.getCompoundTag("item"));
+            chargingItem = ItemStackTools.loadFromNBT(compound.getCompoundTag("item"));
         } else {
             chargingItem = ItemStackTools.getEmptyStack();
         }
         if (compound.hasKey("dust")) {
-            dust = new ItemStack(compound.getCompoundTag("dust"));
+            dust = ItemStackTools.loadFromNBT(compound.getCompoundTag("item"));
         } else {
             dust = ItemStackTools.getEmptyStack();
         }
