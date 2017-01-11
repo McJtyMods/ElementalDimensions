@@ -3,12 +3,13 @@ package bitmovers.elementaldimensions.dimensions.providers;
 import bitmovers.elementaldimensions.dimensions.generators.SpiritChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
 import elec332.core.world.AbstractWorldProvider;
+import mcjty.lib.compat.CompatWorldProvider;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-public class SpiritWorldProvider extends AbstractWorldProvider {
+public class SpiritWorldProvider extends CompatWorldProvider {
 
     @Override
     @Nonnull
@@ -33,10 +34,9 @@ public class SpiritWorldProvider extends AbstractWorldProvider {
     }
 
     @Override
-    protected void setup() {
-        super.setup();
-        this.hasSkyLight = false;
-        this.hasNoSky = true;
+    protected void initialize() {
+        super.initialize();
+        disableSkyLight();
     }
 
     @Override

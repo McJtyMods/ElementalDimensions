@@ -2,7 +2,7 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.EarthChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
-import elec332.core.world.AbstractWorldProvider;
+import mcjty.lib.compat.CompatWorldProvider;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
@@ -12,7 +12,7 @@ import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-public class EarthWorldProvider extends AbstractWorldProvider {
+public class EarthWorldProvider extends CompatWorldProvider {
 
     @Override
     @Nonnull
@@ -33,8 +33,8 @@ public class EarthWorldProvider extends AbstractWorldProvider {
     }
 
     @Override
-    protected void setup() {
-        super.setup();
+    protected void initialize() {
+        super.initialize();
         this.biomeProvider = new BiomeProvider(getWorld().getWorldInfo()) {
 
             @Override
@@ -48,7 +48,6 @@ public class EarthWorldProvider extends AbstractWorldProvider {
             public Biome getBiome(BlockPos pos, @Nonnull Biome defaultBiome) {
                 return Biomes.PLAINS;
             }
-
         };
     }
 
