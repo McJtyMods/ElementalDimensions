@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -19,7 +20,9 @@ import org.lwjgl.opengl.GL11;
 @RegisteredTESR(AltarCenterTileEntity.class)
 public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTileEntity> {
 
-    ResourceLocation blueSphereTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/bluesphere.png");
+    private ResourceLocation blueSphereTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/bluesphere.png");
+
+
 
     @Override
     public void renderTileEntityAt(AltarCenterTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
@@ -41,6 +44,13 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
             this.bindTexture(blueSphereTexture);
             RenderTools.renderBillboardQuadBright(1.2f, 240);
 
+            for (Particle particle : te.getParticles()) {
+                GlStateManager.pushMatrix();
+                Vec3d d = particle.getD();
+                GlStateManager.translate(d.xCoord, d.yCoord, d.zCoord);
+                RenderTools.renderBillboardQuadBrightAlpha(particle.getScale(), 240, particle.getAlpha());
+                GlStateManager.popMatrix();
+            }
 
             GlStateManager.popMatrix();
 
@@ -55,14 +65,10 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
         if (ItemStackTools.isValid(stack)) {
             RenderHelper.enableStandardItemLighting();
             GlStateManager.disableRescaleNormal();
-//            GlStateManager.enableLighting();
             GlStateManager.pushMatrix();
-            // Translate to the center of the block and .9 points higher
             GlStateManager.translate(x + .5, y + 1.5, z + .5);
-//            GlStateManager.scale(.4f, .4f, .4f);
 
             RenderTools.renderItemCustom(stack, 0, .4f, true);
-//            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
 
             GlStateManager.popMatrix();
         }

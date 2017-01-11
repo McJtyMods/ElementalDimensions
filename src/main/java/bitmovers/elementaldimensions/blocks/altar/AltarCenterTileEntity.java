@@ -12,6 +12,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -19,23 +20,82 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class AltarCenterTileEntity extends GenericTileEntity implements ITickable {
 
+    public static final int MAXAGE = 60;
+
     private boolean working = false;
+    private boolean spawnNewParticles = false;
+
+    // Client side only
+    private List<Particle> particles = new ArrayList<>();
+    private int particleTimeout = 10;
 
     private ItemStack chargingItem = ItemStackTools.getEmptyStack();
     private ItemStack dust = ItemStackTools.getEmptyStack();
 
+    private Random random = new Random();
+
+    private Vec3d randVec() {
+        float dx = random.nextFloat() - .5f;
+        float dy = random.nextFloat() - .5f;
+        float dz = random.nextFloat() - .5f;
+        if (Math.abs(dx) < 0.1f && Math.abs(dy) < 0.1f && Math.abs(dz) < 0.1f) {
+            dx = .3f;
+        }
+        return new Vec3d(dx, dy, dz).normalize();
+    }
+
     @Override
     public void update() {
-        if (working && !getWorld().isRemote) {
-            if (ItemStackTools.isValid(chargingItem) && ItemStackTools.isValid(dust) && chargingItem.getItem() == ItemRegister.elementalWand) {
-                int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
-                if (dustLevel < Config.Wand.maxDust) {
-                    dust.splitStack(1);
-                    ItemElementalWand.setDustLevel(chargingItem, dustLevel+1);
+        if (working) {
+            if (getWorld().isRemote) {
+                // Client side animation if needed
+                particleTimeout--;
+                if (particleTimeout <= 0) {
+                    particleTimeout = 10;
+                    // Clean up old particles
+                    if (!particles.isEmpty()) {
+                        List<Particle> newparticles = new ArrayList<>();
+                        for (Particle particle : particles) {
+                            if (particle.getAge() > 0) {
+                                newparticles.add(particle);
+                            }
+                        }
+                        particles = newparticles;
+                    }
+                    if (spawnNewParticles) {
+                        // If this is true we can spawn new particles
+                        particles.add(new Particle(randVec().scale(2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(2), .1f, 128, MAXAGE));
+                    }
                 }
+                for (Particle particle : particles) {
+                    particle.older();
+                    particle.setD(particle.getD().scale(.9));
+//                    if (particle.getAge() > MAXAGE /2) {
+//                        particle.setAlpha(particle.getAlpha()+3);
+//                    } else {
+//                        particle.setAlpha(particle.getAlpha()-3);
+//                    }
+                }
+
+            } else {
+                boolean spawn = false;
+                if (ItemStackTools.isValid(chargingItem) && ItemStackTools.isValid(dust) && chargingItem.getItem() == ItemRegister.elementalWand) {
+                    int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
+                    if (dustLevel < Config.Wand.maxDust) {
+                        dust.splitStack(1);
+                        ItemElementalWand.setDustLevel(chargingItem, dustLevel + 1);
+                        spawn = true;
+                    }
+                }
+                setSpawnNewParticles(spawn);
             }
         }
     }
@@ -52,17 +112,17 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
 
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        boolean working = isWorking();
+//        boolean working = isWorking();
 
         super.onDataPacket(net, packet);
 
-        if (getWorld().isRemote) {
-            // If needed send a render update.
-            boolean newWorking = isWorking();
-            if (newWorking != working) {
-                getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
-            }
-        }
+//        if (getWorld().isRemote) {
+//            // If needed send a render update.
+//            boolean newWorking = isWorking();
+//            if (newWorking != working) {
+//                getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
+//            }
+//        }
     }
 
     public boolean isWorking() {
@@ -70,8 +130,40 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
     }
 
     public void setWorking(int w) {
+        if (working == w > 0) {
+            return;
+        }
         working = w > 0;
         markDirtyClient();
+    }
+
+    public boolean isCharging() {
+        if (!working) {
+            return false;
+        }
+        if (ItemStackTools.isValid(chargingItem) && ItemStackTools.isValid(dust) && chargingItem.getItem() == ItemRegister.elementalWand) {
+            int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
+            if (dustLevel < Config.Wand.maxDust) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isSpawnNewParticles() {
+        return spawnNewParticles;
+    }
+
+    public void setSpawnNewParticles(boolean spawnNewParticles) {
+        if (this.spawnNewParticles == spawnNewParticles) {
+            return;
+        }
+        this.spawnNewParticles = spawnNewParticles;
+        markDirtyClient();
+    }
+
+    public List<Particle> getParticles() {
+        return particles;
     }
 
     public ItemStack getDust() {
@@ -98,11 +190,13 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
         }
 
         working = compound.getBoolean("working");
+        spawnNewParticles = compound.getBoolean("spawnnew");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("working", working);
+        compound.setBoolean("spawnnew", spawnNewParticles);
         if (ItemStackTools.isValid(chargingItem)) {
             NBTTagCompound tagCompound = new NBTTagCompound();
             chargingItem.writeToNBT(tagCompound);
