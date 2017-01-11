@@ -26,7 +26,7 @@ import java.util.Random;
 
 public class AltarCenterTileEntity extends GenericTileEntity implements ITickable {
 
-    public static final int MAXAGE = 60;
+    public static final int MAXAGE = 30;
 
     private boolean working = false;
     private boolean spawnNewParticles = false;
@@ -70,19 +70,18 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
                     }
                     if (spawnNewParticles) {
                         // If this is true we can spawn new particles
-                        particles.add(new Particle(randVec().scale(2), .1f, 128, MAXAGE));
-                        particles.add(new Particle(randVec().scale(2), .1f, 128, MAXAGE));
-                        particles.add(new Particle(randVec().scale(2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(1.2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(1.2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(1.2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(1.2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(1.2), .1f, 128, MAXAGE));
+                        particles.add(new Particle(randVec().scale(1.2), .1f, 128, MAXAGE));
                     }
                 }
                 for (Particle particle : particles) {
                     particle.older();
-                    particle.setD(particle.getD().scale(.9));
-//                    if (particle.getAge() > MAXAGE /2) {
-//                        particle.setAlpha(particle.getAlpha()+3);
-//                    } else {
-//                        particle.setAlpha(particle.getAlpha()-3);
-//                    }
+                    particle.setD(particle.getD().scale(.8));
+                    particle.setAlpha(128 - 4*(MAXAGE - particle.getAge()));
                 }
 
             } else {
