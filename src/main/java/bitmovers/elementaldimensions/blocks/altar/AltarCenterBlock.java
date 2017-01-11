@@ -5,6 +5,7 @@ import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.items.ItemElementalWand;
 import bitmovers.elementaldimensions.util.Config;
+import bitmovers.elementaldimensions.util.InventoryHelper;
 import mcjty.lib.tools.ItemStackTools;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -93,6 +94,27 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         checkRedstone(world, pos);
     }
 
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+
+        if (tileentity instanceof AltarCenterTileEntity) {
+            AltarCenterTileEntity altar = (AltarCenterTileEntity) tileentity;
+            ItemStack dust = altar.getDust();
+            if (ItemStackTools.isValid(dust)) {
+                InventoryHelper.spawnItemStack(worldIn, pos, dust);
+                altar.setDust(ItemStackTools.getEmptyStack());
+            }
+            ItemStack chargedItem = altar.getChargingItem();
+            if (ItemStackTools.isValid(chargedItem)) {
+                InventoryHelper.spawnItemStack(worldIn, pos, chargedItem);
+                altar.setChargingItem(ItemStackTools.getEmptyStack());
+            }
+        }
+
+        super.breakBlock(worldIn, pos, state);
+    }
+
     protected void checkRedstone(World world, BlockPos pos) {
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof AltarCenterTileEntity) {
@@ -104,10 +126,10 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        TileEntity te = world instanceof ChunkCache ? ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
+        TileEntity te = world instanceof ChunkCache ? ((ChunkCache) world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : world.getTileEntity(pos);
         boolean working = false;
         if (te instanceof AltarCenterTileEntity) {
-            working = ((AltarCenterTileEntity)te).isWorking();
+            working = ((AltarCenterTileEntity) te).isWorking();
         }
         return state.withProperty(WORKING, working);
     }
@@ -189,7 +211,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
                 altar.setChargingItem(ItemStackTools.getEmptyStack());
                 if (!player.inventory.addItemStackToInventory(stack)) {
                     // Not possible. Throw item in the world
-                    EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), stack);
+                    EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), stack);
                     world.spawnEntity(entityItem);
                 } else {
                     player.openContainer.detectAndSendChanges();
