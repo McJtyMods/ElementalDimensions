@@ -2,19 +2,21 @@ package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.commands.CommandTeleport;
 import bitmovers.elementaldimensions.compat.MainCompatHandler;
+import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.network.PacketPlayerConnect;
 import bitmovers.elementaldimensions.network.PacketPointedEntity;
 import bitmovers.elementaldimensions.proxy.CommonProxy;
 import bitmovers.elementaldimensions.util.Config;
-import bitmovers.elementaldimensions.util.ElementalDimensionsCreativeTab;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.api.network.ModNetworkHandler;
 import elec332.core.config.ConfigWrapper;
 import elec332.core.network.IElecNetworkHandler;
+import elec332.core.util.AbstractCreativeTab;
 import elec332.core.util.LoadTimer;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.Mod;
@@ -70,8 +72,13 @@ public class ElementalDimensions {
         networkHandler.registerClientPacket(PacketPlayerConnect.class);
         networkHandler.registerServerPacket(PacketPointedEntity.class);
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
-        creativeTab = new ElementalDimensionsCreativeTab();
+        creativeTab = AbstractCreativeTab.create(ElementalDimensions.MODID, new ItemStack(ItemRegister.elementalWand));
+        System.out.println(creativeTab);
+        if (creativeTab == null){
+            throw new RuntimeException();
+        }
         random = new Random();
+
         config.registerConfigWithInnerClasses(new Config());
         config.refresh();
         NCLayerMain.instance.preInit(event);

@@ -44,7 +44,7 @@ public class ItemSchematicCreator extends AbstractItem {
 
     @Nonnull
     @Override
-    protected EnumActionResult onItemUse(EntityPlayer player, EnumHand hand, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUseC(EntityPlayer player, EnumHand hand, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
             if (!stack.hasTagCompound()) {
@@ -68,7 +68,7 @@ public class ItemSchematicCreator extends AbstractItem {
 
     @Nonnull
     @Override
-    protected ActionResult<ItemStack> onItemRightClick(EntityPlayer player, @Nonnull EnumHand hand, World world) {
+    public ActionResult<ItemStack> onItemRightClickC(EntityPlayer player, @Nonnull EnumHand hand, World world) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && stack.hasTagCompound()) {
             String msg = "Created new schematic";

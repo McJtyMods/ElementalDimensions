@@ -71,7 +71,7 @@ public class ElementalDustBlock extends GenericBlock {
     }
 
     @Override
-    protected void getSubBlocks(@Nonnull Item item, List<ItemStack> list, CreativeTabs creativeTab) {
+    public void getSubBlocksC(@Nonnull Item item, List<ItemStack> list, CreativeTabs creativeTab) {
         list.add(new ItemStack(this, 1, 0));
         list.add(new ItemStack(this, 1, 1));
         list.add(new ItemStack(this, 1, 2));

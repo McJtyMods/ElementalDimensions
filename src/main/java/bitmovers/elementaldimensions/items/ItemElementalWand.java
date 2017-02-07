@@ -26,7 +26,7 @@ public class ItemElementalWand extends GenericItem {
 
     @Nonnull
     @Override
-    protected ActionResult<ItemStack> onItemRightClick(EntityPlayer player, @Nonnull EnumHand hand, World world) {
+    public ActionResult<ItemStack> onItemRightClickC(EntityPlayer player, @Nonnull EnumHand hand, World world) {
         ItemStack offhand = player.getHeldItemOffhand();
         ItemStack itemStack = player.getHeldItemMainhand();
         if (!ItemStackHelper.isStackValid(offhand) || !(offhand.getItem() instanceof ItemFocus)) {

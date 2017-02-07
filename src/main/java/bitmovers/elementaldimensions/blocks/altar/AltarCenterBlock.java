@@ -90,7 +90,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
      * block, etc.
      */
     @Override
-    protected void neighborChanged(World world, BlockPos pos, IBlockState state, Block neighbor, BlockPos p_189540_5_) {
+    public void neighborChangedC(World world, BlockPos pos, IBlockState state, Block neighbor, BlockPos p_189540_5_) {
         checkRedstone(world, pos);
     }
 
@@ -186,7 +186,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
 
 
     @Override
-    protected boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, EnumHand hand, IBlockState state, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivatedC(World world, BlockPos pos, EntityPlayer player, EnumHand hand, IBlockState state, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             ItemStack heldItem = player.getHeldItem(hand);
             AltarCenterTileEntity altar = getTE(world, pos);
