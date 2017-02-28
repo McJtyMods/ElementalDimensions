@@ -22,7 +22,7 @@ import java.util.Random;
 /**
  * Created by Elec332 on 5-8-2016.
  */
-@RegisteredWorldGenerator(weight = 394)
+@RegisteredWorldGenerator(weight = 3)
 public class WorldGeneratorPortalDungeon implements IWorldGenerator {
 
     public static final ResourceLocation dungeonResource;

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-@ASMDataProcessor(LoaderState.INITIALIZATION)
+@ASMDataProcessor(LoaderState.POSTINITIALIZATION)
 public class WorldGeneratorHandler implements IASMDataProcessor {
 
     @Override
