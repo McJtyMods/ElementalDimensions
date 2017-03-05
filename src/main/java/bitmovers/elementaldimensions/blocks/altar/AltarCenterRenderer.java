@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-@RegisteredTESR(AltarCenterTileEntity.class)
 public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTileEntity> {
 
     private ResourceLocation blueSphereTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/bluesphere.png");
