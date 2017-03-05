@@ -46,7 +46,7 @@ public class ElementalDimensions {
     public static final String MODNAME = "Elemental Dimensions";
     public static final String VERSION = "0.1.0";
 
-    public static final String MIN_ELECCORE = "1.6.358";
+    public static final String MIN_ELECCORE = "1.7.409";
     public static final String MIN_FORGE10_VER = "12.18.1.2082";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
     public static final String COMPATLAYER_VER = "0.1.0";
