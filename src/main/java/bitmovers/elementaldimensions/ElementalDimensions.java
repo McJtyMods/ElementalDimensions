@@ -46,7 +46,7 @@ public class ElementalDimensions {
     public static final String MODNAME = "Elemental Dimensions";
     public static final String VERSION = "0.0.3";
 
-    public static final String MIN_ELECCORE = "1.6.358";
+    public static final String MIN_ELECCORE = "1.7.409";
     public static final String MIN_FORGE10_VER = "12.18.1.2082";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
     public static final String COMPATLAYER_VER = "0.1.0";
@@ -74,9 +74,6 @@ public class ElementalDimensions {
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
         creativeTab = AbstractCreativeTab.create(ElementalDimensions.MODID, new ItemStack(ItemRegister.elementalWand));
         System.out.println(creativeTab);
-        if (creativeTab == null){
-            throw new RuntimeException();
-        }
         random = new Random();
 
         config.registerConfigWithInnerClasses(new Config());
