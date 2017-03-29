@@ -44,7 +44,7 @@ public class ElementalDimensions {
 
     public static final String MODID = "elementaldimensions";
     public static final String MODNAME = "Elemental Dimensions";
-    public static final String VERSION = "0.1.1";
+    public static final String VERSION = "0.1.2";
 
     public static final String MIN_ELECCORE = "1.7.409";
     public static final String MIN_FORGE10_VER = "12.18.1.2082";
