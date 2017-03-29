@@ -180,9 +180,12 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
     @SuppressWarnings("all")
     private void dropDest(EntityPlayer player){
         if (destination != null){
-            ItemStack s3 = new ItemStack(getItem(destination));
-            if (!player.inventory.addItemStackToInventory(s3)){
-                player.dropItem(s3, true);
+            Item item = getItem(destination);
+            if (item != null) {
+                ItemStack s3 = new ItemStack(item);
+                if (!player.inventory.addItemStackToInventory(s3)) {
+                    player.dropItem(s3, true);
+                }
             }
             destination = null;
             markDirtyClient();
