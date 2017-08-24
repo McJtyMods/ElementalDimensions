@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.items;
 
-import bitmovers.elementaldimensions.DelayedRegister;
+import bitmovers.elementaldimensions.varia.DelayedRegister;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;

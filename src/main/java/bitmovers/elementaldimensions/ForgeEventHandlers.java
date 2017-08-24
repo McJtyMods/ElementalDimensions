@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions;
 
+import bitmovers.elementaldimensions.varia.DelayedRegister;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;

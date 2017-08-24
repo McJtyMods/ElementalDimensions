@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.blocks;
 
-import bitmovers.elementaldimensions.DelayedRegister;
+import bitmovers.elementaldimensions.varia.DelayedRegister;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.compat.top.TOPInfoProvider;
 import elec332.core.tile.AbstractBlock;

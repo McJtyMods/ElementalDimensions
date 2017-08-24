@@ -1,6 +1,6 @@
 package bitmovers.elementaldimensions.init;
 
-import bitmovers.elementaldimensions.DelayedRegister;
+import bitmovers.elementaldimensions.varia.DelayedRegister;
 import bitmovers.elementaldimensions.dimensions.ores.ElementalDustItem;
 import bitmovers.elementaldimensions.items.*;
 import bitmovers.elementaldimensions.ncLayer.dev.ItemSchematicCreator;

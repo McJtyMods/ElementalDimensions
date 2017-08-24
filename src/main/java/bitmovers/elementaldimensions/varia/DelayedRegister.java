@@ -1,5 +1,6 @@
-package bitmovers.elementaldimensions;
+package bitmovers.elementaldimensions.varia;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

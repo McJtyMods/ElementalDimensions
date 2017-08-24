@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.items.GenericItem;
+import bitmovers.elementaldimensions.varia.DelayedRegister;
 import elec332.core.util.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.event.ModelRegistryEvent;
