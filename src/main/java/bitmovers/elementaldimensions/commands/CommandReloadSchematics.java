@@ -2,10 +2,11 @@ package bitmovers.elementaldimensions.commands;
 
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.command.AbstractSubCommand;
-import mcjty.lib.tools.ChatTools;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nonnull;
@@ -22,7 +23,12 @@ public class CommandReloadSchematics extends AbstractSubCommand {
 
     @Override
     public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
-        ChatTools.addChatMessage(sender, new TextComponentString("Schematics reloaded"));
+        ITextComponent component = new TextComponentString("Schematics reloaded");
+        if (sender instanceof EntityPlayer) {
+            ((EntityPlayer) sender).sendStatusMessage(component, false);
+        } else {
+            sender.sendMessage(component);
+        }
         SchematicLoader.INSTANCE.reloadCache();
     }
 

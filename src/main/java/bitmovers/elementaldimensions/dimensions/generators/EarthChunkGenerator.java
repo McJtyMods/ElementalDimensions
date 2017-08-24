@@ -6,7 +6,6 @@ import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.mobs.EntityDirtZombie;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import mcjty.lib.compat.CompatChunkGenerator;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -16,6 +15,7 @@ import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCaves;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -26,7 +26,7 @@ import java.util.Random;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 
-public class EarthChunkGenerator implements CompatChunkGenerator {
+public class EarthChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
@@ -99,11 +99,6 @@ public class EarthChunkGenerator implements CompatChunkGenerator {
     @Override
     public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
         return false;
-    }
-
-    @Override
-    public BlockPos clGetStrongholdGen(World worldIn, String structureName, BlockPos position) {
-        return null;
     }
 
     @Override

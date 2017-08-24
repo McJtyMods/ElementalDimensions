@@ -1,10 +1,8 @@
 package bitmovers.elementaldimensions.blocks.altar;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import bitmovers.elementaldimensions.client.RegisteredTESR;
 import bitmovers.elementaldimensions.client.RenderTools;
 import bitmovers.elementaldimensions.init.BlockRegister;
-import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -60,7 +58,7 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
 
     private void renderItem(AltarCenterTileEntity te,  double x, double y, double z) {
         ItemStack stack = te.getChargingItem();
-        if (ItemStackTools.isValid(stack)) {
+        if (!stack.isEmpty()) {
             RenderHelper.enableStandardItemLighting();
             GlStateManager.disableRescaleNormal();
             GlStateManager.pushMatrix();

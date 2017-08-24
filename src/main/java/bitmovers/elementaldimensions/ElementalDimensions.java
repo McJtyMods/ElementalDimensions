@@ -14,9 +14,8 @@ import elec332.core.api.network.ModNetworkHandler;
 import elec332.core.config.ConfigWrapper;
 import elec332.core.network.IElecNetworkHandler;
 import elec332.core.util.LoadTimer;
-import mcjty.lib.compat.CompatCreativeTabs;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.Mod;
@@ -68,10 +67,10 @@ public class ElementalDimensions {
         networkHandler.registerClientPacket(PacketPlayerConnect.class);
         networkHandler.registerServerPacket(PacketPointedEntity.class);
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
-        creativeTab = new CompatCreativeTabs(ElementalDimensions.MODID) {
+        creativeTab = new CreativeTabs(ElementalDimensions.MODID) {
             @Override
-            protected Item getItem() {
-                return ItemRegister.elementalWand;
+            public ItemStack getTabIconItem() {
+                return new ItemStack(ItemRegister.elementalWand);
             }
         };
         random = new Random();

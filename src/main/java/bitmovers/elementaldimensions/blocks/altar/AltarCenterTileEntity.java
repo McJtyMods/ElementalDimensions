@@ -4,7 +4,6 @@ import bitmovers.elementaldimensions.blocks.GenericTileEntity;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.items.ItemElementalWand;
 import bitmovers.elementaldimensions.util.Config;
-import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -35,8 +34,8 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
     private List<Particle> particles = new ArrayList<>();
     private int particleTimeout = 10;
 
-    private ItemStack chargingItem = ItemStackTools.getEmptyStack();
-    private ItemStack dust = ItemStackTools.getEmptyStack();
+    private ItemStack chargingItem = ItemStack.EMPTY;
+    private ItemStack dust = ItemStack.EMPTY;
 
     private Random random = new Random();
 
@@ -86,7 +85,7 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
 
             } else {
                 boolean spawn = false;
-                if (ItemStackTools.isValid(chargingItem) && ItemStackTools.isValid(dust) && chargingItem.getItem() == ItemRegister.elementalWand) {
+                if (!chargingItem.isEmpty() && !dust.isEmpty() && chargingItem.getItem() == ItemRegister.elementalWand) {
                     int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
                     if (dustLevel < Config.Wand.maxDust) {
                         dust.splitStack(1);
@@ -140,7 +139,7 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
         if (!working) {
             return false;
         }
-        if (ItemStackTools.isValid(chargingItem) && ItemStackTools.isValid(dust) && chargingItem.getItem() == ItemRegister.elementalWand) {
+        if (!chargingItem.isEmpty() && !dust.isEmpty() && chargingItem.getItem() == ItemRegister.elementalWand) {
             int dustLevel = ItemElementalWand.getDustLevel(chargingItem);
             if (dustLevel < Config.Wand.maxDust) {
                 return true;
@@ -178,14 +177,14 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         if (compound.hasKey("item")) {
-            chargingItem = ItemStackTools.loadFromNBT(compound.getCompoundTag("item"));
+            chargingItem = new ItemStack(compound.getCompoundTag("item"));
         } else {
-            chargingItem = ItemStackTools.getEmptyStack();
+            chargingItem = ItemStack.EMPTY;
         }
         if (compound.hasKey("dust")) {
-            dust = ItemStackTools.loadFromNBT(compound.getCompoundTag("item"));
+            dust = new ItemStack(compound.getCompoundTag("item"));
         } else {
-            dust = ItemStackTools.getEmptyStack();
+            dust = ItemStack.EMPTY;
         }
 
         working = compound.getBoolean("working");
@@ -196,12 +195,12 @@ public class AltarCenterTileEntity extends GenericTileEntity implements ITickabl
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("working", working);
         compound.setBoolean("spawnnew", spawnNewParticles);
-        if (ItemStackTools.isValid(chargingItem)) {
+        if (!chargingItem.isEmpty()) {
             NBTTagCompound tagCompound = new NBTTagCompound();
             chargingItem.writeToNBT(tagCompound);
             compound.setTag("item", tagCompound);
         }
-        if (ItemStackTools.isValid(dust)) {
+        if (!dust.isEmpty()) {
             NBTTagCompound tagCompound = new NBTTagCompound();
             dust.writeToNBT(tagCompound);
             compound.setTag("dust", tagCompound);

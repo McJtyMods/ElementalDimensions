@@ -1,13 +1,12 @@
 package bitmovers.elementaldimensions.blocks.altar;
 
 import bitmovers.elementaldimensions.init.ItemRegister;
-import mcjty.lib.compat.CompatItemHandler;
-import mcjty.lib.tools.ItemStackTools;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
-class DustItemHandler implements CompatItemHandler {
+class DustItemHandler implements IItemHandler {
 
     private AltarCenterTileEntity altar;
 
@@ -29,12 +28,12 @@ class DustItemHandler implements CompatItemHandler {
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        if (ItemStackTools.isEmpty(stack) || stack.getItem() != ItemRegister.elementalDustItem) {
+        if (stack.isEmpty() || stack.getItem() != ItemRegister.elementalDustItem) {
             return stack;
         }
 
-        int amount = ItemStackTools.isValid(altar.getDust()) ? ItemStackTools.getStackSize(altar.getDust()) : 0;
-        int stacksize = ItemStackTools.getStackSize(stack);
+        int amount = !altar.getDust().isEmpty() ? altar.getDust().getCount() : 0;
+        int stacksize = stack.getCount();
         int remaining = 0;
         int newamount = amount + stacksize;
         if (newamount > 64) {
@@ -48,7 +47,7 @@ class DustItemHandler implements CompatItemHandler {
         }
 
         if (remaining == 0) {
-            return ItemStackTools.getEmptyStack();
+            return ItemStack.EMPTY;
         } else {
             return new ItemStack(ItemRegister.elementalDustItem, remaining);
         }
@@ -57,23 +56,32 @@ class DustItemHandler implements CompatItemHandler {
     @Nonnull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        if (ItemStackTools.isValid(altar.getChargingItem())) {
-            amount = Math.min(amount, ItemStackTools.getStackSize(altar.getChargingItem()));
+        if (!altar.getChargingItem().isEmpty()) {
+            amount = Math.min(amount, altar.getChargingItem().getCount());
             ItemStack stack;
             if (simulate) {
-                stack = ItemStackTools.setStackSize(altar.getChargingItem().copy(), amount);
+                ItemStack stack1 = altar.getChargingItem().copy();
+                ItemStack result;
+                if (amount <= 0) {
+                    stack1.setCount(0);
+                    result = ItemStack.EMPTY;
+                } else {
+                    stack1.setCount(amount);
+                    result = stack1;
+                }
+                stack = result;
             } else {
                 stack = altar.getChargingItem().splitStack(amount);
                 altar.markDirtyClient();
             }
             return stack;
         } else {
-            return ItemStackTools.getEmptyStack();
+            return ItemStack.EMPTY;
         }
     }
 
     @Override
-    public int getSlotMaxLimit() {
+    public int getSlotLimit(int slot) {
         return 64;
     }
 }

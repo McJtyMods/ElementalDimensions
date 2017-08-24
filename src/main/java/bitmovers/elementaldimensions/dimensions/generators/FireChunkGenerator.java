@@ -4,7 +4,6 @@ import bitmovers.elementaldimensions.dimensions.generators.tools.FireTerrainGene
 import bitmovers.elementaldimensions.mobs.EntityBlaster;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import mcjty.lib.compat.CompatChunkGenerator;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -13,12 +12,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class FireChunkGenerator implements CompatChunkGenerator {
+public class FireChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
@@ -78,11 +78,6 @@ public class FireChunkGenerator implements CompatChunkGenerator {
         }
         return ImmutableList.of();
 
-    }
-
-    @Override
-    public BlockPos clGetStrongholdGen(World worldIn, String structureName, BlockPos position) {
-        return null;
     }
 
     @Override

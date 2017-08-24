@@ -6,7 +6,6 @@ import bitmovers.elementaldimensions.mobs.EntityGhostBoss;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.world.WorldHelper;
-import mcjty.lib.tools.WorldTools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

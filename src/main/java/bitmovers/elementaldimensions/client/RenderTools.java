@@ -1,7 +1,5 @@
 package bitmovers.elementaldimensions.client;
 
-import mcjty.lib.tools.ItemStackTools;
-import mcjty.lib.tools.MinecraftTools;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -61,7 +59,7 @@ public class RenderTools {
 
 
     public static void renderItemCustom(ItemStack is, int rotation, float scale, boolean normal) {
-        if (ItemStackTools.isValid(is)) {
+        if (!is.isEmpty()) {
             GlStateManager.pushMatrix();
 
             GlStateManager.scale(scale, scale, scale);
@@ -80,7 +78,7 @@ public class RenderTools {
         TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 
 //        IBakedModel ibakedmodel = renderItem.getItemModelMesher().getItemModel(is);
-        EntityPlayerSP player = MinecraftTools.getPlayer(Minecraft.getMinecraft());
+        EntityPlayerSP player = Minecraft.getMinecraft().player;
         IBakedModel ibakedmodel = renderItem.getItemModelWithOverrides(is, player.getEntityWorld(), player);
 
         textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);

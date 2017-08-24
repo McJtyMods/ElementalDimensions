@@ -6,7 +6,6 @@ import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.mobs.EntityGhost;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import mcjty.lib.compat.CompatChunkGenerator;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -15,13 +14,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class AirChunkGenerator implements CompatChunkGenerator {
+public class AirChunkGenerator implements IChunkGenerator {
 
     public AirChunkGenerator(World worldObj) {
         this.terraingen = new IslandTerrainGenerator();
@@ -84,11 +84,6 @@ public class AirChunkGenerator implements CompatChunkGenerator {
     @Override
     public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
         return false;
-    }
-
-    @Override
-    public BlockPos clGetStrongholdGen(World worldIn, String structureName, BlockPos position) {
-        return null;
     }
 
     @Override

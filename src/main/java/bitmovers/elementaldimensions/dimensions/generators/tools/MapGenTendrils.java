@@ -1,6 +1,5 @@
 package bitmovers.elementaldimensions.dimensions.generators.tools;
 
-import mcjty.lib.tools.MathTools;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
@@ -82,12 +81,18 @@ public class MapGenTendrils {
                 }
 
                 if (xx >= centerX - 16.0D - d6 * 2.0D && zz >= centerZ - 16.0D - d6 * 2.0D && xx <= centerX + 16.0D + d6 * 2.0D && zz <= centerZ + 16.0D + d6 * 2.0D) {
-                    int i4 = MathTools.floor(xx - d6) - chunkX * 16 - 1;
-                    int l1 = MathTools.floor(xx + d6) - chunkX * 16 + 1;
-                    int j4 = MathTools.floor(yy - d7) - 1;
-                    int i2 = MathTools.floor(yy + d7) + 1;
-                    int k4 = MathTools.floor(zz - d6) - chunkZ * 16 - 1;
-                    int j2 = MathTools.floor(zz + d6) - chunkZ * 16 + 1;
+                    int i7 = (int) (xx - d6);
+                    int i4 = (xx - d6 < i7 ? i7 - 1 : i7) - chunkX * 16 - 1;
+                    int i6 = (int) (xx + d6);
+                    int l1 = (xx + d6 < i6 ? i6 - 1 : i6) - chunkX * 16 + 1;
+                    int i5 = (int) (yy - d7);
+                    int j4 = (yy - d7 < i5 ? i5 - 1 : i5) - 1;
+                    int i3 = (int) (yy + d7);
+                    int i2 = (yy + d7 < i3 ? i3 - 1 : i3) + 1;
+                    int i1 = (int) (zz - d6);
+                    int k4 = (zz - d6 < i1 ? i1 - 1 : i1) - chunkZ * 16 - 1;
+                    int i = (int) (zz + d6);
+                    int j2 = (zz + d6 < i ? i - 1 : i) - chunkZ * 16 + 1;
 
                     if (i4 < 0) {
                         i4 = 0;

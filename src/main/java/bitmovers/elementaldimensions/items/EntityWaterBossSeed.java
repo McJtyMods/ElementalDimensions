@@ -3,7 +3,6 @@ package bitmovers.elementaldimensions.items;
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.mobs.EntityWaterCreepBoss;
 import elec332.core.world.WorldHelper;
-import mcjty.lib.tools.WorldTools;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;

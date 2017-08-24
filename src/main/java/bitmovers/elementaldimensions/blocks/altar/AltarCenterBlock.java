@@ -6,7 +6,6 @@ import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.items.ItemElementalWand;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.InventoryHelper;
-import mcjty.lib.tools.ItemStackTools;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -72,10 +71,10 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         if (te instanceof AltarCenterTileEntity) {
             AltarCenterTileEntity altar = (AltarCenterTileEntity) te;
             ItemStack dustStack = altar.getDust();
-            int dust = ItemStackTools.isValid(dustStack) ? ItemStackTools.getStackSize(dustStack) : 0;
+            int dust = !dustStack.isEmpty() ? dustStack.getCount() : 0;
             probeInfo.text(TextFormatting.GREEN + "Dust: " + TextFormatting.WHITE + dust);
             ItemStack chargingItem = altar.getChargingItem();
-            if (ItemStackTools.isValid(chargingItem)) {
+            if (!chargingItem.isEmpty()) {
                 if (chargingItem.getItem() == ItemRegister.elementalWand) {
                     probeInfo.progress(ItemElementalWand.getDustLevel(chargingItem), Config.Wand.maxDust);
 //                    probeInfo.text(TextFormatting.GREEN + "Wand charge: " + TextFormatting.YELLOW + ItemElementalWand.getDustLevel(chargingItem));
@@ -109,14 +108,14 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         if (tileentity instanceof AltarCenterTileEntity) {
             AltarCenterTileEntity altar = (AltarCenterTileEntity) tileentity;
             ItemStack dust = altar.getDust();
-            if (ItemStackTools.isValid(dust)) {
+            if (!dust.isEmpty()) {
                 InventoryHelper.spawnItemStack(worldIn, pos, dust);
-                altar.setDust(ItemStackTools.getEmptyStack());
+                altar.setDust(ItemStack.EMPTY);
             }
             ItemStack chargedItem = altar.getChargingItem();
-            if (ItemStackTools.isValid(chargedItem)) {
+            if (!chargedItem.isEmpty()) {
                 InventoryHelper.spawnItemStack(worldIn, pos, chargedItem);
-                altar.setChargingItem(ItemStackTools.getEmptyStack());
+                altar.setChargingItem(ItemStack.EMPTY);
             }
         }
 
@@ -200,16 +199,16 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
             ItemStack heldItem = player.getHeldItem(hand);
             AltarCenterTileEntity altar = getTE(world, pos);
 
-            if (ItemStackTools.isValid(heldItem) && heldItem.getItem() == ItemRegister.elementalDustItem) {
+            if (!heldItem.isEmpty() && heldItem.getItem() == ItemRegister.elementalDustItem) {
                 IItemHandler handler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
                 ItemStack remainder = handler.insertItem(0, heldItem, false);
                 player.setHeldItem(EnumHand.MAIN_HAND, remainder);
-            } else if (ItemStackTools.isEmpty(altar.getChargingItem())) {
-                if (ItemStackTools.isValid(heldItem)) {
+            } else if (altar.getChargingItem().isEmpty()) {
+                if (!heldItem.isEmpty()) {
                     // There is no item in the pedestal and the player is holding an item. We move that item
                     // to the pedestal
                     altar.setChargingItem(heldItem);
-                    player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStackTools.getEmptyStack());
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
                     // Make sure the client knows about the changes in the player inventory
                     player.openContainer.detectAndSendChanges();
                 }
@@ -217,7 +216,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
                 // There is a stack in the pedestal. In this case we remove it and try to put it in the
                 // players inventory if there is room
                 ItemStack stack = altar.getChargingItem();
-                altar.setChargingItem(ItemStackTools.getEmptyStack());
+                altar.setChargingItem(ItemStack.EMPTY);
                 if (!player.inventory.addItemStackToInventory(stack)) {
                     // Not possible. Throw item in the world
                     EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), stack);

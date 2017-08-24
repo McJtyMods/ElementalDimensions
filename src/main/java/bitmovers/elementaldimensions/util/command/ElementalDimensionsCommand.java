@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import elec332.core.main.ElecCore;
-import mcjty.lib.compat.CompatCommandBase;
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public class ElementalDimensionsCommand extends CompatCommandBase {
+public class ElementalDimensionsCommand extends CommandBase {
 
     public ElementalDimensionsCommand(){
         aliases = Lists.newArrayList(ElementalDimensions.MODID, "ED", "ed");

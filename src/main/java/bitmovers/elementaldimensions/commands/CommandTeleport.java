@@ -1,11 +1,11 @@
 package bitmovers.elementaldimensions.commands;
 
 import bitmovers.elementaldimensions.util.command.AbstractSubCommand;
-import mcjty.lib.tools.ChatTools;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
@@ -28,7 +28,12 @@ public class CommandTeleport extends AbstractSubCommand {
         try {
             value = Integer.parseInt(args[index]);
         } catch (NumberFormatException e) {
-            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED + "Parameter is not a valid integer!"));
+            ITextComponent component = new TextComponentString(TextFormatting.RED + "Parameter is not a valid integer!");
+            if (sender instanceof EntityPlayer) {
+                ((EntityPlayer) sender).sendStatusMessage(component, false);
+            } else {
+                sender.sendMessage(component);
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             //
         }
@@ -44,9 +49,24 @@ public class CommandTeleport extends AbstractSubCommand {
             y = fetchInt(sender, args, 2, 100);
             z = fetchInt(sender, args, 3, 0);
         } catch (Exception e){
-            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED+"Failed to parse command parameters!"));
-            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED+"Parameters:"));
-            ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED+"<dimid> <x> <y> <z>"));
+            ITextComponent component2 = new TextComponentString(TextFormatting.RED+"Failed to parse command parameters!");
+            if (sender instanceof EntityPlayer) {
+                ((EntityPlayer) sender).sendStatusMessage(component2, false);
+            } else {
+                sender.sendMessage(component2);
+            }
+            ITextComponent component1 = new TextComponentString(TextFormatting.RED+"Parameters:");
+            if (sender instanceof EntityPlayer) {
+                ((EntityPlayer) sender).sendStatusMessage(component1, false);
+            } else {
+                sender.sendMessage(component1);
+            }
+            ITextComponent component = new TextComponentString(TextFormatting.RED+"<dimid> <x> <y> <z>");
+            if (sender instanceof EntityPlayer) {
+                ((EntityPlayer) sender).sendStatusMessage(component, false);
+            } else {
+                sender.sendMessage(component);
+            }
             return;
         }
 
@@ -58,7 +78,12 @@ public class CommandTeleport extends AbstractSubCommand {
                 try {
                     teleportToDimension(player, dim, x, y, z);
                 } catch (IllegalArgumentException e){
-                    ChatTools.addChatMessage(sender, new TextComponentString(TextFormatting.RED + e.getMessage()));
+                    ITextComponent component = new TextComponentString(TextFormatting.RED + e.getMessage());
+                    if (sender instanceof EntityPlayer) {
+                        ((EntityPlayer) sender).sendStatusMessage(component, false);
+                    } else {
+                        sender.sendMessage(component);
+                    }
                 }
             } else {
                 player.setPositionAndUpdate(x, y, z);

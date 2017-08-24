@@ -2,9 +2,9 @@ package bitmovers.elementaldimensions.util.worldgen;
 
 import elec332.core.api.structure.ISchematic;
 import elec332.core.world.schematic.Schematic;
-import mcjty.lib.tools.EntityTools;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
@@ -117,7 +117,9 @@ public class WorldGenHelper {
                     TileEntity tileentity = world.getTileEntity(mpos);
                     if (tileentity instanceof TileEntityMobSpawner) {
                         TileEntityMobSpawner spawner = (TileEntityMobSpawner) tileentity;
-                        EntityTools.setSpawnerEntity(world, spawner, mobId, mobName);
+                        MobSpawnerBaseLogic mobspawnerbaselogic = spawner.getSpawnerBaseLogic();
+                        mobspawnerbaselogic.setEntityId(mobId);
+                        spawner.markDirty();
                     }
                 }
             }

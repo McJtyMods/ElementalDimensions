@@ -2,13 +2,13 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.SpiritChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
-import mcjty.lib.compat.CompatWorldProvider;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-public class SpiritWorldProvider extends CompatWorldProvider {
+public class SpiritWorldProvider extends WorldProvider {
 
     @Override
     @Nonnull
@@ -25,7 +25,7 @@ public class SpiritWorldProvider extends CompatWorldProvider {
     @Override
     @Nonnull
     public IChunkGenerator createChunkGenerator() {
-        return new SpiritChunkGenerator(getWorld());
+        return new SpiritChunkGenerator(world);
     }
 
     public SpiritWorldProvider() {
@@ -33,9 +33,9 @@ public class SpiritWorldProvider extends CompatWorldProvider {
     }
 
     @Override
-    protected void initialize() {
-        super.initialize();
-        disableSkyLight();
+    protected void init() {
+        super.init();
+        hasSkyLight = false;
     }
 
     @Override

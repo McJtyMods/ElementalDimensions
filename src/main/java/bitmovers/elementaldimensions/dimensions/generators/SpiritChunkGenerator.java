@@ -3,7 +3,6 @@ package bitmovers.elementaldimensions.dimensions.generators;
 import bitmovers.elementaldimensions.mobs.EntitySpirit;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import mcjty.lib.compat.CompatChunkGenerator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -13,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.Random;
 
 import static bitmovers.elementaldimensions.dimensions.generators.tools.GeneratorTools.setBlockState;
 
-public class SpiritChunkGenerator implements CompatChunkGenerator {
+public class SpiritChunkGenerator implements IChunkGenerator {
 
     private final World worldObj;
     private Random random;
@@ -102,11 +102,6 @@ public class SpiritChunkGenerator implements CompatChunkGenerator {
     @Override
     public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
         return false;
-    }
-
-    @Override
-    public BlockPos clGetStrongholdGen(World worldIn, String structureName, BlockPos position) {
-        return null;
     }
 
     @Override
