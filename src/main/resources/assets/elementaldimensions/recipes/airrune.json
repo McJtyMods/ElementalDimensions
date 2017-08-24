@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "elementaldimensions:airrune"
+  },
+  "ingredients": [
+    {
+      "item": "elementaldimensions:airrune_part1"
+    },
+    {
+      "item": "elementaldimensions:airrune_part2"
+    },
+    {
+      "item": "elementaldimensions:airrune_part3"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

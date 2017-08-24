@@ -7,13 +7,7 @@ import bitmovers.elementaldimensions.blocks.cosmetic.SolidWaterBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalBaseBlock;
 import bitmovers.elementaldimensions.blocks.portal.PortalDialerBlock;
 import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
-import bitmovers.elementaldimensions.ncLayer.overworldTweaks.blocks.SilverFishStone;
-import bitmovers.elementaldimensions.util.EDResourceLocation;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Created by Elec332 on 4-8-2016.
@@ -44,10 +38,4 @@ public class BlockRegister {
         altarCenterBlock = new AltarCenterBlock();
 //        altarPedestalBlock = new AltarPedestalBlock();
     }
-
-    public static void initCrafting() {
-//        GameRegistry.addRecipe(new ItemStack(altarCenterBlock), " D ", "sSs", "sss", 's', ItemRegister.elementalDustItem, 'S', Blocks.GOLD_BLOCK, 'D', Items.EMERALD);
-//// NOT YET //        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalDustItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
-    }
-
 }

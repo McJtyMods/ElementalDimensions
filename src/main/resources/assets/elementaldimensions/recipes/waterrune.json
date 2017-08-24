@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "elementaldimensions:waterrune"
+  },
+  "ingredients": [
+    {
+      "item": "elementaldimensions:waterrune_part1"
+    },
+    {
+      "item": "elementaldimensions:waterrune_part2"
+    },
+    {
+      "item": "elementaldimensions:waterrune_part3"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

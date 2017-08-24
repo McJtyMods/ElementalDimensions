@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "elementaldimensions:spiritrune"
+  },
+  "ingredients": [
+    {
+      "item": "elementaldimensions:spiritrune_part1"
+    },
+    {
+      "item": "elementaldimensions:spiritrune_part2"
+    },
+    {
+      "item": "elementaldimensions:spiritrune_part3"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

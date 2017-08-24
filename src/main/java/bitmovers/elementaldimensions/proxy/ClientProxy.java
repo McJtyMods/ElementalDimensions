@@ -2,7 +2,6 @@ package bitmovers.elementaldimensions.proxy;
 
 import bitmovers.elementaldimensions.ClientForgeEventHandlers;
 import bitmovers.elementaldimensions.ElementalDimensions;
-import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.mobs.*;
 import bitmovers.elementaldimensions.ncLayer.overworldTweaks.client.ClientBlockHandler;
 import bitmovers.elementaldimensions.sound.MobSounds;
@@ -10,8 +9,6 @@ import bitmovers.elementaldimensions.sound.SoundHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import elec332.core.main.ElecCore;
-import elec332.core.util.RegistryHelper;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EntitySelectors;

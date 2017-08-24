@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "elementaldimensions:altarcenter"
+  },
+  "pattern": [
+    " D ",
+    "sSs",
+    "sss"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "elementaldimensions:elementaldust"
+    },
+    "S": {
+      "item": "minecraft:gold_block"
+    },
+    "D": {
+      "item": "minecraft:emerald"
+    }
+  }
+}

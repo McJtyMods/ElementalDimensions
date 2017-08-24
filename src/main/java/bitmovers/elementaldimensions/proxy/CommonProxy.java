@@ -23,8 +23,6 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-        ItemRegister.initCrafting();
-        BlockRegister.initCrafting();
         MinecraftForge.EVENT_BUS.register(new DimensionEvents());
     }
 

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "elementaldimensions:airbossseed"
+  },
+  "pattern": [
+    " s ",
+    "sSs",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "S": {
+      "item": "minecraft:emerald"
+    }
+  }
+}

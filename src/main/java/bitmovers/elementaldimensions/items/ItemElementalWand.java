@@ -4,7 +4,6 @@ import bitmovers.elementaldimensions.util.Config;
 import elec332.core.util.ItemStackHelper;
 import elec332.core.util.PlayerHelper;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,8 +12,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;

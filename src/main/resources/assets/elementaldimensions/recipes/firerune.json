@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "elementaldimensions:firerune"
+  },
+  "ingredients": [
+    {
+      "item": "elementaldimensions:firerune_part1"
+    },
+    {
+      "item": "elementaldimensions:firerune_part2"
+    },
+    {
+      "item": "elementaldimensions:firerune_part3"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}
