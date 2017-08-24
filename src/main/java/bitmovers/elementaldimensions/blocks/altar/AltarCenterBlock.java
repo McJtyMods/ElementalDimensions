@@ -54,6 +54,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
     @Override
     @SideOnly(Side.CLIENT)
     public void initClient() {
+        super.initClient();
         ClientRegistry.bindTileEntitySpecialRenderer(AltarCenterTileEntity.class, new AltarCenterRenderer());
     }
 

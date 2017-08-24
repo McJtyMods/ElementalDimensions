@@ -54,6 +54,7 @@ public class ElementalDustBlock extends GenericBlock {
         setHarvestLevel("pickaxe", 2);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void initClient() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "oretype=dirt"));
