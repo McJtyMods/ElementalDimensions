@@ -17,6 +17,7 @@ public class LayerGuardEyes implements LayerRenderer<EntityGuard> {
         this.guardRender = renderGuard;
     }
 
+    @Override
     public void doRenderLayer(EntityGuard entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.guardRender.bindTexture(GUARD_EYES);
         GlStateManager.enableBlend();
@@ -31,12 +32,13 @@ public class LayerGuardEyes implements LayerRenderer<EntityGuard> {
         GlStateManager.enableLighting();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.guardRender.getMainModel().render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-        this.guardRender.setLightmap(entitylivingbaseIn, partialTicks);
+        this.guardRender.setLightmap(entitylivingbaseIn);
         GlStateManager.depthMask(true);
         GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
     }
 
+    @Override
     public boolean shouldCombineTextures() {
         return false;
     }

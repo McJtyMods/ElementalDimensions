@@ -63,7 +63,7 @@ public class Config {
         public static float spiritDungeonChance = 0.02f;
 
         @Configurable(comment = "Strength of the wind in the air dimension)", maxValue = 1.0f)
-        public static float windStrength = 0.005f;
+        public static float windStrength = 0.003f;
 
         @Configurable.Class(comment = "Settings for the Air dimension.")
         public static class Air {

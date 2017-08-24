@@ -31,7 +31,7 @@ public class PacketPointedEntity extends AbstractPacket {
     public IMessage onMessageThreadSafe(AbstractPacket abstractPacket, MessageContext messageContext) {
         int i = abstractPacket.networkPackageObject.getInteger("eID");
         if (i > -1){
-            EntityPlayer p = messageContext.getServerHandler().playerEntity;
+            EntityPlayer p = messageContext.getServerHandler().player;
             Entity e = p.getEntityWorld().getEntityByID(i);
             if (e instanceof EntityLiving){
                 if (ItemStackTools.isValid(p.getHeldItemMainhand()) && p.getHeldItemMainhand().getItem() == ItemRegister.elementalWand && ItemStackTools.isValid(p.getHeldItemOffhand()) && p.getHeldItemOffhand().getItem() == ItemRegister.focusDamage){

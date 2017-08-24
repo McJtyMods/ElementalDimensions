@@ -32,7 +32,7 @@ public class ItemFocusDigging extends ItemFocus {
             Vec3d lookVec = player.getLookVec();
             Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
             int distance = 20;  // @todo make configurable
-            Vec3d end = start.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
+            Vec3d end = start.addVector(lookVec.x * distance, lookVec.y * distance, lookVec.z * distance);
             RayTraceResult position = world.rayTraceBlocks(start, end);
             if (position != null && WorldHelper.getBlockAt(world, position.getBlockPos()) != Blocks.BEDROCK) {
                 EntityPlayerMP playerMP = (EntityPlayerMP) player;

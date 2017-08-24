@@ -83,10 +83,9 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         }
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, playerIn, tooltip, advanced);
+    public void addInformationC(@Nonnull ItemStack stack, World world, List<String> tooltip, boolean advanced) {
+        super.addInformationC(stack, world, tooltip, advanced);
         tooltip.add(TextFormatting.GREEN + "This altar can charge the elemental wand");
         tooltip.add(TextFormatting.GREEN + "Right click with dust and give a redstone");
         tooltip.add(TextFormatting.GREEN + "signal");
@@ -167,10 +166,11 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         return false;
     }
 
-    @Override
-    public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
-        return false;
-    }
+
+//    @Override
+//    public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+//        return false;
+//    }
 
     @Override
     public boolean isBlockNormalCube(IBlockState state) {

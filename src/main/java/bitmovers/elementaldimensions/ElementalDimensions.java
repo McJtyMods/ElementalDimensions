@@ -36,10 +36,8 @@ import static bitmovers.elementaldimensions.ElementalDimensions.*;
         version = VERSION,
         dependencies =
                 "required-after:eleccore@[" + MIN_ELECCORE + ",);" +
-                "required-after:compatlayer@[" + ElementalDimensions.COMPATLAYER_VER + ",);" +
-                "after:Forge@[" + ElementalDimensions.MIN_FORGE10_VER + ",);" +
                 "after:forge@[" + ElementalDimensions.MIN_FORGE11_VER + ",)",
-        acceptedMinecraftVersions = "[1.10,1.12)")
+        acceptedMinecraftVersions = "[1.12,1.13)")
 public class ElementalDimensions {
 
     public static final String MODID = "elementaldimensions";
@@ -47,9 +45,7 @@ public class ElementalDimensions {
     public static final String VERSION = "0.1.2";
 
     public static final String MIN_ELECCORE = "1.7.409";
-    public static final String MIN_FORGE10_VER = "12.18.1.2082";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
-    public static final String COMPATLAYER_VER = "0.1.0";
 
     @SidedProxy(clientSide="bitmovers.elementaldimensions.proxy.ClientProxy", serverSide="bitmovers.elementaldimensions.proxy.ServerProxy")
     public static CommonProxy proxy;

@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 
@@ -38,9 +38,12 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/repositories/snapshots/"
     }
+    maven {
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
 }
 
-version = "0.1.2"
+version = "1.12-0.1.2"
 def ENV = System.getenv()
 if (ENV.DRONE_BUILD_NUMBER) {
     version += ".n" + ENV.DRONE_BUILD_NUMBER
@@ -52,9 +55,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 minecraft {
-    version = "1.11.2-13.20.0.2201"
+    version = "1.12.1-14.22.0.2447"
     runDir = "run"
-    mappings = "snapshot_20161227"
+    mappings = "snapshot_20170810"
     useDepAts = true
 }
 
@@ -70,10 +73,12 @@ artifacts {
 
 
 dependencies {
-    deobfCompile "mcp.mobius.waila:Hwyla:1.8.3-B15_1.11"
-    deobfCompile "mezz.jei:jei_1.11.2:4.2.0.210"
-    deobfCompile "mcjty.theoneprobe:TheOneProbe:1.1x-1.4.4-55"
-    deobfCompile "com.github.mcjty:compatlayer:1.11.2-0.1.9"
+    deobfCompile "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12:api"
+    deobfCompile "mezz.jei:jei_1.12:4.7.0.67"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.10-4"
+    deobfCompile "com.github.mcjty:intwheel:1.12-1.2.7"
+    deobfCompile "com.github.mcjty:lostcities:1.12-0.0.17beta"
+    deobfCompile "eleccore-rendering-library:ElecCore:1.12:1.8.428"
 }
 
 jar {

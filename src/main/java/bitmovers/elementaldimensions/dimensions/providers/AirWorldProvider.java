@@ -4,7 +4,7 @@ import bitmovers.elementaldimensions.dimensions.generators.AirChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
 import mcjty.lib.compat.CompatWorldProvider;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 

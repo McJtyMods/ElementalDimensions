@@ -191,7 +191,7 @@ public class EntityWaterCreep extends EntityMob {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return (this.isInWater() ? SoundEvents.ENTITY_GUARDIAN_HURT : SoundEvents.ENTITY_GUARDIAN_HURT_LAND);
     }
 
@@ -261,7 +261,7 @@ public class EntityWaterCreep extends EntityMob {
                 Vec3d vec3d = this.getLook(0.0F);
 
                 for (int i = 0; i < 2; ++i) {
-                    this.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * this.width - vec3d.xCoord * 1.5D, this.posY + this.rand.nextDouble() * this.height - vec3d.yCoord * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width - vec3d.zCoord * 1.5D, 0.0D, 0.0D, 0.0D, new int[0]);
+                    this.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * this.width - vec3d.x * 1.5D, this.posY + this.rand.nextDouble() * this.height - vec3d.y * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width - vec3d.z * 1.5D, 0.0D, 0.0D, 0.0D, new int[0]);
                 }
             }
 
@@ -360,8 +360,8 @@ public class EntityWaterCreep extends EntityMob {
      */
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (!this.isMoving() && !source.isMagicDamage() && source.getSourceOfDamage() instanceof EntityLivingBase) {
-            EntityLivingBase entitylivingbase = (EntityLivingBase) source.getSourceOfDamage();
+        if (!this.isMoving() && !source.isMagicDamage() && source.getTrueSource() instanceof EntityLivingBase) {
+            EntityLivingBase entitylivingbase = (EntityLivingBase) source.getTrueSource();
 
             if (!source.isExplosion()) {
                 entitylivingbase.attackEntityFrom(DamageSource.causeThornsDamage(this), 2.0F);
@@ -384,14 +384,12 @@ public class EntityWaterCreep extends EntityMob {
         return 180;
     }
 
-    /**
-     * Moves the entity based on the specified heading.
-     */
+
     @Override
-    public void moveEntityWithHeading(float strafe, float forward) {
+    public void travel(float strafe, float vertical, float forward) {
         if (this.isServerWorld()) {
             if (this.isInWater()) {
-                this.moveRelative(strafe, forward, 0.1F);
+                this.moveRelative(strafe, vertical, forward, 0.1F);
                 EntityTools.moveEntity(this, this.motionX, this.motionY, this.motionZ); //TODO: COmpat 1.11 -> 1.10
 
                 this.motionX *= 0.8999999761581421D;
@@ -402,10 +400,10 @@ public class EntityWaterCreep extends EntityMob {
                     this.motionY -= 0.005D;
                 }
             } else {
-                super.moveEntityWithHeading(strafe, forward);
+                super.travel(strafe, vertical, forward);
             }
         } else {
-            super.moveEntityWithHeading(strafe, forward);
+            super.travel(strafe, vertical, forward);
         }
     }
 
@@ -427,12 +425,9 @@ public class EntityWaterCreep extends EntityMob {
             return entitylivingbase != null && entitylivingbase.isEntityAlive();
         }
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
         @Override
-        public boolean continueExecuting() {
-            return super.continueExecuting() && (this.theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) > 9.0D);
+        public boolean shouldContinueExecuting() {
+            return super.shouldContinueExecuting() && (this.theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) > 9.0D);
         }
 
         /**

@@ -32,7 +32,7 @@ public class BlockRegister {
     public static Block silverFishStone;
 
     public static void init(){
-        silverFishStone = GameRegistry.register(new SilverFishStone(), new EDResourceLocation("silverFishStone"));
+//        silverFishStone = GameRegistry.register(new SilverFishStone(), new EDResourceLocation("silverFishStone"));
 
         portalDialerBlock = new PortalDialerBlock();
         portalBaseBlock = new PortalBaseBlock();
@@ -46,8 +46,8 @@ public class BlockRegister {
     }
 
     public static void initCrafting() {
-        GameRegistry.addRecipe(new ItemStack(altarCenterBlock), " D ", "sSs", "sss", 's', ItemRegister.elementalDustItem, 'S', Blocks.GOLD_BLOCK, 'D', Items.EMERALD);
-//        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalDustItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
+//        GameRegistry.addRecipe(new ItemStack(altarCenterBlock), " D ", "sSs", "sss", 's', ItemRegister.elementalDustItem, 'S', Blocks.GOLD_BLOCK, 'D', Items.EMERALD);
+//// NOT YET //        GameRegistry.addRecipe(new ItemStack(altarPedestalBlock), " D ", " S ", "sSs", 's', ItemRegister.elementalDustItem, 'S', Blocks.STONE, 'D', Items.DIAMOND);
     }
 
 }

@@ -20,6 +20,7 @@ import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCaves;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -44,8 +45,9 @@ public class EarthChunkGenerator implements CompatChunkGenerator {
         caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
     }
 
+
     @Override
-    public Chunk provideChunk(int x, int z) {
+    public Chunk generateChunk(int x, int z) {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
         terraingen.generate(x, z, chunkprimer);
@@ -86,6 +88,17 @@ public class EarthChunkGenerator implements CompatChunkGenerator {
         }
         return ImmutableList.of();
 
+    }
+
+    @Nullable
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+        return null;
+    }
+
+    @Override
+    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+        return false;
     }
 
     @Override

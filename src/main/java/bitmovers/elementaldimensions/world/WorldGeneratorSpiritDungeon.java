@@ -2,20 +2,14 @@ package bitmovers.elementaldimensions.world;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.SpiritDungeonLocator;
-import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.util.worldgen.RegisteredWorldGenerator;
 import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.api.structure.GenerationType;
-import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
-import elec332.core.world.schematic.Schematic;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 

@@ -1,9 +1,9 @@
 package bitmovers.elementaldimensions.init;
 
+import bitmovers.elementaldimensions.DelayedRegister;
 import bitmovers.elementaldimensions.dimensions.ores.ElementalDustItem;
 import bitmovers.elementaldimensions.items.*;
 import bitmovers.elementaldimensions.ncLayer.dev.ItemSchematicCreator;
-import bitmovers.elementaldimensions.util.EDResourceLocation;
 import elec332.core.main.ElecCore;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -50,7 +50,7 @@ public class ItemRegister {
     public static void init(){
 
         if (ElecCore.developmentEnvironment){
-            GameRegistry.register(new ItemSchematicCreator(), new EDResourceLocation("schematicCreator_DEV"));
+            DelayedRegister.registerLater(new ItemSchematicCreator());
         }
 
         waterBossSeed = new ItemWaterBossSeed();
@@ -88,14 +88,14 @@ public class ItemRegister {
     }
 
     public static void initCrafting() {
-        GameRegistry.addShapelessRecipe(new ItemStack(runeOfAir), new ItemStack(runeOfAirPart1), new ItemStack(runeOfAirPart2), new ItemStack(runeOfAirPart3));
-        GameRegistry.addShapelessRecipe(new ItemStack(runeOfWater), new ItemStack(runeOfWaterPart1), new ItemStack(runeOfWaterPart2), new ItemStack(runeOfWaterPart3));
-        GameRegistry.addShapelessRecipe(new ItemStack(runeOfFire), new ItemStack(runeOfFirePart1), new ItemStack(runeOfFirePart2), new ItemStack(runeOfFirePart3));
-        GameRegistry.addShapelessRecipe(new ItemStack(runeOfSpirit), new ItemStack(runeOfSpiritPart1), new ItemStack(runeOfSpiritPart2), new ItemStack(runeOfSpiritPart3));
-
-        GameRegistry.addRecipe(new ItemStack(waterBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.DIAMOND);
-        GameRegistry.addRecipe(new ItemStack(airBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.EMERALD);
-        GameRegistry.addRecipe(new ItemStack(fireBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.NETHER_STAR);
+//        GameRegistry.addShapelessRecipe(new ItemStack(runeOfAir), new ItemStack(runeOfAirPart1), new ItemStack(runeOfAirPart2), new ItemStack(runeOfAirPart3));
+//        GameRegistry.addShapelessRecipe(new ItemStack(runeOfWater), new ItemStack(runeOfWaterPart1), new ItemStack(runeOfWaterPart2), new ItemStack(runeOfWaterPart3));
+//        GameRegistry.addShapelessRecipe(new ItemStack(runeOfFire), new ItemStack(runeOfFirePart1), new ItemStack(runeOfFirePart2), new ItemStack(runeOfFirePart3));
+//        GameRegistry.addShapelessRecipe(new ItemStack(runeOfSpirit), new ItemStack(runeOfSpiritPart1), new ItemStack(runeOfSpiritPart2), new ItemStack(runeOfSpiritPart3));
+//
+//        GameRegistry.addRecipe(new ItemStack(waterBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.DIAMOND);
+//        GameRegistry.addRecipe(new ItemStack(airBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.EMERALD);
+//        GameRegistry.addRecipe(new ItemStack(fireBossSeed), " s ", "sSs", " s ", 's', Items.WHEAT_SEEDS, 'S', Items.NETHER_STAR);
     }
 
 }

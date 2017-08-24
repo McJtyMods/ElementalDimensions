@@ -1,9 +1,9 @@
 package bitmovers.elementaldimensions.mobs;
 
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -43,7 +43,7 @@ public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
                     Vec3d vec3d = this.getPosition(entitylivingbase, (double) entitylivingbase.height * 0.5D, 1.0F);
                     Vec3d vec3d1 = this.getPosition(livingEntity, (double) livingEntity.getEyeHeight(), 1.0F);
 
-                    if (camera.isBoundingBoxInFrustum(new AxisAlignedBB(vec3d1.xCoord, vec3d1.yCoord, vec3d1.zCoord, vec3d.xCoord, vec3d.yCoord, vec3d.zCoord))) {
+                    if (camera.isBoundingBoxInFrustum(new AxisAlignedBB(vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y, vec3d.z))) {
                         return true;
                     }
                 }
@@ -75,7 +75,7 @@ public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
         if (entitylivingbase != null) {
             float f = entity.getAttackAnimationScale(partialTicks);
             Tessellator tessellator = Tessellator.getInstance();
-            VertexBuffer vertexbuffer = tessellator.getBuffer();
+            BufferBuilder vertexbuffer = tessellator.getBuffer();
             this.bindTexture(GUARDIAN_BEAM_TEXTURE);
             GlStateManager.glTexParameteri(3553, 10242, 10497);
             GlStateManager.glTexParameteri(3553, 10243, 10497);
@@ -96,8 +96,8 @@ public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
             Vec3d vec3d2 = vec3d.subtract(vec3d1);
             double d0 = vec3d2.lengthVector() + 1.0D;
             vec3d2 = vec3d2.normalize();
-            float f5 = (float) Math.acos(vec3d2.yCoord);
-            float f6 = (float) Math.atan2(vec3d2.zCoord, vec3d2.xCoord);
+            float f5 = (float) Math.acos(vec3d2.y);
+            float f6 = (float) Math.atan2(vec3d2.z, vec3d2.x);
             GlStateManager.rotate((((float) Math.PI / 2F) + -f6) * (180F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(f5 * (180F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
             int i = 1;

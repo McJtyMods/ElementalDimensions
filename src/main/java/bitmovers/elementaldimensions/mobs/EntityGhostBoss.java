@@ -90,7 +90,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.isEntityInvulnerable(source)) {
             return false;
-        } else if ("fireball".equals(source.getDamageType()) && source.getEntity() instanceof EntityPlayer) {
+        } else if ("fireball".equals(source.getDamageType()) && source.getTrueSource() instanceof EntityPlayer) {
             super.attackEntityFrom(source, 2000.0F);
             return true;
         } else {
@@ -121,8 +121,9 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
         return SoundEvents.ENTITY_GHAST_AMBIENT;
     }
 
+    @Nullable
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_GHAST_HURT;
     }
 
@@ -244,15 +245,15 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
                 if (this.attackTimer == 20) {
                     double d1 = 4.0D;
                     Vec3d vec3d = this.parentEntity.getLook(1.0F);
-                    double d2 = entitylivingbase.posX - (this.parentEntity.posX + vec3d.xCoord * 4.0D);
-                    double d3 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
-                    double d4 = entitylivingbase.posZ - (this.parentEntity.posZ + vec3d.zCoord * 4.0D);
+                    double d2 = entitylivingbase.posX - (this.parentEntity.posX + vec3d.x * 4.0D);
+                    double d3 = entitylivingbase.getEntityBoundingBox().minY + (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (this.parentEntity.height / 2.0F));
+                    double d4 = entitylivingbase.posZ - (this.parentEntity.posZ + vec3d.z * 4.0D);
                     world.playEvent(null, 1016, new BlockPos(this.parentEntity), 0);
                     EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, this.parentEntity, d2, d3, d4);
                     entitylargefireball.explosionPower = this.parentEntity.getFireballStrength();
-                    entitylargefireball.posX = this.parentEntity.posX + vec3d.xCoord * 4.0D;
-                    entitylargefireball.posY = this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F) + 0.5D;
-                    entitylargefireball.posZ = this.parentEntity.posZ + vec3d.zCoord * 4.0D;
+                    entitylargefireball.posX = this.parentEntity.posX + vec3d.x * 4.0D;
+                    entitylargefireball.posY = this.parentEntity.posY + (this.parentEntity.height / 2.0F) + 0.5D;
+                    entitylargefireball.posZ = this.parentEntity.posZ + vec3d.z * 4.0D;
                     WorldHelper.spawnEntityInWorld(world, entitylargefireball);
                     this.attackTimer = -40;
                 }
@@ -332,7 +333,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
          * Returns whether an in-progress EntityAIBase should continue executing
          */
         @Override
-        public boolean continueExecuting() {
+        public boolean shouldContinueExecuting() {
             return false;
         }
 
@@ -342,9 +343,9 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
         @Override
         public void startExecuting() {
             Random random = this.parentEntity.getRNG();
-            double d0 = this.parentEntity.posX + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d1 = this.parentEntity.posY + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d2 = this.parentEntity.posZ + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            double d0 = this.parentEntity.posX + ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            double d1 = this.parentEntity.posY + ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            double d2 = this.parentEntity.posZ + ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
             this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
         }
     }
@@ -390,7 +391,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
             double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
             AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
 
-            for (int i = 1; (double) i < p_179926_7_; ++i) {
+            for (int i = 1; i < p_179926_7_; ++i) {
                 axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
                 if (!this.parentEntity.getEntityWorld().getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty()) {

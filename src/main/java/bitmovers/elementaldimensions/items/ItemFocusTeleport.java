@@ -31,10 +31,10 @@ public class ItemFocusTeleport extends ItemFocus {
             Vec3d lookVec = player.getLookVec();
             Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
             int distance = 50;  // @todo make configurable
-            Vec3d end = start.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
+            Vec3d end = start.addVector(lookVec.x * distance, lookVec.y * distance, lookVec.z * distance);
             RayTraceResult position = world.rayTraceBlocks(start, end);
             if (position == null) {
-                player.setPositionAndUpdate(end.xCoord, end.yCoord, end.zCoord);
+                player.setPositionAndUpdate(end.x, end.y, end.z);
             } else {
                 BlockPos blockPos = position.getBlockPos();
                 int x = blockPos.getX();

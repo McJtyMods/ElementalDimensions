@@ -17,6 +17,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -39,8 +40,7 @@ public class AirChunkGenerator implements CompatChunkGenerator {
     private MapGenTendrils tendrilGenerator = new MapGenTendrils(BlockRegister.solidWaterBlock.getDefaultState());
 
     @Override
-    @Nonnull
-    public Chunk provideChunk(int x, int z) {
+    public Chunk generateChunk(int x, int z) {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
         terraingen.generate(x, z, chunkprimer);
@@ -73,6 +73,17 @@ public class AirChunkGenerator implements CompatChunkGenerator {
         }
         return ImmutableList.of();
 
+    }
+
+    @Nullable
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+        return null;
+    }
+
+    @Override
+    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+        return false;
     }
 
     @Override

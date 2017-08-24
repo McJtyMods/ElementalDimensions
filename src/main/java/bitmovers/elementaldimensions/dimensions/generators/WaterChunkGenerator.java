@@ -14,6 +14,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public class WaterChunkGenerator implements CompatChunkGenerator {
     }
 
     @Override
-    public Chunk provideChunk(int x, int z) {
+    public Chunk generateChunk(int x, int z) {
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
         terraingen.generate(x, z, chunkprimer);
@@ -58,6 +59,17 @@ public class WaterChunkGenerator implements CompatChunkGenerator {
 
     @Override
     public boolean generateStructures(Chunk chunkIn, int x, int z) {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+        return null;
+    }
+
+    @Override
+    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
         return false;
     }
 

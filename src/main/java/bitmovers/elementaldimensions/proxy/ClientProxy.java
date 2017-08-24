@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.proxy;
 
+import bitmovers.elementaldimensions.ClientForgeEventHandlers;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.mobs.*;
@@ -31,17 +32,14 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent e) {
+        MinecraftForge.EVENT_BUS.register(new ClientForgeEventHandlers());
+
         super.preInit(e);
 
         OBJLoader.INSTANCE.addDomain(ElementalDimensions.MODID);
 
         registerEntityRenderers();
         MobSounds.init();
-        for (Block block : RegistryHelper.getBlockRegistry().getValues()){
-            if (block instanceof GenericBlock){
-                ((GenericBlock) block).initClient();
-            }
-        }
     }
 
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -114,11 +112,11 @@ public class ClientProxy extends CommonProxy {
                 }
 
                 Vec3d vec3d1 = entity.getLook(partialTicks);
-                Vec3d vec3d2 = vec3d.addVector(vec3d1.xCoord * d0, vec3d1.yCoord * d0, vec3d1.zCoord * d0);
+                Vec3d vec3d2 = vec3d.addVector(vec3d1.x * d0, vec3d1.y * d0, vec3d1.z * d0);
                 pointedEntity = null;
                 Vec3d vec3d3 = null;
                 float f = 1.0F;
-                List<Entity> list = ElecCore.proxy.getClientWorld().getEntitiesInAABBexcluding(entity, entity.getEntityBoundingBox().addCoord(vec3d1.xCoord * d0, vec3d1.yCoord * d0, vec3d1.zCoord * d0).expand((double)f, (double)f, (double)f), Predicates.and(EntitySelectors.NOT_SPECTATING, new Predicate<Entity>()
+                List<Entity> list = ElecCore.proxy.getClientWorld().getEntitiesInAABBexcluding(entity, entity.getEntityBoundingBox().offset(vec3d1.x * d0, vec3d1.y * d0, vec3d1.z * d0).expand(f, f, f), Predicates.and(EntitySelectors.NOT_SPECTATING, new Predicate<Entity>()
                 {
                     @Override
                     public boolean apply(@Nullable Entity p_apply_1_)
@@ -130,11 +128,11 @@ public class ClientProxy extends CommonProxy {
 
                 for (int j = 0; j < list.size(); ++j)
                 {
-                    Entity entity1 = (Entity)list.get(j);
-                    AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().expandXyz((double)entity1.getCollisionBorderSize());
+                    Entity entity1 = list.get(j);
+                    AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(entity1.getCollisionBorderSize());
                     RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(vec3d, vec3d2);
 
-                    if (axisalignedbb.isVecInside(vec3d))
+                    if (axisalignedbb.contains(vec3d))
                     {
                         if (d2 >= 0.0D)
                         {

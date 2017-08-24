@@ -38,11 +38,11 @@ public class PortalDungeonLocator {
         if (server == null){
             return null;
         }
-        WorldServer world = server.worldServerForDimension(dim);
+        WorldServer world = server.getWorld(dim);
         ChunkPos chunkPos = new ChunkPos(currentPos);
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                world.getChunkFromChunkCoords(chunkPos.chunkXPos + i, chunkPos.chunkZPos + j);
+                world.getChunkFromChunkCoords(chunkPos.x + i, chunkPos.z + j);
             }
         }
         Chunk chunk = world.getChunkFromBlockCoords(currentPos);

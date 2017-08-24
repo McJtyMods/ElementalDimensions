@@ -2,10 +2,9 @@ package bitmovers.elementaldimensions.dimensions.providers;
 
 import bitmovers.elementaldimensions.dimensions.generators.SpiritChunkGenerator;
 import bitmovers.elementaldimensions.init.DimensionRegister;
-import elec332.core.world.AbstractWorldProvider;
 import mcjty.lib.compat.CompatWorldProvider;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
 
@@ -30,7 +29,7 @@ public class SpiritWorldProvider extends CompatWorldProvider {
     }
 
     public SpiritWorldProvider() {
-        hasNoSky = true;
+        hasSkyLight = false;
     }
 
     @Override

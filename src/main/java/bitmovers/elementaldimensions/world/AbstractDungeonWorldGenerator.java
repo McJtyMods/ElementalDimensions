@@ -1,22 +1,14 @@
 package bitmovers.elementaldimensions.world;
 
-import bitmovers.elementaldimensions.dimensions.AirDungeonLocator;
-import bitmovers.elementaldimensions.dimensions.Dimensions;
-import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
-import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
-import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
 import elec332.core.api.structure.GenerationType;
 import elec332.core.world.StructureTemplate;
-import elec332.core.world.WorldHelper;
 import elec332.core.world.schematic.Schematic;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;

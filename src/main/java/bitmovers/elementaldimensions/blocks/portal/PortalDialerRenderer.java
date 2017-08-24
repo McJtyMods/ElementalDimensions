@@ -26,7 +26,7 @@ public class PortalDialerRenderer extends TileEntitySpecialRenderer<PortalDialer
     ResourceLocation overworldTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/portaloverworld.png");
 
     @Override
-    public void renderTileEntityAt(PortalDialerTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+    public void render(PortalDialerTileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState blockState = getWorld().getBlockState(te.getPos());
         if (blockState.getBlock() != BlockRegister.portalDialerBlock) {
             return;

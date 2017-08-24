@@ -22,9 +22,8 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
     private ResourceLocation blueSphereTexture = new ResourceLocation(ElementalDimensions.MODID, "textures/effects/bluesphere.png");
 
 
-
     @Override
-    public void renderTileEntityAt(AltarCenterTileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+    public void render(AltarCenterTileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState blockState = getWorld().getBlockState(te.getPos());
         if (blockState.getBlock() != BlockRegister.altarCenterBlock) {
             return;
@@ -46,7 +45,7 @@ public class AltarCenterRenderer extends TileEntitySpecialRenderer<AltarCenterTi
             for (Particle particle : te.getParticles()) {
                 GlStateManager.pushMatrix();
                 Vec3d d = particle.getD();
-                GlStateManager.translate(d.xCoord, d.yCoord, d.zCoord);
+                GlStateManager.translate(d.x, d.y, d.z);
                 RenderTools.renderBillboardQuadBrightAlpha(particle.getScale(), 240, particle.getAlpha());
                 GlStateManager.popMatrix();
             }

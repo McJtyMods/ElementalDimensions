@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.blocks;
 
+import bitmovers.elementaldimensions.DelayedRegister;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.compat.top.TOPInfoProvider;
 import elec332.core.tile.AbstractBlock;
@@ -12,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,8 +30,7 @@ public class GenericBlock extends AbstractBlock implements TOPInfoProvider {
         setRegistryName(name);
         setUnlocalizedName(ElementalDimensions.MODID + "." + name);
         setCreativeTab(ElementalDimensions.creativeTab);
-        GameRegistry.register(this);
-        GameRegistry.register(createItemBlock(itemBlockClass), getRegistryName());
+        DelayedRegister.registerLater(this, itemBlockClass, null);
     }
 
     @SideOnly(Side.CLIENT)
