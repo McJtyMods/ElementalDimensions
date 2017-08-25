@@ -32,22 +32,24 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
-        if (validDimension(dimension) && WaterDungeonLocator.isWaterDungeonChunk(world, chunkX, chunkZ)){
+        if (validDimension(dimension)){
             IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_STONE);
             WorldGenHelper.addOreSpawn(ore, Blocks.STONE.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 5, 8, 6, 2, 50);
 
-            Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
-            if (schematic != null) {
-                GenerationType type = GenerationType.NONE;
-                StructureTemplate structure = new StructureTemplate(schematic, type);
-                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
-                pos = world.getTopSolidOrLiquidBlock(pos);
-                if (pos.getY() > WaterTerrainGenerator.SEALEVEL-3) {
-                    return;
+            if (WaterDungeonLocator.isWaterDungeonChunk(world, chunkX, chunkZ)){
+                Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
+                if (schematic != null) {
+                    GenerationType type = GenerationType.NONE;
+                    StructureTemplate structure = new StructureTemplate(schematic, type);
+                    BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(world.getSeed()));
+                    pos = world.getTopSolidOrLiquidBlock(pos);
+                    if (pos.getY() > WaterTerrainGenerator.SEALEVEL - 3) {
+                        return;
+                    }
+                    structure.generateStructure(pos, world, chunkProvider);
+                } else {
+                    throw new IllegalStateException();
                 }
-                structure.generateStructure(pos, world, chunkProvider);
-            } else {
-                throw new IllegalStateException();
             }
         }
     }

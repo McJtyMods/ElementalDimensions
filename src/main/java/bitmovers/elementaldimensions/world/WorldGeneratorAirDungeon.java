@@ -31,18 +31,20 @@ public class WorldGeneratorAirDungeon implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimension = WorldHelper.getDimID(world);
-        if (validDimension(dimension) && AirDungeonLocator.isAirDungeonChunk(world, chunkX, chunkZ)){
+        if (validDimension(dimension)){
             IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_GLASS);
-            WorldGenHelper.addOreSpawn(ore, Blocks.GLASS.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 5, 8, 6, 2, 90);
+            WorldGenHelper.addOreSpawn(ore, Blocks.GLASS.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 8, 13, 12, 2, 90);
 
-            Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
-            if (schematic != null) {
-                GenerationType type = GenerationType.NONE;
-                StructureTemplate structure = new StructureTemplate(schematic, type);
-                BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, random.nextInt(50)+30, new Random(world.getSeed()));
-                structure.generateStructure(pos, world, chunkProvider);
-            } else {
-                throw new IllegalStateException();
+            if (AirDungeonLocator.isAirDungeonChunk(world, chunkX, chunkZ)) {
+                Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
+                if (schematic != null) {
+                    GenerationType type = GenerationType.NONE;
+                    StructureTemplate structure = new StructureTemplate(schematic, type);
+                    BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, random.nextInt(50) + 30, new Random(world.getSeed()));
+                    structure.generateStructure(pos, world, chunkProvider);
+                } else {
+                    throw new IllegalStateException();
+                }
             }
         }
     }
