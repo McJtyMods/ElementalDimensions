@@ -121,7 +121,7 @@ public class PortalDialerBlock extends GenericBlock implements ITileEntityProvid
     }
 
     @Override
-    public boolean onBlockActivatedC(World world, BlockPos pos, EntityPlayer player, EnumHand hand, IBlockState state, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && hand == EnumHand.MAIN_HAND) {
             TileEntity te = WorldHelper.getTileAt(world, pos);
             if (te instanceof PortalDialerTileEntity) {

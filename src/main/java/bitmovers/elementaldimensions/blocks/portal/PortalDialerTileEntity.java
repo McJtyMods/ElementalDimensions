@@ -10,7 +10,6 @@ import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.CustomTeleporter;
 import elec332.core.api.annotations.RegisterTile;
 import elec332.core.util.DirectionHelper;
-import elec332.core.util.ItemStackHelper;
 import elec332.core.util.PlayerHelper;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -156,7 +155,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
 
     public void onActivated(EntityPlayer player){
         ItemStack stack = player.getHeldItemMainhand();
-        if (ItemStackHelper.isStackValid(stack)) {
+        if (!stack.isEmpty()) {
             Item item = stack.getItem();
             if (item instanceof ItemRune){
                 if (getWorld().provider.getDimension() != 0) {
@@ -168,7 +167,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                     return;
                 }
                 dropDest(player);
-                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStackHelper.NULL_STACK);
+                player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 this.destination = dim;
                 markDirtyClient();
             }

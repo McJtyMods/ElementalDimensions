@@ -1,9 +1,9 @@
 package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.util.Config;
-import elec332.core.util.ItemStackHelper;
 import elec332.core.util.PlayerHelper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +13,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemElementalWand extends GenericItem {
@@ -22,12 +22,11 @@ public class ItemElementalWand extends GenericItem {
         super("elementalwand");
     }
 
-    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClickC(EntityPlayer player, @Nonnull EnumHand hand, World world) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand handIn) {
         ItemStack offhand = player.getHeldItemOffhand();
         ItemStack itemStack = player.getHeldItemMainhand();
-        if (!ItemStackHelper.isStackValid(offhand) || !(offhand.getItem() instanceof ItemFocus)) {
+        if (offhand.isEmpty() || !(offhand.getItem() instanceof ItemFocus)) {
             if (world.isRemote) {
                 PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "You need to have a focus item in your off-hand");
             }
@@ -39,8 +38,7 @@ public class ItemElementalWand extends GenericItem {
     }
 
     @Override
-    public void addInformationC(@Nonnull ItemStack stack, World world, List<String> tooltip, boolean advanced) {
-        super.addInformationC(stack, world, tooltip, advanced);
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add(TextFormatting.GREEN + "Put in the altar to charge with elemental dust");
         int dustLevel = getDustLevel(stack);
         tooltip.add(TextFormatting.GREEN + "Charge: " + TextFormatting.YELLOW + dustLevel + TextFormatting.WHITE + " (max " + Config.Wand.maxDust + ")");

@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -22,8 +23,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Random;
 
 public class ElementalDustBlock extends GenericBlock {
@@ -72,7 +71,7 @@ public class ElementalDustBlock extends GenericBlock {
     }
 
     @Override
-    public void getSubBlocksC(@Nonnull Item item, List<ItemStack> list, CreativeTabs creativeTab) {
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> list) {
         list.add(new ItemStack(this, 1, 0));
         list.add(new ItemStack(this, 1, 1));
         list.add(new ItemStack(this, 1, 2));

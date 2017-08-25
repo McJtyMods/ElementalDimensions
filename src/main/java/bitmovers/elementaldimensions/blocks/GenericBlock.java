@@ -1,9 +1,8 @@
 package bitmovers.elementaldimensions.blocks;
 
-import bitmovers.elementaldimensions.varia.DelayedRegister;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.compat.top.TOPInfoProvider;
-import elec332.core.tile.AbstractBlock;
+import bitmovers.elementaldimensions.varia.DelayedRegister;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -22,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class GenericBlock extends AbstractBlock implements TOPInfoProvider {
+public class GenericBlock extends Block implements TOPInfoProvider {
 
     public GenericBlock(String name, Material materialIn) {
         this(name, materialIn, ItemBlock.class);

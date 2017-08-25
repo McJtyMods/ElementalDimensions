@@ -16,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class AltarCenterBlock extends GenericBlock implements ITileEntityProvider {
@@ -84,20 +86,15 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
     }
 
     @Override
-    public void addInformationC(@Nonnull ItemStack stack, World world, List<String> tooltip, boolean advanced) {
-        super.addInformationC(stack, world, tooltip, advanced);
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TextFormatting.GREEN + "This altar can charge the elemental wand");
         tooltip.add(TextFormatting.GREEN + "Right click with dust and give a redstone");
         tooltip.add(TextFormatting.GREEN + "signal");
     }
 
-    /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
-     * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
-     * block, etc.
-     */
     @Override
-    public void neighborChangedC(World world, BlockPos pos, IBlockState state, Block neighbor, BlockPos p_189540_5_) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         checkRedstone(world, pos);
     }
 
@@ -194,7 +191,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
 
 
     @Override
-    public boolean onBlockActivatedC(World world, BlockPos pos, EntityPlayer player, EnumHand hand, IBlockState state, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             ItemStack heldItem = player.getHeldItem(hand);
             AltarCenterTileEntity altar = getTE(world, pos);
