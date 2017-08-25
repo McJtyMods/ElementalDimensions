@@ -106,7 +106,7 @@ public class WorldGenHelper {
     }
 
     // Fix spawners in the structure so they are a specific type
-    public static void fixSpawners(World world, Schematic schematic, BlockPos pos, ResourceLocation mobId, String mobName) {
+    public static void fixSpawners(World world, Schematic schematic, BlockPos pos, ResourceLocation mobId) {
         Random random = new Random(world.getSeed());
         random.nextLong();
         BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();

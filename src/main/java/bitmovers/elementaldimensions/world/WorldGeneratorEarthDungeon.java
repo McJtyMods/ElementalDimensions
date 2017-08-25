@@ -1,5 +1,6 @@
 package bitmovers.elementaldimensions.world;
 
+import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.dimensions.Dimensions;
 import bitmovers.elementaldimensions.dimensions.EarthDungeonLocator;
 import bitmovers.elementaldimensions.dimensions.ores.ElementalDustBlock;
@@ -65,7 +66,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
                     pos =  new BlockPos(pos.getX(), averagey, pos.getZ());
                     structure.generateStructure(pos, world, chunkProvider);
                     WorldGenHelper.fixLootChests(world, schematic, pos);
-                    WorldGenHelper.fixSpawners(world, schematic, pos, new EDResourceLocation("dirtzombie"), "dirtzombie");
+                    WorldGenHelper.fixSpawners(world, schematic, pos, new ResourceLocation(ElementalDimensions.MODID, "ed_dirtzombie"));
 
                     WorldGenHelper.fillWithBlock(world, schematic, pos, averagey, Blocks.DIRT.getDefaultState());
                 } else {
