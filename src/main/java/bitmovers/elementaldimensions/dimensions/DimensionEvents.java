@@ -5,6 +5,7 @@ import bitmovers.elementaldimensions.mobs.EntityGhost;
 import bitmovers.elementaldimensions.mobs.EntityGhostBoss;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.worldgen.WorldGenHelper;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +13,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -88,6 +91,8 @@ public class DimensionEvents {
                     EntityDirtZombieBoss boss = new EntityDirtZombieBoss(evt.world);
                     boss.setPosition(pos.getX(), pos.getY(), pos.getZ());
                     WorldHelper.spawnEntityInWorld(evt.world, boss);
+                    Broadcaster.broadcastDimension(evt.world, new TextComponentString(TextFormatting.RED + "Beware! The boss appears!"));
+
                 }
             }
         }
