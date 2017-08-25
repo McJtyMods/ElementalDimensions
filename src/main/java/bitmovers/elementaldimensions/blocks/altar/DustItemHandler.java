@@ -32,12 +32,12 @@ class DustItemHandler implements IItemHandler {
             return stack;
         }
 
-        int amount = !altar.getDust().isEmpty() ? altar.getDust().getCount() : 0;
+        int amount = altar.getDust().getCount();
         int stacksize = stack.getCount();
         int remaining = 0;
         int newamount = amount + stacksize;
         if (newamount > 64) {
-            remaining = stacksize - (newamount - 64);
+            remaining = newamount - 64;
             newamount = 64;
         }
 
