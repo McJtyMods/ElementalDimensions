@@ -149,7 +149,7 @@ public class WorldGenHelper {
 
     public static void addOreSpawn(IBlockState block, IBlockState targetBlock,
                             World world, Random random, int blockXPos, int blockZPos, int minVeinSize, int maxVeinSize, int chancesToSpawn, int minY, int maxY) {
-        WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize - random.nextInt(maxVeinSize - minVeinSize)), state -> state.getBlock() == targetBlock.getBlock());
+        WorldGenMinable minable = new WorldGenMinable(block, (minVeinSize + random.nextInt(maxVeinSize - minVeinSize)), state -> state.getBlock() == targetBlock.getBlock());
         for (int i = 0 ; i < chancesToSpawn ; i++) {
             int posX = blockXPos + random.nextInt(16);
             int posY = minY + random.nextInt(maxY - minY);
