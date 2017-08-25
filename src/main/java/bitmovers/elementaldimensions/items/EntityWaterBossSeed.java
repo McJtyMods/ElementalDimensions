@@ -33,7 +33,7 @@ public class EntityWaterBossSeed extends EntityItem {
                 if (countdown <= 0) {
                     setDead();
                     EntityWaterCreepBoss boss = new EntityWaterCreepBoss(getEntityWorld());
-                    boss.setPosition(posX, posY, posZ);
+                    boss.setPosition(posX, posY+5, posZ);
                     WorldHelper.spawnEntityInWorld(getEntityWorld(), boss);
                 }
             }
