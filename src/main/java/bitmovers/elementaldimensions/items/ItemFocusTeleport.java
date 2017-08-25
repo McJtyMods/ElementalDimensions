@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.util.Config;
-import elec332.core.util.PlayerHelper;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -21,7 +21,7 @@ public class ItemFocusTeleport extends ItemFocus {
     public int execute(ItemStack stack, World world, EntityPlayer player, int dustLevel) {
         if (dustLevel < Config.Wand.teleportDustUsage) {
             if (world.isRemote) {
-                PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
+                Broadcaster.message(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
             }
             return dustLevel;
         }
@@ -45,7 +45,7 @@ public class ItemFocusTeleport extends ItemFocus {
                 } else {
                     EnumFacing hit = position.sideHit;
                     if (hit == EnumFacing.UP) {
-                        PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "You cannot teleport there!");
+                        Broadcaster.message(player, TextFormatting.RED + "You cannot teleport there!");
                     } else if (hit == EnumFacing.DOWN) {
                         player.setPositionAndUpdate(x + .5, y - 2, z + .5);
                     } else {

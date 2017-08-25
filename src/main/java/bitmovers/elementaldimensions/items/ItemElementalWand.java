@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.util.Config;
-import elec332.core.util.PlayerHelper;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class ItemElementalWand extends GenericItem {
         ItemStack itemStack = player.getHeldItemMainhand();
         if (offhand.isEmpty() || !(offhand.getItem() instanceof ItemFocus)) {
             if (world.isRemote) {
-                PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "You need to have a focus item in your off-hand");
+                Broadcaster.message(player, TextFormatting.RED + "You need to have a focus item in your off-hand");
             }
             return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
         }

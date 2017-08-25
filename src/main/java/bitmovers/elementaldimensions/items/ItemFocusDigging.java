@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.items;
 
 import bitmovers.elementaldimensions.util.Config;
-import elec332.core.util.PlayerHelper;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,7 @@ public class ItemFocusDigging extends ItemFocus {
     public int execute(ItemStack stack, World world, EntityPlayer player, int dustLevel) {
         if (dustLevel < Config.Wand.diggingDustUsage) {
             if (world.isRemote) {
-                PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
+                Broadcaster.message(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
             }
             return dustLevel;
         }

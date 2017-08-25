@@ -8,9 +8,9 @@ import bitmovers.elementaldimensions.items.ItemRune;
 import bitmovers.elementaldimensions.mobs.EntityGuard;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.CustomTeleporter;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import elec332.core.api.annotations.RegisterTile;
 import elec332.core.util.DirectionHelper;
-import elec332.core.util.PlayerHelper;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -94,9 +94,9 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                                 if (destination != null) {
                                     String[] tasks = destination.getTaskDescriptions();
                                     if (tasks != null) {
-                                        PlayerHelper.sendMessageToPlayer(player, TextFormatting.GREEN + "Mortal, here are your tasks:");
+                                        Broadcaster.message(player, TextFormatting.GREEN + "Mortal, here are your tasks:");
                                         for (String task : tasks) {
-                                            PlayerHelper.sendMessageToPlayer(player, task);
+                                            Broadcaster.message(player, task);
                                         }
                                     }
                                 }
@@ -159,7 +159,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
             Item item = stack.getItem();
             if (item instanceof ItemRune){
                 if (getWorld().provider.getDimension() != 0) {
-                    PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "This portal can only go to the overworld!");
+                    Broadcaster.message(player, TextFormatting.RED + "This portal can only go to the overworld!");
                     return;
                 }
                 Dimensions dim = ((ItemRune) item).getDimension(stack);

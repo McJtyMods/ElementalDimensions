@@ -3,7 +3,7 @@ package bitmovers.elementaldimensions.items;
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.network.PacketPointedEntity;
 import bitmovers.elementaldimensions.util.Config;
-import elec332.core.util.PlayerHelper;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -19,7 +19,7 @@ public class ItemFocusDamage extends ItemFocus {
     public int execute(ItemStack stack, World world, EntityPlayer player, int dustLevel) {
         if (dustLevel < Config.Wand.damageDustUsage) {
             if (world.isRemote) {
-                PlayerHelper.sendMessageToPlayer(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
+                Broadcaster.message(player, TextFormatting.RED + "The wand does not contain enough elemental dust!");
             }
             return dustLevel;
         }

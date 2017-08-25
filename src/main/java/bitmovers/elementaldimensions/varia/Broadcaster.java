@@ -2,6 +2,7 @@ package bitmovers.elementaldimensions.varia;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class Broadcaster {
@@ -25,4 +26,7 @@ public class Broadcaster {
         }
     }
 
+    public static void message(EntityPlayer player, String message) {
+        player.sendMessage(new TextComponentString(message));
+    }
 }

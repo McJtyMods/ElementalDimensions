@@ -5,10 +5,10 @@ import bitmovers.elementaldimensions.items.AbstractItem;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.util.DateHelper;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
+import bitmovers.elementaldimensions.varia.Broadcaster;
 import elec332.core.api.util.Area;
 import elec332.core.util.IOUtil;
 import elec332.core.util.NBTHelper;
-import elec332.core.util.PlayerHelper;
 import elec332.core.world.schematic.SchematicHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -55,13 +55,13 @@ public class ItemSchematicCreator extends AbstractItem {
             if (player.isSneaking()) {
                 nbt.addToTag(pos, "pos1");
 
-                PlayerHelper.sendMessageToPlayer(player, "Position 1: "+pos);
-                PlayerHelper.sendMessageToPlayer(player, "Position 2: "+nbt.getPos("pos2"));
+                Broadcaster.message(player, "Position 1: "+pos);
+                Broadcaster.message(player, "Position 2: "+nbt.getPos("pos2"));
             } else {
                 nbt.addToTag(pos, "pos2");
 
-                PlayerHelper.sendMessageToPlayer(player, "Position 1: "+nbt.getPos("pos1"));
-                PlayerHelper.sendMessageToPlayer(player, "Position 2: "+pos);
+                Broadcaster.message(player, "Position 1: "+nbt.getPos("pos1"));
+                Broadcaster.message(player, "Position 2: "+pos);
             }
         }
         return EnumActionResult.SUCCESS;
@@ -89,7 +89,7 @@ public class ItemSchematicCreator extends AbstractItem {
             } catch (Exception e){
                 msg = "Failed to write schematic";
             }
-            PlayerHelper.sendMessageToPlayer(player, msg);
+            Broadcaster.message(player, msg);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
