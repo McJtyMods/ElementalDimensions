@@ -38,7 +38,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension)) {
             IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_DIRT);
-            WorldGenHelper.addOreSpawn(ore, Blocks.DIRT.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 50);
+            WorldGenHelper.addOreSpawn(ore, Blocks.DIRT.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 7, 12, 8, 2, 50);
 
             if (EarthDungeonLocator.isEarthDungeonChunk(world, chunkX, chunkZ)) {
                 Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);

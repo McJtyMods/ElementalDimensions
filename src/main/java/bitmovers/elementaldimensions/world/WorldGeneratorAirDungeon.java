@@ -33,7 +33,7 @@ public class WorldGeneratorAirDungeon implements IWorldGenerator {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && AirDungeonLocator.isAirDungeonChunk(world, chunkX, chunkZ)){
             IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_GLASS);
-            WorldGenHelper.addOreSpawn(ore, Blocks.GLASS.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 90);
+            WorldGenHelper.addOreSpawn(ore, Blocks.GLASS.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 5, 8, 6, 2, 90);
 
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {

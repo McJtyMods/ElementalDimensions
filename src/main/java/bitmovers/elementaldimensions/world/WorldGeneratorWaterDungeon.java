@@ -34,7 +34,7 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
         int dimension = WorldHelper.getDimID(world);
         if (validDimension(dimension) && WaterDungeonLocator.isWaterDungeonChunk(world, chunkX, chunkZ)){
             IBlockState ore = BlockRegister.elementalDustBlock.getDefaultState().withProperty(ElementalDustBlock.ORETYPE, ElementalDustBlock.OreType.ORE_STONE);
-            WorldGenHelper.addOreSpawn(ore, Blocks.STONE.getDefaultState(), world, random, chunkX, chunkZ, 5, 8, 6, 2, 50);
+            WorldGenHelper.addOreSpawn(ore, Blocks.STONE.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 5, 8, 6, 2, 50);
 
             Schematic schematic = SchematicLoader.INSTANCE.getSchematic(dungeonResource);
             if (schematic != null) {
