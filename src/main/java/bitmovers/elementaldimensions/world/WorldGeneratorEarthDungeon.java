@@ -47,6 +47,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
                     StructureTemplate structure = new StructureTemplate(schematic, type);
                     BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 35, new Random(world.getSeed()));
                     structure.generateStructure(pos, world, chunkProvider);
+                    WorldGenHelper.fixSpawners(world, schematic, pos, new ResourceLocation(ElementalDimensions.MODID, "ed_dirtzombie"));
                 } else {
                     throw new IllegalStateException();
                 }
