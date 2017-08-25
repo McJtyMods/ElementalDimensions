@@ -187,7 +187,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                     player.dropItem(s3, true);
                 }
             }
-            destination = null;
+            destination = Dimensions.OVERWORLD;
             markDirtyClient();
         }
     }
