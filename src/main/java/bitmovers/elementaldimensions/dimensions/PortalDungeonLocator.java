@@ -22,12 +22,16 @@ public class PortalDungeonLocator {
     private static final SafelyCachedObject<World> overworld;
 
     public static boolean isPortalChunk(int chunkX, int chunkZ) {
+        // No portals near spawn
+        if (Math.abs(chunkX) < 14 && Math.abs(chunkZ) < 14) {
+            return false;
+        }
         Random random = new Random(getSpecialSeed(chunkX, chunkZ));
         random.nextFloat();
         return random.nextFloat() < Config.Dimensions.portalDungeonChance;
     }
 
-    public static long getSpecialSeed(int chunkX, int chunkZ){
+    public static long getSpecialSeed(int chunkX, int chunkZ) {
         return (overworld.get().getSeed() + chunkX) * 37 + chunkZ * 5 + 113;
     }
 
