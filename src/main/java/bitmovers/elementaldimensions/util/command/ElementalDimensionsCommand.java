@@ -30,7 +30,7 @@ public class ElementalDimensionsCommand extends CommandBase {
 
     @Override
     public String getName() {
-        return ElementalDimensions.MODNAME;
+        return ElementalDimensions.MODID;
     }
 
     @Override
