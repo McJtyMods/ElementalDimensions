@@ -424,7 +424,7 @@ public class EntityWaterCreepBoss extends EntityMob {
          */
         @Override
         public boolean shouldContinueExecuting() {
-            return super.shouldContinueExecuting() && (this.theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) > 9.0D);
+            return super.shouldContinueExecuting() && (this.theEntity.getDistanceSq(this.theEntity.getAttackTarget()) > 9.0D);
         }
 
         /**
@@ -433,7 +433,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         @Override
         public void startExecuting() {
             this.tickCounter = -10;
-            this.theEntity.getNavigator().clearPathEntity();
+            this.theEntity.getNavigator().clearPath();
             this.theEntity.getLookHelper().setLookPositionWithEntity(this.theEntity.getAttackTarget(), 90.0F, 90.0F);
             this.theEntity.isAirBorne = true;
         }
@@ -454,7 +454,7 @@ public class EntityWaterCreepBoss extends EntityMob {
         @Override
         public void updateTask() {
             EntityLivingBase entitylivingbase = this.theEntity.getAttackTarget();
-            this.theEntity.getNavigator().clearPathEntity();
+            this.theEntity.getNavigator().clearPath();
             this.theEntity.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F);
 
             if (!this.theEntity.canEntityBeSeen(entitylivingbase)) {
@@ -544,7 +544,7 @@ public class EntityWaterCreepBoss extends EntityMob {
 
         @Override
         public boolean apply(@Nullable EntityLivingBase p_apply_1_) {
-            return (p_apply_1_ instanceof EntityPlayer) && p_apply_1_.getDistanceSqToEntity(this.parentEntity) > 9.0D;
+            return (p_apply_1_ instanceof EntityPlayer) && p_apply_1_.getDistanceSq(this.parentEntity) > 9.0D;
         }
     }
 }

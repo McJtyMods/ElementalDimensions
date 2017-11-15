@@ -215,7 +215,7 @@ public class EntityBlaster extends EntityMob {
         public void updateTask() {
             --this.attackTime;
             EntityLivingBase entitylivingbase = this.blaze.getAttackTarget();
-            double d0 = this.blaze.getDistanceSqToEntity(entitylivingbase);
+            double d0 = this.blaze.getDistanceSq(entitylivingbase);
 
             if (d0 < 4.0D) {
                 if (this.attackTime <= 0) {
@@ -257,7 +257,7 @@ public class EntityBlaster extends EntityMob {
 
                 this.blaze.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
             } else {
-                this.blaze.getNavigator().clearPathEntity();
+                this.blaze.getNavigator().clearPath();
                 this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
             }
 
