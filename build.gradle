@@ -82,7 +82,7 @@ dependencies {
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.19-11"
     deobfCompile "com.github.mcjty:intwheel:1.12-1.2.7"
     deobfCompile "com.github.mcjty:lostcities:1.12-0.0.17beta"
-    deobfCompile "eleccore-rendering-library:ElecCore:1.12.2:1.8.432"
+    //deobfCompile "eleccore-rendering-library:ElecCore:1.12.2:1.8.432"
 }
 
 jar {
@@ -108,6 +108,5 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-        exclude 'eleccore_at.cfg'
     }
 }
