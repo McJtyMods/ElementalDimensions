@@ -3,6 +3,7 @@ package bitmovers.elementaldimensions.dimensions.ores;
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.init.ItemRegister;
 import elec332.core.world.WorldHelper;
+import mcjty.lib.container.DamageMetadataItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -47,7 +48,7 @@ public class ElementalDustBlock extends GenericBlock {
     public static final PropertyEnum<OreType> ORETYPE = PropertyEnum.create("oretype", OreType.class);
 
     public ElementalDustBlock() {
-        super("elementaldust_ore", Material.ROCK, ElementalDustItemBlock.class);
+        super("elementaldust_ore", Material.ROCK, DamageMetadataItemBlock.class);
         setHardness(3.0f);
         setResistance(5.0f);
         setHarvestLevel("pickaxe", 2);
@@ -75,6 +76,12 @@ public class ElementalDustBlock extends GenericBlock {
         list.add(new ItemStack(this, 1, 0));
         list.add(new ItemStack(this, 1, 1));
         list.add(new ItemStack(this, 1, 2));
+    }
+
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+    {
+        return new ItemStack(this, 1, state.getValue(ORETYPE).ordinal());
     }
 
     @Override
