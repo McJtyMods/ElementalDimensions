@@ -9,6 +9,8 @@ import bitmovers.elementaldimensions.sound.SoundHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import elec332.core.main.ElecCore;
+import mcjty.lib.McJtyLib;
+import mcjty.lib.McJtyLibClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EntitySelectors;
@@ -32,6 +34,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientForgeEventHandlers());
 
         super.preInit(e);
+        McJtyLibClient.preInit(e);
 
         OBJLoader.INSTANCE.addDomain(ElementalDimensions.MODID);
 

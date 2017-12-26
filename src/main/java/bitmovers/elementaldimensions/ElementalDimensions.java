@@ -14,7 +14,10 @@ import elec332.core.api.network.ModNetworkHandler;
 import elec332.core.config.ConfigWrapper;
 import elec332.core.network.IElecNetworkHandler;
 import elec332.core.util.LoadTimer;
+import mcjty.lib.McJtyLib;
+import mcjty.lib.base.ModBase;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -34,14 +37,16 @@ import static bitmovers.elementaldimensions.ElementalDimensions.*;
 @Mod(modid = MODID, name = MODNAME,
         version = VERSION,
         dependencies =
+                "required-after:mcjtylib_ng@[" + ElementalDimensions.MIN_MCJTYLIB_VER + ",);" +
                 "required-after:eleccore@[" + MIN_ELECCORE + ",);" +
                 "after:forge@[" + ElementalDimensions.MIN_FORGE11_VER + ",)",
         acceptedMinecraftVersions = "[1.12,1.13)")
-public class ElementalDimensions {
+public class ElementalDimensions implements ModBase {
 
     public static final String MODID = "elementaldimensions";
     public static final String MODNAME = "Elemental Dimensions";
     public static final String VERSION = "0.1.3";
+    public static final String MIN_MCJTYLIB_VER = "2.5.6";
 
     public static final String MIN_ELECCORE = "1.7.409";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
@@ -61,6 +66,7 @@ public class ElementalDimensions {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        McJtyLib.preInit(event);
         logger = LogManager.getLogger(MODNAME.replace(" ", ""));
         loadTimer = new LoadTimer(logger, MODNAME);
         loadTimer.startPhase(event);
@@ -116,4 +122,13 @@ public class ElementalDimensions {
         PacketPlayerConnect.registerLoginHandler(name, handler);
     }
 
+    @Override
+    public String getModId() {
+        return MODID;
+    }
+
+    @Override
+    public void openManual(EntityPlayer player, int bookindex, String page) {
+        // @todo
+    }
 }
