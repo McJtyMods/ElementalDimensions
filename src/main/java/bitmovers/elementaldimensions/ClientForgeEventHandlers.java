@@ -12,7 +12,7 @@ public class ClientForgeEventHandlers {
 
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event) {
-        for (Block block : RegistryHelper.getBlockRegistry().getValues()){
+        for (Block block : RegistryHelper.getBlockRegistry().getValuesCollection()){
             if (block instanceof GenericBlock){
                 ((GenericBlock) block).initClient();
             }

@@ -49,7 +49,7 @@ public class ElementalDimensions implements ModBase {
     public static final String MIN_MCJTYLIB_VER = "2.6.0";
 
     public static final String MIN_ELECCORE = "1.7.409";
-    public static final String MIN_FORGE11_VER = "13.19.0.2176";
+    public static final String MIN_FORGE11_VER = "14.23.1.2594";
 
     @SidedProxy(clientSide="bitmovers.elementaldimensions.proxy.ClientProxy", serverSide="bitmovers.elementaldimensions.proxy.ServerProxy")
     public static CommonProxy proxy;
