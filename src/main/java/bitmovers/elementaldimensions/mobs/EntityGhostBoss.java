@@ -72,7 +72,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
     }
 
     /**
-     * Called to update the bindings's position/logic.
+     * Called to update the entity's position/logic.
      */
     @Override
     public void onUpdate() {
@@ -84,7 +84,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
     }
 
     /**
-     * Called when the bindings is attacked.
+     * Called when the entity is attacked.
      */
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -147,7 +147,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
     }
 
     /**
-     * Checks if the bindings's current position is a valid location to spawn this bindings.
+     * Checks if the entity's current position is a valid location to spawn this entity.
      */
     @Override
     public boolean getCanSpawnHere() {
@@ -169,7 +169,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
     }
 
     /**
-     * (abstract) Protected helper method to write subclass bindings data to NBT.
+     * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
@@ -178,7 +178,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
     }
 
     /**
-     * (abstract) Protected helper method to read subclass bindings data from NBT.
+     * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
@@ -383,7 +383,7 @@ public class EntityGhostBoss extends EntityFlying implements IMob {
         }
 
         /**
-         * Checks if bindings bounding box is not colliding with terrain
+         * Checks if entity bounding box is not colliding with terrain
          */
         private boolean isNotColliding(double x, double y, double z, double p_179926_7_) {
             double d0 = (x - this.parentEntity.posX) / p_179926_7_;

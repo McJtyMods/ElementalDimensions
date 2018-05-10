@@ -174,7 +174,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     /**
-     * Get number of ticks, at least during which the living bindings will be silent.
+     * Get number of ticks, at least during which the living entity will be silent.
      */
     @Override
     public int getTalkInterval() {
@@ -197,7 +197,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     /**
-     * returns if this bindings triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
     @Override
@@ -216,7 +216,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     /**
-     * Called frequently so the bindings can update its state every tick as required. For example, zombies and skeletons
+     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
     @Override
@@ -336,7 +336,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     /**
-     * Checks that the bindings is not colliding with any blocks / liquids
+     * Checks that the entity is not colliding with any blocks / liquids
      */
     @Override
     public boolean isNotColliding() {
@@ -344,7 +344,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     /**
-     * Checks if the bindings's current position is a valid location to spawn this bindings.
+     * Checks if the entity's current position is a valid location to spawn this entity.
      */
     @Override
     public boolean getCanSpawnHere() {
@@ -352,7 +352,7 @@ public class EntityWaterCreepBoss extends EntityMob {
     }
 
     /**
-     * Called when the bindings is attacked.
+     * Called when the entity is attacked.
      */
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
