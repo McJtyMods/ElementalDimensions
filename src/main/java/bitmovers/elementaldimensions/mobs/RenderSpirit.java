@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 public class RenderSpirit extends RenderLiving<EntitySpirit> {
 
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/bindings/spirit.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/spirit.png");
 
     public static final Factory FACTORY = new Factory();
 

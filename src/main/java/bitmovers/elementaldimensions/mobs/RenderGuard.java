@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 public class RenderGuard extends RenderLiving<EntityGuard> {
 
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/bindings/guard.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/guard.png");
 
     public static final Factory FACTORY = new Factory();
 
