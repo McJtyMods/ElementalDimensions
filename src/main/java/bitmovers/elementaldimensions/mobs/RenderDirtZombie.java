@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 public class RenderDirtZombie extends RenderLiving<EntityDirtZombie> {
 
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/dirtzombie.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/bindings/dirtzombie.png");
 
     public static final Factory FACTORY = new Factory();
 

@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 
 public class RenderBlaster extends RenderLiving<EntityBlaster> {
 
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/blaster.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/bindings/blaster.png");
 
     public static final Factory FACTORY = new Factory();
 

@@ -88,14 +88,14 @@ public class EntityBlaster extends EntityMob {
     }
 
     /**
-     * Gets how bright this entity is.
+     * Gets how bright this bindings is.
      */
     public float getBrightness(float partialTicks) {
         return 1.0F;
     }
 
     /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
+     * Called frequently so the bindings can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate() {
@@ -143,7 +143,7 @@ public class EntityBlaster extends EntityMob {
     }
 
     /**
-     * Returns true if the entity is on fire. Used by render to add the fire effect on rendering.
+     * Returns true if the bindings is on fire. Used by render to add the fire effect on rendering.
      */
     public boolean isBurning() {
         return this.isCharged();

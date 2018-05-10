@@ -22,9 +22,9 @@ import javax.annotation.Nonnull;
 @SideOnly(Side.CLIENT)
 public class RenderWaterCreep extends RenderLiving<EntityWaterCreep> {
 
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/watercreep.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/bindings/watercreep.png");
 
-    private static final ResourceLocation GUARDIAN_BEAM_TEXTURE = new ResourceLocation("textures/entity/guardian_beam.png");
+    private static final ResourceLocation GUARDIAN_BEAM_TEXTURE = new ResourceLocation("textures/bindings/guardian_beam.png");
     int lastModelVersion;
 
     public RenderWaterCreep(RenderManager renderManagerIn) {

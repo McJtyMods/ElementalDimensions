@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class LayerGuardEyes implements LayerRenderer<EntityGuard> {
 
-    private static final ResourceLocation GUARD_EYES = new ResourceLocation("elementaldimensions:textures/entity/guard_eyes.png");
+    private static final ResourceLocation GUARD_EYES = new ResourceLocation("elementaldimensions:textures/bindings/guard_eyes.png");
     private final RenderGuard guardRender;
 
     public LayerGuardEyes(RenderGuard renderGuard) {

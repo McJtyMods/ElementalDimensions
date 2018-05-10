@@ -71,7 +71,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     }
 
     /**
-     * Called to update the entity's position/logic.
+     * Called to update the bindings's position/logic.
      */
     @Override
     public void onUpdate() {
@@ -83,7 +83,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     }
 
     /**
-     * Called when the entity is attacked.
+     * Called when the bindings is attacked.
      */
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -146,7 +146,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     }
 
     /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
+     * Checks if the bindings's current position is a valid location to spawn this bindings.
      */
     @Override
     public boolean getCanSpawnHere() {
@@ -168,7 +168,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     }
 
     /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
+     * (abstract) Protected helper method to write subclass bindings data to NBT.
      */
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
@@ -177,7 +177,7 @@ public class EntityGhost extends EntityFlying implements IMob {
     }
 
     /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
+     * (abstract) Protected helper method to read subclass bindings data from NBT.
      */
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
@@ -385,7 +385,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         }
 
         /**
-         * Checks if entity bounding box is not colliding with terrain
+         * Checks if bindings bounding box is not colliding with terrain
          */
         private boolean isNotColliding(double x, double y, double z, double p_179926_7_) {
             double d0 = (x - this.parentEntity.posX) / p_179926_7_;

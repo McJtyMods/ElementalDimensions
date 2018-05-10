@@ -12,15 +12,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderGhostBoss extends RenderLiving<EntityGhostBoss> {
-    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/entity/ghost_boss.png");
-    private ResourceLocation mobShootingTexture = new ResourceLocation("elementaldimensions:textures/entity/ghost_boss_shooting.png");
+    private ResourceLocation mobTexture = new ResourceLocation("elementaldimensions:textures/bindings/ghost_boss.png");
+    private ResourceLocation mobShootingTexture = new ResourceLocation("elementaldimensions:textures/bindings/ghost_boss_shooting.png");
 
     public RenderGhostBoss(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelGhast(), 2.5F);
     }
 
     /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     * Returns the location of an bindings's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
     protected ResourceLocation getEntityTexture(EntityGhostBoss entity) {
