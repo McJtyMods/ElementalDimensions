@@ -1,0 +1,2 @@
+0.3.0alpha:
+- Made compatible with the latest McJtyLib (3.0.0)
