@@ -176,6 +176,5 @@ curseforge {
             requiredLibrary 'eleccore'
             optionalLibrary 'the-one-probe'
         }
-        addArtifact(apiJar)
     }
 }
