@@ -49,7 +49,7 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
         setHardness(3.0f);
         setResistance(5.0f);
         setSoundType(SoundType.STONE);
-        GameRegistry.registerTileEntity(AltarCenterTileEntity.class, ElementalDimensions.MODID + "_altarcenter");
+        GameRegistry.registerTileEntity(AltarCenterTileEntity.class, ElementalDimensions.MODID + ":altarcenter");
     }
 
     @Override

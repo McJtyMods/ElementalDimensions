@@ -35,7 +35,7 @@ import java.util.Random;
 
 import static bitmovers.elementaldimensions.init.ItemRegister.*;
 
-@RegisterTile(name = ElementalDimensions.MODID + "_portaldialer")
+@RegisterTile(name = ElementalDimensions.MODID + ":portaldialer")
 public class PortalDialerTileEntity extends GenericTileEntity implements ITickable {
 
     public PortalDialerTileEntity(){

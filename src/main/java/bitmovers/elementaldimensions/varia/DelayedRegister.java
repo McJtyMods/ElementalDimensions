@@ -1,10 +1,14 @@
 package bitmovers.elementaldimensions.varia;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
+import mcjty.lib.datafix.fixes.TileEntityNamespace;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.datafix.FixTypes;
+import net.minecraftforge.common.util.ModFixs;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -12,10 +16,12 @@ import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
-public class DelayedRegister {
+public class DelayedRegister { // @todo replace this whole class with McJtyRegister
 
     private static final List<MBlock> blocks = new ArrayList<>();
     private static final List<Item> items = new ArrayList<>();
@@ -43,12 +49,27 @@ public class DelayedRegister {
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
+        ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(ElementalDimensions.MODID, 1);
+        Map<String, String> oldToNewIdMap = new HashMap<>();
         for (MBlock mBlock : blocks) {
             registry.register(mBlock.getBlock());
             if (mBlock.getTileEntityClass() != null) {
-                GameRegistry.registerTileEntity(mBlock.getTileEntityClass(), ElementalDimensions.MODID + "_" + mBlock.getBlock().getRegistryName().getResourcePath());
+                String oldPath = ElementalDimensions.MODID + "_" + mBlock.getBlock().getRegistryName().getResourcePath();
+                String newId = mBlock.getBlock().getRegistryName().toString();
+                GameRegistry.registerTileEntity(mBlock.getTileEntityClass(), newId);
+                oldToNewIdMap.put(oldPath, newId);
+                oldToNewIdMap.put("minecraft:" + oldPath, newId);
             }
         }
+
+        // We used to accidentally register TEs with names like "minecraft:elementaldimensions_altarcenter" instead of "elementaldimensions:altarcenter".
+        // Set up a DataFixer to map these incorrect names to the correct ones, so that we don't break old saved games.
+        // @todo Remove all this if we ever break saved-game compatibility.
+        oldToNewIdMap.put(ElementalDimensions.MODID + "_altarcenter", ElementalDimensions.MODID + ":altarcenter");
+        oldToNewIdMap.put("minecraft:" + ElementalDimensions.MODID + "_altarcenter", ElementalDimensions.MODID + ":altarcenter");
+        oldToNewIdMap.put(ElementalDimensions.MODID + "_portaldialer", ElementalDimensions.MODID + ":portaldialer");
+        oldToNewIdMap.put("minecraft:" + ElementalDimensions.MODID + "_portaldialer", ElementalDimensions.MODID + ":portaldialer");
+        modFixs.registerFix(FixTypes.BLOCK_ENTITY, new TileEntityNamespace(oldToNewIdMap, 1));
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {

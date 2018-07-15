@@ -1,3 +1,6 @@
+0.3.1:
+- Joseph fixed log warnings due to tile entities being registered with names like "minecraft:elementaldimensions_altarcenter" instead of "elementaldimensions:altarcenter".
+
 0.3.0:
 - Made compatible with the latest McJtyLib (3.0.0)
 
