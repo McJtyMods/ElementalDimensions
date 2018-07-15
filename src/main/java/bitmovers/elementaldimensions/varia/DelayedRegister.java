@@ -58,7 +58,7 @@ public class DelayedRegister { // @todo replace this whole class with McJtyRegis
                 String newId = mBlock.getBlock().getRegistryName().toString();
                 GameRegistry.registerTileEntity(mBlock.getTileEntityClass(), newId);
                 oldToNewIdMap.put(oldPath, newId);
-                oldToNewIdMap.put("minecraft:" + oldPath.toLowerCase(), newId);
+                oldToNewIdMap.put("minecraft:" + oldPath, newId);
             }
         }
 
