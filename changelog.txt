@@ -1,4 +1,4 @@
-0.3.1:
+0.3.1 (upcoming):
 - WARNING: Do not load any worlds with Elemental Dimensions 0.3.0 or earlier if you last saved them with Elemental Dimensions 0.3.1 or later!
 - Joseph fixed log warnings due to tile entities being registered with names like "minecraft:elementaldimensions_altarcenter" instead of "elementaldimensions:altarcenter".
 
