@@ -45,7 +45,7 @@ public class ElementalDimensions implements ModBase {
 
     public static final String MODID = "elementaldimensions";
     public static final String MODNAME = "Elemental Dimensions";
-    public static final String VERSION = "0.3.0";
+    public static final String VERSION = "0.3.1";
     public static final String MIN_MCJTYLIB_VER = "3.0.0";
 
     public static final String MIN_ELECCORE = "1.7.409";
