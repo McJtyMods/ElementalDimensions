@@ -29,7 +29,6 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,10 +52,9 @@ public class AltarCenterBlock extends GenericBlock implements ITileEntityProvide
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public void initClient() {
         super.initClient();
-        ClientRegistry.bindTileEntitySpecialRenderer(AltarCenterTileEntity.class, new AltarCenterRenderer());
+        AltarCenterRenderer.register();
     }
 
 
