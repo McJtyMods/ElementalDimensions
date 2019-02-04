@@ -76,7 +76,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public Entity getPointedEntity() {
-        float partialTicks = mc.timer.renderPartialTicks;
+        float partialTicks = mc.getRenderPartialTicks();
         Entity pointedEntity = null;
         Entity entity = this.mc.getRenderViewEntity();
 
