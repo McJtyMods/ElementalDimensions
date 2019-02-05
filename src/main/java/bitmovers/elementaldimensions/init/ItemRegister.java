@@ -4,7 +4,7 @@ import bitmovers.elementaldimensions.varia.DelayedRegister;
 import bitmovers.elementaldimensions.dimensions.ores.ElementalDustItem;
 import bitmovers.elementaldimensions.items.*;
 import bitmovers.elementaldimensions.ncLayer.dev.ItemSchematicCreator;
-import elec332.core.main.ElecCore;
+import elec332.core.ElecCore;
 
 /**
  * Created by Elec332 on 4-8-2016.

@@ -46,7 +46,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
                     GenerationType type = GenerationType.NONE;
                     StructureTemplate structure = new StructureTemplate(schematic, type);
                     BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 35, new Random(world.getSeed()));
-                    structure.generateStructure(pos, world, chunkProvider);
+                    structure.generateStructure(pos, world);
                     WorldGenHelper.fixSpawners(world, schematic, pos, new ResourceLocation(ElementalDimensions.MODID, "ed_dirtzombie"));
                 } else {
                     throw new IllegalStateException();
@@ -65,7 +65,7 @@ public class WorldGeneratorEarthDungeon implements IWorldGenerator {
                         return;
                     }
                     pos =  new BlockPos(pos.getX(), averagey, pos.getZ());
-                    structure.generateStructure(pos, world, chunkProvider);
+                    structure.generateStructure(pos, world);
                     WorldGenHelper.fixLootChests(world, schematic, pos);
                     WorldGenHelper.fixSpawners(world, schematic, pos, new ResourceLocation(ElementalDimensions.MODID, "ed_dirtzombie"));
 

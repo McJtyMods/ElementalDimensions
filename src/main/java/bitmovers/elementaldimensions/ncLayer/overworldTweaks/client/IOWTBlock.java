@@ -5,6 +5,7 @@ import elec332.core.api.client.model.IElecModelBakery;
 import elec332.core.api.client.model.IElecQuadBakery;
 import elec332.core.api.client.model.IElecTemplateBakery;
 import elec332.core.client.model.loading.INoJsonBlock;
+import elec332.core.client.model.loading.INoJsonItem;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * Created by Elec332 on 4-8-2016.
  */
-public interface IOWTBlock extends INoJsonBlock {
+public interface IOWTBlock extends INoJsonBlock, INoJsonItem {
 
     @Override
     @SideOnly(Side.CLIENT)

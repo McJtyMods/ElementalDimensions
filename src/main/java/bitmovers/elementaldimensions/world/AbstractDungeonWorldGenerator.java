@@ -26,7 +26,7 @@ public abstract class AbstractDungeonWorldGenerator implements IWorldGenerator {
                 GenerationType type = getGenerationType(world);
                 StructureTemplate structure = new StructureTemplate(schematic, type);
                 BlockPos pos = randomPos(world, chunkX, chunkZ, random);
-                structure.generateStructure(pos, world, chunkProvider);
+                structure.generateStructure(pos, world);
             } else {
                 throw new IllegalStateException();
             }

@@ -1,6 +1,7 @@
 package bitmovers.elementaldimensions.util;
 
-import elec332.core.config.Configurable;
+
+import elec332.core.api.config.Configurable;
 
 /**
  * Created by Elec332 on 4-8-2016.

@@ -41,7 +41,7 @@ public class DefaultStructureCreator implements IWorldGenerator {
         random.setSeed(ElementalDimensions.random.nextLong());
         StructureTemplate structureTemplate = new StructureTemplate(template, generationType, dimensions);
         if (random.nextInt(100) == 0 && structureTemplate.canSpawnInDimension(WorldHelper.getDimID(world))){
-            structureTemplate.generateStructure(new BlockPos((chunkX << 4) + random.nextInt(16), 30, (chunkZ << 4) + random.nextInt(16)), world, chunkProvider);
+            structureTemplate.generateStructure(new BlockPos((chunkX << 4) + random.nextInt(16), 30, (chunkZ << 4) + random.nextInt(16)), world);
         }
     }
 

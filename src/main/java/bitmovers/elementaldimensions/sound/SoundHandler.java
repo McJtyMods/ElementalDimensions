@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.sound;
 
 import bitmovers.elementaldimensions.dimensions.Dimensions;
-import elec332.core.main.ElecCore;
+import elec332.core.ElecCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

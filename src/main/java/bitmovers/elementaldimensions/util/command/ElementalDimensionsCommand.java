@@ -4,7 +4,7 @@ import bitmovers.elementaldimensions.ElementalDimensions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import elec332.core.main.ElecCore;
+import elec332.core.ElecCore;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

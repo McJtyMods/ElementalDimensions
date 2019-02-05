@@ -27,9 +27,9 @@ public class PacketPlayerConnect extends AbstractPacket {
 
     @Override
     @SuppressWarnings("unchecked")
-    public IMessage onMessageThreadSafe(AbstractPacket abstractPacket, MessageContext messageContext) {
+    public IMessage onMessageThreadSafe(NBTTagCompound abstractPacket, MessageContext messageContext) {
         for (Map.Entry<String, INBTSerializable> entry : map.entrySet()){
-            entry.getValue().deserializeNBT(abstractPacket.networkPackageObject.getTag(entry.getKey()));
+            entry.getValue().deserializeNBT(abstractPacket.getTag(entry.getKey()));
         }
         return null;
     }

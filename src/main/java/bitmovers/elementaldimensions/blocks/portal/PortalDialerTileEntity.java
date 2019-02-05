@@ -9,8 +9,7 @@ import bitmovers.elementaldimensions.mobs.EntityGuard;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.CustomTeleporter;
 import bitmovers.elementaldimensions.varia.Broadcaster;
-import elec332.core.api.annotations.RegisterTile;
-import elec332.core.util.DirectionHelper;
+import elec332.core.api.registration.RegisteredTileEntity;
 import elec332.core.world.WorldHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -35,7 +34,7 @@ import java.util.Random;
 
 import static bitmovers.elementaldimensions.init.ItemRegister.*;
 
-@RegisterTile(name = ElementalDimensions.MODID + ":portaldialer")
+@RegisteredTileEntity(ElementalDimensions.MODID + ":portaldialer")
 public class PortalDialerTileEntity extends GenericTileEntity implements ITickable {
 
     public PortalDialerTileEntity(){
@@ -80,7 +79,7 @@ public class PortalDialerTileEntity extends GenericTileEntity implements ITickab
                 } else {
                     EnumFacing facing = getFacing();
                     BlockPos p = pos.offset(EnumFacing.UP);
-                    AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(DirectionHelper.rotateLeft(facing)), new BlockPos(p.getX() + 1, p.getY() + 3, p.getZ() + 1).offset(DirectionHelper.rotateRight(facing)));
+                    AxisAlignedBB tpAABB = new AxisAlignedBB(p.offset(EnumFacing.getHorizontal(facing.getHorizontalIndex() + 1)), new BlockPos(p.getX() + 1, p.getY() + 3, p.getZ() + 1).offset(EnumFacing.getHorizontal((facing.getHorizontalIndex() - 1) + 4)));
                     List<EntityPlayer> players = getWorld().getEntitiesWithinAABB(EntityPlayer.class, tpAABB);
                     if (!players.isEmpty()) {
                         if (!hasBeenUsed) {

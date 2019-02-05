@@ -6,6 +6,7 @@ import elec332.core.api.client.model.IElecModelBakery;
 import elec332.core.api.client.model.IElecQuadBakery;
 import elec332.core.api.client.model.IElecTemplateBakery;
 import elec332.core.client.model.loading.INoJsonBlock;
+import elec332.core.client.model.loading.INoJsonItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +26,7 @@ import javax.annotation.Nonnull;
  *
  * Since the blocks use vanilla textures, the models are loaded from here.
  */
-public enum ClientBlockHandler implements INoJsonBlock {
+public enum ClientBlockHandler implements INoJsonBlock, INoJsonItem {
 
     INSTANCE;
 

@@ -6,9 +6,10 @@ import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
 import bitmovers.elementaldimensions.util.DateHelper;
 import bitmovers.elementaldimensions.util.EDResourceLocation;
 import bitmovers.elementaldimensions.varia.Broadcaster;
+import com.google.common.base.Preconditions;
 import elec332.core.api.util.Area;
-import elec332.core.util.IOUtil;
-import elec332.core.util.NBTHelper;
+import elec332.core.util.IOHelper;
+import elec332.core.util.NBTBuilder;
 import elec332.core.world.schematic.SchematicHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -45,22 +46,22 @@ public class ItemSchematicCreator extends AbstractItem {
 
     @Nonnull
     @Override
-    public EnumActionResult onItemUseC(EntityPlayer player, EnumHand hand, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
             if (!stack.hasTagCompound()) {
                 stack.setTagCompound(new NBTTagCompound());
             }
-            NBTHelper nbt = new NBTHelper(stack.getTagCompound());
+            NBTBuilder nbt = NBTBuilder.from(Preconditions.checkNotNull(stack.getTagCompound()));
             if (player.isSneaking()) {
-                nbt.addToTag(pos, "pos1");
+                nbt.setBlockPos("pos1", pos);
 
                 Broadcaster.message(player, "Position 1: "+pos);
-                Broadcaster.message(player, "Position 2: "+nbt.getPos("pos2"));
+                Broadcaster.message(player, "Position 2: "+nbt.getBlockPos("pos2"));
             } else {
-                nbt.addToTag(pos, "pos2");
+                nbt.setBlockPos("pos2", pos);
 
-                Broadcaster.message(player, "Position 1: "+nbt.getPos("pos1"));
+                Broadcaster.message(player, "Position 1: "+nbt.getBlockPos("pos1"));
                 Broadcaster.message(player, "Position 2: "+pos);
             }
         }
@@ -69,12 +70,12 @@ public class ItemSchematicCreator extends AbstractItem {
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClickC(EntityPlayer player, @Nonnull EnumHand hand, World world) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && stack.hasTagCompound()) {
             String msg = "Created new schematic";
-            NBTHelper nbt = new NBTHelper(stack.getTagCompound());
-            BlockPos pos1 = nbt.getPos("pos1"), pos2 = nbt.getPos("pos2");
+            NBTBuilder nbt = NBTBuilder.from(Preconditions.checkNotNull(stack.getTagCompound()));
+            BlockPos pos1 = nbt.getBlockPos("pos1"), pos2 = nbt.getBlockPos("pos2");
             if (pos1.equals(BlockPos.ORIGIN) || pos2.equals(BlockPos.ORIGIN)){
                 return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
@@ -83,7 +84,7 @@ public class ItemSchematicCreator extends AbstractItem {
             File folder = new File(NCLayerMain.mcDir, "schematics");
             File file = new File(folder, "Schematic-"+ DateHelper.getDateAsNormalString()+".schematic");
             try {
-                IOUtil.createFile(file);
+                IOHelper.createFile(file);
                 writeOut(s, file);
                 stack.setTagCompound(new NBTTagCompound());
             } catch (Exception e){

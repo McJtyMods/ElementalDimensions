@@ -10,6 +10,7 @@ import bitmovers.elementaldimensions.proxy.CommonProxy;
 import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
+import elec332.core.api.mod.IElecCoreMod;
 import elec332.core.api.network.ModNetworkHandler;
 import elec332.core.config.ConfigWrapper;
 import elec332.core.network.IElecNetworkHandler;
@@ -41,14 +42,14 @@ import static bitmovers.elementaldimensions.ElementalDimensions.*;
                 "required-after:eleccore@[" + MIN_ELECCORE + ",);" +
                 "after:forge@[" + ElementalDimensions.MIN_FORGE11_VER + ",)",
         acceptedMinecraftVersions = "[1.12,1.13)")
-public class ElementalDimensions implements ModBase {
+public class ElementalDimensions implements ModBase, IElecCoreMod {
 
     public static final String MODID = "elementaldimensions";
     public static final String MODNAME = "Elemental Dimensions";
     public static final String VERSION = "0.3.2";
     public static final String MIN_MCJTYLIB_VER = "3.1.0";
 
-    public static final String MIN_ELECCORE = "1.7.409";
+    public static final String MIN_ELECCORE = "#ELECCORE_VER#"; //I messed up the new ElecCore buildscript, will fix next weekend
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
 
     @SidedProxy(clientSide="bitmovers.elementaldimensions.proxy.ClientProxy", serverSide="bitmovers.elementaldimensions.proxy.ServerProxy")

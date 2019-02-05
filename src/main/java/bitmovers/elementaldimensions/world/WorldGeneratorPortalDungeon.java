@@ -40,7 +40,7 @@ public class WorldGeneratorPortalDungeon implements IWorldGenerator {
                 }
                 StructureTemplate structure = new StructureTemplate(schematic, type);
                 BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, 0, new Random(PortalDungeonLocator.getSpecialSeed(chunkX, chunkZ)));
-                structure.generateStructure(dim.adjustHeight(chunkX, chunkZ, pos, world, random), world, chunkProvider);
+                structure.generateStructure(dim.adjustHeight(chunkX, chunkZ, pos, world, random), world);
             } else {
                 throw new IllegalStateException();
             }

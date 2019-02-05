@@ -2,7 +2,7 @@ package bitmovers.elementaldimensions.network;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.init.ItemRegister;
-import elec332.core.main.ElecCore;
+import elec332.core.ElecCore;
 import elec332.core.network.packets.AbstractPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -27,8 +27,8 @@ public class PacketPointedEntity extends AbstractPacket {
     }
 
     @Override
-    public IMessage onMessageThreadSafe(AbstractPacket abstractPacket, MessageContext messageContext) {
-        int i = abstractPacket.networkPackageObject.getInteger("eID");
+    public IMessage onMessageThreadSafe(NBTTagCompound abstractPacket, MessageContext messageContext) {
+        int i = abstractPacket.getInteger("eID");
         if (i > -1){
             EntityPlayer p = messageContext.getServerHandler().player;
             Entity e = p.getEntityWorld().getEntityByID(i);

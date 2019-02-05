@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.sound;
 
 import bitmovers.elementaldimensions.sound.scapes.SoundScape;
-import elec332.core.main.ElecCore;
+import elec332.core.ElecCore;
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;

@@ -46,7 +46,7 @@ public class WorldGeneratorWaterDungeon implements IWorldGenerator {
                     if (pos.getY() > WaterTerrainGenerator.SEALEVEL - 3) {
                         return;
                     }
-                    structure.generateStructure(pos, world, chunkProvider);
+                    structure.generateStructure(pos, world);
                 } else {
                     throw new IllegalStateException();
                 }

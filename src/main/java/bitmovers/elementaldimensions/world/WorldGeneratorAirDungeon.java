@@ -41,7 +41,7 @@ public class WorldGeneratorAirDungeon implements IWorldGenerator {
                     GenerationType type = GenerationType.NONE;
                     StructureTemplate structure = new StructureTemplate(schematic, type);
                     BlockPos pos = WorldGenHelper.randomXZPos(chunkX, chunkZ, random.nextInt(50) + 30, new Random(world.getSeed()));
-                    structure.generateStructure(pos, world, chunkProvider);
+                    structure.generateStructure(pos, world);
                 } else {
                     throw new IllegalStateException();
                 }
