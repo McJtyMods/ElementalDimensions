@@ -8,8 +8,7 @@ import bitmovers.elementaldimensions.sound.MobSounds;
 import bitmovers.elementaldimensions.sound.SoundHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import elec332.core.main.ElecCore;
-import mcjty.lib.McJtyLib;
+import elec332.core.ElecCore;
 import mcjty.lib.McJtyLibClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -47,7 +46,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent e) {
         super.init(e);
-        elec332.core.client.model.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE.setFields());
+        elec332.core.loader.client.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE.setFields());
         MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 
