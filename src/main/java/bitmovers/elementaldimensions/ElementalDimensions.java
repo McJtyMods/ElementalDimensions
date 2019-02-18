@@ -49,7 +49,7 @@ public class ElementalDimensions implements ModBase, IElecCoreMod {
     public static final String VERSION = "0.3.2";
     public static final String MIN_MCJTYLIB_VER = "3.1.0";
 
-    public static final String MIN_ELECCORE = "#ELECCORE_VER#"; //I messed up the new ElecCore buildscript, will fix next weekend
+    public static final String MIN_ELECCORE = "1.9.451";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
 
     @SidedProxy(clientSide="bitmovers.elementaldimensions.proxy.ClientProxy", serverSide="bitmovers.elementaldimensions.proxy.ServerProxy")
