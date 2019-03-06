@@ -46,7 +46,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent e) {
         super.init(e);
-        elec332.core.loader.client.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE.setFields());
+        elec332.core.loader.client.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE);
         MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 

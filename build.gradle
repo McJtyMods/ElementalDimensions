@@ -24,31 +24,15 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven'
 
 repositories {
-    maven { // The repo from which to get waila
+	maven { //JEI, IntWheel, McJtyLib, XNet, RFTools, TOP, OpenComputers & ElecCore
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+    maven { // Waila
         name "Mobius Repo"
-        url "http://tehnut.info/maven"
+        url "https://tehnut.info/maven"
     }
-    maven { // JEI
-        url "http://dvs1.progwml6.com/files/maven"
-    }
-    maven { // TOP
-        name 'tterrag maven'
-        url "http://maven.tterrag.com/"
-    }
-    maven { // OC Repo
-        url "http://maven.cil.li/"
-    }
-    maven { // McJtyLib
-        url "http://maven.k-4u.nl"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-    maven {
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
-    maven {
+    maven { //RF
         name = "CoFH Maven"
         url = "http://maven.covers1624.net"
     }
@@ -94,8 +78,7 @@ dependencies {
 	compile project(':McJtyLib')
     }
     compile "li.cil.oc:OpenComputers:${oc_version}"
-
-    //deobfCompile "eleccore-rendering-library:ElecCore:1.12.2:1.8.432"
+	deobfCompile "nl.elec332.core:ElecCore:1.12.2-1.9.453"
 }
 
 jar {

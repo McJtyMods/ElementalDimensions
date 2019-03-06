@@ -5,6 +5,7 @@ import elec332.core.api.client.IIconRegistrar;
 import elec332.core.api.client.model.IElecModelBakery;
 import elec332.core.api.client.model.IElecQuadBakery;
 import elec332.core.api.client.model.IElecTemplateBakery;
+import elec332.core.client.RenderHelper;
 import elec332.core.client.model.loading.INoJsonBlock;
 import elec332.core.client.model.loading.INoJsonItem;
 import net.minecraft.block.Block;
@@ -35,7 +36,8 @@ public enum ClientBlockHandler implements INoJsonBlock, INoJsonItem {
 
     @Override
     public void registerModels(IElecQuadBakery elecQuadBakery, IElecModelBakery elecModelBakery, IElecTemplateBakery elecTemplateBakery) {
-
+        blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+        missingModel = RenderHelper.getMissingModel();
     }
 
     @Override
@@ -71,12 +73,6 @@ public enum ClientBlockHandler implements INoJsonBlock, INoJsonItem {
     @Nonnull
     public IBakedModel getModelForState(IBlockState state){
         return blockRendererDispatcher.getModelForState(state);
-    }
-
-    public ClientBlockHandler setFields(){
-        blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        missingModel = blockRendererDispatcher.blockModelShapes.modelManager.getMissingModel();
-        return this;
     }
 
 }
