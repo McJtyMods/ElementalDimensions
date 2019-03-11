@@ -31,6 +31,8 @@ public class ClientProxy extends DefaultClientProxy {
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
 
+        MinecraftForge.EVENT_BUS.register(new SoundHandler());
+
         OBJLoader.INSTANCE.addDomain(ElementalDimensions.MODID);
 
         registerEntityRenderers();
@@ -41,7 +43,6 @@ public class ClientProxy extends DefaultClientProxy {
     public void init(FMLInitializationEvent e) {
         super.init(e);
         elec332.core.loader.client.RenderingRegistry.instance().registerLoader(ClientBlockHandler.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 
     @Override
