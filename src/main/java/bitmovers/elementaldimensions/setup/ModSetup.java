@@ -15,7 +15,7 @@ import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.config.ConfigWrapper;
-import mcjty.lib.setup.DefaultCommonSetup;
+import mcjty.lib.setup.DefaultModSetup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.Random;
 
-public class CommonSetup extends DefaultCommonSetup {
+public class ModSetup extends DefaultModSetup {
 
     public static Random random;
     public static ConfigWrapper config;

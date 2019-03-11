@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions;
 
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
-import bitmovers.elementaldimensions.setup.CommonSetup;
+import bitmovers.elementaldimensions.setup.ModSetup;
 import elec332.core.api.mod.IElecCoreMod;
 import elec332.core.api.network.ModNetworkHandler;
 import elec332.core.network.IElecNetworkHandler;
@@ -36,7 +36,7 @@ public class ElementalDimensions implements ModBase, IElecCoreMod {
 
     @SidedProxy(clientSide="bitmovers.elementaldimensions.setup.ClientProxy", serverSide="bitmovers.elementaldimensions.setup.ServerProxy")
     public static IProxy proxy;
-    public static CommonSetup setup = new CommonSetup();
+    public static ModSetup setup = new ModSetup();
 
     @Mod.Instance(MODID)
     public static ElementalDimensions instance;
