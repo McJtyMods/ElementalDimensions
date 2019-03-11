@@ -1,37 +1,19 @@
 package bitmovers.elementaldimensions;
 
-import bitmovers.elementaldimensions.commands.CommandTeleport;
-import bitmovers.elementaldimensions.compat.MainCompatHandler;
-import bitmovers.elementaldimensions.init.ItemRegister;
 import bitmovers.elementaldimensions.ncLayer.NCLayerMain;
-import bitmovers.elementaldimensions.network.PacketPlayerConnect;
-import bitmovers.elementaldimensions.network.PacketPointedEntity;
-import bitmovers.elementaldimensions.proxy.CommonProxy;
-import bitmovers.elementaldimensions.util.Config;
-import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
-import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
+import bitmovers.elementaldimensions.setup.CommonSetup;
 import elec332.core.api.mod.IElecCoreMod;
 import elec332.core.api.network.ModNetworkHandler;
-import elec332.core.config.ConfigWrapper;
 import elec332.core.network.IElecNetworkHandler;
-import elec332.core.util.LoadTimer;
-import mcjty.lib.McJtyLib;
 import mcjty.lib.base.ModBase;
-import net.minecraft.creativetab.CreativeTabs;
+import mcjty.lib.proxy.IProxy;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.Random;
 
 import static bitmovers.elementaldimensions.ElementalDimensions.*;
 
@@ -52,75 +34,37 @@ public class ElementalDimensions implements ModBase, IElecCoreMod {
     public static final String MIN_ELECCORE = "1.9.451";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
 
-    @SidedProxy(clientSide="bitmovers.elementaldimensions.proxy.ClientProxy", serverSide="bitmovers.elementaldimensions.proxy.ServerProxy")
-    public static CommonProxy proxy;
+    @SidedProxy(clientSide="bitmovers.elementaldimensions.setup.ClientProxy", serverSide="bitmovers.elementaldimensions.setup.ServerProxy")
+    public static IProxy proxy;
+    public static CommonSetup setup = new CommonSetup();
 
     @Mod.Instance(MODID)
     public static ElementalDimensions instance;
+
     @ModNetworkHandler
     public static IElecNetworkHandler networkHandler;
-    public static Logger logger;
-    private static LoadTimer loadTimer;
-    public static ConfigWrapper config;
-    public static CreativeTabs creativeTab;
-    public static Random random;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        McJtyLib.preInit(event);
-        logger = LogManager.getLogger(MODNAME.replace(" ", ""));
-        loadTimer = new LoadTimer(logger, MODNAME);
-        loadTimer.startPhase(event);
-        networkHandler.registerClientPacket(PacketPlayerConnect.class);
-        networkHandler.registerServerPacket(PacketPointedEntity.class);
-        config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile())); //We'll move it later
-        creativeTab = new CreativeTabs(ElementalDimensions.MODID) {
-            @Override
-            public ItemStack getTabIconItem() {
-                return new ItemStack(ItemRegister.elementalWand);
-            }
-        };
-        random = new Random();
-
-        config.registerConfigWithInnerClasses(new Config());
-        config.refresh();
-        NCLayerMain.instance.preInit(event);
+        setup.preInit(event);
         proxy.preInit(event);
-
-        MainCompatHandler.registerWaila();
-        MainCompatHandler.registerTOP();
-
-        loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        loadTimer.startPhase(event);
-        NCLayerMain.instance.init(event);
+        setup.init(event);
         proxy.init(event);
-        loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        loadTimer.startPhase(event);
-        NCLayerMain.instance.postInit(event);
-        registerCommand(new CommandTeleport());
+        setup.postInit(event);
         proxy.postInit(event);
-        loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
         NCLayerMain.instance.serverStarting(event);
-    }
-
-    public static void registerCommand(IElementalDimensionsSubCommand command){
-        ElementalDimensionsCommand.registerSubCommand(command);
-    }
-
-    public static void registerLoginHandler(String name, INBTSerializable<?> handler){
-        PacketPlayerConnect.registerLoginHandler(name, handler);
     }
 
     @Override

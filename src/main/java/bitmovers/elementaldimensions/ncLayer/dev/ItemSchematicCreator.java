@@ -32,7 +32,7 @@ public class ItemSchematicCreator extends AbstractItem {
 
     public ItemSchematicCreator() {
         this.setMaxStackSize(1);
-        this.setCreativeTab(ElementalDimensions.creativeTab);
+        this.setCreativeTab(ElementalDimensions.setup.getTab());
         this.setUnlocalizedName(ElementalDimensions.MODID + ".schematicCreator");
         this.setRegistryName(new EDResourceLocation("schematicCreator_DEV"));
     }

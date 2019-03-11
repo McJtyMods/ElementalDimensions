@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.ncLayer.worldgen;
 
-import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.ncLayer.SchematicLoader;
+import bitmovers.elementaldimensions.setup.CommonSetup;
 import elec332.core.api.structure.GenerationType;
 import elec332.core.world.StructureTemplate;
 import elec332.core.world.WorldHelper;
@@ -38,7 +38,7 @@ public class DefaultStructureCreator implements IWorldGenerator {
         if (template == null){
             return;
         }
-        random.setSeed(ElementalDimensions.random.nextLong());
+        random.setSeed(CommonSetup.random.nextLong());
         StructureTemplate structureTemplate = new StructureTemplate(template, generationType, dimensions);
         if (random.nextInt(100) == 0 && structureTemplate.canSpawnInDimension(WorldHelper.getDimID(world))){
             structureTemplate.generateStructure(new BlockPos((chunkX << 4) + random.nextInt(16), 30, (chunkZ << 4) + random.nextInt(16)), world);

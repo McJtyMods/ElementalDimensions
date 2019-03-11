@@ -29,7 +29,7 @@ public class TESRHandler implements IASMDataProcessor {
                     ClientRegistry.bindTileEntitySpecialRenderer((Class<TileEntity>)tileClazz, (TileEntitySpecialRenderer)o);
                 }
             } catch (Exception e){
-                ElementalDimensions.logger.error("Error registering TESR: "+asmData.getClassName());
+                ElementalDimensions.setup.getLogger().error("Error registering TESR: "+asmData.getClassName());
             }
         }
     }

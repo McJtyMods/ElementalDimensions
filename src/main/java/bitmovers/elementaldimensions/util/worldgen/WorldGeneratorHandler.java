@@ -25,7 +25,7 @@ public class WorldGeneratorHandler implements IASMDataProcessor {
                     GameRegistry.registerWorldGenerator((IWorldGenerator) o, clazz.getAnnotation(RegisteredWorldGenerator.class).weight());
                 }
             } catch (Exception e){
-                ElementalDimensions.logger.error("Error registering WorldGenerator: "+asmData.getClassName());
+                ElementalDimensions.setup.getLogger().error("Error registering WorldGenerator: "+asmData.getClassName());
             }
         }
     }

@@ -44,7 +44,7 @@ public enum SchematicLoader {
     }
 
     private void errored(ResourceLocation resourceLocation){
-        ElementalDimensions.logger.error("Failed to load schematic: "+resourceLocation);
+        ElementalDimensions.setup.getLogger().error("Failed to load schematic: "+resourceLocation);
         if (forced.contains(resourceLocation)){
             throw new IllegalStateException("Failed to load forced schematic: "+resourceLocation);
         }

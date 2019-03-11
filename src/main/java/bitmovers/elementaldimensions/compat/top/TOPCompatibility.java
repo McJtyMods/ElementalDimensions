@@ -30,7 +30,7 @@ public class TOPCompatibility {
         @Override
         public Void apply(ITheOneProbe theOneProbe) {
             probe = theOneProbe;
-            ElementalDimensions.logger.log(Level.INFO, "Enabled support for The One Probe");
+            ElementalDimensions.setup.getLogger().log(Level.INFO, "Enabled support for The One Probe");
             probe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public String getID() {

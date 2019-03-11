@@ -13,7 +13,7 @@ public class GenericItem extends Item {
     public GenericItem(String name) {
         setUnlocalizedName(ElementalDimensions.MODID + "." + name);
         setRegistryName(name);
-        setCreativeTab(ElementalDimensions.creativeTab);
+        setCreativeTab(ElementalDimensions.setup.getTab());
         setMaxStackSize(1);
         DelayedRegister.registerLater(this);
     }

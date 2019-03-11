@@ -31,7 +31,7 @@ public class GenericBlock extends Block implements TOPInfoProvider {
         super(materialIn);
         setRegistryName(name);
         setUnlocalizedName(ElementalDimensions.MODID + "." + name);
-        setCreativeTab(ElementalDimensions.creativeTab);
+        setCreativeTab(ElementalDimensions.setup.getTab());
         DelayedRegister.registerLater(this, itemBlockClass, null);
     }
 

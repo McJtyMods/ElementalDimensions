@@ -1,4 +1,5 @@
-package bitmovers.elementaldimensions;
+package bitmovers.elementaldimensions.setup;
+
 
 import bitmovers.elementaldimensions.blocks.GenericBlock;
 import bitmovers.elementaldimensions.items.GenericItem;
@@ -6,12 +7,15 @@ import bitmovers.elementaldimensions.varia.DelayedRegister;
 import elec332.core.util.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
-public class ClientForgeEventHandlers {
+@Mod.EventBusSubscriber(Side.CLIENT)
+public class ClientRegistration {
 
     @SubscribeEvent
-    public void registerModels(ModelRegistryEvent event) {
+    public static void registerModels(ModelRegistryEvent event) {
         for (Block block : RegistryHelper.getBlockRegistry().getValues()){
             if (block instanceof GenericBlock){
                 ((GenericBlock) block).initClient();

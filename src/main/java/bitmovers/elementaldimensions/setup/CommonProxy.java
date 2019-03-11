@@ -1,6 +1,5 @@
-package bitmovers.elementaldimensions.proxy;
+package bitmovers.elementaldimensions.setup;
 
-import bitmovers.elementaldimensions.ForgeEventHandlers;
 import bitmovers.elementaldimensions.dimensions.DimensionEvents;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.init.DimensionRegister;
@@ -15,7 +14,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(new ForgeEventHandlers());
         BlockRegister.init();
         ItemRegister.init();
         DimensionRegister.init();

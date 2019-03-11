@@ -1,7 +1,7 @@
 package bitmovers.elementaldimensions.network;
 
-import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.init.ItemRegister;
+import bitmovers.elementaldimensions.setup.ClientProxy;
 import elec332.core.ElecCore;
 import elec332.core.network.packets.AbstractPacket;
 import net.minecraft.entity.Entity;
@@ -20,7 +20,7 @@ public class PacketPointedEntity extends AbstractPacket {
     public PacketPointedEntity(){
         if (ElecCore.proxy.isClient()){
             NBTTagCompound tag = new NBTTagCompound();
-            Entity e = ElementalDimensions.proxy.getPointedEntity();
+            Entity e = ClientProxy.getPointedEntity();
             tag.setInteger("eID", e == null ? -1 : e.getEntityId());
             networkPackageObject = tag;
         }

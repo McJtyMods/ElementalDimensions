@@ -23,7 +23,7 @@ public class CommandReloadConfig extends AbstractSubCommand {
 
     @Override
     public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
-        ElementalDimensions.config.refresh();
+        ElementalDimensions.setup.config.refresh();
         ITextComponent component = new TextComponentString("Configs reloaded");
         if (sender instanceof EntityPlayer) {
             ((EntityPlayer) sender).sendStatusMessage(component, false);
