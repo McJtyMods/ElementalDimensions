@@ -1,8 +1,8 @@
 package bitmovers.elementaldimensions.blocks;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
-import bitmovers.elementaldimensions.compat.top.TOPInfoProvider;
 import bitmovers.elementaldimensions.varia.DelayedRegister;
+import mcjty.lib.compat.theoneprobe.TOPInfoProvider;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;

@@ -2,7 +2,6 @@ package bitmovers.elementaldimensions.setup;
 
 import bitmovers.elementaldimensions.ElementalDimensions;
 import bitmovers.elementaldimensions.commands.CommandTeleport;
-import bitmovers.elementaldimensions.compat.MainCompatHandler;
 import bitmovers.elementaldimensions.dimensions.DimensionEvents;
 import bitmovers.elementaldimensions.init.BlockRegister;
 import bitmovers.elementaldimensions.init.DimensionRegister;
@@ -15,6 +14,7 @@ import bitmovers.elementaldimensions.util.Config;
 import bitmovers.elementaldimensions.util.command.ElementalDimensionsCommand;
 import bitmovers.elementaldimensions.util.command.IElementalDimensionsSubCommand;
 import elec332.core.config.ConfigWrapper;
+import mcjty.lib.compat.MainCompatHandler;
 import mcjty.lib.setup.DefaultModSetup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
