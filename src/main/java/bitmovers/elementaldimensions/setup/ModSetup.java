@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import java.io.File;
 import java.util.Random;
 
 public class ModSetup extends DefaultModSetup {
@@ -42,13 +43,8 @@ public class ModSetup extends DefaultModSetup {
 
         ElementalDimensions.networkHandler.registerClientPacket(PacketPlayerConnect.class);
         ElementalDimensions.networkHandler.registerServerPacket(PacketPointedEntity.class);
-        config = new ConfigWrapper(new Configuration(e.getSuggestedConfigurationFile())); //We'll move it later
         random = new Random();
-
-        config.registerConfigWithInnerClasses(new Config());
-        config.refresh();
         NCLayerMain.instance.preInit(e);
-
         BlockRegister.init();
         ItemRegister.init();
         DimensionRegister.init();
@@ -72,6 +68,13 @@ public class ModSetup extends DefaultModSetup {
     protected void setupModCompat() {
         MainCompatHandler.registerWaila();
         MainCompatHandler.registerTOP();
+    }
+
+    @Override
+    protected void setupConfig() {
+        config = new ConfigWrapper(new Configuration(new File(getModConfigDir().getPath(), "elementaldimensions.cfg"))); //We'll move it later
+        config.registerConfigWithInnerClasses(new Config());
+        config.refresh();
     }
 
     @Override
