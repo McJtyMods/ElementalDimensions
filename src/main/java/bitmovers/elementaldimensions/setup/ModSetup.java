@@ -79,6 +79,6 @@ public class ModSetup extends DefaultModSetup {
 
     @Override
     public void createTabs() {
-        createTab(ElementalDimensions.MODID, new ItemStack(ItemRegister.elementalWand));
+        createTab(ElementalDimensions.MODID, () -> new ItemStack(ItemRegister.elementalWand));
     }
 }
