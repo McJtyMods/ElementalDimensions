@@ -28,8 +28,8 @@ public class ElementalDimensions implements ModBase, IElecCoreMod {
 
     public static final String MODID = "elementaldimensions";
     public static final String MODNAME = "Elemental Dimensions";
-    public static final String VERSION = "0.3.4";
-    public static final String MIN_MCJTYLIB_VER = "3.1.0";
+    public static final String VERSION = "0.4.0";
+    public static final String MIN_MCJTYLIB_VER = "3.5.0";
 
     public static final String MIN_ELECCORE = "1.9.451";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
